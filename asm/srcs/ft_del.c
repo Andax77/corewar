@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_del.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/17 20:07:58 by pmilan           ###   ########.fr       */
+/*   Created: 2018/05/17 19:18:42 by pmilan            #+#    #+#             */
+/*   Updated: 2018/05/17 19:40:01 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int		main(int ac, char **av)
+static void	del_input(void *content, size_t content_size)
 {
-	t_champ		*champ;
+	(void)content_size;
+	free(content);
+}
 
-	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
-		return (0);
-	ft_init(champ);
-	if (ac > 1 && read_file(av[1], champ) == ERROR)
-	{
-		del_champ(champ);
-		exit(EXIT_FAILURE);
-	}
-	del_champ(champ);
-	exit(EXIT_SUCCESS);
+//static void	del_instru(void *content, size_t content_size)
+//{
+	//TODO
+//}
+//
+
+void		del_champ(t_champ *champ)
+{
+	free(champ->name);
+	free(champ->comment);
+	ft_lstdel(&champ->input, del_input);
+	free(champ);
 }
