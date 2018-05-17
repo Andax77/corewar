@@ -6,18 +6,23 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/17 15:41:50 by pmilan           ###   ########.fr        #
+#    Updated: 2018/05/17 19:38:45 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = asm
 
-FILES = main.c
+FILES = main.c \
+		ft_init.c \
+		ft_read_file.c \
+		ft_parsing.c \
+		ft_del.c \
+
 
 HFILES = includes/asm.h
 
 CC = gcc
-CFLAGS = -Wall -Wextra #-Werror -O3
+CFLAGS = -Wall -Wextra -g#-Werror -O3
 
 INC_DIR = includes/ \
 		  $(LIBFT_DIR)includes

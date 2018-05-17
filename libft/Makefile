@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/04 13:09:25 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/17 15:09:33 by pmilan           ###   ########.fr        #
+#    Updated: 2018/05/17 17:29:58 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ FILES = ft_strlen.c \
 		ft_sqrt.c \
 		ft_smallest.c \
 		ft_biggest.c \
+		ft_str_and_free_join.c \
 		get_next_line.c \
 		ft_printf/printf/ft_printf.c \
 		ft_printf/printf/ft_vprintf.c \

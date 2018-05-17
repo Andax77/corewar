@@ -83,6 +83,7 @@ car les roles sont deja figées.
 Je Suis le Prédateur, tu est Ma Proie"
 
 
+
 begin_coromp2:
 	st				r1, :stock
 	ld				%151068160,r1

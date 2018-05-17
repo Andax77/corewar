@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 13:14:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/17 15:03:47 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/17 17:36:58 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ void				ft_init_tab(int	tab[], int size);
 int					ft_sqrt(int nb);
 int					ft_smallest(int a, int b);
 int					ft_biggest(int a, int b);
+char				*ft_str_and_free_join(char *s1, const char *s2);
 
 #endif
