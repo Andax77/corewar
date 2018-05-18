@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/17 19:38:36 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/18 15:33:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,20 @@ typedef struct	s_champ
 	char		*name;
 	char		*comment;
 	t_list		*input;
+	t_list		*label;
 //	t_list		*instru;
 	int			fd;
 }				t_champ;
 
+typedef struct	s_label
+{
+	char		*label_name;
+	int			label_addr;
+}				t_label;
+
 typedef struct	s_instru
 {
 	char		**params;
-	char		*label;
-	int			addr_label;
 	int			op_code;
 	int			ocp;
 }				t_instru;
