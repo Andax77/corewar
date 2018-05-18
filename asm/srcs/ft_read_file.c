@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:34:36 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/17 19:36:43 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/18 16:24:08 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int			read_file(char *file_name, t_champ *champ)
 			break ;
 	}
 	store_lines(champ);
+	if (ft_get_instru(champ) == ERROR)
+		;//ft_error
 	close(champ->fd);
 	return (SUCCESS);
 }

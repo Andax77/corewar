@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/17 19:38:45 by pmilan           ###   ########.fr        #
+#    Updated: 2018/05/18 19:04:01 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,9 @@ NAME = asm
 FILES = main.c \
 		ft_init.c \
 		ft_read_file.c \
+		ft_get_instru.c \
 		ft_parsing.c \
-		ft_del.c \
+		ft_del.c
 
 
 HFILES = includes/asm.h
