@@ -10,11 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef ASM_H
+# define ASM_H
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <op.h>
 #include <libft.h>
 
 enum			e_list
@@ -56,3 +60,5 @@ int				parse_line(char *line, t_champ *champ);
 int				ft_get_instru(t_champ *champ);
 
 void			del_champ(t_champ *champ);
+
+#endif

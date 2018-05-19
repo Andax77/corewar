@@ -26,7 +26,7 @@ t_instru	*ft_init_instru(void)
 {
 	t_instru	*inst;
 
-	inst = ft_malloc(sizeof(t_instru *), EXIT_FAILURE);
+	inst = ft_malloc(sizeof(t_instru), EXIT_FAILURE);
 	inst->params = NULL;
 	inst->label_name = NULL;
 	inst->op_code = 0;

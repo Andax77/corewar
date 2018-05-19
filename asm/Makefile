@@ -17,22 +17,26 @@ FILES = main.c \
 		ft_read_file.c \
 		ft_get_instru.c \
 		ft_parsing.c \
-		ft_del.c
+		ft_del.c \
+		../../commun/srcs/op.c
 
+HFILES = includes/asm.h \
+		 ../commun/includes/op.h \
+		 $(LIBFT_DIR)includes/libft.h
 
-HFILES = includes/asm.h
+LIBFT_DIR = ../libft/
+LIBFT = $(LIBFT_DIR)libft.a
+LIBFT_LIB = -L $(LIBFT_DIR) -lft
 
 CC = gcc
 CFLAGS = -Wall -Wextra -g#-Werror -O3
 
-INC_DIR = includes/ \
-		  $(LIBFT_DIR)includes
-
-SRCS_DIR = srcs/
 OBJ_DIR = objs/
+SRCS_DIR = srcs/
 
-LIBFT_DIR = ../libft/
-LIBFT_LIB = -L $(LIBFT_DIR) -lft
+INC_DIR = includes/ \
+		  ../commun/includes/ \
+		  $(LIBFT_DIR)includes/
 
 INC := $(addprefix -I, $(INC_DIR))
 SRCS := $(addprefix $(SRCS_DIR), $(FILES))
@@ -51,31 +55,28 @@ START = @printf $(GREEN)"ASM\n--------------------\n"$(NORMAL)
 END = @printf $(GREEN)"--------------------\n"$(NORMAL)
 
 all:
-	@make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR) CFLAGS="$(CFLAGS)"
 	$(START)
 	@make $(NAME)
 	$(END)
 
-$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT_DIR)libft.a
+$(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT)
 	@printf $(CYAN)"-> compilation : $(NAME)\n"$(NORMAL)
-	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBFT_LIB)
+	@$(CC) -o $(NAME) $(OBJ) $(INC) $(CFLAGS) $(LIBFT_LIB)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(HFILES)
 	@printf $(YELLOW)"-> $<\n"$(NORMAL)
 	@$(CC) -c $(INC) $< -o $@ $(CFLAGS)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(dir $(OBJ))
-
-$(LIBFT_DIR)libft.a:
-	@make -C $(LIBFT_DIR)
 
 clean:
 	@make -C $(LIBFT_DIR) clean
 	$(START)
 	@printf $(RED)"-x remove .o files\n"$(NORMAL)
 	@rm -rf $(OBJ_DIR)
+	@rm -rf ../commun/srcs/op.o
 	$(END)
 
 fclean: clean
