@@ -17,6 +17,7 @@ FILES = main.c \
 		ft_read_file.c \
 		ft_get_instru.c \
 		ft_parsing.c \
+		ft_fill_instru.c \
 		ft_del.c \
 		../../commun/srcs/op.c
 

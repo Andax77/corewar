@@ -250,21 +250,21 @@ void			ft_get_size_instruction(t_instru *inst)
 	}
 }
 
-int				ft_fill_instru(t_instru *inst, char *str)
+int				ft_fill_instru(t_instru **inst, char *str)
 {
-	if (ft_get_label_name(inst, str) == ERROR)
+	if (ft_get_label_name(*inst, str) == ERROR)
 		return (ERROR);
-	ft_get_op_code(inst, str);
+	ft_get_op_code(*inst, str);
 //	ft_printf("%s\n{red}%d{eoc}\n", str, inst->op_code);
-	if (inst->op_code != 0)
+	if ((*inst)->op_code != 0)
 	{
-		if (ft_get_params(inst, str) == ERROR)
+		if (ft_get_params(*inst, str) == ERROR)
 			return (ERROR);
-		if (ft_get_ocp(inst) == ERROR)
+		if (ft_get_ocp(*inst) == ERROR)
 			return (ERROR);
-		ft_get_size_instruction(inst);
+		ft_get_size_instruction(*inst);
 //		ft_printf("%d\n", inst->size);
-//		ft_printf("%.8b\n", inst->ocp);
+//		ft_printf("%.8b\n", (*inst)->ocp);
 	}
 	return (SUCCESS);
 }
@@ -284,7 +284,7 @@ int				ft_get_instru(t_champ *champ)
 			continue ;
 		}
 		inst = ft_init_instru();
-		ft_fill_instru(inst, (char*)cur->content);
+		ft_fill_instru(&inst, (char*)cur->content);
 		if (!champ->instru)
 		{
 			if (!(champ->instru = ft_lstnew(inst, sizeof(t_instru *))))
@@ -296,6 +296,7 @@ int				ft_get_instru(t_champ *champ)
 				exit(EXIT_FAILURE);
 			ft_lstaddend(&champ->instru, new);
 		}
+		ft_printf("{green}%d\n{eoc}", inst->op_code);
 		free(inst);
 		cur = cur->next;
 	}

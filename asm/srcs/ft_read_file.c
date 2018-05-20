@@ -55,6 +55,7 @@ int			read_file(char *file_name, t_champ *champ)
 	store_lines(champ);
 	if (ft_get_instru(champ) == ERROR)
 		;//ft_error
+	ft_fill_label_addr(champ);
 	close(champ->fd);
 	return (SUCCESS);
 }
