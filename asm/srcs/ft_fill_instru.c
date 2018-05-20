@@ -24,8 +24,9 @@ void		ft_fill_label_addr(t_champ *champ)
 	{
 		cur = (t_instru *)tmp->content;
 		ft_printf("{red}%s{eoc}\n", cur->label_name);
-		if (cur->label_name != NULL)
-			cur->label_addr = total_size;
+//		if (cur->label_name != NULL)
+		cur->label_addr = total_size;
+		ft_printf("{blue}%d\n{eoc}", cur->label_addr);
 		total_size += cur->size;
 		tmp = tmp->next;
 	}
