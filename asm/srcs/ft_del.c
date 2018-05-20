@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:18:42 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/17 19:40:01 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/20 21:28:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,22 @@ static void	del_input(void *content, size_t content_size)
 
 static void	del_instru(void *content, size_t content_size)
 {
-	char	**tab;
+	char	**tmp_tab;
 	int		n;
+	(void)content_size;
+	t_instru	*instru;
 
-	n = content_size / sizeof(char*);
-	if (!content)
-		return ;
-	tab = (char**)content;
-	while (--n >= 0)
-		free(tab[n]);
+	instru = (t_instru*)content;
+	tmp_tab = (char**)instru->params;
+	n = 0;
+	while (tmp_tab && tmp_tab[n])
+	{
+		free(tmp_tab[n]);
+		n++;
+	}
+	if (instru->label_name)
+		free(instru->label_name);
+	free(tmp_tab);
 	free(content);
 }
 
