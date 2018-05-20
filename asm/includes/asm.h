@@ -31,17 +31,10 @@ typedef struct	s_champ
 	char		*name;
 	char		*comment;
 	t_list		*input;
-//	t_list		*label;
 	t_list		*instru;
 	int			fd;
 }				t_champ;
 
-//typedef struct	s_label
-//{
-//	char		*label_name;
-//	int			label_addr;
-//}				t_label;
-//
 typedef struct	s_instru
 {
 	char		**params;
