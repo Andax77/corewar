@@ -74,7 +74,7 @@ int				ft_get_params(t_instru *inst, char *str)
 			str++;
 	}
 	trim = ft_strtrim(str);
-	inst->params = ft_malloc(sizeof(char *) * g_op_tab[inst->op_code - 1].nb_params, EXIT_FAILURE);
+//	inst->params = ft_malloc(sizeof(char *) * g_op_tab[inst->op_code - 1].nb_params, EXIT_FAILURE);
 	inst->params = ft_strsplit(trim, SEPARATOR_CHAR);
 	ft_clean_spaces_comments(inst);
 	free(trim);
