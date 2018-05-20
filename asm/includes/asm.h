@@ -50,9 +50,22 @@ t_instru		*ft_init_instru(void);
 
 int				read_file(char *file_name, t_champ *champ);
 int				parse_line(char *line, t_champ *champ);
+
+int				ft_check_params_type(t_instru *inst);
+int				ft_check_params_format(t_instru *inst, char *str);
+
 int				ft_get_instru(t_champ *champ);
+int				ft_get_params(t_instru *inst, char *str);
+int				ft_get_t_param(char *str);
+int				ft_get_label_name(t_instru *inst, char *str);
+void			ft_get_op_code(t_instru *inst, char *str);
+int				ft_get_ocp(t_instru *inst);
+void			ft_get_size_instruction(t_instru *inst);
+
+int				ft_fill_instru(t_instru *inst, char *str);
 void			ft_fill_label_addr(t_champ *champ);
 
+void			ft_free_struct_instru(t_instru *inst);
 void			del_champ(t_champ *champ);
 
 #endif

@@ -15,9 +15,11 @@ NAME = asm
 FILES = main.c \
 		ft_init.c \
 		ft_read_file.c \
-		ft_get_instru.c \
 		ft_parsing.c \
+		ft_get_instru.c \
+		ft_get_instru_annexe.c \
 		ft_fill_instru.c \
+		ft_check_instru.c \
 		ft_del.c \
 		../../commun/srcs/op.c
 

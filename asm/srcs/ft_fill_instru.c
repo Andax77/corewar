@@ -16,15 +16,33 @@ void		ft_fill_label_addr(t_champ *champ)
 {
 	t_list		*tmp;
 	t_instru	*cur;
+	int			total_size;
 
 	tmp = champ->instru;
+	total_size = 0;
 	while (tmp != NULL)
 	{
 		cur = (t_instru *)tmp->content;
-		ft_printf("{red}%d\n{eoc}", cur->op_code);
-//		printf("%p\n", tmp->content);
-//		if (cur->label_name != NULL)
-//			ft_printf("{red}%s\n{eoc}", cur->label_name);
+		ft_printf("{red}%s{eoc}\n", cur->label_name);
+		if (cur->label_name != NULL)
+			cur->label_addr = total_size;
+		total_size += cur->size;
 		tmp = tmp->next;
 	}
+}
+
+int				ft_fill_instru(t_instru *inst, char *str)
+{
+	if (ft_get_label_name(inst, str) == ERROR)
+		return (ERROR);
+	ft_get_op_code(inst, str);
+	if (inst->op_code != 0)
+	{
+		if (ft_get_params(inst, str) == ERROR)
+			return (ERROR);
+		if (ft_get_ocp(inst) == ERROR)
+			return (ERROR);
+		ft_get_size_instruction(inst);
+	}
+	return (SUCCESS);
 }
