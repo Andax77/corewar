@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 16:16:44 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 18:48:36 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ void		ft_fill_label_addr(t_champ *champ)
 	while (tmp != NULL)
 	{
 		cur = (t_instru *)tmp->content;
-		ft_printf("{red}%s{eoc}\n", cur->label_name);
-		ft_printf("{green}%d{eoc}\n", cur->op_code);
-		int i = -1;
-		while (cur->params[++i])
-			ft_printf("|{yellow}%s{eoc}|\n", cur->params[i]);
-//		if (cur->label_name != NULL)
-		cur->label_addr = total_size;
-//		ft_printf("{blue}%d\n{eoc}", cur->label_addr);
+//		ft_printf("{red}%s{eoc}\n", cur->label_name);
+//		ft_printf("{green}%d{eoc}\n", cur->op_code);
+//		int i = -1;
+//		while (cur->params[++i])
+//			ft_printf("|{yellow}%s{eoc}|\n", cur->params[i]);
+		cur->inst_addr = total_size;
+		ft_printf("{blue}%d\n{eoc}", cur->inst_addr);
 		total_size += cur->size;
 		tmp = tmp->next;
 	}

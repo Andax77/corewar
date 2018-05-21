@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 19:14:16 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 16:12:44 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 18:48:11 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int				ft_check_params_type(t_instru *inst)
 	i = -1;
 	while (inst->params[++i])
 	{
-		if (ft_check_ocp_addition(g_op_tab[inst->op_code - 1].params_type[i], ft_get_t_param(inst->params[i])) == ERROR)
+		if (ft_get_t_param(inst->params[i]) == ERROR ||
+			ft_check_ocp_addition(g_op_tab[inst->op_code - 1].params_type[i],
+			ft_get_t_param(inst->params[i])) == ERROR)
 			return (ERROR);
 	}
 	return (SUCCESS);
@@ -59,8 +61,6 @@ int				ft_check_params_format(t_instru *inst, char *str)
 	while (str[++i] && str[i] != COMMENT_CHAR)
 		if (str[i] == SEPARATOR_CHAR)
 			++count_separators;
-//	if (str[i] && str[i] == COMMENT_CHAR && count_separators != nb_params - 1)
-//		return (ERROR);
 	if (count_separators == nb_params - 1)
 		return (SUCCESS);
 	return (ERROR);

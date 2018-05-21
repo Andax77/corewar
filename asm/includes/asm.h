@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/21 16:01:23 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 18:45:18 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 #include <op.h>
 #include <libft.h>
 
+# define ERROR -1
+# define SUCCESS 0
+
 enum			e_list
 {
-	FINISHED, UNFINISHED, ERROR, SUCCESS, EMPTY, CHARACTER
+	FINISHED, UNFINISHED, EMPTY, CHARACTER
 };
 
 typedef struct	s_champ
@@ -42,7 +45,7 @@ typedef struct	s_instru
 	int			op_code;
 	int			ocp;
 	int			size;
-	int			label_addr;
+	int			inst_addr;
 }				t_instru;
 
 void			ft_init_champ(t_champ *champ);

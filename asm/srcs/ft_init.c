@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:33:26 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/21 14:27:26 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 18:29:57 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ t_instru	*ft_init_instru(void)
 	inst->op_code = 0;
 	inst->ocp = 0;
 	inst->size = 0;
-	inst->label_addr = 0;
+	inst->inst_addr = 0;
 	return (inst);
 }

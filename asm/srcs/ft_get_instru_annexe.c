@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 19:20:59 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 16:42:26 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 18:36:36 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ int				ft_get_t_param(char *str)
 		return (T_REG);
 	else if (str[0] == DIRECT_CHAR)
 		return (T_DIR);
-	return (T_IND);
+	else if (ft_strisdigit(str))
+		return (T_IND);
+	return (ERROR);
 }
 
 static int		ft_get_param_code(int num)
