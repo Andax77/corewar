@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/18 19:04:04 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 16:40:16 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int		ft_empty_line(char *str)
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\v'
 											&& str[i] != '\n' && str[i] != '\f')
 			return (CHARACTER);
+		if (str[i] == COMMENT_CHAR)
+			return (EMPTY);
 	}
 	return (EMPTY);
 }
@@ -58,7 +60,7 @@ void			ft_clean_spaces_comments(t_instru *inst)
 int				ft_get_params(t_instru *inst, char *str)
 {
 	int		i;
-	char	*trim;
+	char	*sub;
 
 	if (ft_check_params_format(inst, str) == ERROR)
 		return (ERROR);
@@ -73,11 +75,14 @@ int				ft_get_params(t_instru *inst, char *str)
 		while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 			str++;
 	}
-	trim = ft_strtrim(str);
-//	inst->params = ft_malloc(sizeof(char *) * g_op_tab[inst->op_code - 1].nb_params, EXIT_FAILURE);
-	inst->params = ft_strsplit(trim, SEPARATOR_CHAR);
+	i = -1;
+	while (str[++i] && str[i] != COMMENT_CHAR)
+		;
+	if (!(sub = ft_strsub(str, 0, i)))
+		exit(EXIT_FAILURE);
+	inst->params = ft_strsplit(sub, SEPARATOR_CHAR);
 	ft_clean_spaces_comments(inst);
-	free(trim);
+	free(sub);
 	return (SUCCESS);
 }
 
@@ -114,7 +119,8 @@ int				ft_get_instru(t_champ *champ)
 			continue ;
 		}
 		inst = ft_init_instru();
-		ft_fill_instru(inst, (char*)cur->content);
+		if (ft_fill_instru(inst, (char*)cur->content) == ERROR)
+			return (ERROR);
 		if (!champ->instru)
 		{
 			if (!(champ->instru = ft_lstnew(inst, sizeof(t_instru))))
@@ -127,7 +133,6 @@ int				ft_get_instru(t_champ *champ)
 			ft_lstaddend(&(champ->instru), new);
 		}
 		free(inst);
-//		ft_free_struct_instru(inst);
 		cur = cur->next;
 	}
 	return (SUCCESS);

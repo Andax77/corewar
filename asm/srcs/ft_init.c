@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:33:26 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/18 18:25:51 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 14:27:26 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_init_champ(t_champ *champ)
 	champ->name = NULL;
 	champ->comment = NULL;
 	champ->input = NULL;
-//	champ->label = NULL;
 	champ->instru = NULL;
 	champ->fd = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:34:36 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/18 16:24:08 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 15:07:38 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			read_file(char *file_name, t_champ *champ)
 	}
 	store_lines(champ);
 	if (ft_get_instru(champ) == ERROR)
-		;//ft_error
+		exit(1);//ft_error
 	ft_fill_label_addr(champ);
 	close(champ->fd);
 	return (SUCCESS);

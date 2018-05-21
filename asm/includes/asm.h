@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/18 18:25:25 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/21 16:01:23 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int				ft_get_instru(t_champ *champ);
 int				ft_get_params(t_instru *inst, char *str);
 int				ft_get_t_param(char *str);
 int				ft_get_label_name(t_instru *inst, char *str);
-void			ft_get_op_code(t_instru *inst, char *str);
+int				ft_get_op_code(t_instru *inst, char *str);
 int				ft_get_ocp(t_instru *inst);
 void			ft_get_size_instruction(t_instru *inst);
 

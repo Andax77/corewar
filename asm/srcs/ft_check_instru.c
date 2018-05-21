@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 19:14:16 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/20 19:14:16 by pierremilan      ###   ########.fr       */
+/*   Updated: 2018/05/21 16:12:44 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ int				ft_check_params_format(t_instru *inst, char *str)
 	nb_params = g_op_tab[inst->op_code - 1].nb_params;
 	i = -1;
 	count_separators = 0;
-	while (str[++i])
-	{
+	while (str[++i] && str[i] != COMMENT_CHAR)
 		if (str[i] == SEPARATOR_CHAR)
 			++count_separators;
-		else if (str[i] == COMMENT_CHAR && count_separators != nb_params - 1)
-			return (ERROR);
-	}
+//	if (str[i] && str[i] == COMMENT_CHAR && count_separators != nb_params - 1)
+//		return (ERROR);
 	if (count_separators == nb_params - 1)
 		return (SUCCESS);
 	return (ERROR);

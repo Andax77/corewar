@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 00:43:44 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 00:43:44 by pierremilan      ###   ########.fr       */
+/*   Updated: 2018/05/21 16:39:59 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,5 @@ void		ft_write_cor(t_champ *champ, char *name)
 	ft_printf("{yellow}%d\n{eoc}", length_output);
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
 	ft_bzero(output, length_output + 1);
+	free(output);
 }
