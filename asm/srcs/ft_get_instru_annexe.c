@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 19:20:59 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 18:36:36 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 17:13:55 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,6 @@ int				ft_get_op_code(t_instru *inst, char *str)
 	return (ERROR);
 }
 
-int				ft_get_t_param(char *str)
-{
-	if (str[0] == 'r')
-		return (T_REG);
-	else if (str[0] == DIRECT_CHAR)
-		return (T_DIR);
-	else if (ft_strisdigit(str))
-		return (T_IND);
-	return (ERROR);
-}
-
 static int		ft_get_param_code(int num)
 {
 	if (num == T_REG)
@@ -104,6 +93,7 @@ static int		ft_get_param_code(int num)
 int				ft_get_ocp(t_instru *inst)
 {
 	int		i;
+
 	if (ft_check_params_type(inst) == ERROR)
 		return (ERROR);
 	if (g_op_tab[inst->op_code - 1].nb_params > 1 || inst->op_code == 16)

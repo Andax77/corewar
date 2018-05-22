@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 18:48:36 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 17:11:49 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void		ft_fill_inst_addr(t_champ *champ)
 	}
 }
 
-int				ft_fill_instru(t_instru *inst, char *str)
+int			ft_fill_instru(t_instru *inst, char *str)
 {
 	if (ft_get_label_name(inst, str) == ERROR)
 		return (ERROR);
