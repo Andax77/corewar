@@ -22,10 +22,8 @@ static int	ft_get_addr_label(t_champ *champ, char *str)
 	{
 		cur = (t_instru *)tmp->content;
 		if (cur->label_name)
-		{
 			if (ft_strcmp(cur->label_name, str) == 0)
 				return (cur->inst_addr);
-		}
 		tmp = tmp->next;
 	}
 	return (ERROR);
@@ -37,7 +35,7 @@ static void	ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
 	int			len;
 
 	if ((addr = ft_get_addr_label(champ, cur->params[i] + 2)) == ERROR)
-		ft_error(champ, "addresse directe ne correspond a aucun label");
+		ft_error(champ, "error: direct address has no match");
 	addr -= cur->inst_addr;
 	free(cur->params[i]);
 	if (!(cur->params[i] = ft_itoa(addr)))

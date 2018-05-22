@@ -55,15 +55,3 @@ void		del_champ(t_champ *champ)
 		free(champ);
 	}
 }
-
-void		ft_free_struct_instru(t_instru *inst)
-{
-	int		i;
-
-	i = -1;
-	while (inst->params[++i])
-		free(inst->params[i]);
-	free(inst->params);
-	free(inst->label_name);
-	free(inst);
-}

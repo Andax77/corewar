@@ -100,6 +100,7 @@ void		ft_write_cor(t_champ *champ, char *name)
 	if (!(s = open(file_name, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)))
 		exit(EXIT_FAILURE);
 	write(s, output, length_output);
+	ft_printf("{yellow}Writing output program to %s{eoc}\n", file_name);
 	free(file_name);
 	free(output);
 }

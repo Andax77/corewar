@@ -28,7 +28,7 @@ int				ft_empty_or_comment_line(char *str)
 	return (EMPTY);
 }
 
-void			ft_clean_spaces_comments(t_instru *inst)
+static void		ft_clean_spaces_comments(t_instru *inst)
 {
 	int		i;
 	int		j;
