@@ -51,7 +51,6 @@ static int	get_champ_name_comment(char *line, char **member, int fd)
 	if (line[i] == '\0')
 		get_champ_name_comment_other_lines(member, fd);
 	return (SUCCESS);
-//	ft_printf("{magenta}%s\n{eoc}", *member);
 }
 
 int			parse_line(char *line, t_champ *champ)
@@ -69,7 +68,7 @@ int			parse_line(char *line, t_champ *champ)
 		++is_finished;
 	}
 	if (status == ERROR)
-		;//ft_error+free
+		ft_error(champ, "erreur de format pour name ou comment");
 	if (is_finished == 1)
 		return (FINISHED);
 	return (UNFINISHED);

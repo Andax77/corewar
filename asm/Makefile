@@ -20,8 +20,10 @@ FILES = main.c \
 		ft_get_instru_annexe.c \
 		ft_fill_instru.c \
 		ft_check_instru.c \
+		ft_endian.c \
 		ft_write_cor.c \
 		ft_del.c \
+		ft_error.c \
 		../../commun/srcs/op.c
 
 HFILES = includes/asm.h \

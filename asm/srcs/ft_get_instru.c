@@ -19,11 +19,11 @@ static int		ft_empty_line(char *str)
 	i = -1;
 	while (str[++i])
 	{
+		if (str[i] == COMMENT_CHAR)
+			return (EMPTY);
 		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\v'
 											&& str[i] != '\n' && str[i] != '\f')
 			return (CHARACTER);
-		if (str[i] == COMMENT_CHAR)
-			return (EMPTY);
 	}
 	return (EMPTY);
 }

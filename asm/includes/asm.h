@@ -66,11 +66,16 @@ int				ft_get_ocp(t_instru *inst);
 void			ft_get_size_instruction(t_instru *inst);
 
 int				ft_fill_instru(t_instru *inst, char *str);
-void			ft_fill_label_addr(t_champ *champ);
+void			ft_fill_inst_addr(t_champ *champ);
+void			ft_replace_direct(t_champ *champ);
+
+int16_t			swap_int16(int16_t val);
+int32_t			swap_int32(int32_t val);
 
 void			ft_write_cor(t_champ *champ, char *name);
 
 void			ft_free_struct_instru(t_instru *inst);
 void			del_champ(t_champ *champ);
 
+void			ft_error(t_champ *champ, char *msg);
 #endif

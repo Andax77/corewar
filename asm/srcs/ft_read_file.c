@@ -54,8 +54,9 @@ int			read_file(char *file_name, t_champ *champ)
 	}
 	store_lines(champ);
 	if (ft_get_instru(champ) == ERROR)
-		exit(1);//ft_error
-	ft_fill_label_addr(champ);
+		ft_error(champ, "instruction probleme");// voir a personnaliser ca
+	ft_fill_inst_addr(champ);
+	ft_replace_direct(champ);
 	close(champ->fd);
 	return (SUCCESS);
 }
