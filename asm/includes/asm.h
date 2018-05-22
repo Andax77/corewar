@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/21 18:45:18 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 15:08:03 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int16_t			swap_int16(int16_t val);
 int32_t			swap_int32(int32_t val);
 
 void			ft_write_cor(t_champ *champ, char *name);
+int				ft_fill_file_name(char *name, char **file_name);
+int				ft_fill_output_params(t_instru *cur, char *output, int cursor);
 
 void			ft_free_struct_instru(t_instru *inst);
 void			del_champ(t_champ *champ);

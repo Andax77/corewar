@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/18 19:04:01 by pmilan           ###   ########.fr        #
+#    Updated: 2018/05/22 15:06:41 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ FILES = main.c \
 		ft_check_instru.c \
 		ft_endian.c \
 		ft_write_cor.c \
+		ft_write_cor_annexe.c \
 		ft_del.c \
 		ft_error.c \
 		../../commun/srcs/op.c

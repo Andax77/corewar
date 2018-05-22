@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 00:43:44 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 20:51:04 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 15:11:18 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,50 +26,6 @@ static int	ft_get_instructions_length(t_champ *champ)
 	return (ret);
 }
 
-static int	ft_fill_output_params(t_instru *cur, char *output, int cursor)
-{
-	int		i;
-	char	*write;
-
-	i = -1;
-	while (cur->params[++i])//essayer de reduire en avancant pointeur cur->params[i] et faire un int octet
-	{
-		if (ft_get_t_param(cur->params[i]) == T_REG)
-		{
-			write = ft_malloc(1, EXIT_FAILURE);
-			*(char *)write = ft_atoi(cur->params[i] + 1);
-			ft_memcpy(output + cursor, write, 1);
-			cursor += 1;
-		}
-		else if (ft_get_t_param(cur->params[i]) == T_IND)
-		{
-			write = ft_malloc(2, EXIT_FAILURE);
-			*(short *)write = swap_int16(ft_atoi(cur->params[i]));
-			ft_memcpy(output + cursor, write, 2);
-			cursor += 2;
-		}
-		else
-		{
-			if (g_op_tab[cur->op_code - 1].direct_size == 1)
-			{
-				write = ft_malloc(2, EXIT_FAILURE);
-				*(short *)write = swap_int16(ft_atoi(cur->params[i] + 1));
-				ft_memcpy(output + cursor, write, 2);
-				cursor += 2;
-			}
-			else
-			{
-				write = ft_malloc(4, EXIT_FAILURE);
-				*(int *)write = swap_int32(ft_atoi(cur->params[i] + 1));
-				ft_memcpy(output + cursor, write, 4);
-				cursor += 4;
-			}
-		}
-		free(write);
-	}
-	return (cursor);
-}
-
 static void	ft_fill_output_instructions(t_champ *champ, char *output, int cursor)
 {
 	t_list		*tmp;
@@ -84,19 +40,16 @@ static void	ft_fill_output_instructions(t_champ *champ, char *output, int cursor
 		{
 			write = ft_malloc(1, EXIT_FAILURE);
 			*(char *)write = (char)cur->op_code;
-			ft_memcpy(output + cursor, write, 1);
+			ft_memcpy(output + cursor++, write, 1);
 			free(write);
-			cursor += 1;
 			if (cur->ocp != 0)
 			{
 				write = ft_malloc(1, EXIT_FAILURE);
 				*(char *)write = (char)cur->ocp;
-				ft_memcpy(output + cursor, write, 1);
+				ft_memcpy(output + cursor++, write, 1);
 				free(write);
-				cursor += 1;
 			}
-			if (cur->params)
-				cursor = ft_fill_output_params(cur, output, cursor);
+			cursor = ft_fill_output_params(cur, output, cursor);
 		}
 		tmp = tmp->next;
 	}
@@ -127,20 +80,26 @@ static void	ft_fill_output(t_champ *champ, char *output, int instructions_length
 void		ft_write_cor(t_champ *champ, char *name)
 {
 	char	*output;
+	char	*file_name;
 	int		length_output;
 	int		instructions_length;
 	int		s;
 
-	(void)name;
+	file_name = NULL;
+	if (ft_fill_file_name(name, &file_name) == ERROR)
+	{
+		ft_fruit(1, &file_name);
+		ft_error(champ, "mauvais format de fichier");
+	}
 	instructions_length = ft_get_instructions_length(champ);
-//	ft_printf("{magenta}%d\n{yellow}%d\n{eoc}", instructions_length, sizeof(instructions_length));
-	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 + sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
-//	ft_printf("{yellow}%d\n{eoc}", length_output);
+	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 +
+		sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
 	ft_bzero(output, length_output + 1);
 	ft_fill_output(champ, output, instructions_length);
-//	ft_printf("{red}%r{eoc}\n", output, 2215);
-	s = open("serge", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
-	write(s, output, 2215);
+	if (!(s = open(file_name, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)))
+		exit(EXIT_FAILURE);
+	write(s, output, length_output);
+	free(file_name);
 	free(output);
 }
