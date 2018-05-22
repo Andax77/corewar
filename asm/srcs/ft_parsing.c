@@ -55,25 +55,22 @@ static int	get_champ_name_comment(char *line, char **member, int fd)
 
 int			parse_line(char *line, t_champ *champ)
 {
-	int		is_finished;
 	int		status;
 
 	status = SUCCESS;
-	is_finished = 0;
+	if (line[0] == COMMENT_CHAR)
+		return (UNFINISHED);
 	if (ft_strstr(line, ".name"))
 		status = get_champ_name_comment(line, &champ->name, champ->fd);
 	else if (ft_strstr(line, ".comment"))
-	{
 		status = get_champ_name_comment(line, &champ->comment, champ->fd);
-		++is_finished;
-	}
 	if (status == ERROR)
-		ft_error(champ, "error: programe name or comment is bad formatted");
+		ft_error(champ, "error: programe name or comment is badly formatted");
 	if (champ->name && ft_strlen(champ->name) > PROG_NAME_LENGTH)
 		ft_error(champ, "error: program name is too long");
 	if (champ->comment && ft_strlen(champ->comment) > COMMENT_LENGTH)
 		ft_error(champ, "error: program name is too long");
-	if (is_finished == 1)
+	if (champ->name != NULL && champ->comment != NULL)
 		return (FINISHED);
 	return (UNFINISHED);
 }

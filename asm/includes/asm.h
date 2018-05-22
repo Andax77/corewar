@@ -56,6 +56,7 @@ int				parse_line(char *line, t_champ *champ);
 
 int				ft_check_params_type(t_instru *inst);
 int				ft_check_params_format(t_instru *inst, char *str);
+int				ft_empty_or_comment_line(char *str);
 
 int				ft_get_instru(t_champ *champ);
 int				ft_get_params(t_instru *inst, char *str);

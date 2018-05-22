@@ -89,7 +89,7 @@ void		ft_write_cor(t_champ *champ, char *name)
 	if (ft_fill_file_name(name, &file_name) == ERROR)
 	{
 		ft_fruit(1, &file_name);
-		ft_error(champ, "mauvais format de fichier");
+		ft_error(champ, "error: wrong file format <sourcefile.s>");
 	}
 	instructions_length = ft_get_instructions_length(champ);
 	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 +

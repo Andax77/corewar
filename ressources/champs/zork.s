@@ -1,5 +1,6 @@
 .name "zork"
 .comment "just a basic living prog"
+  	.serge
 
 l2: sti r1, %:live ,%1#,seksek
 	and r1,%0,r1

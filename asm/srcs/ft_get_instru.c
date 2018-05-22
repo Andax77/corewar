@@ -12,7 +12,7 @@
 
 #include <asm.h>
 
-static int		ft_empty_or_comment_line(char *str)
+int				ft_empty_or_comment_line(char *str)
 {
 	int		i;
 
