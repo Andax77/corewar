@@ -6,13 +6,13 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/21 16:40:16 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 16:26:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-static int		ft_empty_line(char *str)
+static int		ft_empty_or_comment_line(char *str)
 {
 	int		i;
 
@@ -100,7 +100,7 @@ void			ft_get_size_instruction(t_instru *inst)
 		else if (ft_get_t_param(inst->params[i]) == T_IND)
 			inst->size += 2;
 		else if (ft_get_t_param(inst->params[i]) == T_DIR)
-			inst->size += (g_op_tab[inst->op_code - 1].direct_size == 1) ? 2 : 4;
+			inst->size += (g_op_tab[inst->op_code - 1].dir_size == 1) ? 2 : 4;
 	}
 }
 
@@ -113,7 +113,7 @@ int				ft_get_instru(t_champ *champ)
 	cur = champ->input;
 	while (cur != NULL)
 	{
-		if (ft_empty_line(cur->content) == EMPTY)
+		if (ft_empty_or_comment_line((char *)cur->content) == EMPTY)
 		{
 			cur = cur->next;
 			continue ;

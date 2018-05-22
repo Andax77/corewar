@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:34:36 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/21 15:07:38 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 16:21:12 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			read_file(char *file_name, t_champ *champ)
 	}
 	store_lines(champ);
 	if (ft_get_instru(champ) == ERROR)
-		ft_error(champ, "instruction probleme");// voir a personnaliser ca
+		ft_error(champ, "error: instruction problem");// voir a personnaliser ca
 	ft_fill_inst_addr(champ);
 	ft_replace_direct(champ);
 	close(champ->fd);

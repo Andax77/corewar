@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/18 15:34:59 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 16:18:47 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,11 @@ int			parse_line(char *line, t_champ *champ)
 		++is_finished;
 	}
 	if (status == ERROR)
-		ft_error(champ, "erreur de format pour name ou comment");
+		ft_error(champ, "error: programe name or comment is bad formatted");
+	if (champ->name && ft_strlen(champ->name) > PROG_NAME_LENGTH)
+		ft_error(champ, "error: program name is too long");
+	if (champ->comment && ft_strlen(champ->comment) > COMMENT_LENGTH)
+		ft_error(champ, "error: program name is too long");
 	if (is_finished == 1)
 		return (FINISHED);
 	return (UNFINISHED);

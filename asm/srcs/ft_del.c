@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:18:42 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/20 21:28:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:14:57 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void	del_input(void *content, size_t content_size)
 
 static void	del_instru(void *content, size_t content_size)
 {
-	char	**tmp_tab;
-	int		n;
-	(void)content_size;
+	char		**tmp_tab;
+	int			n;
 	t_instru	*instru;
 
+	(void)content_size;
 	instru = (t_instru*)content;
 	tmp_tab = (char**)instru->params;
 	n = 0;
@@ -42,11 +42,18 @@ static void	del_instru(void *content, size_t content_size)
 
 void		del_champ(t_champ *champ)
 {
-	free(champ->name);
-	free(champ->comment);
-	ft_lstdel(&champ->input, del_input);
-	ft_lstdel(&champ->instru, del_instru);
-	free(champ);
+	if (champ)
+	{
+		if (champ->name)
+			free(champ->name);
+		if (champ->comment)
+			free(champ->comment);
+		if (champ->input)
+			ft_lstdel(&champ->input, del_input);
+		if (champ->instru)
+			ft_lstdel(&champ->instru, del_instru);
+		free(champ);
+	}
 }
 
 void		ft_free_struct_instru(t_instru *inst)

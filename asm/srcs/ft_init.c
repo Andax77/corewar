@@ -6,13 +6,13 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:33:26 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/21 18:29:57 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 16:10:59 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void	ft_init_champ(t_champ *champ)
+void		ft_init_champ(t_champ *champ)
 {
 	champ->name = NULL;
 	champ->comment = NULL;

@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 15:05:26 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/22 15:11:15 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 16:27:25 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	ft_get_octets_params(t_instru *cur, int i)
 		return (2);
 	else
 	{
-		if (g_op_tab[cur->op_code - 1].direct_size == 1)
+		if (g_op_tab[cur->op_code - 1].dir_size == 1)
 			return (2);
 		else
 			return (4);
