@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/18 18:15:34 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/23 00:24:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 int		main(int argc, char **argv)
 {
 	t_champ		*champ;
+	int			argc_c;
 
-	if (argc > 1)
+	argc_c = argc;
+	while (--argc && ft_strstr(argv[argc], ".s"))
 	{
 		if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
 			return (0);
 		ft_init_champ(champ);
-		if (read_file(argv[1], champ) == ERROR)
+		if (read_file(argv[argc], champ) == ERROR)
 		{
 			del_champ(champ);
 			exit(EXIT_FAILURE);
 		}
-		ft_write_cor(champ, argv[1]);
+		ft_write_cor(champ, argv[argc]);
 		del_champ(champ);
 	}
-	else
+	if (argc_c == 1)
 		ft_printf("{yellow}Usage: %s <sourcefile.s>{eoc}\n", argv[0]);
 	exit(EXIT_SUCCESS);
 }
