@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/21 18:12:54 by eparisot         ###   ########.fr        #
+#    Updated: 2018/05/22 22:01:39 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ all:
 
 $(NAME): $(OBJ_DIR) $(OBJ) $(LIBFT_DIR)libft.a
 	@printf $(CYAN)"-> compilation : $(NAME)\n"$(NORMAL)
-	@$(CC) -o $(NAME) $(OBJ) $(CFLAGS) $(LIBFT_LIB)
+	@$(CC) -lncurses -o $(NAME) $(OBJ) $(CFLAGS) $(LIBFT_LIB)
 
 $(OBJ_DIR)%.o: $(SRCS_DIR)%.c $(HFILES)
 	@printf $(YELLOW)"-> $<\n"$(NORMAL)

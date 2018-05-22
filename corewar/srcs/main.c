@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/21 18:11:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/22 22:19:05 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,25 @@ int	check_opt(char **av)
 	return (SUCCESS);
 }
 
-int		parse_opt(char **av, t_opt *opt)
+int		parse_opt(char **av, t_opt **opt)
 {
 	if (check_opt(av) == SUCCESS)
 	{
-		opt = init_opt(opt);
+		*opt = init_opt(*opt);
 		while (*av)
 		{
-			(ft_strequ(*av, "-a")) ? opt->a = 1 : 0;
-			(ft_strequ(*av, "-d")) ? opt->d = ft_atoi(*++av) : 0;
-			(ft_strequ(*av, "-s")) ? opt->s = ft_atoi(*++av) : 0;
-			(ft_strequ(*av, "-v")) ? opt->v = ft_atoi(*++av) : 0;
-			(ft_strequ(*av, "-b")) ? opt->b = 1 : 0;
-			(ft_strequ(*av, "-n")) ? opt->n = 1 : 0;
+			(ft_strequ(*av, "-a")) ? (*opt)->a = 1 : 0;
+			(ft_strequ(*av, "-d")) ? (*opt)->d = ft_atoi(*++av) : 0;
+			(ft_strequ(*av, "-s")) ? (*opt)->s = ft_atoi(*++av) : 0;
+			(ft_strequ(*av, "-v")) ? (*opt)->v = ft_atoi(*++av) : 0;
+			(ft_strequ(*av, "-b")) ? (*opt)->b = 1 : 0;
+			(ft_strequ(*av, "-n")) ? (*opt)->n = 1 : 0;
 			if (ft_strequ(*av, "--stealth"))
 			{
 				if (ft_strequ(*(av - 1), "-b"))
-					opt->bs = 1;
+					(*opt)->bs = 1;
 				else if (ft_strequ(*(av - 1), "-n"))
-					opt->ns = 1;
+					(*opt)->ns = 1;
 			}
 			av++;
 		}
@@ -101,7 +101,7 @@ int		main(int ac, char **av)
 		print_usage();
 		exit(ERROR);
 	}
-	else if (parse_opt(av, opt) == SUCCESS)
+	else if (parse_opt(av, &opt) == SUCCESS)
 		init(opt);
 	else
 	{
