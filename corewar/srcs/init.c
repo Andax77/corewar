@@ -6,49 +6,56 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/22 23:53:27 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:25:04 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-int		init_ncurse(WINDOW *border1, WINDOW *border2, WINDOW *border3)
+int		init_ncurse()
 {
-	wchar_t	c;
+	int		x;
+	int		y;
 
-	c = (wchar_t)"\u25A0";
+	x = 0;
+	y = 0;
 	initscr();
-	border1 = subwin(stdscr, 40, 80, 0, 0);
-	wborder(border1, c, c, c, c, c, c, c, c);
-	border2 = subwin(stdscr, 40, 40, 0, 80);
-	wborder(border2, c, c, c, c, c, c, c, c);
-	border3 = subwin(stdscr, 10, 120, 39, 0);
-	wborder(border3, c, c, c, c, c, c, c, c);
+	start_color();
+	init_color(COLOR_CYAN, 500, 500, 500);
+	init_pair(1, COLOR_CYAN, COLOR_CYAN);
+	attron(COLOR_PAIR(1));
+	while (y < 68)
+	{
+		if (y == 0 || y == 67 || x == 0 || x == 196 || x == 253)
+			mvprintw(y, x, "*");
+		x++;
+		if (x > 254 && !(x = 0))
+			y++;
+	}
+	x = 3;
+	y = 2;
 	refresh();
-	getch();
-	endwin();
+	init_pair(2, COLOR_CYAN, COLOR_BLACK);
+	attron(COLOR_PAIR(2));
+	while (y < 66)
+	{
+		mvprintw(y, x, "00");
+		x = x + 3;
+		if (x >= 194 && (x = 3))
+			y++;
+	}
+	curs_set(0);
 	return (SUCCESS);
 }
 
 int		init(t_opt *opt)
 {
-	WINDOW	*border1;
-	WINDOW	*border2;
-	WINDOW	*border3;
-
-	border1 = NULL;
-	border2 = NULL;
-	border3 = NULL;
 	if (opt->n)
-		if (!init_ncurse(border1, border2, border3))
+		if (!init_ncurse())
 		{
-			free(border1);
-			free(border2);
-			free(border3);
 			return (ERROR);
 		}
-	free(border1);
-	free(border2);
-	free(border3);
+	getch();
+	endwin();
 	return (SUCCESS);
 }
