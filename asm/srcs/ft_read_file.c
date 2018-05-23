@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:34:36 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/22 16:21:12 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/23 12:00:30 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			read_file(char *file_name, t_champ *champ)
 	int		stock;
 	int		result_gnl;
 
-	if (!(champ->fd = open(file_name, O_RDONLY)))
+	if ((champ->fd = open(file_name, O_RDONLY)) <= 0)
 		return (ERROR);
 	line = NULL;
 	stock = UNFINISHED;
