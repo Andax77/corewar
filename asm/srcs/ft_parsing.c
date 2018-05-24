@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/22 16:18:47 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 23:22:08 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ int			parse_line(char *line, t_champ *champ)
 	else if (ft_strstr(line, ".comment"))
 		status = get_champ_name_comment(line, &champ->comment, champ->fd);
 	if (status == ERROR)
-		ft_error(champ, "error: programe name or comment is badly formatted");
+		return (ft_error(champ, "error: name or comment is badly formatted"));
 	if (champ->name && ft_strlen(champ->name) > PROG_NAME_LENGTH)
-		ft_error(champ, "error: program name is too long");
+		return (ft_error(champ, "error: program name is too long"));
 	if (champ->comment && ft_strlen(champ->comment) > COMMENT_LENGTH)
-		ft_error(champ, "error: program name is too long");
+		return (ft_error(champ, "error: program comment is too long"));
 	if (champ->name != NULL && champ->comment != NULL)
 		return (FINISHED);
 	return (UNFINISHED);

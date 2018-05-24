@@ -6,14 +6,17 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:33:26 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/22 16:10:59 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 22:55:25 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-void		ft_init_champ(t_champ *champ)
+void		ft_init_champ(t_champ *champ, char *argv)
 {
+	if (!(champ->argv = ft_strdup(argv)))
+		exit(EXIT_FAILURE);
+	champ->file_name = NULL;
 	champ->name = NULL;
 	champ->comment = NULL;
 	champ->input = NULL;

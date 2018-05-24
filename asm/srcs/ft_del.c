@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:18:42 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/22 16:14:57 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 22:55:22 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,42 @@ static void	del_instru(void *content, size_t content_size)
 
 void		del_champ(t_champ *champ)
 {
-	if (champ)
+	ft_fruit(4, &champ->argv, &champ->file_name, &champ->name, &champ->comment);
+//	if (champ->input)
+		ft_lstdel(&champ->input, del_input);
+//	if (champ->instru)
+		ft_lstdel(&champ->instru, del_instru);
+	ft_fruit(1, &champ);
+//	if (champ)
+//	{
+//		if (champ->argv)
+//			ft_fruit(1, &champ->argv);
+//		if (champ->file_name)
+//			free(champ->file_name);
+//		if (champ->name)
+//			free(champ->name);
+//		if (champ->comment)
+//			free(champ->comment);
+//		if (champ->input)
+//			ft_lstdel(&champ->input, del_input);
+//		if (champ->instru)
+//			ft_lstdel(&champ->instru, del_instru);
+//		free(champ);
+//	}
+}
+
+void		ft_free_struct_instru(t_instru *inst)
+{
+	int		i;
+
+	i = -1;
+	if (inst->params)
 	{
-		if (champ->name)
-			free(champ->name);
-		if (champ->comment)
-			free(champ->comment);
-		if (champ->input)
-			ft_lstdel(&champ->input, del_input);
-		if (champ->instru)
-			ft_lstdel(&champ->instru, del_instru);
-		free(champ);
+		while (inst->params[++i])
+			free(inst->params[i]);
+		free(inst->params);
 	}
+	if (inst->label_name)
+		free(inst->label_name);
+	free(inst);
 }

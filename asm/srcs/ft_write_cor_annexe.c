@@ -6,35 +6,29 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 15:05:26 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/22 16:27:25 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 22:30:26 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int			ft_fill_file_name(char *name, char **file_name)
+int			ft_fill_file_name(t_champ *champ, char *name)
 {
-	int		nb_point;
 	int		i;
 	int		marqueur;
 
-	nb_point = 0;
 	i = -1;
+	marqueur = 0;
 	while (name[++i])
 	{
 		if (name[i] == '.')
-		{
-			++nb_point;
 			marqueur = i;
-		}
-		else if (name[i] == '/')
-			nb_point = 0;
 	}
-	if (nb_point != 1)
-		return (ERROR);
-	if (!(*file_name = ft_strndup(name, marqueur)))
+	if (i == 0 || marqueur == 0 || name[marqueur + 1] != 's')
+		return (ft_error(champ, "error: wrong file format <sourcefile.s>"));
+	if (!(champ->file_name = ft_strndup(name, marqueur)))
 		exit(EXIT_FAILURE);
-	if (!(*file_name = ft_str_and_free_join(*file_name, ".cor")))
+	if (!(champ->file_name = ft_str_and_free_join(champ->file_name, ".cor")))
 		exit(EXIT_FAILURE);
 	return (SUCCESS);
 }

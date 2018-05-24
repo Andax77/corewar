@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/22 17:11:49 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 20:54:18 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static int	ft_get_addr_label(t_champ *champ, char *str)
 	return (ERROR);
 }
 
-static void	ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
+static int	ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
 {
 	int			addr;
 	int			len;
 
 	if ((addr = ft_get_addr_label(champ, cur->params[i] + 2)) == ERROR)
-		ft_error(champ, "error: direct address has no match");
+		return (ft_error(champ, "error: direct address has no match"));
 	addr -= cur->inst_addr;
 	free(cur->params[i]);
 	if (!(cur->params[i] = ft_itoa(addr)))
@@ -45,9 +45,10 @@ static void	ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
 		exit(EXIT_FAILURE);
 	ft_memmove(cur->params[i] + 1, cur->params[i], len + 1);
 	cur->params[i][0] = DIRECT_CHAR;
+	return (SUCCESS);
 }
 
-void		ft_replace_direct(t_champ *champ)
+static int	ft_replace_direct(t_champ *champ)
 {
 	int			i;
 	t_list		*tmp;
@@ -63,13 +64,15 @@ void		ft_replace_direct(t_champ *champ)
 			while (cur->params[++i])
 				if (ft_get_t_param(cur->params[i]) == T_DIR &&
 										ft_strchr(cur->params[i], LABEL_CHAR))
-					ft_replace_direct_param(champ, cur, i);
+					if (ft_replace_direct_param(champ, cur, i) == ERROR)
+						return (ERROR);
 		}
 		tmp = tmp->next;
 	}
+	return (SUCCESS);
 }
 
-void		ft_fill_inst_addr(t_champ *champ)
+int			ft_fill_inst_addr_and_replace_direct(t_champ *champ)
 {
 	t_list		*tmp;
 	t_instru	*cur;
@@ -84,6 +87,7 @@ void		ft_fill_inst_addr(t_champ *champ)
 		total_size += cur->size;
 		tmp = tmp->next;
 	}
+	return (ft_replace_direct(champ));
 }
 
 int			ft_fill_instru(t_instru *inst, char *str)

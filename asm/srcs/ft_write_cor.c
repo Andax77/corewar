@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 00:43:44 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/22 15:11:18 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 21:54:35 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,52 +55,45 @@ static void	ft_fill_output_instructions(t_champ *champ, char *output, int cursor
 	}
 }
 
-static void	ft_fill_output(t_champ *champ, char *output, int instructions_length)
+static void	ft_fill_output(t_champ *champ, char *output, int instructions_len)
 {
 	char	*tmp;
 	int		cursor;
 
 	tmp = ft_malloc(sizeof(COREWAR_EXEC_MAGIC), EXIT_FAILURE);
-	*(int *)tmp = swap_int32(COREWAR_EXEC_MAGIC);
+	*(int *)tmp = swap_int32(COREWAR_EXEC_MAGIC);/// a verifier ptet un while
 	ft_memcpy(output, tmp, sizeof(COREWAR_EXEC_MAGIC));
 	free(tmp);
 	cursor = sizeof(COREWAR_EXEC_MAGIC);
 	ft_memcpy(output + cursor, champ->name, ft_strlen(champ->name));
 	cursor += PROG_NAME_LENGTH + 4;
-	tmp = ft_malloc(sizeof(instructions_length), EXIT_FAILURE);
-	*(int *)tmp = swap_int32(instructions_length);//verif que int 32 suffit
-	ft_memcpy(output + cursor, tmp, sizeof(instructions_length));
+	tmp = ft_malloc(sizeof(instructions_len), EXIT_FAILURE);
+	*(int *)tmp = swap_int32(instructions_len);//verif que int 32 suffit
+	ft_memcpy(output + cursor, tmp, sizeof(instructions_len));
 	free(tmp);
-	cursor += sizeof(instructions_length);
+	cursor += sizeof(instructions_len);
 	ft_memcpy(output + cursor, champ->comment, ft_strlen(champ->comment));
 	cursor += COMMENT_LENGTH + 4;
 	ft_fill_output_instructions(champ, output, cursor);
 }
 
-void		ft_write_cor(t_champ *champ, char *name)
+int			ft_write_cor(t_champ *champ)
 {
 	char	*output;
-	char	*file_name;
 	int		length_output;
 	int		instructions_length;
-	int		s;
+	int		fd;
 
-	file_name = NULL;
-	if (ft_fill_file_name(name, &file_name) == ERROR)
-	{
-		ft_fruit(1, &file_name);
-		ft_error(champ, "error: wrong file format <sourcefile.s>");
-	}
 	instructions_length = ft_get_instructions_length(champ);
 	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 +
 		sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
 	ft_bzero(output, length_output + 1);
 	ft_fill_output(champ, output, instructions_length);
-	if (!(s = open(file_name, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)))
+	if ((fd = open(champ->file_name, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) <= 0)
 		exit(EXIT_FAILURE);
-	write(s, output, length_output);
-	ft_printf("{yellow}Writing output program to %s{eoc}\n", file_name);
-	free(file_name);
+	write(fd, output, length_output);
+	ft_printf("{yellow}Writing output program to %s{eoc}\n", champ->file_name);
 	free(output);
+	return (SUCCESS);
 }

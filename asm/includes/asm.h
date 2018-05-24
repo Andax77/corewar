@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/22 17:07:37 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 22:53:19 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ enum			e_list
 
 typedef struct	s_champ
 {
+	char		*argv;
+	char		*file_name;
 	char		*name;
 	char		*comment;
 	t_list		*input;
@@ -48,7 +50,7 @@ typedef struct	s_instru
 	int			inst_addr;
 }				t_instru;
 
-void			ft_init_champ(t_champ *champ);
+void			ft_init_champ(t_champ *champ, char *argv);
 t_instru		*ft_init_instru(void);
 
 int				read_file(char *file_name, t_champ *champ);
@@ -68,18 +70,17 @@ void			ft_get_size_instruction(t_instru *inst);
 
 void			ft_fill_lst_instru(t_champ *champ, t_instru *inst);
 int				ft_fill_instru(t_instru *inst, char *str);
-void			ft_fill_inst_addr(t_champ *champ);
-void			ft_replace_direct(t_champ *champ);
+int				ft_fill_inst_addr_and_replace_direct(t_champ *champ);
 
 int16_t			swap_int16(int16_t val);
 int32_t			swap_int32(int32_t val);
 
-void			ft_write_cor(t_champ *champ, char *name);
-int				ft_fill_file_name(char *name, char **file_name);
+int				ft_write_cor(t_champ *champ);
+int				ft_fill_file_name(t_champ *champ, char *name);
 int				ft_fill_output_params(t_instru *cur, char *output, int cursor);
 
 void			ft_free_struct_instru(t_instru *inst);
 void			del_champ(t_champ *champ);
 
-void			ft_error(t_champ *champ, char *msg);
+int				ft_error(t_champ *champ, char *msg);
 #endif
