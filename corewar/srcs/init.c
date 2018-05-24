@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/24 17:59:34 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:09:34 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,29 +61,21 @@ static void		init_ncurse(t_opt *opt)
 	curs_set(0);
 }
 
-static void		init_algo(char *map, t_opt *opt)
+static void		init_algo(t_opt *opt)
 {
+	char	*map;
+
 	if (!(map = ft_strnew(4096)))
-	{
-		if (opt->n)
-		{
-			getch();
-			endwin();
-		}
-		free(opt);
 		exit(EXIT_FAILURE);
-	}
+	//TODO ALGO
+	free(map);
 }
 
 int		init(t_opt *opt)
 {
-	char	*map;
-
-	map = NULL;
 	if (opt->n)
 		init_ncurse(opt);
-	init_algo(map, opt);
-	free(map);
+	init_algo(opt);
 	if (opt->n)
 	{
 		getch();

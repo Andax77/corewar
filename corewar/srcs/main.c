@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/24 18:01:10 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:03:20 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ int		main(int ac, char **av)
 		exit(EXIT_FAILURE);
 	}
 	free(opt);
+	while (1);
 	exit(EXIT_SUCCESS);
 }
