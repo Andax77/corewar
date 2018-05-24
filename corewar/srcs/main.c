@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/22 22:19:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:01:10 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int		main(int ac, char **av)
 	if (ac == 1)
 	{
 		print_usage();
-		exit(ERROR);
+		exit(EXIT_FAILURE);
 	}
 	else if (parse_opt(av, &opt) == SUCCESS)
 		init(opt);
@@ -107,8 +107,8 @@ int		main(int ac, char **av)
 	{
 		print_usage();
 		free(opt);
-		exit(ERROR);
+		exit(EXIT_FAILURE);
 	}
 	free(opt);
-	exit(SUCCESS);
+	exit(EXIT_SUCCESS);
 }
