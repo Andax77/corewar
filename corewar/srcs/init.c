@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/24 18:09:34 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/24 22:21:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	draw_map(t_opt *opt)
 	}
 }
 
-static void		init_ncurse(t_opt *opt)
+static void	init_ncurse(t_opt *opt)
 {
 	initscr();
 	start_color();
@@ -61,22 +61,34 @@ static void		init_ncurse(t_opt *opt)
 	curs_set(0);
 }
 
-static void		init_algo(t_opt *opt)
+static void	init_cor(t_cor *cor, char **argv)
 {
 	char	*map;
+	char	**champs;
 
+	champs = ft_malloc(sizeof(char**), EXIT_FAILURE);
+	while (*argv)
+	{
+		if (ft_strstr(*argv, ".cor"))
+		{
+			*champs = ft_strdup(*argv);
+			champs++;
+		}
+		argv++;
+	}
+	cor->champs = champs;
 	if (!(map = ft_strnew(4096)))
 		exit(EXIT_FAILURE);
-	//TODO ALGO
-	free(map);
+	cor->map = map;
+	//TODO GOGO Algo
 }
 
-int		init(t_opt *opt)
+int			init(char **argv, t_cor *cor)
 {
-	if (opt->n)
-		init_ncurse(opt);
-	init_algo(opt);
-	if (opt->n)
+	if (cor->opt->n)
+		init_ncurse(cor->opt);
+	init_cor(cor, argv);
+	if (cor->opt->n)
 	{
 		getch();
 		endwin();

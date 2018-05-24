@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/22 22:01:39 by eparisot         ###   ########.fr        #
+#    Updated: 2018/05/24 22:01:15 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,15 @@ NAME = corewar
 FILES = main.c \
 		init.c \
 
-HFILES = includes/corewar.h
+HFILES = includes/corewar.h \
+		 ../commun/includes/op.h \
+		 $(LIBFT_DIR)includes/libft.h
 
 CC = gcc
 CFLAGS = -Wall -Wextra -g#-Werror -O3
 
 INC_DIR = includes/ \
+		  ../commun/includes/ \
 		  $(LIBFT_DIR)includes
 
 SRCS_DIR = srcs/

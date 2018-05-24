@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/22 22:02:15 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/24 22:19:50 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <libft.h>
 #include <ncurses.h>
+#include <op.h>
 
 enum			e_list
 {
@@ -35,4 +36,14 @@ typedef struct	s_opt
 	int			ns;
 }				t_opt;
 
-int		init(t_opt *opt);
+typedef struct	s_cor
+{
+	t_opt		*opt;
+	char		**champs;
+	char		*map;
+	int			pc;
+	int			carry;
+	int			cycles;
+}				t_cor;
+
+int		init(char ** argv, t_cor *cor);
