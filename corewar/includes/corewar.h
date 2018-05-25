@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 19:36:34 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 23:01:44 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,9 @@ typedef struct	s_cor
 	int			cycles;
 }				t_cor;
 
-int		init(char ** argv, t_cor *cor);
+void	print_usage(void);
+int		is_opt(char *str);
+int		parse_opt(char **argv, t_opt *opt, t_cor *cor);
+int		init(char **argv, t_cor *cor);
+int		init_ncurses(t_opt *opt);
+int		init_cor(t_cor *cor, char **argv);

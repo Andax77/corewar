@@ -6,14 +6,16 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/24 22:01:15 by eparisot         ###   ########.fr        #
+#    Updated: 2018/05/25 22:42:40 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 
 FILES = main.c \
+		parse_opt.c \
 		init.c \
+		init_cor.c \
 
 HFILES = includes/corewar.h \
 		 ../commun/includes/op.h \
