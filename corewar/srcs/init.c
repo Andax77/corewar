@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 17:45:29 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 18:10:49 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,37 @@ static uint64_t swap_u_int(uint64_t c)
 	return ((c << 16) | ((c >> 16) & 0xFFFF));
 }
 
+static void		populate_instru(t_list **instru, uint64_t c)
+{
+	char		*tmp;
+	t_list		*new;
+
+	tmp = ft_itoa(swap_u_int(c));
+	if (!*(instru))
+		*instru = ft_lstnew(tmp, ft_strlen(tmp) + 1);
+	else
+	{
+		new = ft_lstnew(tmp, ft_strlen(tmp) + 1);
+		ft_lstaddend(instru, new);
+	}
+	free(tmp);
+}
+
 static int		get_champ(t_cor *cor)
 {
-	int			fd;
 	uint64_t	c;
-	t_list		*new;
-	char		*tmp;
+	int			fd;
 
 	if (cor->champs->path)
 	{
 		fd = open(cor->champs->path, O_RDONLY);
 		while (read(fd, &c, 8))
-		{
-			tmp = ft_itoa(swap_u_int(c));
-			if (!cor->champs->instru)
-				cor->champs->instru = ft_lstnew(tmp, ft_strlen(tmp) + 1);
-			else
-			{
-				new = ft_lstnew(tmp, ft_strlen(tmp) + 1);
-				ft_lstaddend(&cor->champs->instru, new);
-			}
-			free(tmp);
-		}
+			populate_instru(&(cor->champs->instru), c);
 		close(fd);
-// TO be destroyed
-cor->champs->name = malloc(sizeof(char));
-cor->champs->comment = malloc(sizeof(char));
-//
+		// TO be destroyed
+		cor->champs->name = malloc(sizeof(char));
+		cor->champs->comment = malloc(sizeof(char));
+		//
 	}
 	return (SUCCESS);
 }
