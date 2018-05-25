@@ -130,6 +130,7 @@ int				get_next_line(const int fd, char **line)
 		return (GNL_ERROR);
 	}
 	ret = ft_read(f, line, n);
-	ft_fruit_gnl(&f, n);
+	if (ret == GNL_ERROR || ret == GNL_END)
+		ft_fruit_gnl(&f, n);
 	return (ret);
 }

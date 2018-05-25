@@ -21,7 +21,7 @@ void		ft_init_champ(t_champ *champ, char *argv)
 	champ->comment = NULL;
 	champ->input = NULL;
 	champ->instru = NULL;
-	champ->fd = 0;
+	champ->fd = -1;
 }
 
 t_instru	*ft_init_instru(void)
