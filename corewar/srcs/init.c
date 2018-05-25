@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 16:12:01 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:41:04 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,16 @@ static void	init_ncurse(t_opt *opt)
 	curs_set(0);
 }
 
-
-
-static int	check_champs(char **champs)
+static int	check_champ(t_champ *champ)
 {
-	int			i;
 	int			fd;
 	uint64_t	c;
 	char		*line;
 
 	line = NULL;
-	i = 0;
-	while (champs[i])
+	if (champ->path)
 	{
-		fd = open(champs[i], O_RDONLY);
+		fd = open(champ->path, O_RDONLY);
 		while (read(fd, &c, 8))
 		{
 			c = ((c << 8) & 0xFF00FF00) | ((c >> 8) & 0xFF00FF);
@@ -82,7 +78,11 @@ static int	check_champs(char **champs)
 			ft_printf("readen char = %x\n", c);
 		}
 		close(fd);
-		i++;
+// TO be destroyed
+champ->name = malloc(sizeof(char));
+champ->comment = malloc(sizeof(char));
+champ->instru = malloc(sizeof(char));
+//
 	}
 	return (SUCCESS);
 }
@@ -90,24 +90,17 @@ static int	check_champs(char **champs)
 static int	init_cor(t_cor *cor, char **argv)
 {
 	int		i;
-	int		n;
 
 	i = 0;
-	n = 0;
-	while (argv[i])
-		if (ft_strstr(argv[i++], ".cor"))
-			n++;
-	cor->champs = (char**)ft_malloc((n + 1) * sizeof(char*), EXIT_FAILURE);
-	i = 0;
+	cor->champs = (t_champ*)ft_malloc(sizeof(t_champ), EXIT_FAILURE);
 	while (*argv)
 	{
 		if (ft_strstr(*argv, ".cor"))
-			cor->champs[i++] = ft_strdup(*argv);
+			cor->champs->path = ft_strdup(*argv);
+		if (!check_champ(cor->champs))
+			return (ERROR);
 		argv++;
 	}
-	cor->champs[i] = NULL;
-	if (!check_champs(cor->champs))
-		return (ERROR);
 	if (!(cor->map = ft_strnew(4096)))
 		exit(EXIT_FAILURE);
 	//TODO GOGO Algo

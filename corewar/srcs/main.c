@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 13:39:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:39:28 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ void	print_usage(void)
 void	free_cor(t_cor *cor)
 {
 	free(cor->opt);
+	free(cor->champs->path);
+	free(cor->champs->name);
+	free(cor->champs->comment);
+	free(cor->champs->instru);
 	free(cor->champs);
 	free(cor->map);
 	free(cor);
@@ -119,5 +123,6 @@ int		main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	free_cor(cor);
+	while (1);
 	exit(EXIT_SUCCESS);
 }

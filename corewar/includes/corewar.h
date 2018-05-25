@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/24 22:19:50 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:39:11 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,18 @@ typedef struct	s_opt
 	int			ns;
 }				t_opt;
 
+typedef struct	s_champ
+{
+	char		*path;
+	char		*name;
+	char		*comment;
+	char		*instru;
+}				t_champ;
+
 typedef struct	s_cor
 {
 	t_opt		*opt;
-	char		**champs;
+	t_champ		*champs;
 	char		*map;
 	int			pc;
 	int			carry;
