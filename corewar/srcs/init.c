@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/24 22:21:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 14:22:09 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,33 +61,59 @@ static void	init_ncurse(t_opt *opt)
 	curs_set(0);
 }
 
-static void	init_cor(t_cor *cor, char **argv)
+static int	check_champs(char **champs)
+{
+	int		i;
+
+	i = 0;
+	while (champs[i])
+	{
+		ft_printf("champ = %s\n", champs[i]);
+		i++;
+	}
+	return (SUCCESS);
+}
+
+static int	init_cor(t_cor *cor, char **argv)
 {
 	char	*map;
 	char	**champs;
+	int		i;
+	int		n;
 
-	champs = ft_malloc(sizeof(char**), EXIT_FAILURE);
+	i = 0;
+	n = 0;
+	while (argv[i])
+		if (ft_strstr(argv[i++], ".cor"))
+			n++;
+	if (!(champs = (char**)malloc(n * sizeof(char*))))
+		exit(ERROR);
+	i = 0;
 	while (*argv)
 	{
 		if (ft_strstr(*argv, ".cor"))
 		{
-			*champs = ft_strdup(*argv);
-			champs++;
+			champs[i] = ft_strdup(*argv);
+			i++;
 		}
 		argv++;
 	}
 	cor->champs = champs;
+	if (!check_champs(champs))
+		return (ERROR);
 	if (!(map = ft_strnew(4096)))
 		exit(EXIT_FAILURE);
 	cor->map = map;
 	//TODO GOGO Algo
+	return (SUCCESS);
 }
 
 int			init(char **argv, t_cor *cor)
 {
 	if (cor->opt->n)
 		init_ncurse(cor->opt);
-	init_cor(cor, argv);
+	if (init_cor(cor, argv) == ERROR)
+		return (ERROR);
 	if (cor->opt->n)
 	{
 		getch();
