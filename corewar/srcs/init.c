@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 16:41:04 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 17:45:29 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,27 +61,38 @@ static void	init_ncurse(t_opt *opt)
 	curs_set(0);
 }
 
-static int	check_champ(t_champ *champ)
+static uint64_t swap_u_int(uint64_t c)
+{
+	c = ((c << 8) & 0xFF00FF00) | ((c >> 8) & 0xFF00FF);
+	return ((c << 16) | ((c >> 16) & 0xFFFF));
+}
+
+static int		get_champ(t_cor *cor)
 {
 	int			fd;
 	uint64_t	c;
-	char		*line;
+	t_list		*new;
+	char		*tmp;
 
-	line = NULL;
-	if (champ->path)
+	if (cor->champs->path)
 	{
-		fd = open(champ->path, O_RDONLY);
+		fd = open(cor->champs->path, O_RDONLY);
 		while (read(fd, &c, 8))
 		{
-			c = ((c << 8) & 0xFF00FF00) | ((c >> 8) & 0xFF00FF);
-			c = ((c << 16) | ((c >> 16) & 0xFFFF));
-			ft_printf("readen char = %x\n", c);
+			tmp = ft_itoa(swap_u_int(c));
+			if (!cor->champs->instru)
+				cor->champs->instru = ft_lstnew(tmp, ft_strlen(tmp) + 1);
+			else
+			{
+				new = ft_lstnew(tmp, ft_strlen(tmp) + 1);
+				ft_lstaddend(&cor->champs->instru, new);
+			}
+			free(tmp);
 		}
 		close(fd);
 // TO be destroyed
-champ->name = malloc(sizeof(char));
-champ->comment = malloc(sizeof(char));
-champ->instru = malloc(sizeof(char));
+cor->champs->name = malloc(sizeof(char));
+cor->champs->comment = malloc(sizeof(char));
 //
 	}
 	return (SUCCESS);
@@ -90,14 +101,16 @@ champ->instru = malloc(sizeof(char));
 static int	init_cor(t_cor *cor, char **argv)
 {
 	int		i;
+	int		n;
 
 	i = 0;
+	n = 0;
 	cor->champs = (t_champ*)ft_malloc(sizeof(t_champ), EXIT_FAILURE);
 	while (*argv)
 	{
-		if (ft_strstr(*argv, ".cor"))
+		if (ft_strstr(*argv, ".cor") && ++n && n <= MAX_PLAYERS)
 			cor->champs->path = ft_strdup(*argv);
-		if (!check_champ(cor->champs))
+		if (!get_champ(cor))
 			return (ERROR);
 		argv++;
 	}
