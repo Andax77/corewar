@@ -40,3 +40,12 @@ int			ft_get_t_param(char *str)
 		return (T_IND);
 	return (ERROR);
 }
+
+int				ft_get_param_code(int num)
+{
+	if (num == T_REG)
+		return (REG_CODE);
+	else if (num == T_DIR)
+		return (DIR_CODE);
+	return (IND_CODE);
+}

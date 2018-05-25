@@ -52,10 +52,11 @@ typedef struct	s_instru
 
 void			ft_init_champ(t_champ *champ, char *argv);
 t_instru		*ft_init_instru(void);
+int				ft_fill_file_name(t_champ *champ, char *name);
 
 int				read_file(char *file_name, t_champ *champ);
-int				parse_line(char *line, t_champ *champ);
 
+int				ft_check_input_format(t_champ *champ);
 int				ft_check_params_type(t_instru *inst);
 int				ft_check_params_format(t_instru *inst, char *str);
 int				ft_empty_or_comment_line(char *str);
@@ -67,6 +68,7 @@ int				ft_get_label_name(t_instru *inst, char *str);
 int				ft_get_op_code(t_instru *inst, char *str);
 int				ft_get_ocp(t_instru *inst);
 void			ft_get_size_instruction(t_instru *inst);
+int				ft_get_param_code(int num);
 
 void			ft_fill_lst_instru(t_champ *champ, t_instru *inst);
 int				ft_fill_instru(t_instru *inst, char *str);
@@ -76,7 +78,6 @@ int16_t			swap_int16(int16_t val);
 int32_t			swap_int32(int32_t val);
 
 int				ft_write_cor(t_champ *champ);
-int				ft_fill_file_name(t_champ *champ, char *name);
 int				ft_fill_output_params(t_instru *cur, char *output, int cursor);
 
 void			ft_free_struct_instru(t_instru *inst);

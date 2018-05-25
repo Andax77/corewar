@@ -14,13 +14,12 @@ NAME = asm
 
 FILES = main.c \
 		ft_init.c \
-		ft_read_file.c \
 		ft_parsing.c \
-		ft_get_instru.c \
-		ft_get_instru_annexe.c \
 		ft_fill_instru.c \
 		ft_fill_instru_annexe.c \
-		ft_check_instru.c \
+		ft_get_instru.c \
+		ft_check.c \
+		ft_replace.c \
 		ft_endian.c \
 		ft_write_cor.c \
 		ft_write_cor_annexe.c \

@@ -12,22 +12,6 @@
 
 #include <asm.h>
 
-int				ft_empty_or_comment_line(char *str)
-{
-	int		i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == COMMENT_CHAR)
-			return (EMPTY);
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\v'
-											&& str[i] != '\n' && str[i] != '\f')
-			return (CHARACTER);
-	}
-	return (EMPTY);
-}
-
 static void		ft_clean_spaces_comments(t_instru *inst)
 {
 	int		i;

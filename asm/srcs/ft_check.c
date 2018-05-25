@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_instru.c                                  :+:      :+:    :+:   */
+/*   ft_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -64,4 +64,49 @@ int				ft_check_params_format(t_instru *inst, char *str)
 	if (count_separators == nb_params - 1)
 		return (SUCCESS);
 	return (ERROR);
+}
+
+int			ft_check_input_format(t_champ *champ)
+{
+	t_list		*tmp;
+	char		*str;
+	int			i;
+
+	if (champ->name == NULL)
+		return (ft_error(champ, "error: no program name found"));
+	if (champ->comment == NULL)
+		return (ft_error(champ, "error: no comment found"));
+	tmp = champ->input;
+	while ((i = -1) && tmp != NULL)
+	{
+		str = (char *)tmp->content;
+		while (str[++i] && (str[i] == ' ' || str[i] == '\t'))
+			;
+		if (str[i] && str[i] == '.')
+		{
+			if (ft_strncmp(str + i, ".name", 5) == 0)
+				return (ft_error(champ, "error: several names of file found"));
+			else if (ft_strncmp(str + i, ".comment", 8) == 0)
+				return (ft_error(champ, "error: several comments found"));
+			return (ft_error(champ, "error: unknown command found"));
+		}
+		tmp = tmp->next;
+	}
+	return (SUCCESS);
+}
+
+int				ft_empty_or_comment_line(char *str)
+{
+	int		i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == COMMENT_CHAR)
+			return (EMPTY);
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\v'
+											&& str[i] != '\n' && str[i] != '\f')
+			return (CHARACTER);
+	}
+	return (EMPTY);
 }

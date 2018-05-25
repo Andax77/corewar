@@ -12,82 +12,91 @@
 
 #include <asm.h>
 
-static int	ft_get_addr_label(t_champ *champ, char *str)
+int				ft_get_ocp(t_instru *inst)
 {
-	t_list		*tmp;
-	t_instru	*cur;
+	int		i;
 
-	tmp = champ->instru;
-	while (tmp != NULL)
+	if (ft_check_params_type(inst) == ERROR)
+		return (ERROR);
+	if (g_op_tab[inst->op_code - 1].nb_params > 1 || inst->op_code == 16)
 	{
-		cur = (t_instru *)tmp->content;
-		if (cur->label_name)
-			if (ft_strcmp(cur->label_name, str) == 0)
-				return (cur->inst_addr);
-		tmp = tmp->next;
+		i = -1;
+		while (++i < 3)
+		{
+			if (i < g_op_tab[inst->op_code - 1].nb_params)
+				inst->ocp += ft_get_param_code(ft_get_t_param(inst->params[i]));
+			inst->ocp = inst->ocp << 2;
+		}
 	}
+	return (SUCCESS);
+}
+static char		*ft_get_name_op_code(t_instru *inst, char *str)
+{
+	char	*ptr;
+	int		i;
+	int		j;
+
+	ptr = NULL;
+	i = -1;
+	while (str[++i] && (str[i] == ' ' || str[i] == '\t'))
+		;
+	if (inst->label_name)
+	{
+		j = -1;
+		while (str[i] == inst->label_name[++j])
+			++i;
+		while (str[++i] && (str[i] == ' ' || str[i] == '\t'))
+			;
+	}
+	j = i;
+	while (str[j] && str[j] != ' ' && str[j] != '\t')
+		++j;
+	if (!(ptr = ft_strndup(str + i, j - i)))
+		exit(EXIT_FAILURE);
+	return (ptr);
+}
+
+int				ft_get_op_code(t_instru *inst, char *str)
+{
+	int		i;
+	char	*ptr;
+
+	i = -1;
+	ptr = ft_get_name_op_code(inst, str);
+	while (g_op_tab[++i].name)
+	{
+		if (strcmp(ptr, g_op_tab[i].name) == 0)
+		{
+			inst->op_code = g_op_tab[i].op_code;
+			free(ptr);
+			return (SUCCESS);
+		}
+	}
+	free(ptr);
 	return (ERROR);
 }
 
-static int	ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
+int				ft_get_label_name(t_instru *inst, char *str)
 {
-	int			addr;
-	int			len;
+	int		i;
 
-	if ((addr = ft_get_addr_label(champ, cur->params[i] + 2)) == ERROR)
-		return (ft_error(champ, "error: direct address has no match"));
-	addr -= cur->inst_addr;
-	free(cur->params[i]);
-	if (!(cur->params[i] = ft_itoa(addr)))
-		exit(EXIT_FAILURE);
-	len = ft_strlen(cur->params[i]);
-	if (!(cur->params[i] = ft_realloc(cur->params[i], len + 1, len + 2)))
-		exit(EXIT_FAILURE);
-	ft_memmove(cur->params[i] + 1, cur->params[i], len + 1);
-	cur->params[i][0] = DIRECT_CHAR;
-	return (SUCCESS);
-}
-
-static int	ft_replace_direct(t_champ *champ)
-{
-	int			i;
-	t_list		*tmp;
-	t_instru	*cur;
-
-	tmp = champ->instru;
-	while (tmp != NULL)
+	if (ft_strchr(str, LABEL_CHAR))
 	{
-		cur = (t_instru *)tmp->content;
-		if (cur->params)
-		{
-			i = -1;
-			while (cur->params[++i])
-				if (ft_get_t_param(cur->params[i]) == T_DIR &&
-										ft_strchr(cur->params[i], LABEL_CHAR))
-					if (ft_replace_direct_param(champ, cur, i) == ERROR)
-						return (ERROR);
-		}
-		tmp = tmp->next;
+		i = -1;
+		while (str[++i] && str[i] != LABEL_CHAR)
+			;
+		if (i == 0)
+			return (ERROR);
+		if (str[i - 1] == DIRECT_CHAR)
+			return (SUCCESS);
+		if (!(inst->label_name = ft_strndup(str, i)))
+			exit(EXIT_FAILURE);
+		i = -1;
+		while (inst->label_name[++i])
+			if (!ft_strchr(LABEL_CHARS, inst->label_name[i]))
+				return (ERROR);
 	}
 	return (SUCCESS);
-}
-
-int			ft_fill_inst_addr_and_replace_direct(t_champ *champ)
-{
-	t_list		*tmp;
-	t_instru	*cur;
-	int			total_size;
-
-	tmp = champ->instru;
-	total_size = 0;
-	while (tmp != NULL)
-	{
-		cur = (t_instru *)tmp->content;
-		cur->inst_addr = total_size;
-		total_size += cur->size;
-		tmp = tmp->next;
-	}
-	return (ft_replace_direct(champ));
 }
 
 int			ft_fill_instru(t_instru *inst, char *str)
