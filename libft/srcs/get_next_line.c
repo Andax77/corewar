@@ -125,9 +125,11 @@ int				get_next_line(const int fd, char **line)
 	*line = NULL;
 	ret = 0;
 	if (ft_create_struct(&f, fd, &n) == GNL_ERROR)
-		return (GNL_ERROR);
-	ret = ft_read(f, line, n);
-	if (ret == GNL_END || ret == GNL_ERROR)
+	{
 		ft_fruit_gnl(&f, n);
+		return (GNL_ERROR);
+	}
+	ret = ft_read(f, line, n);
+	ft_fruit_gnl(&f, n);
 	return (ret);
 }
