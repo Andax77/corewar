@@ -4,5 +4,5 @@
 l2: sti r1, %:live ,%1#,seksek
 	and r1,%0,r1
 
-live:live %1
+live:live %1,r1
 	zjmp %:live

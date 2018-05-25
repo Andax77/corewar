@@ -6,9 +6,12 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/08 17:18:36 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/22 16:26:30 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef OP_H
+# define OP_H
 
 /*
 ** Toutes les tailles sont en octets.
@@ -69,8 +72,24 @@ typedef char	t_arg_type;
 
 typedef struct		header_s
 {
-  unsigned int		magic;
-  char				prog_name[PROG_NAME_LENGTH + 1];
-  unsigned int		prog_size;
-  char				comment[COMMENT_LENGTH + 1];
+ 	unsigned int	magic;
+ 	char			prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int	prog_size;
+	char			comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct		s_op
+{
+	char			*name;
+	int				nb_params;
+	int				params_type[MAX_ARGS_NUMBER];
+	int				op_code;
+	int				nb_cycles;
+	char			*full_name;
+	int				modif_carry;
+	int				dir_size;
+}					t_op;
+
+extern t_op			g_op_tab[17];
+
+#endif

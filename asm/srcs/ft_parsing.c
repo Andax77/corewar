@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/18 15:34:59 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/24 23:22:08 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,79 @@ static int	get_champ_name_comment(char *line, char **member, int fd)
 	if (line[i] == '\0')
 		get_champ_name_comment_other_lines(member, fd);
 	return (SUCCESS);
-//	ft_printf("{magenta}%s\n{eoc}", *member);
 }
 
-int			parse_line(char *line, t_champ *champ)
+static int	parse_line(char *line, t_champ *champ)
 {
-	int		is_finished;
 	int		status;
 
 	status = SUCCESS;
-	is_finished = 0;
+	if (line[0] == COMMENT_CHAR)
+		return (UNFINISHED);
 	if (ft_strstr(line, ".name"))
 		status = get_champ_name_comment(line, &champ->name, champ->fd);
 	else if (ft_strstr(line, ".comment"))
-	{
 		status = get_champ_name_comment(line, &champ->comment, champ->fd);
-		++is_finished;
-	}
 	if (status == ERROR)
-		;//ft_error+free
-	if (is_finished == 1)
+		return (ft_error(champ, "error: name or comment is badly formatted"));
+	if (champ->name && ft_strlen(champ->name) > PROG_NAME_LENGTH)
+		return (ft_error(champ, "error: program name is too long"));
+	if (champ->comment && ft_strlen(champ->comment) > COMMENT_LENGTH)
+		return (ft_error(champ, "error: program comment is too long"));
+	if (champ->name != NULL && champ->comment != NULL)
 		return (FINISHED);
 	return (UNFINISHED);
+}
+
+static void	store_lines(t_champ *champ)
+{
+	char	*line;
+	t_list	*new;
+
+	line = NULL;
+	new = NULL;
+	while (get_next_line(champ->fd, &line) == GNL_SUCCESS)
+	{
+		if (!champ->input)
+		{
+			if (!(champ->input = ft_lstnew(line, ft_strlen(line) + 1)))
+				exit(EXIT_FAILURE);
+		}
+		else
+		{
+			if (!(new = ft_lstnew(line, ft_strlen(line) + 1)))
+				exit(EXIT_FAILURE);
+			ft_lstaddend(&champ->input, new);
+		}
+		free(line);
+	}
+}
+
+int			read_file(char *file_name, t_champ *champ)
+{
+	char	*line;
+	int		stock;
+	int		result_gnl;
+
+	if ((champ->fd = open(file_name, O_RDONLY)) <= 0)
+		return (ERROR);
+	line = NULL;
+	stock = UNFINISHED;
+	while ((result_gnl = get_next_line(champ->fd, &line)) == GNL_SUCCESS)
+	{
+		if ((stock = parse_line(line, champ)) == ERROR && ft_fruit(1, &line))
+			return (ERROR);
+		free(line);
+		if (stock == FINISHED)
+			break ;
+	}
+	if (result_gnl == GNL_ERROR)
+		return (ft_error(champ, "error: bad file descriptor"));
+	store_lines(champ);
+	close(champ->fd);
+	if (ft_check_input_format(champ) == ERROR)
+		return (ERROR);
+	if (ft_get_instru(champ) == ERROR)
+		return (ft_error(champ, "error: instruction problem"));
+	return (ft_fill_inst_addr_and_replace_direct(champ));
 }
