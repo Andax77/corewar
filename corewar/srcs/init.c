@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 16:07:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 16:12:01 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ static void	init_ncurse(t_opt *opt)
 
 static int	check_champs(char **champs)
 {
-	int		i;
-	int		fd;
-	int32_t	c;
-	char	*line;
+	int			i;
+	int			fd;
+	uint64_t	c;
+	char		*line;
 
 	line = NULL;
 	i = 0;
 	while (champs[i])
 	{
 		fd = open(champs[i], O_RDONLY);
-		while (read(fd, &c, 8) > 0)
+		while (read(fd, &c, 8))
 		{
 			c = ((c << 8) & 0xFF00FF00) | ((c >> 8) & 0xFF00FF);
 			c = ((c << 16) | ((c >> 16) & 0xFFFF));
