@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 23:08:08 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 23:59:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		populate_instru(t_champ **champ, uint64_t c)
 	instru = &(*champ)->instru;
 	if (!(tmp = ft_itoa(swap_u_int(c))))
 		exit(EXIT_FAILURE);
-	if (*instru == NULL)
+	if (!*instru)
 	{
 		if (!(*instru = ft_lstnew(tmp, ft_strlen(tmp) + 1)))
 			exit(EXIT_FAILURE);
@@ -56,6 +56,8 @@ static int		get_champ(t_champ **champ, char *path)
 		if (ret == -1)
 			return (ERROR);
 	}
+	if (check_champ(champ, path) == ERROR)
+		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -65,7 +67,7 @@ static int		populate_champs(t_list **champs, char *path)
 	t_champ		*champ;
 
 	champ = ft_malloc(sizeof(t_champ), EXIT_FAILURE);
-	if (!get_champ(&champ, path))
+	if (get_champ(&champ, path) == ERROR)
 		return (ERROR);
 	if (!*(champs))
 	{
@@ -93,7 +95,7 @@ int	init_cor(t_cor *cor, char **argv)
 	{
 		if (ft_strstr(*argv, ".cor") && ++n && n <= MAX_PLAYERS)
 		{
-			if (!populate_champs(&cor->champs, *argv))
+			if (populate_champs(&cor->champs, *argv) == ERROR)
 				return (ERROR);
 		}
 		else if (!is_opt(*argv))

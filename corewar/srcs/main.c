@@ -6,19 +6,19 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 22:42:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/25 23:47:12 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static void	del(void *content, size_t content_size)
+void		del(void *content, size_t content_size)
 {
 	(void)content_size;
 	free(content);
 }
 
-static void	del_champ(void *content, size_t content_size)
+void		del_champ(void *content, size_t content_size)
 {
 	(void)content_size;
 	//free(((t_champ*)content)->name);
@@ -35,7 +35,7 @@ static void	free_cor(t_cor *cor)
 	free(cor);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_opt	*opt;
 	t_cor	*cor;
@@ -47,13 +47,13 @@ int		main(int argc, char **argv)
 		print_usage();
 		exit(EXIT_FAILURE);
 	}
-	else if (!parse_opt(argv, opt, cor))
+	else if (parse_opt(argv, opt, cor) == ERROR)
 	{
 		print_usage();
 		free_cor(cor);
 		exit(EXIT_FAILURE);
 	}
-	else if (!init(argv, cor))
+	else if (init(argv, cor) == ERROR)
 	{
 		free_cor(cor);
 		exit(EXIT_FAILURE);
