@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/04 13:09:25 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/17 17:29:58 by pmilan           ###   ########.fr        #
+#    Updated: 2018/05/25 22:53:46 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ FILES = ft_strlen.c \
 		ft_tolower.c \
 		ft_isalpha.c \
 		ft_isdigit.c \
+		ft_is_int.c \
 		ft_isalnum.c \
 		ft_isascii.c \
 		ft_isprint.c \

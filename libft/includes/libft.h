@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 13:14:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/17 17:36:58 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/25 22:59:03 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int					ft_strncmp(const char *str1, const char *str2, size_t n);
 char				*ft_strdup(const char *src);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_is_int(const char *str);
 int					ft_isascii(int c);
 int					ft_isalnum(int c);
 int					ft_isprint(int c);
