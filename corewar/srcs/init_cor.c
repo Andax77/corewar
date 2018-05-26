@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/26 00:15:26 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/26 02:06:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		populate_instru(t_champ **champ, uint64_t c)
 		if (!(new = ft_lstnew(tmp, ft_strlen(tmp) + 1)))
 			exit(EXIT_FAILURE);
 		ft_lstaddend(instru, new);
-	}
+	}//ft_printf("%s\n", tmp);
 	free(tmp);
 }
 
@@ -104,7 +104,7 @@ int	init_cor(t_cor *cor, char **argv)
 			return (ERROR);
 		}
 	}
-	if (!(cor->map = ft_strnew(4096)))
+	if (!(cor->map = ft_strnew(MEM_SIZE)))
 		exit(EXIT_FAILURE);
 	if (cor->opt->n && !init_ncurses(cor->opt))
 		return (ERROR);
