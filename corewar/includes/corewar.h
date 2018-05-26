@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/26 17:26:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/26 19:30:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_champ
 	char		*name;
 	char		*comment;
 	t_list		*instru;
+	int			op_nb;
 	int			pc;
 	int			carry;
 }				t_champ;
