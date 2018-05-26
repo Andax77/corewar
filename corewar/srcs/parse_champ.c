@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/27 00:00:22 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/27 00:15:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,10 @@ int				check_champ(t_champ **champ, char *path)
 			path);
 		return (ERROR);
 	}
-	if (!check_champ_bis(instru, champ, path))
+	if (check_champ_bis(instru, champ, path) == ERROR)
+	{
+		del_champ(*champ, 0);
 		return (ERROR);
+	}
 	return (SUCCESS);
 }
