@@ -6,13 +6,13 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/26 19:37:39 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/26 23:08:55 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-char	*translate(uint64_t val)
+static char		*translate(uint64_t val)
 {
 	char	*text;
 
@@ -31,7 +31,8 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 	char	*add;
 
 	i = 0;
-	*text = ft_strnew(size);
+	if (!(*text = ft_strnew(size + 1)))
+		exit(EXIT_FAILURE);
 	while (instru && (i += 4))
 	{
 		if (i == size)
@@ -39,10 +40,7 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 			if (ft_atoi(instru->content) != 0)
 				return (NULL);
 			else
-			{
-				instru = instru->next;
 				break ;
-			}
 		}
 		if (ft_atoi(instru->content) != 0)
 		{
@@ -52,10 +50,51 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 		}
 		instru = instru->next;
 	}
-	return (instru);
+	return (instru->next);
 }
 
-int		check_champ(t_champ **champ, char *path)
+static int		check_prog_len(t_list *instru, int size, char **text)
+{
+	int		i;
+	char	*add;
+
+	i = 0;
+	if (!(*text = ft_strnew(size + 1)))
+		exit(EXIT_FAILURE);
+	while (instru && (i += 4))
+	{
+		if (i > size)
+			return (ERROR);
+		add = translate(ft_atoi(instru->content)); //Verif
+		ft_strcat(*text, add);
+		free(add);
+		instru = instru->next;
+	}
+	return (SUCCESS);
+}
+
+static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
+{
+	(*champ)->op_nb = ft_atoi(instru->next->content);
+	if (!(instru = check_len(instru->next, COMMENT_LENGTH, &(*champ)->comment)))
+	{
+		ft_printf("{red}error : champion '%s' has wrong comment length{eoc}\n",\
+			path);
+		del_champ(*champ, 0);
+		return (ERROR);
+	}
+	if (check_prog_len(instru->next, CHAMP_MAX_SIZE, &(*champ)->prog) == ERROR)
+	{
+		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
+			path);
+		del_champ(*champ, 0);
+		return (ERROR);
+	}
+	ft_printf("champ name = %s, op_nb = %d, comment = %s, prog = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog);
+	return (SUCCESS);
+}
+
+int				check_champ(t_champ **champ, char *path)
 {
 	t_list	*instru;
 
@@ -78,14 +117,7 @@ int		check_champ(t_champ **champ, char *path)
 		del_champ(*champ, 0);
 		return (ERROR);
 	}
-	(*champ)->op_nb = ft_atoi(instru->next->content);
-	if (!(instru = check_len(instru->next, COMMENT_LENGTH, &(*champ)->comment)))
-	{
-		ft_printf("{red}error : champion '%s' has wrong comment length{eoc}\n",\
-			path);
-		del_champ(*champ, 0);
+	if (!check_champ_bis(instru, champ, path))
 		return (ERROR);
-	}
-	ft_printf("champ name = %s, op_nb = %d, comment = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment);
 	return (SUCCESS);
 }
