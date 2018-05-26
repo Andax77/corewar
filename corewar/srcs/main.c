@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/26 00:18:55 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/27 00:02:29 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ void		del(void *content, size_t content_size)
 void		del_champ(void *content, size_t content_size)
 {
 	(void)content_size;
-	if (((t_champ*)content)->name)
-		free(((t_champ*)content)->name);
-	if (((t_champ*)content)->comment)
-		free(((t_champ*)content)->comment);
-	if (((t_champ*)content)->instru)
-		ft_lstdel(&((t_champ*)content)->instru, del);
+	free(((t_champ*)content)->name);
+	free(((t_champ*)content)->comment);
+	free(((t_champ*)content)->prog);
+	ft_lstdel(&((t_champ*)content)->instru, del);
 	free(content);
 }
 

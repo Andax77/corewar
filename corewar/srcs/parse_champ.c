@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/26 23:08:55 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/27 00:00:22 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 		}
 		instru = instru->next;
 	}
+	if (!instru)
+		return (NULL);
 	return (instru->next);
 }
 
@@ -80,14 +82,12 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 	{
 		ft_printf("{red}error : champion '%s' has wrong comment length{eoc}\n",\
 			path);
-		del_champ(*champ, 0);
 		return (ERROR);
 	}
 	if (check_prog_len(instru->next, CHAMP_MAX_SIZE, &(*champ)->prog) == ERROR)
 	{
 		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
 			path);
-		del_champ(*champ, 0);
 		return (ERROR);
 	}
 	ft_printf("champ name = %s, op_nb = %d, comment = %s, prog = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog);
@@ -101,20 +101,17 @@ int				check_champ(t_champ **champ, char *path)
 	if (!(instru = (*champ)->instru))
 	{
 		ft_printf("{red}error : champion '%s' is empty{eoc}\n", path);
-		del_champ(*champ, 0);
 		return (ERROR);
 	}
 	if (ft_atoi(instru->content) != COREWAR_EXEC_MAGIC)
 	{
 		ft_printf("{red}error : champion '%s' has wrong CEM{eoc}\n", path);
-		del_champ(*champ, 0);
 		return (ERROR);
 	}
 	if (!(instru = check_len(instru->next, PROG_NAME_LENGTH, &(*champ)->name)))
 	{
 		ft_printf("{red}error : champion '%s' has wrong name length{eoc}\n", \
 			path);
-		del_champ(*champ, 0);
 		return (ERROR);
 	}
 	if (!check_champ_bis(instru, champ, path))
