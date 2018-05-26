@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/26 02:06:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/26 17:50:20 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		populate_instru(t_champ **champ, uint64_t c)
 		if (!(new = ft_lstnew(tmp, ft_strlen(tmp) + 1)))
 			exit(EXIT_FAILURE);
 		ft_lstaddend(instru, new);
-	}//ft_printf("%s\n", tmp);
+	}
 	free(tmp);
 }
 
@@ -50,7 +50,7 @@ static int		get_champ(t_champ **champ, char *path)
 	if (path)
 	{
 		fd = open(path, O_RDONLY);
-		while ((ret = read(fd, &c, 8)))
+		while ((ret = read(fd, &c, 4)))
 			populate_instru(champ, c);
 		close(fd);
 		if (ret == -1)
