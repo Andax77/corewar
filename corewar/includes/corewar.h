@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/27 23:32:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/27 23:43:17 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ int		init(char **argv, t_cor *cor);
 int		init_ncurses(t_opt *opt);
 int		init_cor(t_cor *cor, char **argv);
 int		check_champ(t_champ **champ, char *path);
+char	*translate(uint64_t val);
+int		padd(char **str);
 void	del_champ(void *content, size_t content_size);
 void	del(void *content, size_t content_size);
