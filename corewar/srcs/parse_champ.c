@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 19:34:25 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 20:01:11 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 			free(add);
 			(*text)[size * 2] = '\0';
 		}
-		else if (i > size)
-			return (ERROR);
 		else
 		{
 			add = ft_itoa_base(ft_atoi(instru->content), 16);
@@ -93,7 +91,7 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 			path);
 		return (ERROR);
 	}
-	if (check_prog_len(instru->next, (*champ)->op_nb, &(*champ)->prog) == ERROR)
+	if (check_prog_len(instru->next, (*champ)->op_nb, &(*champ)->prog) == ERROR) //PROTECT from less than size
 	{
 		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
 			path);
