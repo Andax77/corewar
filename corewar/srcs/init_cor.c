@@ -6,19 +6,19 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/27 00:18:12 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 17:05:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static uint64_t swap_u_int(uint64_t c)
+static int64_t swap_u_int(int64_t c)
 {
 	c = ((c << 8) & 0xFF00FF00) | ((c >> 8) & 0xFF00FF);
 	return ((c << 16) | ((c >> 16) & 0xFFFF));
 }
 
-static void		populate_instru(t_champ **champ, uint64_t c)
+static void		populate_instru(t_champ **champ, int64_t c)
 {
 	t_list		**instru;
 	char		*tmp;
@@ -50,15 +50,25 @@ static int		get_champ(t_champ **champ, char *path)
 	if (path)
 	{
 		fd = open(path, O_RDONLY);
-		while ((ret = read(fd, &c, 4)))
-			populate_instru(champ, c);
-		close(fd);
-		if (ret == -1)
+		if (fd != -1)
+		{
+			while ((ret = read(fd, &c, 4)))
+				populate_instru(champ, c);
+			close(fd);
+			if (ret == -1)
+				return (ERROR);
+			if (check_champ(champ, path) == ERROR)
+				return (ERROR);
+		}
+		else
+		{
+			ft_printf("{red}error : file '%s' does not exists{eoc}\n", path);
 			return (ERROR);
+		}
+		return (SUCCESS);
 	}
-	if (check_champ(champ, path) == ERROR)
+	else
 		return (ERROR);
-	return (SUCCESS);
 }
 
 static int		populate_champs(t_list **champs, char *path)

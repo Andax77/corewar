@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/27 00:02:29 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 16:23:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ int			main(int argc, char **argv)
 	else if (init(argv, cor) == ERROR)
 	{
 		free_cor(cor);
-		while (1);
+		//DEBUG
+		//while (1);
 		exit(EXIT_FAILURE);
 	}
 	free_cor(cor);
-	while (1);
+	//DEBUG
+	//while (1);
 	exit(EXIT_SUCCESS);
 }

@@ -6,13 +6,13 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 00:14:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 17:02:26 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-char		*translate(uint64_t val)
+char		*translate(int64_t val)
 {
 	char	*text;
 	int		i;
@@ -28,10 +28,10 @@ char		*translate(uint64_t val)
 	return (text);
 }
 
-int		padd(char **str)
+int		pad(char **str)
 {
 	char	*tmp;
-	char	zeros[8];
+	char	zeros[9];
 	int		i;
 	int		len;
 
@@ -40,6 +40,8 @@ int		padd(char **str)
 	tmp = *str;
 	while (len--)
 		zeros[i++] = '0';
+	while (i <= 8)
+		zeros[i++] = '\0';
 	if (!(*str = ft_strjoin(zeros, *str)))
 		exit(EXIT_FAILURE);
 	free(tmp);
