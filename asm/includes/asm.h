@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <op.h>
 #include <libft.h>
 

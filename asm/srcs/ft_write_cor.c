@@ -61,14 +61,16 @@ static void	ft_fill_output(t_champ *champ, char *output, int instructions_len)
 	int		cursor;
 
 	tmp = ft_malloc(sizeof(COREWAR_EXEC_MAGIC), EXIT_FAILURE);
-	*(int *)tmp = swap_int32(COREWAR_EXEC_MAGIC);/// a verifier ptet un while
+	if (sizeof(COREWAR_EXEC_MAGIC) == 4)
+		*(int *)tmp = swap_int32(COREWAR_EXEC_MAGIC);
 	ft_memcpy(output, tmp, sizeof(COREWAR_EXEC_MAGIC));
 	free(tmp);
 	cursor = sizeof(COREWAR_EXEC_MAGIC);
 	ft_memcpy(output + cursor, champ->name, ft_strlen(champ->name));
 	cursor += PROG_NAME_LENGTH + 4;
 	tmp = ft_malloc(sizeof(instructions_len), EXIT_FAILURE);
-	*(int *)tmp = swap_int32(instructions_len);//verif que int 32 suffit
+	if (sizeof(instructions_len == 4))
+		*(int *)tmp = swap_int32(instructions_len);
 	ft_memcpy(output + cursor, tmp, sizeof(instructions_len));
 	free(tmp);
 	cursor += sizeof(instructions_len);
@@ -85,6 +87,10 @@ int			ft_write_cor(t_champ *champ)
 	int		fd;
 
 	instructions_length = ft_get_instructions_length(champ);
+	if (instructions_length > CHAMP_MAX_SIZE)
+		return (ft_error(champ, "error: too many instructions"));
+	if (sizeof(COREWAR_EXEC_MAGIC) > 4)
+		return (ft_error(champ, "error: magic number is not an integer"));
 	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 +
 		sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);

@@ -27,8 +27,9 @@ int		main(int argc, char **argv)
 			if (ft_fill_file_name(champ, argv[argc]) == ERROR)
 				continue ;
 			if (read_file(argv[argc], champ) == ERROR)
-				continue;
-			ft_write_cor(champ);
+				continue ;
+			if (ft_write_cor(champ) == ERROR)
+				continue ;
 			del_champ(champ);
 		}
 	}
