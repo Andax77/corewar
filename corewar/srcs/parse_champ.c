@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 17:15:32 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 19:34:25 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,32 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 	char	*add;
 
 	i = 0;
-	if (!(*text = ft_strnew(size + 1)))
+	if (!(*text = ft_strnew(size * 2 + 1)))
 		exit(EXIT_FAILURE);
-	(*text)[size] = '\0';
 	while (instru && (i += 4))
 	{
-		if (i > size)
+		if (i > size && (size % 4) != 0)
+		{
+			if (size % 4 == 3)
+				add = ft_itoa_base(ft_atoi(instru->content) >> 8, 16);
+			else if (size % 4 == 2)
+				add = ft_itoa_base(ft_atoi(instru->content) >> 16, 16);
+			else if (size % 4 == 1)
+				add = ft_itoa_base(ft_atoi(instru->content) >> 24, 16);
+			ft_strcat(*text, add);
+			free(add);
+			(*text)[size * 2] = '\0';
+		}
+		else if (i > size)
 			return (ERROR);
-		add = ft_itoa_base(ft_atoi(instru->content), 16);
-		if (ft_strlen(add) < 8)
-			pad(&add);
-		ft_strcat(*text, add);
-		free(add);
+		else
+		{
+			add = ft_itoa_base(ft_atoi(instru->content), 16);
+			if (ft_strlen(add) < 8)
+				pad(&add);
+			ft_strcat(*text, add);
+			free(add);
+		}
 		instru = instru->next;
 	}
 	return (SUCCESS);
@@ -67,14 +81,19 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 
 static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 {
-	(*champ)->op_nb = ft_atoi(instru->content);
+	if (((*champ)->op_nb = ft_atoi(instru->content)) > CHAMP_MAX_SIZE)
+	{
+		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
+			path);
+		return (ERROR);
+	}
 	if (!(instru = check_len(instru->next, COMMENT_LENGTH, &(*champ)->comment)))
 	{
 		ft_printf("{red}error : champion '%s' has wrong comment length{eoc}\n",\
 			path);
 		return (ERROR);
 	}
-	if (check_prog_len(instru->next, CHAMP_MAX_SIZE, &(*champ)->prog) == ERROR)
+	if (check_prog_len(instru->next, (*champ)->op_nb, &(*champ)->prog) == ERROR)
 	{
 		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
 			path);
