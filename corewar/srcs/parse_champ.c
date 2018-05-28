@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 20:01:11 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 21:32:07 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 	{
 		if (i > size && (size % 4) != 0)
 		{
+			i -= 4 - (size % 4);
 			if (size % 4 == 3)
 				add = ft_itoa_base(ft_atoi(instru->content) >> 8, 16);
 			else if (size % 4 == 2)
@@ -63,6 +64,7 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 			ft_strcat(*text, add);
 			free(add);
 			(*text)[size * 2] = '\0';
+			break ;
 		}
 		else
 		{
@@ -74,6 +76,8 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 		}
 		instru = instru->next;
 	}
+	if (i != size)
+		return (ERROR);
 	return (SUCCESS);
 }
 
