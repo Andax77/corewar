@@ -6,13 +6,13 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 00:45:12 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/26 00:53:26 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/27 11:34:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static int		ft_count(int value, int base)
+static int		ft_count(long long value, int base)
 {
 	int		c;
 
@@ -27,7 +27,7 @@ static int		ft_count(int value, int base)
 	return (c);
 }
 
-static char*	ft_itoa_base_bis(char *res, int c, long nb, int base)
+static char*	ft_itoa_base_bis(char *res, int c, long long nb, int base)
 {
 	while (nb >= base)
 	{
@@ -45,11 +45,11 @@ static char*	ft_itoa_base_bis(char *res, int c, long nb, int base)
 	return (res);
 }
 
-char			*ft_itoa_base(int value, int base)
+char			*ft_itoa_base(long long value, int base)
 {
-	char	*res;
-	int		c;
-	long	nb;
+	char		*res;
+	int			c;
+	long long	nb;
 
 	res = NULL;
 	if (base >= 2 && base <= 16)
