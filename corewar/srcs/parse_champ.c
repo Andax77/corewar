@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 21:32:07 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 21:40:34 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 	return (instru->next);
 }
 
+static int		check_last(char *add, char **text, int size, t_list *instru)
+{
+	if (size % 4 == 3)
+		add = ft_itoa_base(ft_atoi(instru->content) >> 8, 16);
+	else if (size % 4 == 2)
+		add = ft_itoa_base(ft_atoi(instru->content) >> 16, 16);
+	else if (size % 4 == 1)
+		add = ft_itoa_base(ft_atoi(instru->content) >> 24, 16);
+	ft_strcat(*text, add);
+	free(add);
+	(*text)[size * 2] = '\0';
+	return (SUCCESS);
+}
+
 static int		check_prog_len(t_list *instru, int size, char **text)
 {
 	int		i;
@@ -52,20 +66,8 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 		exit(EXIT_FAILURE);
 	while (instru && (i += 4))
 	{
-		if (i > size && (size % 4) != 0)
-		{
-			i -= 4 - (size % 4);
-			if (size % 4 == 3)
-				add = ft_itoa_base(ft_atoi(instru->content) >> 8, 16);
-			else if (size % 4 == 2)
-				add = ft_itoa_base(ft_atoi(instru->content) >> 16, 16);
-			else if (size % 4 == 1)
-				add = ft_itoa_base(ft_atoi(instru->content) >> 24, 16);
-			ft_strcat(*text, add);
-			free(add);
-			(*text)[size * 2] = '\0';
+		if (i > size && (size % 4) != 0 && check_last(add, text, size, instru))
 			break ;
-		}
 		else
 		{
 			add = ft_itoa_base(ft_atoi(instru->content), 16);
@@ -76,7 +78,7 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 		}
 		instru = instru->next;
 	}
-	if (i != size)
+	if ((i -= 4 - (size % 4)) != size)
 		return (ERROR);
 	return (SUCCESS);
 }
