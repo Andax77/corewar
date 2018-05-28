@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/27 23:43:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 00:13:41 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 	}
 	//TODO Check prog (operations conformity)
 	//DEBUG
-	//ft_printf("champ name = %s, op_nb = %d, comment = %s, prog = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog);
+	ft_printf("champ name = %s, op_nb = %d, comment = %s, prog = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog);
 	return (SUCCESS);
 }
 

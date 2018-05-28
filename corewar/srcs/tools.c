@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/27 23:43:20 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/28 00:14:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 char		*translate(uint64_t val)
 {
 	char	*text;
+	int		i;
 
+	i = 0;
 	if (!(text = ft_strnew(5)))
 		exit(EXIT_FAILURE);
 	text[0] = val >> 24;
