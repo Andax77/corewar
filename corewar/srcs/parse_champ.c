@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 21:40:34 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/29 14:32:38 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,24 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 static int		check_last(char *add, char **text, int size, t_list *instru)
 {
 	if (size % 4 == 3)
+	{
 		add = ft_itoa_base(ft_atoi(instru->content) >> 8, 16);
+		if (ft_strlen(add) < 6)
+			pad(&add, 6);
+	}
 	else if (size % 4 == 2)
+	{
 		add = ft_itoa_base(ft_atoi(instru->content) >> 16, 16);
+		if (ft_strlen(add) < 4)
+			pad(&add, 4);
+	}
 	else if (size % 4 == 1)
+	{
 		add = ft_itoa_base(ft_atoi(instru->content) >> 24, 16);
+		if (ft_strlen(add) < 2)
+			pad(&add, 2);
+	}
+ft_printf("add = %s\n", add);
 	ft_strcat(*text, add);
 	free(add);
 	(*text)[size * 2] = '\0';
@@ -72,7 +85,8 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 		{
 			add = ft_itoa_base(ft_atoi(instru->content), 16);
 			if (ft_strlen(add) < 8)
-				pad(&add);
+				pad(&add, 8);
+ft_printf("add = %s\n", add);
 			ft_strcat(*text, add);
 			free(add);
 		}

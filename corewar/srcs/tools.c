@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 17:02:26 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/29 14:33:28 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,19 @@ char		*translate(int64_t val)
 	return (text);
 }
 
-int		pad(char **str)
+int		pad(char **str, int n)
 {
 	char	*tmp;
-	char	zeros[9];
+	char	zeros[n + 1];
 	int		i;
 	int		len;
 
 	i = 0;
-	len = 8 - ft_strlen(*str);
+	len = n - ft_strlen(*str);
 	tmp = *str;
 	while (len--)
 		zeros[i++] = '0';
-	while (i <= 8)
+	while (i <= n)
 		zeros[i++] = '\0';
 	if (!(*str = ft_strjoin(zeros, *str)))
 		exit(EXIT_FAILURE);
