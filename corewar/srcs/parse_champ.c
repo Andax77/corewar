@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/29 14:32:38 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/29 16:44:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static int		check_last(char *add, char **text, int size, t_list *instru)
 		if (ft_strlen(add) < 2)
 			pad(&add, 2);
 	}
-ft_printf("add = %s\n", add);
 	ft_strcat(*text, add);
 	free(add);
 	(*text)[size * 2] = '\0';
@@ -86,7 +85,6 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 			add = ft_itoa_base(ft_atoi(instru->content), 16);
 			if (ft_strlen(add) < 8)
 				pad(&add, 8);
-ft_printf("add = %s\n", add);
 			ft_strcat(*text, add);
 			free(add);
 		}
@@ -117,9 +115,10 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 			path);
 		return (ERROR);
 	}
+	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
 	//TODO Check prog (operations conformity)
 	//DEBUG
-	ft_printf("champ name = %s, op_nb = %d, comment = %s, prog = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog);
+	//ft_printf("champ name = %s, op_nb = %d, comment = %s, prog = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog);
 	return (SUCCESS);
 }
 
