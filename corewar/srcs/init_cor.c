@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/28 17:05:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/29 18:05:24 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		populate_instru(t_champ **champ, int64_t c)
 
 static int		get_champ(t_champ **champ, char *path)
 {
-	uint64_t	c;
+	int64_t		c;
 	int			fd;
 	int			ret;
 
