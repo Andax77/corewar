@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 17:05:47 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/22 17:13:52 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 15:41:51 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			ft_get_t_param(char *str)
 	return (ERROR);
 }
 
-int				ft_get_param_code(int num)
+int			ft_get_param_code(int num)
 {
 	if (num == T_REG)
 		return (REG_CODE);

@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 12:18:34 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/25 12:18:34 by pierremilan      ###   ########.fr       */
+/*   Updated: 2018/05/29 15:45:17 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		ft_get_addr_label(t_champ *champ, char *str)
 	return (ERROR);
 }
 
-static int	ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
+static int		ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
 {
 	int			addr;
 	int			len;
@@ -48,7 +48,7 @@ static int	ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
 	return (SUCCESS);
 }
 
-static int	ft_replace_direct(t_champ *champ)
+static int		ft_replace_direct(t_champ *champ)
 {
 	int			i;
 	t_list		*tmp;
@@ -72,7 +72,7 @@ static int	ft_replace_direct(t_champ *champ)
 	return (SUCCESS);
 }
 
-int			ft_fill_inst_addr_and_replace_direct(t_champ *champ)
+int				ft_fill_inst_addr_and_replace_direct(t_champ *champ)
 {
 	t_list		*tmp;
 	t_instru	*cur;

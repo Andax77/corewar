@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 19:14:16 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/21 18:48:11 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 15:42:18 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int				ft_check_params_format(t_instru *inst, char *str)
 	return (ERROR);
 }
 
-int			ft_check_input_format(t_champ *champ)
+int				ft_check_input_format(t_champ *champ)
 {
 	t_list		*tmp;
 	char		*str;

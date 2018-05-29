@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/24 22:52:41 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 15:45:47 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int				ft_get_instru(t_champ *champ)
 		inst = ft_init_instru();
 		if (ft_fill_instru(inst, (char*)cur->content) == ERROR)
 		{
-		   	ft_free_struct_instru(inst);
+			ft_free_struct_instru(inst);
 			return (ERROR);
 		}
 		ft_fill_lst_instru(champ, inst);

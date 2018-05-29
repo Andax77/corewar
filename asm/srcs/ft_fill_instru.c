@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/24 20:54:18 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 15:44:14 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int				ft_get_ocp(t_instru *inst)
 	}
 	return (SUCCESS);
 }
+
 static char		*ft_get_name_op_code(t_instru *inst, char *str)
 {
 	char	*ptr;
@@ -99,7 +100,7 @@ int				ft_get_label_name(t_instru *inst, char *str)
 	return (SUCCESS);
 }
 
-int			ft_fill_instru(t_instru *inst, char *str)
+int				ft_fill_instru(t_instru *inst, char *str)
 {
 	if (ft_get_label_name(inst, str) == ERROR)
 		return (ERROR);

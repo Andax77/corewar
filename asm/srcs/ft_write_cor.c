@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 00:43:44 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/24 21:54:35 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 15:44:50 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	ft_get_instructions_length(t_champ *champ)
 	return (ret);
 }
 
-static void	ft_fill_output_instructions(t_champ *champ, char *output, int cursor)
+static void	ft_fill_output_instructions(t_champ *champ, char *output,
+																	int cursor)
 {
 	t_list		*tmp;
 	t_instru	*cur;
