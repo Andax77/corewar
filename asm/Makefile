@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/22 17:09:55 by pmilan           ###   ########.fr        #
+#    Updated: 2018/05/29 17:50:59 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = asm
 FILES = main.c \
 		ft_init.c \
 		ft_parsing.c \
+		ft_parsing_binary.c \
 		ft_fill_instru.c \
 		ft_fill_instru_annexe.c \
 		ft_get_instru.c \

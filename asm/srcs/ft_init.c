@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:33:26 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/24 22:55:25 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 17:48:23 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,27 @@ int			ft_fill_file_name(t_champ *champ, char *name)
 	if (!(champ->file_name = ft_strndup(name, marqueur)))
 		exit(EXIT_FAILURE);
 	if (!(champ->file_name = ft_str_and_free_join(champ->file_name, ".cor")))
+		exit(EXIT_FAILURE);
+	return (SUCCESS);
+}
+
+int			ft_fill_binary_name(t_champ *champ, char *name)
+{
+	int		i;
+	int		marqueur;
+
+	i = -1;
+	marqueur = 0;
+	if (!(ft_strstr(name, ".cor")))
+		return (ft_error(champ, "error: wrong file format <sourcefile.cor>"));
+	while (name[++i])
+	{
+		if (name[i] == '.')
+			marqueur = i;
+	}
+	if (!(champ->file_name = ft_strndup(name, marqueur)))
+		exit(EXIT_FAILURE);
+	if (!(champ->file_name = ft_str_and_free_join(champ->file_name, ".s")))
 		exit(EXIT_FAILURE);
 	return (SUCCESS);
 }

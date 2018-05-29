@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/29 15:01:23 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 17:47:50 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ typedef struct	s_instru
 void			ft_init_champ(t_champ *champ, char *argv);
 t_instru		*ft_init_instru(void);
 int				ft_fill_file_name(t_champ *champ, char *name);
+int				ft_fill_binary_name(t_champ *champ, char *name);
 
 int				read_file(char *file_name, t_champ *champ);
+int				read_binary(char *path, t_champ *champ);
 
 int				ft_check_input_format(t_champ *champ);
 int				ft_check_params_type(t_instru *inst);

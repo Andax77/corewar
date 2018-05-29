@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/29 17:26:38 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/05/29 17:39:29 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ int				main(int argc, char **argv)
 		if (ft_strcmp("-r", argv[1]) == 0)
 		{
 			if (argc_c == 1)
+			{
+				del_champ(champ);
+				break ;
+			}
+			if (read_binary(argv[argc_c], champ) == ERROR)
 				continue ;
-
 		}
 		else
 		{
