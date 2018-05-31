@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 17:13:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:38:44 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 		}
 		if (ft_atoi(instru->content) != 0)
 		{
-			add = translate(ft_atoi(instru->content));
-			ft_strcat(*text, add);
+			ft_strcat(*text, (add = translate(ft_atoi(instru->content))));
 			free(add);
 		}
 		instru = instru->next;
@@ -117,6 +116,9 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 	}
 	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
 	//TODO Check prog (operations conformity)
+	//DEBUG
+	ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1]);
+	//
 	return (SUCCESS);
 }
 

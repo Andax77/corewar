@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 22:55:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:29:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	check_opt(char **argv)
 	return (SUCCESS);
 }
 
-int		parse_opt(char **argv, t_opt *opt, t_cor *cor)
+int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 {
 	if (check_opt(argv) == SUCCESS)
 	{
@@ -73,7 +73,7 @@ int		parse_opt(char **argv, t_opt *opt, t_cor *cor)
 		return (ERROR);
 }
 
-int		is_opt(char *str)
+int			is_opt(char *str)
 {
 	int		ret;
 
@@ -84,12 +84,12 @@ int		is_opt(char *str)
 	(ft_strequ(str, "-v")) ? ret = 1 : 0;
 	(ft_strequ(str, "-b")) ? ret = 1 : 0;
 	(ft_strequ(str, "-n")) ? ret = 1 : 0;
-	(ft_strequ(str, "--stealth")) ? ret = 1: 0;
-	(ft_isdigit(str[0]) && ft_is_int(str)) ? ret = 1: 0;
+	(ft_strequ(str, "--stealth")) ? ret = 1 : 0;
+	(ft_isdigit(str[0]) && ft_is_int(str)) ? ret = 1 : 0;
 	return (ret);
 }
 
-void	print_usage(void)
+void		print_usage(void)
 {
 	char	*line;
 	int		fd;

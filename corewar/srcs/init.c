@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/25 22:24:15 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:25:22 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	draw_map(t_opt *opt)
 	}
 }
 
-int		init_ncurses(t_opt *opt)
+int			init_ncurses(t_opt *opt)
 {
 	if (initscr())
 	{

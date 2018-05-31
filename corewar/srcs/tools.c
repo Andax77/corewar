@@ -6,11 +6,17 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 17:05:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:28:33 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
+
+int64_t					swap_int(int64_t c)
+{
+	c = ((c << 8) & 0xFF00FF00) | ((c >> 8) & 0xFF00FF);
+	return ((c << 16) | ((c >> 16) & 0xFFFF));
+}
 
 char					*translate(int64_t val)
 {
@@ -76,8 +82,8 @@ static unsigned char	get_hex_val(char a, char b)
 void					split_bits(char **prog, unsigned char **splited_prog)
 {
 	unsigned char	*splited;
-	int		i;
-	int		j;
+	int				i;
+	int				j;
 
 	i = 0;
 	j = 0;

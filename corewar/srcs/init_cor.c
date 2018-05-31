@@ -6,17 +6,11 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 16:55:04 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:34:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
-
-static int64_t swap_int(int64_t c)
-{
-	c = ((c << 8) & 0xFF00FF00) | ((c >> 8) & 0xFF00FF);
-	return ((c << 16) | ((c >> 16) & 0xFFFF));
-}
 
 static void		populate_instru(t_champ **champ, int64_t c)
 {
@@ -67,8 +61,7 @@ static int		get_champ(t_champ **champ, char *path)
 		}
 		return (SUCCESS);
 	}
-	else
-		return (ERROR);
+	return (ERROR);
 }
 
 static int		populate_champs(t_list **champs, char *path)
@@ -97,7 +90,7 @@ static int		populate_champs(t_list **champs, char *path)
 	return (SUCCESS);
 }
 
-int	init_cor(t_cor *cor, char **argv)
+int				init_cor(t_cor *cor, char **argv)
 {
 	int			i;
 	int			n;
@@ -121,6 +114,6 @@ int	init_cor(t_cor *cor, char **argv)
 		exit(EXIT_FAILURE);
 	if (cor->opt->n && !init_ncurses(cor->opt))
 		return (ERROR);
-	//TODO GOGO Algo
+//TODO GOGO Algo
 	return (SUCCESS);
 }

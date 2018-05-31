@@ -6,18 +6,22 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/29 16:49:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:24:39 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <ncurses.h>
-#include <op.h>
+#ifndef COREWAR_H
+
+# define COREWAR_H
+
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <libft.h>
+# include <ncurses.h>
+# include <op.h>
 
 enum				e_list
 {
@@ -64,8 +68,11 @@ int					init(char **argv, t_cor *cor);
 int					init_ncurses(t_opt *opt);
 int					init_cor(t_cor *cor, char **argv);
 int					check_champ(t_champ **champ, char *path);
+int64_t				swap_int(int64_t c);
 char				*translate(int64_t val);
 int					pad(char **str, int n);
 void				split_bits(char **prog, unsigned char **splited_prog);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
+
+#endif
