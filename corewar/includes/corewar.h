@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 17:24:39 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 18:08:17 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		s_cor
 {
 	t_opt			*opt;
 	t_list			*champs;
-	char			*map;
+	unsigned char	*map;
 	int				cycles;
 }					t_cor;
 
@@ -65,7 +65,7 @@ void				print_usage(void);
 int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 int					init(char **argv, t_cor *cor);
-int					init_ncurses(t_opt *opt);
+int					init_ncurses(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
 int					check_champ(t_champ **champ, char *path);
 int64_t				swap_int(int64_t c);

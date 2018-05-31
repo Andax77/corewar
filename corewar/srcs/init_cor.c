@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 17:34:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 18:17:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ int				init_cor(t_cor *cor, char **argv)
 			return (ERROR);
 		}
 	}
-	if (!(cor->map = ft_strnew(MEM_SIZE)))
+	if (!(cor->map = ft_malloc((MEM_SIZE + 1) * sizeof(unsigned char), EXIT_FAILURE)))
 		exit(EXIT_FAILURE);
-	if (cor->opt->n && !init_ncurses(cor->opt))
+	if (cor->opt->n && !init_ncurses(cor))
 		return (ERROR);
 //TODO GOGO Algo
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 17:25:22 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 18:41:04 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,18 @@ static void	draw_map(t_opt *opt)
 	}
 }
 
-int			init_ncurses(t_opt *opt)
+int		init_ncurses(t_cor *cor)
 {
 	if (initscr())
 	{
 		start_color();
 		init_color(COLOR_CYAN, 500, 500, 500);
 		draw_borders();
-		draw_map(opt);
+		draw_map(cor->opt);
 		curs_set(0);
-		return (SUCCESS);
+		return (1);
 	}
-	return (ERROR);
+	return (0);
 }
 
 int			init(char **argv, t_cor *cor)
