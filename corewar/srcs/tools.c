@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/29 16:45:17 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:05:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,4 @@ void					split_bits(char **prog, unsigned char **splited_prog)
 	}
 	splited[j] = '\0';
 	*splited_prog = splited;
-	// DEBUG
-	int t = 0;
-	while (t < j)
-		ft_printf("%d\n", (*splited_prog)[t++]);
 }

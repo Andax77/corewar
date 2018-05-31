@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/29 16:44:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:13:46 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 			path);
 		return (ERROR);
 	}
-	if (check_prog_len(instru->next, (*champ)->op_nb, &(*champ)->prog) == ERROR) //PROTECT from less than size
+	if (check_prog_len(instru->next, (*champ)->op_nb, &(*champ)->prog) == ERROR)
 	{
 		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
 			path);
@@ -117,8 +117,6 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 	}
 	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
 	//TODO Check prog (operations conformity)
-	//DEBUG
-	//ft_printf("champ name = %s, op_nb = %d, comment = %s, prog = %s\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog);
 	return (SUCCESS);
 }
 
