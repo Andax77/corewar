@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/04 17:29:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:56:57 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	draw_map(t_cor *cor)
 		{
 			init_pair(3 + id, COLOR_GREEN + id, COLOR_BLACK);
 			attron(COLOR_PAIR(3 + id));
-			(cor->opt->ns) ? draw_uchar(i, cor->map[i]) : draw_uchar(i, 0xff);
+			(cor->opt->ns) ? draw_uchar(i, 0xff) : draw_uchar(i, cor->map[i]);
 		}
 		else
 		{
@@ -54,7 +54,7 @@ static void	draw_map(t_cor *cor)
 			if (champs->next && i == (id + 1) * (MEM_SIZE / nb) - 1)
 				if (++id < MAX_PLAYERS)
 					champs = champs->next;
-			(cor->opt->ns) ? draw_uchar(i, cor->map[i]) : draw_uchar(i, 0xff);
+			(cor->opt->ns) ? draw_uchar(i, 0xff) : draw_uchar(i, cor->map[i]);
 		}
 }
 
