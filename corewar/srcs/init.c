@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 19:51:56 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/04 15:37:30 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	draw_map(t_opt *opt)
 	}
 }
 
-void	draw_char(int pos, unsigned char val, int col_f, int col_b)
+void	draw_char(int pos, unsigned char val)
 {
 	int		x;
 	int		y;
@@ -62,8 +62,6 @@ void	draw_char(int pos, unsigned char val, int col_f, int col_b)
 	x = 3;
 	y = 2;
 	i = 0;
-	init_pair(3, col_f, col_b);
-	attron(COLOR_PAIR(3));
 	c = ft_itoa_base(val, 16);
 	if (ft_strlen(c) < 2)
 	{
@@ -73,10 +71,9 @@ void	draw_char(int pos, unsigned char val, int col_f, int col_b)
 	}
 	while (y < 66)
 	{
-		if (i == pos)
+		if (i++ == pos)
 			mvprintw(y, x, c);
 		x = x + 3;
-		i++;
 		if (x >= 194 && (x = 3))
 			y++;
 	}
@@ -91,12 +88,14 @@ int		init_ncurses(t_cor *cor)
 		init_color(COLOR_CYAN, 500, 500, 500);
 		draw_borders();
 		draw_map(cor->opt);
-		//	TEST PRINT CHAMP
+		//	TEST PRINT CHAMP[0]
 		t_champ *champ = cor->champs->content;
 		int i = 0;
+		init_pair(3, 2, 0);
+		attron(COLOR_PAIR(3));
 		while (i < champ->op_nb)
 		{
-			draw_char(i, champ->splited_prog[i], 2, 0);
+			draw_char(i, champ->splited_prog[i]);
 			i++;
 		}
 		// END TEST

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 17:28:33 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/04 15:31:18 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ static unsigned char	get_hex_val(char a, char b)
 	k = 0;
 	if (b >= '0' && b <= '9')
 		n = b - 48;
-	else if (b >= 'A' && b <= 'F')
-		n = b - 55;
+	else if (b >= 'a' && b <= 'f')
+		n = b + 10 - 97;
 	if (a >= '0' && a <= '9')
 		k = a - 48;
-	else if (a >= 'A' && a <= 'F')
-		k = a - 55;
+	else if (a >= 'a' && a <= 'f')
+		k = a + 10 - 97;
 	if (k == 0)
 		res = n;
 	else if (n == 0)
