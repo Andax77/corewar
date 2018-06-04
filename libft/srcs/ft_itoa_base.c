@@ -34,14 +34,14 @@ static char*	ft_itoa_base_bis(char *res, int c, long long nb, int base)
 		if (nb % base < 10)
 			res[c] = (nb % base) + 48;
 		else
-			res[c] = (nb % base) - 10 + 65;
+			res[c] = (nb % base) - 10 + 97;
 		nb /= base;
 		c--;
 	}
 	if (nb < 10)
 		res[c] = nb + 48;
 	else
-		res[c] = nb - 10 + 65;
+		res[c] = nb - 10 + 97;
 	return (res);
 }
 

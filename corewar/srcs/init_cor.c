@@ -6,11 +6,37 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 18:17:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:12:51 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
+
+static void		init_memory(t_cor *cor)
+{
+	t_list			*champs;
+	unsigned char	*tmp_prog;
+	int				i;
+	int				j;
+	int				nb_champs;
+
+	i = 0;
+	j = 0;
+	champs = cor->champs;
+	nb_champs = ft_lstcount(champs);
+	while (champs)
+	{
+		tmp_prog = ((t_champ *)champs->content)->splited_prog;
+		while (j < ((t_champ *)champs->content)->op_nb)
+		{
+			cor->map[i + j] = tmp_prog[j];
+			j++;
+		}
+		j = 0;
+		i += MEM_SIZE / nb_champs;
+		champs = champs->next;
+	}
+}
 
 static void		populate_instru(t_champ **champ, int64_t c)
 {
@@ -110,10 +136,10 @@ int				init_cor(t_cor *cor, char **argv)
 			return (ERROR);
 		}
 	}
-	if (!(cor->map = ft_malloc((MEM_SIZE + 1) * sizeof(unsigned char), EXIT_FAILURE)))
+	if (!(cor->map = malloc((MEM_SIZE + 1) * sizeof(unsigned char))))
 		exit(EXIT_FAILURE);
+	init_memory(cor);
 	if (cor->opt->n && !init_ncurses(cor))
 		return (ERROR);
-//TODO GOGO Algo
 	return (SUCCESS);
 }

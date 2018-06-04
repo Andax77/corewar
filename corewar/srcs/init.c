@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/04 15:37:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:29:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static void	draw_borders(void)
 
 	x = 0;
 	y = 0;
-	init_pair(1, COLOR_CYAN, COLOR_CYAN);
-	attron(COLOR_PAIR(1));
 	while (y < 68)
 	{
 		if (y == 0 || y == 67 || x == 0 || x == 196 || x == 253)
@@ -31,27 +29,36 @@ static void	draw_borders(void)
 	}
 }
 
-static void	draw_map(t_opt *opt)
+static void	draw_map(t_cor *cor)
 {
-	int		x;
-	int		y;
-	char	c[3];
+	int		i;
+	t_list	*champs;
+	int		nb;
+	int		id;
 
-	x = 3;
-	y = 2;
-	init_pair(2, COLOR_CYAN, COLOR_BLACK);
-	attron(COLOR_PAIR(2));
-	ft_strcpy(c, (opt->ns) ? "ff\0" : "00\0");
-	while (y < 66)
-	{
-		mvprintw(y, x, c);
-		x = x + 3;
-		if (x >= 194 && (x = 3))
-			y++;
-	}
+	i = -1;
+	id = 0;
+	champs = cor->champs;
+	nb = ft_lstcount(champs);
+	while (++i < MEM_SIZE)
+		if (champs && i >= id * (MEM_SIZE / nb) && i < (id * (MEM_SIZE / nb)) +\
+				(int)((t_champ *)champs->content)->op_nb)
+		{
+			init_pair(3 + id, COLOR_GREEN + id, COLOR_BLACK);
+			attron(COLOR_PAIR(3 + id));
+			(cor->opt->ns) ? draw_uchar(i, cor->map[i]) : draw_uchar(i, 0xff);
+		}
+		else
+		{
+			attron(COLOR_PAIR(2));
+			if (champs->next && i == (id + 1) * (MEM_SIZE / nb) - 1)
+				if (++id < MAX_PLAYERS)
+					champs = champs->next;
+			(cor->opt->ns) ? draw_uchar(i, cor->map[i]) : draw_uchar(i, 0xff);
+		}
 }
 
-void	draw_char(int pos, unsigned char val)
+void	draw_uchar(int pos, unsigned char val)
 {
 	int		x;
 	int		y;
@@ -86,19 +93,12 @@ int		init_ncurses(t_cor *cor)
 	{
 		start_color();
 		init_color(COLOR_CYAN, 500, 500, 500);
+		init_pair(1, COLOR_CYAN, COLOR_CYAN);
+		init_pair(2, COLOR_CYAN, COLOR_BLACK);
+		attron(COLOR_PAIR(1));
 		draw_borders();
-		draw_map(cor->opt);
-		//	TEST PRINT CHAMP[0]
-		t_champ *champ = cor->champs->content;
-		int i = 0;
-		init_pair(3, 2, 0);
-		attron(COLOR_PAIR(3));
-		while (i < champ->op_nb)
-		{
-			draw_char(i, champ->splited_prog[i]);
-			i++;
-		}
-		// END TEST
+		attron(COLOR_PAIR(2));
+		draw_map(cor);
 		curs_set(0);
 		return (1);
 	}
