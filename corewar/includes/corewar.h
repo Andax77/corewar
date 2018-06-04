@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/04 16:18:26 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:33:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ enum				e_list
 };
 
 typedef struct		s_opt
+
 {
 	int				a;
 	int				d;
