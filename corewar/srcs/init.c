@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/04 19:50:18 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/04 21:01:21 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,38 @@ static void	draw_infos(int nb)
 	draw_line(19 + nb, "[--------------------------------------------------]");
 	draw_line(21 + nb, "CYCLES_TO_DIE :");
 	draw_line(23 + nb, "CYCLE_DELTA :");
-	draw_line(24 + nb, "NBR_LIVE :");
-	draw_line(25 + nb, "MAX_CHECKS :");
+	draw_line(25 + nb, "NBR_LIVE :");
+	draw_line(27 + nb, "MAX_CHECKS :");
+}
+
+void		draw_cow(int nb)
+{
+	nb = 27 + (4 * (nb - 1));
+	draw_line(nb++, "----------------------------------------------------");
+	draw_line(nb++, "");
+	draw_line(nb++, "");
+	draw_line(nb++, "");
+	draw_line(nb++, "");
+	draw_line(nb++, "		    __    ____");
+	draw_line(nb++, "		   /{_\\_/   `'\\____");
+	draw_line(nb++, "		    \\___  (o)  (o   }");
+	draw_line(nb++, "		     /            -'ô");
+	draw_line(nb++, "		     #   \\_    `__\\");
+	draw_line(nb++, "		    ###   \\__ (o'o)");
+	draw_line(nb++, "		   ###    #(  `===='");
+	draw_line(nb++, "		  ####     ##|                           __");
+	draw_line(nb++, "		 ##         ###|                        //");
+	draw_line(nb++, "		 #            #)                       //");
+	draw_line(nb++, "		 |   ###    \\###|_____    //nnnnnnn/--//");
+	draw_line(nb++, "		 |    ###    \\________|\\ //nnnnnnn/  //");
+	draw_line(nb++, "		 |#    ##           | | //nnnnnnn/  //");
+	draw_line(nb++, "		 |##       \\--------°- //nnnnnnn/  //");
+	draw_line(nb++, "		 |###       ####|     //nnnnnnn/  //");
+	draw_line(nb++, "                              ------------");
+	draw_line(nb++, "");
+	draw_line(nb++, "");
+	draw_line(nb++, "");
+	draw_line(nb++, "			 C.O.W -- W.A.R");
 }
 
 int			init_ncurses(t_cor *cor)
@@ -147,6 +177,7 @@ int			init_ncurses(t_cor *cor)
 		init_pair(7, COLOR_WHITE, COLOR_BLACK);
 		attron(COLOR_PAIR(7));
 		draw_infos(ft_lstcount(cor->champs));
+		draw_cow(ft_lstcount(cor->champs));
 		curs_set(0);
 		return (1);
 	}
