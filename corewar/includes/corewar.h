@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/04 18:33:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/07 19:42:26 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_champ
 	char			*comment;
 	char			*prog;
 	unsigned char	*splited_prog;
+	unsigned int	*reg;
 	t_list			*instru;
 	int				size;
 	int				op_nb;

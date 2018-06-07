@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/31 17:40:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/07 19:49:08 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		del_champ(void *content, size_t content_size)
 	free(((t_champ*)content)->comment);
 	free(((t_champ*)content)->prog);
 	free(((t_champ*)content)->splited_prog);
+	free(((t_champ*)content)->reg);
 	ft_lstdel(&((t_champ*)content)->instru, del);
 	free(content);
 }
