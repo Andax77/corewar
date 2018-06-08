@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/07 20:22:11 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/08 19:33:03 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,13 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
 	if (!((*champ)->reg = ft_memalloc(16 * sizeof(unsigned int))))
 		exit(EXIT_FAILURE);
-	//TODO Check prog (operations conformity)
-	//if (check_op_len(*champ) == ERROR)
-	//{
-	//	ft_printf("{red}Invalid operation in %s\n{eoc}", path);
-	//	return (ERROR);
-	//}
+	if (check_op_len(*champ) == ERROR)
+	{
+		ft_printf("{red}Invalid operation in %s\n{eoc}", path);
+		return (ERROR);
+	}
 	//DEBUG
-	ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
+	//ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
 	//
 	return (SUCCESS);
 }
