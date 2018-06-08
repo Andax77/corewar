@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/08 19:33:03 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/08 19:47:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,17 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 {
 	if (((*champ)->op_nb = ft_atoi(instru->content)) > CHAMP_MAX_SIZE)
 	{
-		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
-			path);
+		ft_printf("{red}error : '%s' has wrong length{eoc}\n", path);
 		return (ERROR);
 	}
 	if (!(instru = check_len(instru->next, COMMENT_LENGTH, &(*champ)->comment)))
 	{
-		ft_printf("{red}error : champion '%s' has wrong comment length{eoc}\n",\
-			path);
+		ft_printf("{red}error : '%s' has wrong comment length{eoc}\n", path);
 		return (ERROR);
 	}
 	if (check_prog_len(instru->next, (*champ)->op_nb, &(*champ)->prog) == ERROR)
 	{
-		ft_printf("{red}error : champion '%s' has wrong length{eoc}\n",\
-			path);
+		ft_printf("{red}error : '%s' has wrong length{eoc}\n", path);
 		return (ERROR);
 	}
 	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
@@ -122,9 +119,6 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 		ft_printf("{red}Invalid operation in %s\n{eoc}", path);
 		return (ERROR);
 	}
-	//DEBUG
-	//ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
-	//
 	return (SUCCESS);
 }
 
@@ -150,5 +144,9 @@ int				check_champ(t_champ **champ, char *path)
 	}
 	if (check_champ_bis(instru->next, champ, path) == ERROR)
 		return (ERROR);
+
+	//DEBUG
+	//ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
+
 	return (SUCCESS);
 }
