@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/29 17:47:50 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/09 12:47:28 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int				ft_fill_inst_addr_and_replace_direct(t_champ *champ);
 
 int16_t			swap_int16(int16_t val);
 int32_t			swap_int32(int32_t val);
+int64_t			swap_int64(int64_t val);
 
 int				ft_write_cor(t_champ *champ);
 int				ft_fill_output_params(t_instru *cur, char *output, int cursor);
