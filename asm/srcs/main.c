@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/29 17:39:29 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/09 15:52:44 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int				main(int argc, char **argv)
 				del_champ(champ);
 				break ;
 			}
-			if (read_binary(argv[argc_c], champ) == ERROR)
+			if (read_binary(champ) == ERROR)
 				continue ;
 		}
 		else
 		{
-			if (ft_fill_file_name(champ, argv[argc_c]) == ERROR)
+			if (ft_fill_file_name(champ) == ERROR)
 				continue ;
-			if (read_file(argv[argc_c], champ) == ERROR)
+			if (read_file(champ) == ERROR)
 				continue ;
 			if (ft_write_cor(champ) == ERROR)
 				continue ;

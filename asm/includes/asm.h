@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/09 12:47:28 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/09 16:42:57 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,17 @@ typedef struct	s_instru
 
 void			ft_init_champ(t_champ *champ, char *argv);
 t_instru		*ft_init_instru(void);
-int				ft_fill_file_name(t_champ *champ, char *name);
-int				ft_fill_binary_name(t_champ *champ, char *name);
+int				ft_fill_file_name(t_champ *champ);
+int				ft_fill_binary_name(t_champ *champ);
 
-int				read_file(char *file_name, t_champ *champ);
-int				read_binary(char *path, t_champ *champ);
+int				read_file(t_champ *champ);
+int				read_binary(t_champ *champ);
 
 int				ft_check_input_format(t_champ *champ);
 int				ft_check_params_type(t_instru *inst);
 int				ft_check_params_format(t_instru *inst, char *str);
 int				ft_empty_or_comment_line(char *str);
+int				ft_check_champ_binary(t_champ **champ);
 
 int				ft_get_instru(t_champ *champ);
 int				ft_get_params(t_instru *inst, char *str);
@@ -80,6 +81,8 @@ int				ft_fill_inst_addr_and_replace_direct(t_champ *champ);
 int16_t			swap_int16(int16_t val);
 int32_t			swap_int32(int32_t val);
 int64_t			swap_int64(int64_t val);
+char			*translate(int64_t val);
+int				pad(char **str, int n);
 
 int				ft_write_cor(t_champ *champ);
 int				ft_fill_output_params(t_instru *cur, char *output, int cursor);
