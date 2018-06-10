@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/09 16:42:57 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/10 17:59:45 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int				ft_check_champ_binary(t_champ **champ);
 int				ft_get_instru(t_champ *champ);
 int				ft_get_params(t_instru *inst, char *str);
 int				ft_get_t_param(char *str);
-int				ft_get_label_name(t_instru *inst, char *str);
-int				ft_get_op_code(t_instru *inst, char *str);
-int				ft_get_ocp(t_instru *inst);
+//int				ft_get_label_name(t_instru *inst, char *str);
+//int				ft_get_op_code(t_instru *inst, char *str);
+//int				ft_get_ocp(t_instru *inst);
 void			ft_get_size_instruction(t_instru *inst);
 int				ft_get_param_code(int num);
 
@@ -83,6 +83,7 @@ int32_t			swap_int32(int32_t val);
 int64_t			swap_int64(int64_t val);
 char			*translate(int64_t val);
 int				pad(char **str, int n);
+unsigned char	*split_bits(char *prog);
 
 int				ft_write_cor(t_champ *champ);
 int				ft_fill_output_params(t_instru *cur, char *output, int cursor);

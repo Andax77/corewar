@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/09 15:02:09 by pmilan           ###   ########.fr        #
+#    Updated: 2018/06/10 15:10:37 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ FILES = main.c \
 		ft_check_binary.c \
 		ft_replace.c \
 		ft_endian.c \
+		ft_asm_tools.c \
 		ft_write_cor.c \
 		ft_write_cor_annexe.c \
 		ft_del.c \

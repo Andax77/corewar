@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:47:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/09 17:07:14 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/10 17:46:55 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 static int		check_last(char *add, char **text, int size, t_list *input)
 {
+	add = NULL;
+
+	printf("===> %d\n", size %4 );
 	if (size % 4 == 3)
 	{
 		add = ft_itoa_base(ft_atoi(input->content) >> 8, 16);
@@ -28,7 +31,7 @@ static int		check_last(char *add, char **text, int size, t_list *input)
 	}
 	else if (size % 4 == 1)
 	{
-		add = ft_itoa_base(ft_atoi(input->content) >> 24, 16);
+		add = ft_itoa_base(ft_atoi(input->content) >> 24 & 0x000000FF, 16);
 		if (ft_strlen(add) < 2)
 			pad(&add, 2);
 	}
@@ -48,7 +51,7 @@ static int		check_prog_len(t_list *input, int size, char **text)
 		exit(EXIT_FAILURE);
 	while (input && (i += 4))
 	{
-		if (i > size && (size % 4) != 0 && check_last(add, text, size, input))
+		if (i > size && (size % 4) != 0 && check_last(add, text, size, input) == SUCCESS)
 			break ;
 		else
 		{
@@ -60,9 +63,25 @@ static int		check_prog_len(t_list *input, int size, char **text)
 		}
 		input = input->next;
 	}
-	if ((i -= 4 - (size % 4)) != size)
+	if (i != ((size % 4 == 0) ? size : size + 4 - size % 4))
 		return (ERROR);
-	ft_printf("{green}%s{eoc}\n", *text);//////////////
+//	ft_printf("{green}%s{eoc}\n", *text);//////////////
+	return (SUCCESS);
+}
+
+static int		check_instructions(int size, t_champ *champ, char *text)
+{
+	t_instru	*inst;
+	int			count;
+
+	count = -1;
+	while (text[++count])
+	{
+		ft_printf("{red}%c{eoc}", text[count]);
+	}
+	printf("\n");
+//	if (count != size)
+//		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -98,8 +117,9 @@ static t_list	*check_len(t_list *input, int size, char **text)
 
 static int		ft_check_champ_binary_bis(t_list *input, t_champ **champ)
 {
-	int		inst_length;
-	char	*prog = NULL;
+	int				inst_length;
+	char			*prog = NULL;
+	unsigned char	*splitted_prog = NULL;
 
 	if ((inst_length = ft_atoi(input->content)) > CHAMP_MAX_SIZE)
 		return (ft_error(*champ, "has wrong length"));
@@ -107,6 +127,9 @@ static int		ft_check_champ_binary_bis(t_list *input, t_champ **champ)
 		return (ft_error(*champ, "has wrong comment length"));
 	if (check_prog_len(input->next, inst_length, &prog) == ERROR)////adapter cette fonction////////////////
 		return (ft_error(*champ, "has wrong length"));
+	if (check_instructions(inst_length, *champ, prog) == ERROR)
+		return (ft_error(*champ, "has wrong length"));
+	splitted_prog = split_bits(prog);
 //	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
 //	if (check_op_len(*champ) == ERROR)
 //	{
