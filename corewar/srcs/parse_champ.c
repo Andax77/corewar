@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/08 19:52:57 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/10 16:50:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		check_last(char *add, char **text, int size, t_list *instru)
 	}
 	else if (size % 4 == 1)
 	{
-		add = ft_itoa_base(ft_atoi(instru->content) >> 24, 16);
+		add = ft_itoa_base(ft_atoi(instru->content) >> 24 & 0x000000FF, 16);
 		if (ft_strlen(add) < 2)
 			pad(&add, 2);
 	}
@@ -145,7 +145,7 @@ int				check_champ(t_champ **champ, char *path)
 		exit(EXIT_FAILURE);
 
 	//DEBUG
-	//ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
+	ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
 
 	return (SUCCESS);
 }
