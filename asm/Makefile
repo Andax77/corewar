@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/10 15:10:37 by pmilan           ###   ########.fr        #
+#    Updated: 2018/06/10 20:07:08 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ FILES = main.c \
 		ft_fill_instru.c \
 		ft_fill_instru_annexe.c \
 		ft_get_instru.c \
+		ft_decrypt_prog.c \
 		ft_check.c \
 		ft_check_binary.c \
 		ft_replace.c \

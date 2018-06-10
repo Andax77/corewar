@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/10 17:59:45 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/10 20:11:37 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ int				ft_check_champ_binary(t_champ **champ);
 int				ft_get_instru(t_champ *champ);
 int				ft_get_params(t_instru *inst, char *str);
 int				ft_get_t_param(char *str);
-//int				ft_get_label_name(t_instru *inst, char *str);
-//int				ft_get_op_code(t_instru *inst, char *str);
-//int				ft_get_ocp(t_instru *inst);
 void			ft_get_size_instruction(t_instru *inst);
 int				ft_get_param_code(int num);
+int				ft_decrypt_prog(t_champ *champ, unsigned char *prog, int inst_length);
 
 void			ft_fill_lst_instru(t_champ *champ, t_instru *inst);
 int				ft_fill_instru(t_instru *inst, char *str);
