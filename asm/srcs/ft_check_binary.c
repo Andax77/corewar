@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:47:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/10 20:11:48 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/11 14:25:45 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static t_list	*check_len(t_list *input, int size, char **text)
 	}
 	if (!input)
 		return (NULL);
-	ft_printf("{green}%s{eoc}\n", *text);//////////////
+//	ft_printf("{green}%s{eoc}\n", *text);//////////////
 	return (input->next);
 }
 

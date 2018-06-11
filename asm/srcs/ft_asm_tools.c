@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 15:11:05 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/10 20:11:03 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/11 14:25:53 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ unsigned char	*split_bits(char *prog)
 		if (i && i % 2)
 		{
 			splitted_prog[j] = get_hex_val(prog[i - 1], prog[i]);
-			ft_printf("%x ", splitted_prog[j]);
+//			ft_printf("%x ", splitted_prog[j]);
 			j++;
 		}
 		i++;
