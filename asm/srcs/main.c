@@ -31,6 +31,8 @@ int				main(int argc, char **argv)
 			}
 			if (read_binary(champ) == ERROR)
 				continue ;
+			if (ft_write_s(champ) == ERROR)
+				continue ;
 		}
 		else
 		{

@@ -27,6 +27,7 @@ FILES = main.c \
 		ft_asm_tools.c \
 		ft_write_cor.c \
 		ft_write_cor_annexe.c \
+		ft_write_s.c \
 		ft_del.c \
 		ft_error.c \
 		../../commun/srcs/op.c

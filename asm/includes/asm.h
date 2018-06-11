@@ -85,6 +85,7 @@ unsigned char	*split_bits(char *prog);
 
 int				ft_write_cor(t_champ *champ);
 int				ft_fill_output_params(t_instru *cur, char *output, int cursor);
+int				ft_write_s(t_champ *champ);
 
 void			ft_free_struct_instru(t_instru *inst);
 void			del_champ(t_champ *champ);

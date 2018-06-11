@@ -41,7 +41,6 @@ int			ft_fill_params_binary(t_champ *champ, t_instru *inst, unsigned char *prog,
 		if (!(inst->params[j] = ft_str_and_free_join(inst->params[j], tmp_num)))
 			exit(EXIT_FAILURE);
 		free(tmp_num);
-			ft_printf("{magenta}%s {eoc}", inst->params[j]);//////////////////////
 	}
 	return (SUCCESS);
 }
