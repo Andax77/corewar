@@ -6,14 +6,18 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/08 17:18:36 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/11 17:23:27 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef OP_H
+
+# define OP_H
+
 /*
-** Toutes les tailles sont en octets.
-** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
-*/
+ ** Toutes les tailles sont en octets.
+ ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
+ */
 
 #define IND_SIZE				2
 #define REG_SIZE				4
@@ -49,8 +53,8 @@
 #define MAX_CHECKS				10
 
 /*
-**
-*/
+ **
+ */
 
 typedef char	t_arg_type;
 
@@ -60,17 +64,25 @@ typedef char	t_arg_type;
 #define T_LAB					8
 
 /*
-**
-*/
+ **
+ */
 
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
-typedef struct		header_s
+typedef struct		s_op
 {
-  unsigned int		magic;
-  char				prog_name[PROG_NAME_LENGTH + 1];
-  unsigned int		prog_size;
-  char				comment[COMMENT_LENGTH + 1];
-}					header_t;
+	char			*name;
+	int				nb_params;
+	int				params_type[MAX_ARGS_NUMBER];
+	int				op_code;
+	int				nb_cycles;
+	char			*full_name;
+	int				modif_carry;
+	int				dir_size;
+}					t_op;
+
+extern t_op			g_op_tab[17];
+
+#endif

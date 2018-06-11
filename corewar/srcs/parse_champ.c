@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/10 16:50:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/11 18:00:41 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 		return (ERROR);
 	}
 	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
-	if (check_op_len(*champ) == ERROR)
+	if (check_op_len(*champ) == ERROR || check_op(*champ) == ERROR)
 	{
 		ft_printf("{red}Invalid operation in %s\n{eoc}", path);
 		return (ERROR);
