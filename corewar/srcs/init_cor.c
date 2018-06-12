@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/04 16:12:51 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:16:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,6 @@ int				init_cor(t_cor *cor, char **argv)
 	init_memory(cor);
 	if (cor->opt->n && !init_ncurses(cor))
 		return (ERROR);
+	//TODO Start Cycles
 	return (SUCCESS);
 }

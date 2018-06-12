@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools2.c                                           :+:      :+:    :+:   */
+/*   parse_op.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:19 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/08 19:36:22 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/12 14:49:25 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			check_op_len(t_champ *champ)
 	prog = champ->splited_prog;
 	while (i < champ->op_nb)
 	{
-		if (prog[i] > 16)
+		if (prog[i] > 16 || check_op(prog, i) == ERROR)
 			return (ERROR);
 		(prog[i] == 1 || prog[i] == 4 || prog[i] == 5) ? i += 5 : 0;
 		((prog[i] == 2 || prog[i] == 13) && prog[i + 1] == 0xD0) ? i += 5 : 0;
