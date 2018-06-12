@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/20 15:08:11 by pierremilan       #+#    #+#             */
-/*   Updated: 2018/05/29 15:44:14 by pmilan           ###   ########.fr       */
+/*   Created: 2018/05/20 15:08:11 by pmilan            #+#    #+#             */
+/*   Updated: 2018/06/10 18:00:54 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-int				ft_get_ocp(t_instru *inst)
+static int		ft_get_ocp(t_instru *inst)
 {
 	int		i;
 
@@ -57,7 +57,7 @@ static char		*ft_get_name_op_code(t_instru *inst, char *str)
 	return (ptr);
 }
 
-int				ft_get_op_code(t_instru *inst, char *str)
+static void		ft_get_op_code(t_instru *inst, char *str)
 {
 	int		i;
 	char	*ptr;
@@ -69,15 +69,13 @@ int				ft_get_op_code(t_instru *inst, char *str)
 		if (strcmp(ptr, g_op_tab[i].name) == 0)
 		{
 			inst->op_code = g_op_tab[i].op_code;
-			free(ptr);
-			return (SUCCESS);
+			break ;
 		}
 	}
 	free(ptr);
-	return (ERROR);
 }
 
-int				ft_get_label_name(t_instru *inst, char *str)
+static int		ft_get_label_name(t_instru *inst, char *str)
 {
 	int		i;
 
@@ -104,8 +102,7 @@ int				ft_fill_instru(t_instru *inst, char *str)
 {
 	if (ft_get_label_name(inst, str) == ERROR)
 		return (ERROR);
-	if (ft_get_op_code(inst, str) == ERROR)
-		return (ERROR);
+	ft_get_op_code(inst, str);
 	if (inst->op_code != 0)
 	{
 		if (ft_get_params(inst, str) == ERROR)

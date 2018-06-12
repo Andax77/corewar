@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/04 13:09:25 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/17 17:29:58 by pmilan           ###   ########.fr        #
+#    Updated: 2018/06/09 16:49:44 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ FILES = ft_strlen.c \
 		ft_isprint.c \
 		ft_atoi.c \
 		ft_itoa.c \
+		ft_itoa_base.c \
 		ft_strstr.c \
 		ft_strnstr.c \
 		ft_strchr.c \

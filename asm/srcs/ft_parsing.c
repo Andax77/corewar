@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/24 23:22:08 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/09 15:05:17 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ static void	store_lines(t_champ *champ)
 	}
 }
 
-int			read_file(char *file_name, t_champ *champ)
+int			read_file(t_champ *champ)
 {
 	char	*line;
 	int		stock;
 	int		result_gnl;
 
-	if ((champ->fd = open(file_name, O_RDONLY)) <= 0)
+	if ((champ->fd = open(champ->argv, O_RDONLY)) <= 0)
 		return (ERROR);
 	line = NULL;
 	stock = UNFINISHED;
