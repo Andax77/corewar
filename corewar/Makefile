@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/11 17:43:18 by eparisot         ###   ########.fr        #
+#    Updated: 2018/06/12 18:11:05 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ FILES = main.c \
 		parse_champ.c \
 		tools.c \
 		parse_op.c \
-		parse_op_2.c \
 		../../commun/srcs/op.c
 
 HFILES = includes/corewar.h \

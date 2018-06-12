@@ -6,28 +6,11 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:19 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/12 15:32:01 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/12 18:08:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
-
-static int	check_no_ocp(unsigned char *prog, int i)
-{
-	if (prog[i] == 1 && (prog[++i] != 0 || prog[++i] != 0 || prog[++i] != 0 || \
-				prog[++i] != 1))
-		return (ERROR);
-	else if (prog[i] == 9 && ((prog[++i] < 0 || prog[i] > 0xFF) || \
-				(prog[++i] < 0 || prog[i] > 0xFF)))
-		return (ERROR);
-	else if (prog[i] == 12 && ((prog[++i] < 0 || prog[i] > 0xFF) || \
-				(prog[++i] < 0 || prog[i] > 0xFF)))
-		return (ERROR);
-	else if (prog[i] == 15 && ((prog[++i] < 0 || prog[i] > 0xFF) || \
-				(prog[++i] < 0 || prog[i] > 0xFF)))
-		return (ERROR);
-	return (SUCCESS);
-}
 
 int			check_op(unsigned char *prog, int i)
 {
@@ -46,7 +29,8 @@ int			check_op(unsigned char *prog, int i)
 		}
 	}
 	else
-		if (check_no_ocp(prog, i) == ERROR)
+		if (prog[i] == 1 && (prog[++i] != 0 || prog[++i] != 0 || prog[++i] != 0\
+			|| (prog[++i] <= 0 || prog[i] > 16)))
 			return (ERROR);
 	return (SUCCESS);
 }
