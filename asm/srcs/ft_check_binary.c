@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:47:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/11 14:25:45 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/12 15:28:43 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static int		check_last(char *add, char **text, int size, t_list *input)
 {
 	add = NULL;
-
-//	printf("===> %d\n", size %4 );
 	if (size % 4 == 3)
 	{
 		add = ft_itoa_base(ft_atoi(input->content) >> 8, 16);
@@ -51,7 +49,8 @@ static int		check_prog_len(t_list *input, int size, char **text)
 		exit(EXIT_FAILURE);
 	while (input && (i += 4))
 	{
-		if (i > size && (size % 4) != 0 && check_last(add, text, size, input) == SUCCESS)
+		if (i > size && (size % 4) != 0 &&
+								check_last(add, text, size, input) == SUCCESS)
 			break ;
 		else
 		{
@@ -65,7 +64,6 @@ static int		check_prog_len(t_list *input, int size, char **text)
 	}
 	if (i != ((size % 4 == 0) ? size : size + 4 - size % 4))
 		return (ERROR);
-//	ft_printf("{green}%s{eoc}\n", *text);//////////////
 	return (SUCCESS);
 }
 
@@ -95,30 +93,34 @@ static t_list	*check_len(t_list *input, int size, char **text)
 	}
 	if (!input)
 		return (NULL);
-//	ft_printf("{green}%s{eoc}\n", *text);//////////////
 	return (input->next);
 }
 
 static int		ft_check_champ_binary_bis(t_list *input, t_champ **champ)
 {
 	int				inst_length;
-	char			*prog = NULL;
-	unsigned char	*splitted_prog = NULL;
+	char			*prog;
+	unsigned char	*splitted_prog;
 
+	prog = NULL;
+	splitted_prog = NULL;
 	if ((inst_length = ft_atoi(input->content)) > CHAMP_MAX_SIZE)
 		return (ft_error(*champ, "has wrong length"));
 	if (!(input = check_len(input->next, COMMENT_LENGTH, &(*champ)->comment)))
 		return (ft_error(*champ, "has wrong comment length"));
-	if (check_prog_len(input->next, inst_length, &prog) == ERROR)////adapter cette fonction////////////////
+	if (check_prog_len(input->next, inst_length, &prog) == ERROR)
+	{
+		free(prog);
 		return (ft_error(*champ, "has wrong length"));
+	}
 	splitted_prog = split_bits(prog);
+	free(prog);
 	if (ft_decrypt_prog(*champ, splitted_prog, inst_length) == ERROR)
+	{
+		free(splitted_prog);
 		return (ERROR);
-//	if (check_op_len(*champ) == ERROR)
-//	{
-//		ft_printf("{red}Invalid operation in %s\n{eoc}", (*champ)->argv);
-//		return (ERROR);
-//	}
+	}
+	free(splitted_prog);
 	return (SUCCESS);
 }
 
@@ -134,7 +136,5 @@ int				ft_check_champ_binary(t_champ **champ)
 		return (ft_error(*champ, "has wrong name length"));
 	if (ft_check_champ_binary_bis(input->next, champ) == ERROR)
 		return (ERROR);
-//	if (!((*champ)->reg = ft_memalloc(16 * sizeof(unsigned int))))
-//		exit(EXIT_FAILURE);
 	return (SUCCESS);
 }
