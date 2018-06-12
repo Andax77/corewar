@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 00:45:12 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/09 16:47:12 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/12 17:27:13 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		ft_count(long long value, int base)
 	return (c);
 }
 
-static char*	ft_itoa_base_bis(char *res, int c, long long nb, int base)
+static char		*ft_itoa_base_bis(char *res, int c, long long nb, int base)
 {
 	while (nb >= base)
 	{

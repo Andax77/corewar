@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:18:42 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/29 15:02:09 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/12 17:24:00 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ static void	del_instru(void *content, size_t content_size)
 	free(content);
 }
 
-void		del_champ(t_champ *champ)
+int			del_champ(t_champ *champ)
 {
 	ft_fruit(4, &champ->argv, &champ->file_name, &champ->name, &champ->comment);
 	ft_lstdel(&champ->input, del_input);
 	ft_lstdel(&champ->instru, del_instru);
 	ft_fruit(1, &champ);
+	return (1);
 }
 
 void		ft_free_struct_instru(t_instru *inst)

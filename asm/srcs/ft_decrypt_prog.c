@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 20:05:18 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/12 15:24:36 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/12 17:09:37 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,13 @@ int			ft_fill_params_binary(t_champ *champ, t_instru *inst,
 				tmp = (prog[(*i)++] << 24) + (prog[(*i)++] << 16);
 			tmp += (prog[(*i)++] << 8) + prog[(*i)++];
 		}
-		else if (inst->params[j][0] == 'r')
-		{
-			tmp = prog[(*i)++];
-			if (tmp > REG_NUMBER || tmp < 1)
-				return (ft_error(champ, "wrong reg number"));
-		}
-		else
+		else if (inst->params[j][0] == '\0')
 			tmp = (prog[(*i)++] << 8) + prog[(*i)++];
-		if (!(tmp_num = ft_itoa(tmp)))
-			exit(EXIT_FAILURE);
-		if (!(inst->params[j] = ft_str_and_free_join(inst->params[j], tmp_num)))
+		else if (inst->params[j][0] == 'r')
+			if (!(tmp = prog[(*i)++]) && (tmp > REG_NUMBER || tmp < 1))
+				return (ft_error(champ, "wrong reg number"));
+		if ((!(tmp_num = ft_itoa(tmp))) ||
+		(!(inst->params[j] = ft_str_and_free_join(inst->params[j], tmp_num))))
 			exit(EXIT_FAILURE);
 		free(tmp_num);
 	}

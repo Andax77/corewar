@@ -6,11 +6,31 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/09 15:52:44 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/12 17:24:22 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+static int		main_reverse(t_champ *champ)
+{
+	if (read_binary(champ) == ERROR)
+		return (ERROR);
+	if (ft_write_s(champ) == ERROR)
+		return (ERROR);
+	return (SUCCESS);
+}
+
+static int		main_normal(t_champ *champ)
+{
+	if (ft_fill_file_name(champ) == ERROR)
+		return (ERROR);
+	if (read_file(champ) == ERROR)
+		return (ERROR);
+	if (ft_write_cor(champ) == ERROR)
+		return (ERROR);
+	return (SUCCESS);
+}
 
 int				main(int argc, char **argv)
 {
@@ -24,23 +44,14 @@ int				main(int argc, char **argv)
 		ft_init_champ(champ, argv[argc_c]);
 		if (ft_strcmp("-r", argv[1]) == 0)
 		{
-			if (argc_c == 1)
-			{
-				del_champ(champ);
+			if (argc_c == 1 && del_champ(champ))
 				break ;
-			}
-			if (read_binary(champ) == ERROR)
-				continue ;
-			if (ft_write_s(champ) == ERROR)
+			if (main_reverse(champ) == ERROR)
 				continue ;
 		}
 		else
 		{
-			if (ft_fill_file_name(champ) == ERROR)
-				continue ;
-			if (read_file(champ) == ERROR)
-				continue ;
-			if (ft_write_cor(champ) == ERROR)
+			if (main_normal(champ) == ERROR)
 				continue ;
 		}
 		del_champ(champ);
