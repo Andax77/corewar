@@ -13,11 +13,14 @@
 
 #include <corewar.h>
 
+/*
+The launcher during *** times for VM
+*/
+//add stop_vm in 1st while
 void	cycle(t_cor *cor)
 {
 	t_champ *ori;
 	t_list *champ;
-//add stop_vm in 1st while
 	champ = cor->champs;
 	ori = champ;
 	while ((champ = ori))
@@ -36,6 +39,10 @@ void	cycle(t_cor *cor)
 		(cor->cycle)++;
 	}
 }
+
+/*
+Array of Pointer in function for replace the "Forest of if"
+*/
 
 void	exec_op(t_cor *cor, t_champ **champ)
 {
@@ -59,6 +66,10 @@ void	exec_op(t_cor *cor, t_champ **champ)
 	f[16] = &ft_aff;
 }
 
+/*
+To recup the register or the index value from all operators :)
+*/
+
 int		recup_content(t_champ *champ)
 {
 	int ocp;
@@ -71,10 +82,10 @@ int		recup_content(t_champ *champ)
 	{
 		ret = champ->splited_prog[champ->(++index)];
 	}
-	else if (t_v1 == DIR_CODE)
+	else if (type == DIR_CODE)
 	{
 		ret = 0;
-		if (size_dir == 4)
+		if (((g_op_tab[10].dir_size == 1) ? 2 : 4) == 4)
 		{
 			ret = champ->splited_prog[champ->(++index)] << 24 +
 				champ->splited_prog[champ->(++index)] << 16;
@@ -87,6 +98,9 @@ int		recup_content(t_champ *champ)
 	return (ret);
 }
 
+/*
+The last OPcode function(I don't where to place it so here, I think is good)
+*/
 void	ft_aff(t_cor *cor, t_champ  *champ)
 {
 	int r1;

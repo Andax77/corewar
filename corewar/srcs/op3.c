@@ -21,7 +21,7 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 	int	ocp;
 
 	size_dir = (g_op_tab[10].dir_size == 1) ? 2 : 4;
-	ocp = champ->splited_prog[champ->(++index)]; // == 0x68
+	ocp = champ->splited_prog[champ->(++index)];
 	r1 = champ->reg[champ->splited_prog[champ->(++index)] - 1];
 	t_v1 = (ocp >> 4) & 3;
 	if (t_v1 == REG_CODE)
@@ -63,7 +63,7 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 	{
 		v2 = //indirect
 	}
-	
+
 }
 
 void	ft_fork(t_cor *cor, t_champ *champ)
