@@ -52,6 +52,7 @@ typedef struct		s_champ
 	int				size;
 	int				op_nb;
 	int				pc;
+	int			index;
 	int				carry;
 	int				r_cy;
 }					t_champ;
@@ -80,5 +81,26 @@ void				split_bits(char **prog, unsigned char **splited_prog);
 int					check_op_len(t_champ *t_champ);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
+
+/*
+CYCLE FCT
+*/
+
+void				ft_live(t_cor *cor, t_champ *champ);
+void				ft_ld(t_cor *cor, t_champ *champ);
+void				ft_st(t_cor *cor, t_champ *champ);
+void				ft_add(t_cor *cor, t_champ *champ);
+void				ft_sub(t_cor *cor, t_champ *champ);
+void				ft_and(t_cor *cor, t_champ *champ);
+void				ft_or(t_cor *cor, t_champ *champ);
+void				ft_xor(t_cor *cor, t_champ *champ);
+void				ft_zjmp(t_cor *cor, t_champ *champ);
+void				ft_ldi(t_cor *cor, t_champ *champ);
+void				ft_sti(t_cor *cor, t_champ *champ);
+void				ft_fork(t_cor *cor, t_champ *champ);
+void				ft_lld(t_cor *cor, t_champ *champ);
+void				ft_lldi(t_cor *cor, t_champ *champ);
+void				ft_lfork(t_cor *cor, t_champ *champ);
+
 
 #endif
