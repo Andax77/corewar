@@ -19,7 +19,16 @@ FILES = main.c \
 		parse_champ.c \
 		tools.c \
 		parse_op.c \
+<<<<<<< HEAD
+		parse_op_2.c \
+		../../commun/srcs/op.c \
+		cycle.c \
+		# op1.c \
+		# op2.c \
+		# op3.c \
+=======
 		../../commun/srcs/op.c
+>>>>>>> f81045732fbec4994c3be419c57ddf64269ee01d
 
 HFILES = includes/corewar.h \
 		 ../commun/includes/op.h \
