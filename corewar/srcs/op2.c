@@ -6,9 +6,11 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:07 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/13 15:06:09 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/14 19:38:35 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <corewar.h>
 
 void	ft_and(t_cor *cor, t_champ *champ)
 {

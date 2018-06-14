@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/14 16:14:14 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/14 19:28:35 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 int					init(char **argv, t_cor *cor);
 void				init_op(void (**f)(t_cor*, t_champ*));
+int					recup_content(t_champ *champ, int ocp, int decalage, int op_code);
 void				draw_uchar(int pos, unsigned char val);
 int					init_ncurses(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
@@ -101,6 +102,7 @@ void				ft_fork(t_cor *cor, t_champ *champ);
 void				ft_lld(t_cor *cor, t_champ *champ);
 void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
+void				ft_aff(t_cor *cor, t_champ *champ);
 
 
 #endif

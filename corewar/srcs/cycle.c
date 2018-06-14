@@ -6,10 +6,9 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/14 17:38:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/14 19:45:07 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <corewar.h>
 
@@ -24,7 +23,7 @@ void	cycle(t_cor *cor)
 	t_champ		*cur_champ;
 	int			last_pc;
 	t_champ		*last_champ;
-	void		(*f[17])(t_cor*, t_champ*);
+	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
 
 	init_op(f);
 	last_pc = 0;
@@ -40,7 +39,7 @@ void	cycle(t_cor *cor)
 			{
 				if (cur_champ->r_cy == 0)
 				{
-					f[cur_champ->splited_prog[cur_champ->pc]];
+					//f[cur_champ->splited_prog[cur_champ->pc]](cor, cur_champ);// faire un if pour f[0] si op_code invalide/////////////////
 					//He would send a OPcode to exec_op
 					if (cor->opt->n)
 					{
@@ -95,7 +94,6 @@ To recup the register or the index value from all operators :)
 
 int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
 {
-	int ocp;
 	int type;
 	int ret;
 
@@ -103,19 +101,19 @@ int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
 	type = (ocp >> decalage) & 3;
 	if (type == REG_CODE)
 	{
-		ret = champ->splited_prog[champ->(++pc)];
+		ret = champ->splited_prog[++champ->pc];
 	}
 	else if (type == DIR_CODE)
 	{
 		if (((g_op_tab[op_code - 1].dir_size == 1) ? 2 : 4) == 4)
-			ret = champ->splited_prog[champ->(++pc)] << 24 +
-				champ->splited_prog[champ->(++pc)] << 16;
-		ret += champ->splited_prog[champ->(++pc)] << 8 +
-			champ->splited_prog[champ->(++pc)];
+			ret = (champ->splited_prog[++champ->pc] << 24) +
+				(champ->splited_prog[++champ->pc] << 16);
+		ret += (champ->splited_prog[++champ->pc] << 8) +
+			champ->splited_prog[++champ->pc];
 	}
 	else
-		ret = champ->splited_prog[champ->(++pc)] << 8 +
-			champ->splited_prog[champ->(++pc)];
+		ret = (champ->splited_prog[++champ->pc] << 8) +
+			champ->splited_prog[++champ->pc];
 	return (ret);
 }
 /*
