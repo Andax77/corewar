@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/13 15:06:19 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/14 17:38:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	cycle(t_cor *cor)
 /*
 Array of Pointer in function for replace the "Forest of if"
 */
-
 void	init_op(void (**f)(t_cor*, t_champ*))
 {
 	f[0] = &ft_move;
@@ -90,7 +89,6 @@ void	init_op(void (**f)(t_cor*, t_champ*))
 	f[15] = &ft_lfork;
 	f[16] = &ft_aff;
 }
-
 /*
 To recup the register or the index value from all operators :)
 */
@@ -120,7 +118,6 @@ int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
 			champ->splited_prog[champ->(++pc)];
 	return (ret);
 }
-
 /*
 The last OPcode function(I don't know where to place it so here, I think is good)
 */
