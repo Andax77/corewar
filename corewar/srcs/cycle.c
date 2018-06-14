@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 01:05:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 01:08:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	cycle(t_cor *cor)
 	t_list		*first_champ;
 	t_champ		*cur_champ;
 	int			last_pc;
-	t_champ		*last_champ;
-	void		//(*f[17])(t_cor *cor, t_champ *cur_champ);
+	int			last_champ;
+	//void		(*f[17])(t_cor *cor, t_champ *cur_champ);
 
 	//init_op(f);
 	last_pc = 0;
