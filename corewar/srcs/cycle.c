@@ -70,31 +70,29 @@ void	exec_op(t_cor *cor, t_champ **champ)
 To recup the register or the index value from all operators :)
 */
 
-int		recup_content(t_champ *champ)
+int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
 {
 	int ocp;
 	int type;
 	int ret;
 
-	ocp = champ->splited_prog[champ->(++index)];
-	type = (ocp >> 4) & 3;
+	ret = 0;
+	type = (ocp >> decalage) & 3;
 	if (type == REG_CODE)
 	{
-		ret = champ->splited_prog[champ->(++index)];
+		ret = champ->reg[champ->splited_prog[champ->(++index)] - 1];
 	}
 	else if (type == DIR_CODE)
 	{
-		ret = 0;
-		if (((g_op_tab[10].dir_size == 1) ? 2 : 4) == 4)
-		{
+		if (((g_op_tab[op_code - 1].dir_size == 1) ? 2 : 4) == 4)
 			ret = champ->splited_prog[champ->(++index)] << 24 +
 				champ->splited_prog[champ->(++index)] << 16;
-		}
 		ret += champ->splited_prog[champ->(++index)] << 8 +
 			champ->splited_prog[champ->(++index)];
 	}
 	else
-		ret = -1;//indirect
+		ret = champ->splited_prog[champ->(++index)] << 8 +
+			champ->splited_prog[champ->(++index)];
 	return (ret);
 }
 
