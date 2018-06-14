@@ -49,10 +49,7 @@ typedef struct		s_champ
 	unsigned char	*splited_prog;
 	unsigned int	*reg;
 	t_list			*instru;
-	int				size;
-	int				op_nb;
 	int				pc;
-	int			index;
 	int				carry;
 	int				r_cy;
 }					t_champ;
@@ -70,6 +67,7 @@ void				print_usage(void);
 int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 int					init(char **argv, t_cor *cor);
+void				init_op(void (**f)(t_cor*, t_champ*));
 void				draw_uchar(int pos, unsigned char val);
 int					init_ncurses(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
@@ -85,7 +83,7 @@ void				del(void *content, size_t content_size);
 /*
 CYCLE FCT
 */
-
+void				ft_move(t_cor *cor, t_champ *champ);
 void				ft_live(t_cor *cor, t_champ *champ);
 void				ft_ld(t_cor *cor, t_champ *champ);
 void				ft_st(t_cor *cor, t_champ *champ);
