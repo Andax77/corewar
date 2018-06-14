@@ -6,9 +6,11 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/13 15:06:13 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/14 19:38:00 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <corewar.h>
 
 void	ft_sti(t_cor *cor, t_champ *champ)
 {
@@ -19,7 +21,7 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 	int	ori;
 
 	ori = champ->pc;
-	ocp = champ->splited_prog[champ->(++pc)];
+	ocp = champ->splited_prog[++champ->pc];
 	p1 = recup_content(champ, ocp, 6, 11);
 	p2 = recup_content(champ, ocp, 4, 11);
 	p3 = recup_content(champ, ocp, 2, 11);
