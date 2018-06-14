@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/13 15:06:19 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/14 17:38:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,47 @@ The launcher during *** times for VM
 //add stop_vm in 1st while
 void	cycle(t_cor *cor)
 {
-	t_champ *ori;
-	t_list *champ;
-	champ = cor->champs;
-	ori = champ;
-	while ((champ = ori))
+	t_list		*champs;
+	t_list		*first_champ;
+	t_champ		*cur_champ;
+	int			last_pc;
+	t_champ		*last_champ;
+
+	last_pc = 0;
+	champs = cor->champs;
+	first_champ = champs;
+	while ((champs = first_champ))
 	{
-		while (champ)
+		while (champs)
 		{
-			if (((t_champ *)champ->content)->r_cy != -1)
+			cur_champ = champs->content;
+			last_champ = cur_champ;
+			if (cur_champ->r_cy > -1)
 			{
-				if (((t_champ *)champ->content)->r_cy == 0)
-					exec_op(cor, &champ);
+				if (cur_champ->r_cy == 0)
+				{
+					//exec_op(cor, &cur_champ);
 					//He would send a OPcode to exec_op
-				(((t_champ *)champ->content)->r_cy)--;
+					if (cor->opt->n)
+					{
+						//attron(COLOR_PAIR((last_champ->reg)[0]));
+						//draw_uchar(cur_champ->pc, (cor->map)[last_pc]);
+						attron(COLOR_PAIR(10 + (cur_champ->reg)[0]));
+						draw_uchar(cur_champ->pc, (cor->map)[cur_champ->pc]);
+						getch();
+					}
+					//ft_printf("cur_champ = %s, cur_pc = %d\n", cur_champ->name, cur_champ->pc);
+					last_pc = cur_champ->pc;
+					last_champ = cur_champ;
+					if (cur_champ->pc < MEM_SIZE)
+						cur_champ->pc++;
+					else
+						cur_champ->pc = 0;
+				}
+				else
+					(cur_champ->r_cy)--;
 			}
-			champ = champ->next;
+			champs = champs->next;
 		}
 		(cor->cycle)++;
 	}
@@ -43,7 +68,7 @@ void	cycle(t_cor *cor)
 /*
 Array of Pointer in function for replace the "Forest of if"
 */
-
+/*
 void	exec_op(t_cor *cor, t_champ **champ)
 {
 	void (**f)(*cor, *champ);
@@ -65,11 +90,11 @@ void	exec_op(t_cor *cor, t_champ **champ)
 	f[15] = &lfork;
 	f[16] = &ft_aff;
 }
-
+*/
 /*
 To recup the register or the index value from all operators :)
 */
-
+/*
 int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
 {
 	int ocp;
@@ -95,53 +120,13 @@ int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
 			champ->splited_prog[champ->(++index)];
 	return (ret);
 }
-
+*/
 /*
 The last OPcode function(I don't where to place it so here, I think is good)
 */
+/*
 void	ft_aff(t_cor *cor, t_champ  *champ)
 {
 	int r1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-z
+*/
