@@ -15,56 +15,23 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 	int p1;
 	int p2;
 	int p3;
-	// int	t_v1;
-	// int	t_v2;
-	// int	size_dir;
 	int	ocp;
+	int	ori;
 
-	ocp = champ->splited_prog[champ->(++index)];
+	ori = champ->pc;
+	ocp = champ->splited_prog[champ->(++pc)];
 	p1 = recup_content(champ, ocp, 6, 11);
 	p2 = recup_content(champ, ocp, 4, 11);
 	p3 = recup_content(champ, ocp, 2, 11);
-	// t_v1 = (ocp >> 4) & 3;
-	// if (t_v1 == REG_CODE)
-	// {
-	// 	v1 = champ->splited_prog[champ->(++index)];
-	// }
-	// else if (t_v1 == DIR_CODE)
-	// {
-	// 	v1 = 0;
-	// 	if (size_dir == 4)
-	// 	{
-	// 		v1 = champ->splited_prog[champ->(++index)] << 24 +
-	// 			champ->splited_prog[champ->(++index)] << 16;
-	// 	}
-	// 	v1 += champ->splited_prog[champ->(++index)] << 8 +
-	// 		champ->splited_prog[champ->(++index)];
-	// }
-	// else
-	// {
-	// 	v1 = //indirect
-	// }
-	// t_v2 = (ocp >> 2) & 3;
-	// if (t_v2 == REG_CODE)
-	// {
-	// 	v2 = champ->splited_prog[champ->(++index)];
-	// }
-	// else if (t_v2 == DIR_CODE)
-	// {
-	// 	if (size_dir == 2)
-	// 	{
-	// 		v2 =
-	// 	}
-	// 	else
-	// 	{
-	// 		v2 =
-	// 	}
-	// }
-	// else
-	// {
-	// 	v2 = //indirect
-	// }
-
+	if (((ocp >> 4) & 3) == REG_CODE)
+		p2 = champ->reg[p2 - 1];
+	if (((ocp >> 2) & 3) == REG_CODE)
+		p3 = champ->reg[p3 - 1];
+	champ->splited_prog[((ori + p2 + p3) < 0) ? MEM_SIZE - ((ori + p2 + p3) % MEM_SIZE) : ori + p2 + p3] = champ->reg[p1 - 1];
+	if (champ->reg[p1 - 1] == 0)
+		champ->carry = 1;
+	else
+		champ->carry = 0;
 }
 
 void	ft_fork(t_cor *cor, t_champ *champ)
