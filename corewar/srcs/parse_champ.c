@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/14 16:58:42 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 00:32:31 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int				check_champ(t_champ **champ, char *path)
 		return (ERROR);
 	if (!((*champ)->reg = ft_memalloc(REG_NUMBER * sizeof(unsigned int))))
 		exit(EXIT_FAILURE);
-	((*champ)->reg)[0] = ++id;
+	(*champ)->reg[0] = ++id;
 	//DEBUG
 	//ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
 	return (SUCCESS);

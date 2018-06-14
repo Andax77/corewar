@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/14 16:15:06 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 00:23:09 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,32 +163,27 @@ void		draw_cow(int nb)
 
 static void	init_colors(t_list *champs)
 {
-	int		i;
 	t_list	*tmp;
+	int		i;
 
-	i = 0;
 	tmp = champs;
 	while (champs)
 	{
-		init_pair(3 + i + 10, COLOR_BLACK, COLOR_RED + i);
-		i++;
+		i = ((t_champ*)champs->content)->reg[0];
+		init_pair(i + 10, COLOR_BLACK, i);
 		champs = champs->next;
 	}
 	champs = tmp;
-	i = 0;
 	while (champs)
 	{
-		init_pair(3 + i + 20, COLOR_WHITE, COLOR_RED + i);
-		i++;
+		i = ((t_champ*)champs->content)->reg[0];
+		init_pair(i + 20, COLOR_WHITE, i);
 		champs = champs->next;
 	}
 }
 
 int			init_ncurses(t_cor *cor)
 {
-	t_list	*tmp;
-
-	tmp = cor->champs;
 	if (initscr())
 	{
 		start_color();
@@ -205,7 +200,7 @@ int			init_ncurses(t_cor *cor)
 		draw_infos(ft_lstcount(cor->champs));
 		draw_cow(ft_lstcount(cor->champs));
 		curs_set(0);
-		init_colors(tmp);
+		init_colors(cor->champs);
 		return (1);
 	}
 	return (0);
