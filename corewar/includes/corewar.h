@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/15 19:52:49 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 20:05:29 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int					init(char **argv, t_cor *cor);
 void				init_op(void (**f)(t_cor*, t_champ*));
 int					recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code);
 void				draw_uchar(int pos, unsigned char val);
+void				draw_line(int line_idx, int col_idx, char *line);
 int					init_ncurses(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
 int					check_champ(t_champ **champ, char *path);

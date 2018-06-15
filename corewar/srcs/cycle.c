@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 20:00:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 20:49:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	cycle(t_cor *cor)
 	int			*last_pc;
 	int			*last_champ;
 	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
+	char		*cycle;
 
 	last_pc = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	last_champ = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
@@ -36,6 +37,7 @@ void	cycle(t_cor *cor)
 		{
 			while (champs)
 			{
+				//Clean process pos
 				cur_champ = champs->content;
 				if (last_champ[cur_champ->id - 1] && cur_champ->r_cy == 0)
 				{
@@ -54,10 +56,26 @@ void	cycle(t_cor *cor)
 			{
 				if (cur_champ->r_cy == 0)
 				{
-					if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
-						cur_champ->r_cy = change_r_cy(cor, champs->content);
-//					ft_printf("{magenta}%d\n{eoc}\n",cor->map[cur_champ->pc]);// debug pour voir sur quel pc on est
-					//He would send a OPcode to exec_op
+					//Set r_cy
+					if (cor->cycle != 0)
+					{
+						if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+							cur_champ->r_cy = change_r_cy(cor, champs->content);
+					}
+					else
+					{
+						if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+							cur_champ->r_cy = change_r_cy(cor, champs->content) - 1;
+					}
+					//Do the operation
+					if (cor->cycle != 0)
+					{
+						if (cor->map[cur_champ->pc] <= 0 || cor->map[cur_champ->pc] > 16)
+							f[0];
+						else
+							f[cor->map[cur_champ->pc]](cor, cur_champ);
+					}
+					//Print process pos
 					if (cor->opt->n)
 					{
 						attron(COLOR_PAIR(10 + cur_champ->id));
@@ -65,20 +83,19 @@ void	cycle(t_cor *cor)
 						last_pc[cur_champ->id - 1] = cur_champ->pc;
 						last_champ[cur_champ->id - 1] = cur_champ->id;
 					}
-					//Do the job
-					if (cor->map[cur_champ->pc] <= 0 || cor->map[cur_champ->pc] > 16)
-						f[0];
-					else
-						f[cor->map[cur_champ->pc]](cor, cur_champ);
 				}
 				else
 					cur_champ->r_cy--;
 			}
 			champs = champs->next;
 		}
+		//Print cycle
+		cycle = ft_itoa((cor->cycle)++);
+		attron(COLOR_PAIR(7));
+		draw_line(7, 9, cycle);
+		free(cycle);
 		//Wait event
 		getch();
-		(cor->cycle)++;
 	}
 	free(last_pc);
 	free(last_champ);
