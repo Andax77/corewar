@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/15 00:23:09 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 18:27:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,14 +169,14 @@ static void	init_colors(t_list *champs)
 	tmp = champs;
 	while (champs)
 	{
-		i = ((t_champ*)champs->content)->reg[0];
+		i = ((t_champ*)champs->content)->id;
 		init_pair(i + 10, COLOR_BLACK, i);
 		champs = champs->next;
 	}
 	champs = tmp;
 	while (champs)
 	{
-		i = ((t_champ*)champs->content)->reg[0];
+		i = ((t_champ*)champs->content)->id;
 		init_pair(i + 20, COLOR_WHITE, i);
 		champs = champs->next;
 	}
