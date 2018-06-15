@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/16 01:46:33 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/16 01:49:10 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,13 @@ void	cycle(t_cor *cor)
 				{
 					if (cor->cycle != 0)
 					{
+						// Do op
 						if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
-						{
-							// Do op
 							f[cor->map[cur_champ->pc]](cor, cur_champ);
-						}
 						else
 							f[0];
 					}
+					// Change r_cy
 					if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
 						cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 					//Print process pos
