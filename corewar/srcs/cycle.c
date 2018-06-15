@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 01:08:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 17:42:30 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	cycle(t_cor *cor)
 	t_champ		*cur_champ;
 	int			last_pc;
 	int			last_champ;
-	//void		(*f[17])(t_cor *cor, t_champ *cur_champ);
+	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
 
-	//init_op(f);
+	init_op(f);
 	last_pc = 0;
 	last_champ = 0;
 	champs = cor->champs;
@@ -35,11 +35,13 @@ void	cycle(t_cor *cor)
 		while (champs)
 		{
 			cur_champ = champs->content;
+//			change_r_cy(cor, cur_champ);//je sais pas trop ou mettre ca la ca marche pas...
 			if (cur_champ->r_cy > -1)
 			{
 				if (cur_champ->r_cy == 0)
 				{
-					//f[cur_champ->splited_prog[cur_champ->pc]](cor, cur_champ);// faire un if pour f[0] si op_code invalide/////////////////
+					f[cor->map[cur_champ->pc]](cor, cur_champ);// faire un if pour f[0] si op_code invalide/////////////////
+//					ft_printf("{magenta}%d\n{eoc}\n",cor->map[cur_champ->pc]);// debug pour voir sur quel pc on est
 					//He would send a OPcode to exec_op
 					if (cor->opt->n)
 					{
@@ -55,10 +57,10 @@ void	cycle(t_cor *cor)
 					//ft_printf("cur_champ = %s, cur_pc = %d\n", cur_champ->name, cur_champ->pc);
 					last_pc = cur_champ->pc;
 					last_champ = cur_champ->reg[0];
-					if (cur_champ->pc < MEM_SIZE)
-						cur_champ->pc++;
-					else
-						cur_champ->pc = ((t_champ*)champs->content)->pc;
+//					if (cur_champ->pc < MEM_SIZE)
+//						cur_champ->pc++;
+//					else
+//						cur_champ->pc = ((t_champ*)champs->content)->pc;
 				}
 				else
 					cur_champ->r_cy--;
@@ -68,7 +70,14 @@ void	cycle(t_cor *cor)
 		(cor->cycle)++;
 	}
 }
-/*
+
+void	change_r_cy(t_cor *cor, t_champ *champ)//////////////////////// fonction pour changer r_cy
+{
+	if (cor->map[champ->pc] <= 0 || cor->map[champ->pc] > 16)
+		champ->r_cy = 0;
+	else
+		champ->r_cy = g_op_tab[cor->map[champ->pc] - 1].nb_cycles;
+}
 //Array of Pointer in function for replace the "Forest of if"
 
 void	init_op(void (**f)(t_cor*, t_champ*))
@@ -95,7 +104,7 @@ void	init_op(void (**f)(t_cor*, t_champ*))
 //To recup the register or the index value from all operators :)
 
 
-int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
+int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code)
 {
 	int type;
 	int ret;
@@ -104,19 +113,16 @@ int		recup_content(t_champ *champ, int ocp, int decalage, int op_code)
 	type = (ocp >> decalage) & 3;
 	if (type == REG_CODE)
 	{
-		ret = champ->splited_prog[++champ->pc];
+		ret = cor->map[++champ->pc];
 	}
 	else if (type == DIR_CODE)
 	{
 		if (((g_op_tab[op_code - 1].dir_size == 1) ? 2 : 4) == 4)
-			ret = (champ->splited_prog[++champ->pc] << 24) +
-				(champ->splited_prog[++champ->pc] << 16);
-		ret += (champ->splited_prog[++champ->pc] << 8) +
-			champ->splited_prog[++champ->pc];
+			ret = (cor->map[++champ->pc] << 24) + (cor->map[++champ->pc] << 16);
+		ret += (cor->map[++champ->pc] << 8) + cor->map[++champ->pc];
 	}
 	else
-		ret = (champ->splited_prog[++champ->pc] << 8) +
-			champ->splited_prog[++champ->pc];
+		ret = (cor->map[++champ->pc] << 8) + cor->map[++champ->pc];
 	return (ret);
 }
 
@@ -131,4 +137,3 @@ void	ft_move(t_cor *cor, t_champ  *champ)
 {
 	int r1;
 }
-*/

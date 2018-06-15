@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/14 19:28:35 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/15 17:33:34 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct		s_champ
 	int				pc;
 	int				carry;
 	int				r_cy;
+	//int			live;//a voir
 }					t_champ;
 
 typedef struct		s_cor
@@ -69,7 +70,7 @@ int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 int					init(char **argv, t_cor *cor);
 void				init_op(void (**f)(t_cor*, t_champ*));
-int					recup_content(t_champ *champ, int ocp, int decalage, int op_code);
+int					recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code);
 void				draw_uchar(int pos, unsigned char val);
 int					init_ncurses(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
@@ -80,6 +81,7 @@ int					pad(char **str, int n);
 void				split_bits(char **prog, unsigned char **splited_prog);
 int					check_op_len(t_champ *t_champ);
 void				cycle(t_cor *cor);
+void				change_r_cy(t_cor *cor, t_champ *champ);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 
