@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 20:49:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/16 01:46:33 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,18 @@ void	cycle(t_cor *cor)
 			{
 				if (cur_champ->r_cy == 0)
 				{
-					//Set r_cy
 					if (cor->cycle != 0)
 					{
 						if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
-							cur_champ->r_cy = change_r_cy(cor, champs->content);
-					}
-					else
-					{
-						if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
-							cur_champ->r_cy = change_r_cy(cor, champs->content) - 1;
-					}
-					//Do the operation
-					if (cor->cycle != 0)
-					{
-						if (cor->map[cur_champ->pc] <= 0 || cor->map[cur_champ->pc] > 16)
-							f[0];
-						else
+						{
+							// Do op
 							f[cor->map[cur_champ->pc]](cor, cur_champ);
+						}
+						else
+							f[0];
 					}
+					if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+						cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 					//Print process pos
 					if (cor->opt->n)
 					{
@@ -101,12 +94,12 @@ void	cycle(t_cor *cor)
 	free(last_champ);
 }
 
-int		change_r_cy(t_cor *cor, t_champ **champ)//////////////////////// fonction pour changer r_cy
+int		change_r_cy(t_cor *cor, t_champ *champ)//////////////////////// fonction pour changer r_cy
 {
-	if (cor->map[(*champ)->pc] <= 0 || cor->map[(*champ)->pc] > 16)
+	if (cor->map[champ->pc] <= 0 || cor->map[champ->pc] > 16)
 		return (0);
 	else
-		return (g_op_tab[cor->map[(*champ)->pc] - 1].nb_cycles);
+		return (g_op_tab[cor->map[champ->pc] - 1].nb_cycles);
 }
 //Array of Pointer in function for replace the "Forest of if"
 

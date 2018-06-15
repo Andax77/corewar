@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/15 20:05:29 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/16 01:41:57 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int					pad(char **str, int n);
 void				split_bits(char **prog, unsigned char **splited_prog);
 int					check_op_len(t_champ *t_champ);
 void				cycle(t_cor *cor);
-int					change_r_cy(t_cor *cor, t_champ **champ);
+int					change_r_cy(t_cor *cor, t_champ *champ);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 
