@@ -29,7 +29,12 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 		p2 = champ->reg[p2 - 1];
 	if (((ocp >> 2) & 3) == REG_CODE)
 		p3 = champ->reg[p3 - 1];
-	cor->map[((ori + p2 + p3) < 0) ? MEM_SIZE - ((ori + p2 + p3) % MEM_SIZE) : ori + p2 + p3] = champ->reg[p1 - 1];
+	while ((ori + p2 + p3) < 0)
+		p3 += MEM_SIZE;
+	cor->map[(ori + p2 + p3) % MEM_SIZE] = champ->reg[p1 - 1] >> 24;
+	cor->map[(ori + p2 + p3 + 1) % MEM_SIZE] = champ->reg[p1 - 1] >> 16;
+	cor->map[(ori + p2 + p3 + 2) % MEM_SIZE] = champ->reg[p1 - 1] >> 8;
+	cor->map[(ori + p2 + p3 + 3) % MEM_SIZE] = champ->reg[p1 - 1];
 	if (champ->reg[p1 - 1] == 0)
 		champ->carry = 1;
 	else
