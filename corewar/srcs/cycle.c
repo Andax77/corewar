@@ -62,7 +62,7 @@ void	cycle(t_cor *cor)
 						if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
 							f[cor->map[cur_champ->pc]](cor, cur_champ);
 						else
-							f[0];
+							f[0](cor, cur_champ);
 					}
 					// Change r_cy
 					if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)

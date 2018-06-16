@@ -59,10 +59,14 @@ void	ft_xor(t_cor *cor, t_champ *champ)
 void	ft_zjmp(t_cor *cor, t_champ *champ)
 {
 	int p;
+	int	ori;
 
+	ori = champ->pc;
 	p = (cor->map[++champ->pc] << 8) + cor->map[++champ->pc];
+	while ((ori + p) < 0)
+		p += MEM_SIZE;
 	if (champ->carry == 1)
-		champ->pc = (champ->pc + p) % MEM_SIZE;// - 1;// -1 pour le ++pc dans cycle
+		champ->pc = (ori + p) % MEM_SIZE;// - 1;// -1 pour le ++pc dans cycle
 }
 
 void	ft_ldi(t_cor *cor, t_champ *champ)
