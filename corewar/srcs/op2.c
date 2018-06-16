@@ -19,14 +19,18 @@ void	ft_and(t_cor *cor, t_champ *champ)
 	int p3;
 	int	ocp;
 
-	ocp = cor->map[++champ->pc];
+	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 6);
 	p2 = recup_content(cor, champ, ocp, 4, 6);
 	p3 = recup_content(cor, champ, ocp, 2, 6);
 	if (((ocp >> 6) & 3) == REG_CODE)
-		p1 = champ->reg[p1 - 1];
+		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+	else
+		p1 = p1 % IDX_MOD;
 	if (((ocp >> 4) & 3) == REG_CODE)
-		p2 = champ->reg[p2 - 1];
+		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
+	else
+		p2 = p2 % IDX_MOD;
 	if (p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = p1 & p2;
@@ -37,23 +41,71 @@ void	ft_and(t_cor *cor, t_champ *champ)
 	}
 	else
 		champ->carry = 0;
-	++champ->pc;
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
 void	ft_or(t_cor *cor, t_champ *champ)
 {
-	int r1;
-	int r2;
-	int r3;
+	int p1;
+	int p2;
+	int p3;
+	int	ocp;
 
+	ocp = cor->map[++champ->pc % MEM_SIZE];
+	p1 = recup_content(cor, champ, ocp, 6, 7);
+	p2 = recup_content(cor, champ, ocp, 4, 7);
+	p3 = recup_content(cor, champ, ocp, 2, 7);
+	if (((ocp >> 6) & 3) == REG_CODE)
+		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+	else
+		p1 = p1 % IDX_MOD;
+	if (((ocp >> 4) & 3) == REG_CODE)
+		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
+	else
+		p2 = p2 % IDX_MOD;
+	if (p3 > 0 && p3 <= REG_NUMBER)
+	{
+		champ->reg[p3 - 1] = p1 | p2;
+		if ((p1 | p2) == 0)
+			champ->carry = 1;
+		else
+			champ->carry = 0;
+	}
+	else
+		champ->carry = 0;
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
 void	ft_xor(t_cor *cor, t_champ *champ)
 {
-	int r1;
-	int r2;
-	int r3;
+	int p1;
+	int p2;
+	int p3;
+	int	ocp;
 
+	ocp = cor->map[++champ->pc % MEM_SIZE];
+	p1 = recup_content(cor, champ, ocp, 6, 8);
+	p2 = recup_content(cor, champ, ocp, 4, 8);
+	p3 = recup_content(cor, champ, ocp, 2, 8);
+	if (((ocp >> 6) & 3) == REG_CODE)
+		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+	else
+		p1 = p1 % IDX_MOD;
+	if (((ocp >> 4) & 3) == REG_CODE)
+		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
+	else
+		p2 = p2 % IDX_MOD;
+	if (p3 > 0 && p3 <= REG_NUMBER)
+	{
+		champ->reg[p3 - 1] = p1 ^ p2;
+		if ((p1 ^ p2) == 0)
+			champ->carry = 1;
+		else
+			champ->carry = 0;
+	}
+	else
+		champ->carry = 0;
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
 void	ft_zjmp(t_cor *cor, t_champ *champ)
@@ -62,17 +114,46 @@ void	ft_zjmp(t_cor *cor, t_champ *champ)
 	int	ori;
 
 	ori = champ->pc;
-	p = (cor->map[++champ->pc] << 8) + cor->map[++champ->pc];
-	while ((ori + p) < 0)
-		p += MEM_SIZE;
+	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	if (champ->carry == 1)
-		champ->pc = (ori + p) % MEM_SIZE;// - 1;// -1 pour le ++pc dans cycle
+		champ->pc = (ori + p) % MEM_SIZE;
+	else
+		champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
 void	ft_ldi(t_cor *cor, t_champ *champ)
 {
-	int v1;
-	int v2;
-	int r1;
+	int p1;
+	int p2;
+	int p3;
+	int	ocp;
+	int	ori;
 
+	ori = champ->pc;
+	ocp = cor->map[++champ->pc % MEM_SIZE];
+	p1 = recup_content(cor, champ, ocp, 6, 10);
+	p2 = recup_content(cor, champ, ocp, 4, 10);
+	p3 = recup_content(cor, champ, ocp, 2, 10);
+	if (((ocp >> 6) & 3) == REG_CODE)
+		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+	else
+		p1 = p1 % IDX_MOD;
+	if (((ocp >> 4) & 3) == REG_CODE)
+		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
+	else
+		p2 = p2 % IDX_MOD;
+	if (p3 > 0 && p3 <= REG_SIZE)
+	{
+		champ->reg[p3 - 1] = (cor->map[(ori + p1 + p2) % MEM_SIZE] << 24) +
+		(cor->map[(ori + p1 + p2 + 1) % MEM_SIZE] << 16) +
+		(cor->map[(ori + p1 + p2 + 2) % MEM_SIZE] << 8) +
+		cor->map[(ori + p1 + p2 + 3) % MEM_SIZE];
+		if (champ->reg[p3 - 1] == 0)
+			champ->carry = 1;
+		else
+			champ->carry = 0;
+	}
+	else
+		champ->carry = 0;
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
