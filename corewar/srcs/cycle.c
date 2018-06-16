@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/16 19:32:58 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/16 21:48:00 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,17 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 void	key_event(int *timeout, int *ch)
 {
 	char	*p_p_c;
+	int		k;
 
-	if (*ch != ' ')
+	k = 0;
+	if (*ch != ERR)
 	{
 		noecho();
-		*ch = getch();
-		while (*ch != 's' && *ch != ' ')
+		if (!ft_strchr("rewq", *ch))
+			*ch = getch();
+		else
+			k = 1;
+		while (*ch != 's' && *ch != ERR)
 		{
 			if (*ch == 'e' && *timeout > 0)
 			{
@@ -103,14 +108,25 @@ void	key_event(int *timeout, int *ch)
 				draw_line(4, 22, p_p_c);
 				free(p_p_c);
 			}
+			if (*ch == ' ' || k == 1)
+			{
+				k = 0;
+				*ch = ERR;
+				break ;
+			}
 			*ch = getch();
 		}
 		echo();
 	}
 	else
 	{
-		usleep(*timeout);
-		refresh();
+		noecho();
+		timeout(*timeout);
+		*ch = getch();
+		timeout(-1);
+		if (!ft_strchr("s rewq", *ch))
+			*ch = ERR;
+		echo();
 	}
 }
 
