@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/15 00:23:09 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/15 20:10:30 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ static void	draw_map(t_cor *cor)
 		}
 }
 
-void		draw_line(int line_idx, char *line)
+void		draw_line(int line_idx, int col_idx, char *line)
 {
 	int		x;
 	int		y;
 
-	x = 199;
+	x = 199 + col_idx;
 	y = 2;
 	while (y < 66)
 	{
@@ -104,61 +104,61 @@ void		draw_uchar(int pos, unsigned char val)
 
 static void	draw_infos(int nb)
 {
-	draw_line(2, "** PAUSED **");
-	draw_line(4, "Cycles/second limit :");
-	draw_line(7, "Cycle :");
-	draw_line(9, "Processes :");
-	draw_line(11, "Player 1 :");
-	draw_line(12, "  Last live :			");
-	draw_line(13, "  Lives in current period :	");
-	(nb > 1) ? draw_line(15, "Player 2 :") : 0;
-	(nb > 1) ? draw_line(16, "  Last live :			") : 0;
-	(nb > 1) ? draw_line(17, "  Lives in current period :	") : 0;
-	(nb > 2) ? draw_line(19, "Player 3 :") : 0;
-	(nb > 2) ? draw_line(20, "  Last live :			") : 0;
-	(nb > 2) ? draw_line(21, "  Lives in current period :	") : 0;
-	(nb > 3) ? draw_line(23, "Player 4 :") : 0;
-	(nb > 3) ? draw_line(24, "  Last live :			") : 0;
-	(nb > 3) ? draw_line(25, "  Lives in current period :	") : 0;
+	draw_line(2, 0, "** PAUSED **");
+	draw_line(4, 0, "Cycles/second limit :");
+	draw_line(7, 0, "Cycle :");
+	draw_line(9, 0, "Processes :");
+	draw_line(11, 0, "Player 1 :");
+	draw_line(12, 0, "  Last live :			");
+	draw_line(13, 0, "  Lives in current period :	");
+	(nb > 1) ? draw_line(15, 0, "Player 2 :") : 0;
+	(nb > 1) ? draw_line(16, 0, "  Last live :			") : 0;
+	(nb > 1) ? draw_line(17, 0, "  Lives in current period :	") : 0;
+	(nb > 2) ? draw_line(19, 0, "Player 3 :") : 0;
+	(nb > 2) ? draw_line(20, 0, "  Last live :			") : 0;
+	(nb > 2) ? draw_line(21, 0, "  Lives in current period :	") : 0;
+	(nb > 3) ? draw_line(23, 0, "Player 4 :") : 0;
+	(nb > 3) ? draw_line(24, 0, "  Last live :			") : 0;
+	(nb > 3) ? draw_line(25, 0, "  Lives in current period :	") : 0;
 	nb = 4 * (nb - 1);
-	draw_line(15 + nb, "Live breakdown for current period :");
-	draw_line(16 + nb, "[--------------------------------------------------]");
-	draw_line(18 + nb, "Live breakdown for last period :");
-	draw_line(19 + nb, "[--------------------------------------------------]");
-	draw_line(21 + nb, "CYCLES_TO_DIE :");
-	draw_line(23 + nb, "CYCLE_DELTA :");
-	draw_line(25 + nb, "NBR_LIVE :");
-	draw_line(27 + nb, "MAX_CHECKS :");
+	draw_line(15 + nb, 0, "Live breakdown for current period :");
+	draw_line(16 + nb, 0, "[--------------------------------------------------]");
+	draw_line(18 + nb, 0, "Live breakdown for last period :");
+	draw_line(19 + nb, 0, "[--------------------------------------------------]");
+	draw_line(21 + nb, 0, "CYCLES_TO_DIE :");
+	draw_line(23 + nb, 0, "CYCLE_DELTA :");
+	draw_line(25 + nb, 0, "NBR_LIVE :");
+	draw_line(27 + nb, 0, "MAX_CHECKS :");
 }
 
 void		draw_cow(int nb)
 {
 	nb = 27 + (4 * (nb - 1));
-	draw_line(nb++, "----------------------------------------------------");
-	draw_line(nb++, "");
-	draw_line(nb++, "");
-	draw_line(nb++, "");
-	draw_line(nb++, "");
-	draw_line(nb++, "		    __    ____");
-	draw_line(nb++, "		   /{_\\_/   `'\\____");
-	draw_line(nb++, "		    \\___  (o)  (o   }");
-	draw_line(nb++, "		     /            -'ô");
-	draw_line(nb++, "		     #   \\_    `__\\");
-	draw_line(nb++, "		    ###   \\__ (o'o)");
-	draw_line(nb++, "		   ###    #(  `===='");
-	draw_line(nb++, "		  ####     ##|                           __");
-	draw_line(nb++, "		 ##         ###|                        //");
-	draw_line(nb++, "		 #            #)                       //");
-	draw_line(nb++, "		 |   ###    \\###|_____    //nnnnnnn/--//");
-	draw_line(nb++, "		 |    ###    \\________|\\ //nnnnnnn/  //");
-	draw_line(nb++, "		 |#    ##           | | //nnnnnnn/  //");
-	draw_line(nb++, "		 |##       \\--------°- //nnnnnnn/  //");
-	draw_line(nb++, "		 |###       ####|     //nnnnnnn/  //");
-	draw_line(nb++, "                              ------------");
-	draw_line(nb++, "");
-	draw_line(nb++, "");
-	draw_line(nb++, "");
-	draw_line(nb++, "			 C.O.W -- W.A.R");
+	draw_line(nb++, 0, "----------------------------------------------------");
+	draw_line(nb++, 0, "");
+	draw_line(nb++, 0, "");
+	draw_line(nb++, 0, "");
+	draw_line(nb++, 0, "");
+	draw_line(nb++, 0, "		    __    ____");
+	draw_line(nb++, 0, "		   /{_\\_/   `'\\____");
+	draw_line(nb++, 0, "		    \\___  (o)  (o   }");
+	draw_line(nb++, 0, "		     /            -'ô");
+	draw_line(nb++, 0, "		     #   \\_    `__\\");
+	draw_line(nb++, 0, "		    ###   \\__ (o'o)");
+	draw_line(nb++, 0, "		   ###    #(  `===='");
+	draw_line(nb++, 0, "		  ####     ##|                           __");
+	draw_line(nb++, 0, "		 ##         ###|                        //");
+	draw_line(nb++, 0, "		 #            #)                       //");
+	draw_line(nb++, 0, "		 |   ###    \\###|_____    //nnnnnnn/--//");
+	draw_line(nb++, 0, "		 |    ###    \\________|\\ //nnnnnnn/  //");
+	draw_line(nb++, 0, "		 |#    ##           | | //nnnnnnn/  //");
+	draw_line(nb++, 0, "		 |##       \\--------°- //nnnnnnn/  //");
+	draw_line(nb++, 0, "		 |###       ####|     //nnnnnnn/  //");
+	draw_line(nb++, 0, "                              ------------");
+	draw_line(nb++, 0, "");
+	draw_line(nb++, 0, "");
+	draw_line(nb++, 0, "");
+	draw_line(nb++, 0, "			 C.O.W -- W.A.R");
 }
 
 static void	init_colors(t_list *champs)
@@ -169,14 +169,14 @@ static void	init_colors(t_list *champs)
 	tmp = champs;
 	while (champs)
 	{
-		i = ((t_champ*)champs->content)->reg[0];
+		i = ((t_champ*)champs->content)->id;
 		init_pair(i + 10, COLOR_BLACK, i);
 		champs = champs->next;
 	}
 	champs = tmp;
 	while (champs)
 	{
-		i = ((t_champ*)champs->content)->reg[0];
+		i = ((t_champ*)champs->content)->id;
 		init_pair(i + 20, COLOR_WHITE, i);
 		champs = champs->next;
 	}
