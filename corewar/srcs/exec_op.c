@@ -50,25 +50,31 @@ int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_cod
 	type = (ocp >> decalage) & 3;
 	if (type == REG_CODE)
 	{
-		ret = cor->map[++champ->pc];
+		ret = cor->map[++champ->pc % MEM_SIZE];
 	}
 	else if (type == DIR_CODE)
 	{
 		if (((g_op_tab[op_code - 1].dir_size == 1) ? 2 : 4) == 4)
-			ret = (cor->map[++champ->pc] << 24) + (cor->map[++champ->pc] << 16);
-		ret += (cor->map[++champ->pc] << 8) + cor->map[++champ->pc];
+			ret = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16);
+		ret += (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	}
 	else
-		ret = (cor->map[++champ->pc] << 8) + cor->map[++champ->pc];
+		ret = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	return (ret);
 }
 
 void	ft_aff(t_cor *cor, t_champ  *champ)
 {
-	int r1;
+	int p;
+
+	p = cor->map[++champ->pc % MEM_SIZE];
+	if (p > 0 && p <= REG_SIZE)
+		ft_printf("{magenta}%c{eoc}\n", champ->reg[p - 1] % 256);
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
 void	ft_move(t_cor *cor, t_champ  *champ)
 {
-	int r1;
+	(void)cor;
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
