@@ -16,6 +16,7 @@ FILES = main.c \
 		ft_init.c \
 		ft_parsing.c \
 		ft_parsing_binary.c \
+		ft_manual.c \
 		ft_fill_instru.c \
 		ft_fill_instru_annexe.c \
 		ft_get_instru.c \

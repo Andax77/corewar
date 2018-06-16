@@ -26,3 +26,22 @@ int			ft_error(t_champ *champ, char *msg)
 	del_champ(champ);
 	return (ERROR);
 }
+
+int			ft_error_m(t_champ *champ, char *msg)
+{
+	char	*tmp;
+	int		ret;
+
+	tmp = NULL;
+	ft_printf("{red}%s{eoc}\n", msg);
+	ft_printf("{yellow}Please press ^d{eoc}\n");
+	while ((ret = get_next_line(STDIN_FILENO, &tmp)) != GNL_END)
+	{
+		ft_printf("{yellow}Please press ^d{eoc}\n");
+		ft_fruit(1, &tmp);
+	}
+	if (ret == GNL_ERROR)
+		ft_fruit(1, &tmp);
+	del_champ(champ);
+	return (ERROR);
+}

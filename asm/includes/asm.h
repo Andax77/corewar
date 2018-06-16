@@ -22,6 +22,7 @@
 # include <op.h>
 # include <libft.h>
 
+# define BASE_HEXA "0123456789ABCDEF"
 # define ERROR -1
 # define SUCCESS 0
 
@@ -58,6 +59,7 @@ int				ft_fill_binary_name(t_champ *champ);
 
 int				read_file(t_champ *champ);
 int				read_binary(t_champ *champ);
+int				ft_manual(t_champ *champ);
 
 int				ft_check_input_format(t_champ *champ);
 int				ft_check_params_type(t_instru *inst);
@@ -92,4 +94,5 @@ void			ft_free_struct_instru(t_instru *inst);
 int				del_champ(t_champ *champ);
 
 int				ft_error(t_champ *champ, char *msg);
+int				ft_error_m(t_champ *champ, char *msg);
 #endif
