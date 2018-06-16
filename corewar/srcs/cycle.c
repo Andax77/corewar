@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/16 12:04:22 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/16 13:50:37 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	cycle(t_cor *cor)
 	int			*last_champ;
 	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
 	char		*cycle;
+	int			ch;
 
 	last_pc = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	last_champ = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
@@ -79,11 +80,29 @@ void	cycle(t_cor *cor)
 		}
 		//Print cycle
 		cycle = ft_itoa((cor->cycle)++);
-		attron(COLOR_PAIR(7));
-		draw_line(7, 9, cycle);
+		if (cor->opt->n)
+		{
+			attron(COLOR_PAIR(7));
+			draw_line(7, 9, cycle);
+		}
 		free(cycle);
 		//Wait event
-		getch();
+		if (cor->opt->n)
+		{
+			if (ch != ' ')
+			{
+				noecho();
+				ch = getch();
+				while (ch != 's' && ch != ' ')
+					ch = getch();
+				echo();
+			}
+			else
+			{
+				usleep(500);
+				refresh();
+			}
+		}
 	}
 	free(last_pc);
 	free(last_champ);
