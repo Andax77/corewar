@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 17:27:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 18:19:14 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void		draw_uchar(int pos, unsigned char val)
 	}
 	while (y < 66)
 	{
-		if (i++ == pos)
+		if (i++ == pos % MEM_SIZE)
 			mvprintw(y, x, c);
 		x = x + 3;
 		if (x >= 194 && (x = 3))
