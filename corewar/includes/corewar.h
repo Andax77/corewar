@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 19:11:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 19:49:27 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,11 @@ enum				e_list
 };
 
 typedef struct		s_opt
-
 {
+	int				*n;
 	int				a;
 	int				d;
-	int				s;
 	int				v;
-	int				b;
-	int				bs;
-	int				n;
-	int				ns;
 }					t_opt;
 
 typedef struct		s_champ
