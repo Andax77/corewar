@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 18:19:14 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 18:23:28 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,14 +197,14 @@ int			init_ncurses(t_cor *cor)
 	{
 		start_color();
 		init_color(COLOR_MAGENTA, 500, 500, 500);
-		init_color(COLOR_WHITE + 10, 1000, 1000, 1000);
+		init_color(17, 1000, 1000, 1000);
 		init_pair(1, COLOR_MAGENTA, COLOR_MAGENTA);
 		init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
 		attron(COLOR_PAIR(1));
 		draw_borders();
 		attron(COLOR_PAIR(2));
 		draw_map(cor);
-		init_pair(COLOR_WHITE + 10, COLOR_WHITE, COLOR_BLACK);
+		init_pair(17, 17, COLOR_BLACK);
 		attron(COLOR_PAIR(COLOR_WHITE + 10));
 		draw_infos(ft_lstcount(cor->champs));
 		init_colors(cor->champs);
