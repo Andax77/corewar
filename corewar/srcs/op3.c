@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 13:51:21 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 13:58:25 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 		cor->map[(ori + p2 + p3 + 3) % MEM_SIZE] = champ->reg[p1 - 1];
 		if (cor->opt->n)
 		{
-			attron(COLOR_PAIR(2 + champ->id));
+			attron(COLOR_PAIR(2 + champ->id) | A_BOLD);
 			draw_uchar((ori + p2 + p3) % MEM_SIZE, champ->reg[p1 - 1] >> 24);
 			draw_uchar((ori + p2 + p3 + 1) % MEM_SIZE, champ->reg[p1 - 1] >> 16);
 			draw_uchar((ori + p2 + p3 + 2) % MEM_SIZE, champ->reg[p1 - 1] >> 8);

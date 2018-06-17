@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 13:50:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 14:15:33 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	clean(t_cor *cor, t_list *champs, int *last_champ, int *last_pc)
 				draw_uchar(last_pc[cur_champ->id - 1], \
 					(cor->map)[last_pc[cur_champ->id - 1]]);
 			}
-			if (cor->map[cur_champ->pc] == 1 && cur_champ->lives > 0)
+			else if (cur_champ->lives > 0 && \
+					last_pc[cur_champ->id - 1] != cur_champ->last_live_pc)
 			{
 				attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
 				draw_uchar(cur_champ->last_live_pc, \
