@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 12:19:07 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 13:50:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 	{
 		if (cor->map[cur_champ->pc] == 1)
 		{
-			attron(COLOR_PAIR(20 + cur_champ->id));
+			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 		}
 		else
 		{
-			attron(COLOR_PAIR(10 + cur_champ->id));
+			attron(COLOR_PAIR(20 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 		}
 		last_pc[cur_champ->id - 1] = cur_champ->pc;
@@ -171,13 +171,13 @@ void	print_infos(t_cor *cor)
 	champs = cor->champs;
 	cycle = ft_itoa((cor->cycle)++);
 	processes = ft_itoa(ft_lstcount(cor->champs));
-	attron(COLOR_PAIR(7));
+	attron(COLOR_PAIR(17));
 	draw_line(7, 9, cycle);
 	draw_line(9, 12, "    ");
 	draw_line(9, 12, processes);
 	if (cor->cycle == 1)
 	{
-		attron(COLOR_PAIR(7));
+		attron(COLOR_PAIR(17));
 		draw_line(4, 22, "50");
 	}
 	while (champs)
