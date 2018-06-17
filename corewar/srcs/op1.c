@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:54:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/17 11:40:30 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
 	(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
-	//ajouter un live dans la structure et faire le live de p
-}
+	champ->lives++;
+	champ->last_live = cor->cycle;
+	}
 
 void	ft_ld(t_cor *cor, t_champ *champ)
 {

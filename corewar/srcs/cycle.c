@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 11:35:00 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 11:41:08 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,6 @@ void	print_infos(t_cor *cor)
 	}
 	while (champs)
 	{
-		if (((t_champ*)champs->content)->lives > 0)
-			((t_champ*)champs->content)->last_live++;
 		last_live = ft_itoa(((t_champ*)champs->content)->last_live);
 		lives = ft_itoa(((t_champ*)champs->content)->lives);
 		draw_line(12 + (4 * i), 32, "    ");
