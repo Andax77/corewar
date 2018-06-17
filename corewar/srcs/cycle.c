@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 11:41:08 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 12:19:07 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,18 @@ void	clean(t_cor *cor, t_list *champs, int *last_champ, int *last_pc)
 		cur_champ = champs->content;
 		if (last_champ[cur_champ->id - 1] && cur_champ->r_cy == 0)
 		{
-			attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
-			draw_uchar(last_pc[cur_champ->id - 1], \
+			if (cor->map[last_pc[cur_champ->id - 1]] != 1)
+			{
+				attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
+				draw_uchar(last_pc[cur_champ->id - 1], \
 					(cor->map)[last_pc[cur_champ->id - 1]]);
+			}
+			if (cor->map[cur_champ->pc] == 1 && cur_champ->lives > 0)
+			{
+				attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
+				draw_uchar(cur_champ->last_live_pc, \
+					(cor->map)[last_pc[cur_champ->id - 1]]);
+			}
 		}
 		champs = champs->next;
 	}
@@ -48,8 +57,16 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 	// Print process pos
 	if (cor->opt->n)
 	{
-		attron(COLOR_PAIR(10 + cur_champ->id));
-		draw_uchar(cur_champ->pc, (cor->map)[cur_champ->pc]);
+		if (cor->map[cur_champ->pc] == 1)
+		{
+			attron(COLOR_PAIR(20 + cur_champ->id));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+		}
+		else
+		{
+			attron(COLOR_PAIR(10 + cur_champ->id));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+		}
 		last_pc[cur_champ->id - 1] = cur_champ->pc;
 		last_champ[cur_champ->id - 1] = cur_champ->id;
 	}
@@ -64,7 +81,6 @@ void	key_event(int *timeout, int *ch)
 	if (*ch != ERR)
 	{
 		noecho();
-		usleep(*timeout / 50);
 		draw_line(2, 0, "             ");
 		draw_line(2, 0, "** PAUSED **");
 		if (!ft_strchr("rewq", *ch))
