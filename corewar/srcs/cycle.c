@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 18:14:59 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 19:11:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,18 +161,22 @@ void	key_event(int *timeout, int *ch)
 
 void	print_infos(t_cor *cor)
 {
-	t_list	*champs;
-	char	*cycle;
-	char	*processes;
-	char	*last_live;
-	char	*lives;
-	char	*cycle_to_die;
-	char	*cycle_delta;
-	char	*nbr_live;
-	int		i;
+	t_list		*champs;
+	char		*cycle;
+	char		*processes;
+	char		*last_live;
+	char		*lives;
+	char		*cycle_to_die;
+	char		*cycle_delta;
+	char		*nbr_live;
+	char		*max_checks;
+	int			i;
+	static int	j;
 
 	i = 0;
 	champs = cor->champs;
+	if (cor->cycle == 0)
+		j = ft_lstcount(champs);
 	cycle = ft_itoa((cor->cycle)++);
 	while (champs)
 	{
@@ -182,26 +186,29 @@ void	print_infos(t_cor *cor)
 	}
 	champs = cor->champs;
 	processes = ft_itoa(i);
-	i = 0;
 	cycle_to_die = ft_itoa(cor->cycle_to_die);
 	cycle_delta = ft_itoa(CYCLE_DELTA);
 	nbr_live = ft_itoa(NBR_LIVE);
+	max_checks = ft_itoa(MAX_CHECKS);
 	attron(COLOR_PAIR(17));
 	draw_line(7, 8, cycle);
 	draw_line(9, 12, "    ");
 	draw_line(9, 12, processes);
-	draw_line(33 + (4 * i), 16, "    ");
-	draw_line(33 + (4 * i), 16, cycle_to_die);
-	draw_line(35 + (4 * i), 14, "    ");
-	draw_line(35 + (4 * i), 14, cycle_delta);
-	draw_line(37 + (4 * i), 11, "    ");
-	draw_line(37 + (4 * i), 11, nbr_live);
+	draw_line(37, 16, "    ");
+	draw_line(37, 16, cycle_to_die);
+	draw_line(39, 14, "    ");
+	draw_line(39, 14, cycle_delta);
+	draw_line(41, 11, "    ");
+	draw_line(41, 11, nbr_live);
+	draw_line(43, 11, "    ");
+	draw_line(43, 11, max_checks);
 	if (cor->cycle == 1)
 	{
 		attron(COLOR_PAIR(17));
 		draw_line(4, 22, "50");
 	}
-	while (champs)
+	i = 0;
+	while (champs && i < j)
 	{
 		last_live = ft_itoa(((t_champ*)champs->content)->last_live);
 		lives = ft_itoa(((t_champ*)champs->content)->lives);
@@ -219,6 +226,7 @@ void	print_infos(t_cor *cor)
 	free(cycle_to_die);
 	free(cycle_delta);
 	free(nbr_live);
+	free(max_checks);
 }
 
 int		check_lives(t_cor *cor)
@@ -236,8 +244,14 @@ int		check_lives(t_cor *cor)
 			nbr_live += ((t_champ*)champs->content)->lives;
 		champs = champs->next;
 	}
-	if (nbr_live >= NBR_LIVE)
+	if (nbr_live >= NBR_LIVE || cor->checks == MAX_CHECKS)
+	{
 		cor->cycle_to_die -= CYCLE_DELTA;
+		if (cor->checks == MAX_CHECKS)
+			cor->checks = 0;
+	}
+	else
+		cor->checks++;
 	if (cor->cycle_to_die <= 0)
 	{
 		cor->cycle_to_die = 0;

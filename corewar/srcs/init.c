@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 18:23:28 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 19:03:15 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,11 +120,10 @@ static void	draw_infos(int nb)
 	(nb > 3) ? draw_line(23, 0, "Player 4 :") : 0;
 	(nb > 3) ? draw_line(24, 0, "  Last live :			") : 0;
 	(nb > 3) ? draw_line(25, 0, "  Lives in current period :	") : 0;
-	nb = 4 * (nb - 1);
-	draw_line(21 + nb, 0, "CYCLES_TO_DIE :");
-	draw_line(23 + nb, 0, "CYCLE_DELTA :");
-	draw_line(25 + nb, 0, "NBR_LIVE :");
-	draw_line(27 + nb, 0, "MAX_CHECKS :");
+	draw_line(37, 0, "CYCLES_TO_DIE :");
+	draw_line(39, 0, "CYCLE_DELTA :");
+	draw_line(41, 0, "NBR_LIVE :");
+	draw_line(43, 0, "MAX_CHECKS :");
 }
 
 void		draw_names(t_list *champs)
@@ -144,11 +143,7 @@ void		draw_names(t_list *champs)
 void		draw_cow(int nb)
 {
 	attron(COLOR_PAIR(17));
-	nb = 27 + (4 * (nb - 1));
 	draw_line(nb++, 0, "----------------------------------------------------");
-	draw_line(nb++, 0, "");
-	draw_line(nb++, 0, "");
-	draw_line(nb++, 0, "");
 	draw_line(nb++, 0, "");
 	draw_line(nb++, 0, "		    __    ____");
 	draw_line(nb++, 0, "		   /{_\\_/   `'\\____");
@@ -209,7 +204,7 @@ int			init_ncurses(t_cor *cor)
 		draw_infos(ft_lstcount(cor->champs));
 		init_colors(cor->champs);
 		draw_names(cor->champs);
-		draw_cow(ft_lstcount(cor->champs));
+		draw_cow(45);
 		curs_set(0);
 		return (1);
 	}
