@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/15 20:10:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 10:50:07 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,23 @@ static void	draw_infos(int nb)
 	draw_line(27 + nb, 0, "MAX_CHECKS :");
 }
 
+void		draw_names(t_list *champs)
+{
+	int		i;
+
+	i = 0;
+	while (champs)
+	{
+		attron(COLOR_PAIR(i + 3));
+		draw_line(11 + (4 * i), 11, ((t_champ*)champs->content)->name);
+		i++;
+		champs = champs->next;
+	}
+}
+
 void		draw_cow(int nb)
 {
+	attron(COLOR_PAIR(7));
 	nb = 27 + (4 * (nb - 1));
 	draw_line(nb++, 0, "----------------------------------------------------");
 	draw_line(nb++, 0, "");
@@ -155,8 +170,6 @@ void		draw_cow(int nb)
 	draw_line(nb++, 0, "		 |##       \\--------°- //nnnnnnn/  //");
 	draw_line(nb++, 0, "		 |###       ####|     //nnnnnnn/  //");
 	draw_line(nb++, 0, "                              ------------");
-	draw_line(nb++, 0, "");
-	draw_line(nb++, 0, "");
 	draw_line(nb++, 0, "");
 	draw_line(nb++, 0, "			 C.O.W -- W.A.R");
 }
@@ -198,9 +211,10 @@ int			init_ncurses(t_cor *cor)
 		init_pair(7, COLOR_WHITE, COLOR_BLACK);
 		attron(COLOR_PAIR(7));
 		draw_infos(ft_lstcount(cor->champs));
+		init_colors(cor->champs);
+		draw_names(cor->champs);
 		draw_cow(ft_lstcount(cor->champs));
 		curs_set(0);
-		init_colors(cor->champs);
 		return (1);
 	}
 	return (0);

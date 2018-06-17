@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/16 21:48:00 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 10:53:37 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	key_event(int *timeout, int *ch)
 	else
 	{
 		noecho();
-		timeout(*timeout);
+		timeout(*timeout / 50);
 		*ch = getch();
 		timeout(-1);
 		if (!ft_strchr("s rewq", *ch))
@@ -133,16 +133,21 @@ void	key_event(int *timeout, int *ch)
 void	print_infos(t_cor *cor)
 {
 	char	*cycle;
+	char	*processes;
 
 	cycle = ft_itoa((cor->cycle)++);
+	processes = ft_itoa(ft_lstcount(cor->champs));
 	attron(COLOR_PAIR(7));
 	draw_line(7, 9, cycle);
+	draw_line(9, 12, "    ");
+	draw_line(9, 12, processes);
 	if (cor->cycle == 1)
 	{
 		attron(COLOR_PAIR(7));
 		draw_line(4, 22, "50");
 	}
 	free(cycle);
+	free(processes);
 }
 
 void	cycle(t_cor *cor)
