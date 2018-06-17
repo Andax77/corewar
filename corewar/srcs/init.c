@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 13:50:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 17:27:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,6 @@ static void	draw_infos(int nb)
 	(nb > 3) ? draw_line(24, 0, "  Last live :			") : 0;
 	(nb > 3) ? draw_line(25, 0, "  Lives in current period :	") : 0;
 	nb = 4 * (nb - 1);
-	draw_line(15 + nb, 0, "Live breakdown for current period :");
-	draw_line(16 + nb, 0, "[--------------------------------------------------]");
-	draw_line(18 + nb, 0, "Live breakdown for last period :");
-	draw_line(19 + nb, 0, "[--------------------------------------------------]");
 	draw_line(21 + nb, 0, "CYCLES_TO_DIE :");
 	draw_line(23 + nb, 0, "CYCLE_DELTA :");
 	draw_line(25 + nb, 0, "NBR_LIVE :");
