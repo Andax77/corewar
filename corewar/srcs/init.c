@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/15 20:10:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 13:50:05 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,23 @@ static void	draw_infos(int nb)
 	draw_line(27 + nb, 0, "MAX_CHECKS :");
 }
 
+void		draw_names(t_list *champs)
+{
+	int		i;
+
+	i = 0;
+	while (champs)
+	{
+		attron(COLOR_PAIR(i + 3));
+		draw_line(11 + (4 * i), 11, ((t_champ*)champs->content)->name);
+		i++;
+		champs = champs->next;
+	}
+}
+
 void		draw_cow(int nb)
 {
+	attron(COLOR_PAIR(17));
 	nb = 27 + (4 * (nb - 1));
 	draw_line(nb++, 0, "----------------------------------------------------");
 	draw_line(nb++, 0, "");
@@ -156,8 +171,6 @@ void		draw_cow(int nb)
 	draw_line(nb++, 0, "		 |###       ####|     //nnnnnnn/  //");
 	draw_line(nb++, 0, "                              ------------");
 	draw_line(nb++, 0, "");
-	draw_line(nb++, 0, "");
-	draw_line(nb++, 0, "");
 	draw_line(nb++, 0, "			 C.O.W -- W.A.R");
 }
 
@@ -170,14 +183,14 @@ static void	init_colors(t_list *champs)
 	while (champs)
 	{
 		i = ((t_champ*)champs->content)->id;
-		init_pair(i + 10, COLOR_BLACK, i);
+		init_pair(i + 20, COLOR_BLACK, i);
 		champs = champs->next;
 	}
 	champs = tmp;
 	while (champs)
 	{
 		i = ((t_champ*)champs->content)->id;
-		init_pair(i + 20, COLOR_WHITE, i);
+		init_pair(i + 40, COLOR_WHITE, i);
 		champs = champs->next;
 	}
 }
@@ -188,19 +201,20 @@ int			init_ncurses(t_cor *cor)
 	{
 		start_color();
 		init_color(COLOR_MAGENTA, 500, 500, 500);
-		init_color(COLOR_WHITE, 1000, 1000, 1000);
+		init_color(COLOR_WHITE + 10, 1000, 1000, 1000);
 		init_pair(1, COLOR_MAGENTA, COLOR_MAGENTA);
 		init_pair(2, COLOR_MAGENTA, COLOR_BLACK);
 		attron(COLOR_PAIR(1));
 		draw_borders();
 		attron(COLOR_PAIR(2));
 		draw_map(cor);
-		init_pair(7, COLOR_WHITE, COLOR_BLACK);
-		attron(COLOR_PAIR(7));
+		init_pair(COLOR_WHITE + 10, COLOR_WHITE, COLOR_BLACK);
+		attron(COLOR_PAIR(COLOR_WHITE + 10));
 		draw_infos(ft_lstcount(cor->champs));
+		init_colors(cor->champs);
+		draw_names(cor->champs);
 		draw_cow(ft_lstcount(cor->champs));
 		curs_set(0);
-		init_colors(cor->champs);
 		return (1);
 	}
 	return (0);

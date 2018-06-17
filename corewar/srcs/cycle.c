@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/16 21:48:00 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 14:15:33 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,19 @@ void	clean(t_cor *cor, t_list *champs, int *last_champ, int *last_pc)
 		cur_champ = champs->content;
 		if (last_champ[cur_champ->id - 1] && cur_champ->r_cy == 0)
 		{
-			attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
-			draw_uchar(last_pc[cur_champ->id - 1], \
+			if (cor->map[last_pc[cur_champ->id - 1]] != 1)
+			{
+				attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
+				draw_uchar(last_pc[cur_champ->id - 1], \
 					(cor->map)[last_pc[cur_champ->id - 1]]);
+			}
+			else if (cur_champ->lives > 0 && \
+					last_pc[cur_champ->id - 1] != cur_champ->last_live_pc)
+			{
+				attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
+				draw_uchar(cur_champ->last_live_pc, \
+					(cor->map)[last_pc[cur_champ->id - 1]]);
+			}
 		}
 		champs = champs->next;
 	}
@@ -48,8 +58,16 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 	// Print process pos
 	if (cor->opt->n)
 	{
-		attron(COLOR_PAIR(10 + cur_champ->id));
-		draw_uchar(cur_champ->pc, (cor->map)[cur_champ->pc]);
+		if (cor->map[cur_champ->pc] == 1)
+		{
+			attron(COLOR_PAIR(40 + cur_champ->id));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+		}
+		else
+		{
+			attron(COLOR_PAIR(20 + cur_champ->id));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+		}
 		last_pc[cur_champ->id - 1] = cur_champ->pc;
 		last_champ[cur_champ->id - 1] = cur_champ->id;
 	}
@@ -64,6 +82,8 @@ void	key_event(int *timeout, int *ch)
 	if (*ch != ERR)
 	{
 		noecho();
+		draw_line(2, 0, "             ");
+		draw_line(2, 0, "** PAUSED **");
 		if (!ft_strchr("rewq", *ch))
 			*ch = getch();
 		else
@@ -116,16 +136,25 @@ void	key_event(int *timeout, int *ch)
 			}
 			*ch = getch();
 		}
+		draw_line(2, 0, "              ");
+		draw_line(2, 0, "** RUNNING **");
 		echo();
 	}
 	else
 	{
 		noecho();
-		timeout(*timeout);
+		draw_line(2, 0, "              ");
+		draw_line(2, 0, "** RUNNING **");
+		timeout(*timeout / 50);
 		*ch = getch();
 		timeout(-1);
 		if (!ft_strchr("s rewq", *ch))
 			*ch = ERR;
+		else
+		{
+			draw_line(2, 0, "             ");
+			draw_line(2, 0, "** PAUSED **");
+		}
 		echo();
 	}
 }
@@ -133,16 +162,40 @@ void	key_event(int *timeout, int *ch)
 void	print_infos(t_cor *cor)
 {
 	char	*cycle;
+	char	*processes;
+	t_list	*champs;
+	char	*last_live;
+	char	*lives;
+	int		i;
 
+	i = 0;
+	champs = cor->champs;
 	cycle = ft_itoa((cor->cycle)++);
-	attron(COLOR_PAIR(7));
+	processes = ft_itoa(ft_lstcount(cor->champs));
+	attron(COLOR_PAIR(17));
 	draw_line(7, 9, cycle);
+	draw_line(9, 12, "    ");
+	draw_line(9, 12, processes);
 	if (cor->cycle == 1)
 	{
-		attron(COLOR_PAIR(7));
+		attron(COLOR_PAIR(17));
 		draw_line(4, 22, "50");
 	}
+	while (champs)
+	{
+		last_live = ft_itoa(((t_champ*)champs->content)->last_live);
+		lives = ft_itoa(((t_champ*)champs->content)->lives);
+		draw_line(12 + (4 * i), 32, "    ");
+		draw_line(12 + (4 * i), 32, last_live);
+		draw_line(13 + (4 * i), 32, "    ");
+		draw_line(13 + (4 * i), 32, lives);
+		i++;
+		champs = champs->next;
+		free(last_live);
+		free(lives);
+	}
 	free(cycle);
+	free(processes);
 }
 
 void	cycle(t_cor *cor)

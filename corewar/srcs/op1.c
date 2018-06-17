@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:54:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/17 14:44:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	ft_live(t_cor *cor, t_champ *champ)
 {
 	int		p;
 
+	champ->last_live_pc = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
-	(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
+		(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
-	//ajouter un live dans la structure et faire le live de p
+	champ->lives++;
+	champ->last_live = cor->cycle;
 }
 
 void	ft_ld(t_cor *cor, t_champ *champ)
@@ -36,9 +38,9 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	if (p2 > 0 && p2 <= REG_SIZE)
 	{
 		champ->reg[p2 - 1] = (cor->map[(ori + p1) % MEM_SIZE] << 24) +
-		(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) +
-		(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) +
-		cor->map[(ori + p1 + 3) % MEM_SIZE];
+			(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) +
+			(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) +
+			cor->map[(ori + p1 + 3) % MEM_SIZE];
 		if (champ->reg[p2 - 1] == 0)
 			champ->carry = 1;
 		else
@@ -74,6 +76,15 @@ void	ft_st(t_cor *cor, t_champ *champ)
 			cor->map[(ori + p2 + 1) % MEM_SIZE] = champ->reg[p1 - 1] >> 16;
 			cor->map[(ori + p2 + 2) % MEM_SIZE] = champ->reg[p1 - 1] >> 8;
 			cor->map[(ori + p2 + 3) % MEM_SIZE] = champ->reg[p1 - 1];
+			if (cor->opt->n)
+			{
+				attron(COLOR_PAIR(2 + champ->id) | A_BOLD);
+				draw_uchar((ori + p2) % MEM_SIZE, champ->reg[p1 - 1] >> 24);
+				draw_uchar((ori + p2 + 1) % MEM_SIZE, champ->reg[p1 - 1] >> 16);
+				draw_uchar((ori + p2 + 2) % MEM_SIZE, champ->reg[p1 - 1] >> 8);
+				draw_uchar((ori + p2 + 3) % MEM_SIZE, champ->reg[p1 - 1]);
+				attroff(A_BOLD);
+			}
 		}
 		if (champ->reg[p1 - 1] == 0)
 			champ->carry = 1;
