@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/15 00:56:47 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 17:18:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,8 @@ static int		populate_champs(t_list **champs, char *path)
 
 int				init_cor(t_cor *cor, char **argv)
 {
-	int			i;
 	int			n;
 
-	i = 0;
 	n = 0;
 	while (++argv && *argv)
 	{
@@ -140,9 +138,9 @@ int				init_cor(t_cor *cor, char **argv)
 	if (!(cor->map = malloc((MEM_SIZE + 1) * sizeof(unsigned char))))
 		exit(EXIT_FAILURE);
 	init_memory(cor);
+	cor->cycle_to_die = CYCLE_TO_DIE;
 	if (cor->opt->n && !init_ncurses(cor))
 		return (ERROR);
-	//TODO Start Cycles
 	cycle(cor);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 14:15:33 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 18:14:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	key_event(int *timeout, int *ch)
 			if (*ch == 'e' && *timeout > 0)
 			{
 				p_p_c = ft_itoa(1000 - --*timeout);
-				attron(COLOR_PAIR(7));
+				attron(COLOR_PAIR(17));
 				draw_line(4, 22, "    ");
 				draw_line(4, 22, p_p_c);
 				free(p_p_c);
@@ -104,7 +104,7 @@ void	key_event(int *timeout, int *ch)
 					p_p_c = ft_itoa(1000 - (*timeout = 0));
 				else
 					p_p_c = ft_itoa(1000 - (*timeout -= 10));
-				attron(COLOR_PAIR(7));
+				attron(COLOR_PAIR(17));
 				draw_line(4, 22, "    ");
 				draw_line(4, 22, p_p_c);
 				free(p_p_c);
@@ -112,7 +112,7 @@ void	key_event(int *timeout, int *ch)
 			else if (*ch == 'w' && *timeout < 950)
 			{
 				p_p_c = ft_itoa(1000 - ++*timeout);
-				attron(COLOR_PAIR(7));
+				attron(COLOR_PAIR(17));
 				draw_line(4, 22, "    ");
 				draw_line(4, 22, p_p_c);
 				free(p_p_c);
@@ -123,7 +123,7 @@ void	key_event(int *timeout, int *ch)
 					p_p_c = ft_itoa(1000 - (*timeout = 950));
 				else
 					p_p_c = ft_itoa(1000 - (*timeout += 10));
-				attron(COLOR_PAIR(7));
+				attron(COLOR_PAIR(17));
 				draw_line(4, 22, "    ");
 				draw_line(4, 22, p_p_c);
 				free(p_p_c);
@@ -161,21 +161,41 @@ void	key_event(int *timeout, int *ch)
 
 void	print_infos(t_cor *cor)
 {
+	t_list	*champs;
 	char	*cycle;
 	char	*processes;
-	t_list	*champs;
 	char	*last_live;
 	char	*lives;
+	char	*cycle_to_die;
+	char	*cycle_delta;
+	char	*nbr_live;
 	int		i;
 
 	i = 0;
 	champs = cor->champs;
 	cycle = ft_itoa((cor->cycle)++);
-	processes = ft_itoa(ft_lstcount(cor->champs));
+	while (champs)
+	{
+		if (((t_champ*)champs->content)->r_cy >= 0)
+			i++;
+		champs = champs->next;
+	}
+	champs = cor->champs;
+	processes = ft_itoa(i);
+	i = 0;
+	cycle_to_die = ft_itoa(cor->cycle_to_die);
+	cycle_delta = ft_itoa(CYCLE_DELTA);
+	nbr_live = ft_itoa(NBR_LIVE);
 	attron(COLOR_PAIR(17));
-	draw_line(7, 9, cycle);
+	draw_line(7, 8, cycle);
 	draw_line(9, 12, "    ");
 	draw_line(9, 12, processes);
+	draw_line(33 + (4 * i), 16, "    ");
+	draw_line(33 + (4 * i), 16, cycle_to_die);
+	draw_line(35 + (4 * i), 14, "    ");
+	draw_line(35 + (4 * i), 14, cycle_delta);
+	draw_line(37 + (4 * i), 11, "    ");
+	draw_line(37 + (4 * i), 11, nbr_live);
 	if (cor->cycle == 1)
 	{
 		attron(COLOR_PAIR(17));
@@ -196,6 +216,34 @@ void	print_infos(t_cor *cor)
 	}
 	free(cycle);
 	free(processes);
+	free(cycle_to_die);
+	free(cycle_delta);
+	free(nbr_live);
+}
+
+int		check_lives(t_cor *cor)
+{
+	t_list	*champs;
+	int		nbr_live;
+
+	nbr_live = 0;
+	champs = cor->champs;
+	while (champs)
+	{
+		if (((t_champ*)champs->content)->lives == 0)
+			((t_champ*)champs->content)->r_cy = -1;
+		else
+			nbr_live += ((t_champ*)champs->content)->lives;
+		champs = champs->next;
+	}
+	if (nbr_live >= NBR_LIVE)
+		cor->cycle_to_die -= CYCLE_DELTA;
+	if (cor->cycle_to_die <= 0)
+	{
+		cor->cycle_to_die = 0;
+		return (0);
+	}
+	return (1);
 }
 
 void	cycle(t_cor *cor)
@@ -207,7 +255,9 @@ void	cycle(t_cor *cor)
 	int			*last_champ;
 	int			timeout;
 	int			ch;
+	int			ret;
 
+	ret = 1;
 	timeout = 950;
 	last_pc = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	last_champ = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
@@ -230,9 +280,14 @@ void	cycle(t_cor *cor)
 			}
 			champs = champs->next;
 		}
+		// Check champs lives
+		if (cor->cycle % cor->cycle_to_die == 0 && cor->cycle > 0)
+			ret = check_lives(cor);
 		// Print infos
 		if (cor->opt->n)
 			print_infos(cor);
+		if (!ret)
+			break ;
 		// Key event
 		if (cor->opt->n)
 			key_event(&timeout, &ch);
