@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 19:11:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 19:48:50 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 	if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 	// Print process pos
-	if (cor->opt->n)
+	if (cor->opt->v)
 	{
 		if (cor->map[cur_champ->pc] == 1)
 		{
@@ -279,7 +279,7 @@ void	cycle(t_cor *cor)
 	while ((champs = first_champ))
 	{
 		// Clean cursor
-		if (cor->opt->n)
+		if (cor->opt->v)
 			clean(cor, champs, last_champ, last_pc);
 		while (champs)
 		{
@@ -298,12 +298,12 @@ void	cycle(t_cor *cor)
 		if (cor->cycle % cor->cycle_to_die == 0 && cor->cycle > 0)
 			ret = check_lives(cor);
 		// Print infos
-		if (cor->opt->n)
+		if (cor->opt->v)
 			print_infos(cor);
 		if (!ret)
 			break ;
 		// Key event
-		if (cor->opt->n)
+		if (cor->opt->v)
 			key_event(&timeout, &ch);
 	}
 	free(last_pc);
