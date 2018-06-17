@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 10:53:37 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 11:35:00 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void	key_event(int *timeout, int *ch)
 	if (*ch != ERR)
 	{
 		noecho();
+		usleep(*timeout / 50);
+		draw_line(2, 0, "             ");
+		draw_line(2, 0, "** PAUSED **");
 		if (!ft_strchr("rewq", *ch))
 			*ch = getch();
 		else
@@ -116,16 +119,25 @@ void	key_event(int *timeout, int *ch)
 			}
 			*ch = getch();
 		}
+		draw_line(2, 0, "              ");
+		draw_line(2, 0, "** RUNNING **");
 		echo();
 	}
 	else
 	{
 		noecho();
+		draw_line(2, 0, "              ");
+		draw_line(2, 0, "** RUNNING **");
 		timeout(*timeout / 50);
 		*ch = getch();
 		timeout(-1);
 		if (!ft_strchr("s rewq", *ch))
 			*ch = ERR;
+		else
+		{
+			draw_line(2, 0, "             ");
+			draw_line(2, 0, "** PAUSED **");
+		}
 		echo();
 	}
 }
@@ -134,7 +146,13 @@ void	print_infos(t_cor *cor)
 {
 	char	*cycle;
 	char	*processes;
+	t_list	*champs;
+	char	*last_live;
+	char	*lives;
+	int		i;
 
+	i = 0;
+	champs = cor->champs;
 	cycle = ft_itoa((cor->cycle)++);
 	processes = ft_itoa(ft_lstcount(cor->champs));
 	attron(COLOR_PAIR(7));
@@ -145,6 +163,21 @@ void	print_infos(t_cor *cor)
 	{
 		attron(COLOR_PAIR(7));
 		draw_line(4, 22, "50");
+	}
+	while (champs)
+	{
+		if (((t_champ*)champs->content)->lives > 0)
+			((t_champ*)champs->content)->last_live++;
+		last_live = ft_itoa(((t_champ*)champs->content)->last_live);
+		lives = ft_itoa(((t_champ*)champs->content)->lives);
+		draw_line(12 + (4 * i), 32, "    ");
+		draw_line(12 + (4 * i), 32, last_live);
+		draw_line(13 + (4 * i), 32, "    ");
+		draw_line(13 + (4 * i), 32, lives);
+		i++;
+		champs = champs->next;
+		free(last_live);
+		free(lives);
 	}
 	free(cycle);
 	free(processes);
