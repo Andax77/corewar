@@ -97,12 +97,13 @@ void				draw_cow3(int nb);
 void				angry_cow1(int nb);
 void				angry_cow2(int nb);
 void				angry_cow3(int nb);
+void				print_cow(t_cor *cor);
 
 /*
 HEART BEAT
 */
 void				heart(int nb, int player, int stat);
-void				draw_heart(int line_idx, int y, char *line);
+void				draw_heart(int line_idx, int y, char *line, int i);
 void				stat1(int nb, int player);
 void				stat2(int nb, int player);
 void				stat3(int nb, int player);
@@ -111,6 +112,7 @@ void				draw_player(int line_idx, int y, char *line);
 void				draw_player_id(int line_idx, int y, char *line);
 void				player(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
+void				heart_color();
 
 /*
 CYCLE FCT

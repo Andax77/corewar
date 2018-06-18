@@ -12,31 +12,49 @@
 
 #include <corewar.h>
 
-void		player(int nb, int player)
+void		print_player(int nb, int player)
 {
-	nb = 26 + (4 * (nb - 1));
-	draw_line2(nb++, "----------------------------------------------------");
-	draw_player(nb++, player, " __Player __ ");
-	mvprintw(39, 209 + player * 14 - 14 - player, ft_itoa(player));
-	draw_player(nb++, player, "|           |");
-	draw_player(nb++, player, "|           |");
-	draw_player(nb++, player, "|           |");
-	draw_player(nb++, player, "|           |");
-	draw_player(nb++, player, "|           |");
-	draw_player(nb++, player, "|           |");
-	draw_player(nb++, player, "|___________|");
+	int x;
+
+	attron(COLOR_PAIR(17));
+	x = nb;
+	while (player)
+	{
+		nb = 26 + (4 * (x - 1));
+		draw_line2(nb++, "----------------------------------------------------");
+		draw_player(nb++, player, " __Player __ ");
+		mvprintw(39, 209 + player * 14 - 14 - player, ft_itoa(player));
+		draw_player(nb++, player, "|           |");
+		draw_player(nb++, player, "|           |");
+		draw_player(nb++, player, "|           |");
+		draw_player(nb++, player, "|           |");
+		draw_player(nb++, player, "|           |");
+		draw_player(nb++, player, "|           |");
+		draw_player(nb++, player, "|___________|");
+		player--;
+	}
 }
 
-void		draw_heart(int line_idx, int y, char *line)
+void		draw_heart(int line_idx, int y, char *line, int i)
 {
 	int		x;
+	int		id;
 
-	x = 201 + y * 14 - 14 - y;
+	id = y;
+	x = 201 + y * 14 - 14 - y + i;
 	y = 30;
 	while (y < 66)
 	{
 		if (line_idx == y)
+		{
+			if (ft_strchr(line, ' '))
+				attron(COLOR_PAIR(17));
+			else if (ft_strstr(line , "IS") || ft_strstr(line, "DEAD"))
+				attron(COLOR_PAIR(2 + id));
+			else
+				attron(COLOR_PAIR(id + 25));
 			mvprintw(y, x, line);
+		}
 		y++;
 	}
 }

@@ -173,8 +173,17 @@ void	print_infos(t_cor *cor)
 	int			i;
 	static int	j;
 
+	static int x;
 	i = 0;
-	// print_cow()
+	print_cow(cor);
+	if (x == 0 && ++x){
+heart(4, 1, 1);}
+else if (x == 1 && ++x){
+heart(4, 2, 2);}
+else if (x == 2 && ++x){ //                   LE TEST POUR VACHE + HEART
+heart(4, 3, 3);}
+else if (x == 3 && !(x = 0)){
+heart(4, 4, 4);}
 	champs = cor->champs;
 	if (cor->cycle == 0)
 		j = ft_lstcount(champs);
@@ -272,8 +281,6 @@ void	cycle(t_cor *cor)
 	int			ch;
 	int			ret;
 
-	int x = 0;
-
 	ret = 1;
 	timeout = 950;
 	last_pc = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
@@ -287,23 +294,7 @@ void	cycle(t_cor *cor)
 			clean(cor, champs, last_champ, last_pc);
 		while (champs)
 		{
-			attron(COLOR_PAIR(17));
-			if (x == 0 && ++x){
-	angry_cow1(4);
-	player(4, 1);
-	heart(4, 1, 1);}
-else if (x == 1 && ++x){
-	angry_cow2(4);
-	player(4, 2);
-	heart(4, 2, 2);}
-else if (x == 2 && ++x){ //                   LE TEST POUR VACHE + HEART
-	angry_cow3(4);
-	player(4, 3);
-	heart(4, 3, 3);}
-else if (x == 3 && !(x = 0)){
-	draw_cow1(4);
-	player(4, 4);
-	heart(4, 4, 4);}
+
 			cur_champ = champs->content;
 			if (cur_champ->r_cy > -1)
 			{

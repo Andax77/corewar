@@ -30,7 +30,7 @@ void		angry_cow1(int nb)
 	draw_line2(nb++, "		 |   ###    \\###|_____    //nnnnnnn/--//     ");
 	draw_line2(nb++, "		 |    ###    \\______| |\\ //nnnnnnn/  //      ");
 	draw_line2(nb++, "		 |#    ##           | | //nnnnnnn/  //       ");
-	draw_line2(nb++, "		 |##       \\--------°- //nnnnnn/  //        ");
+	draw_line2(nb++, "		 |##       \\--------°- //nnnnnnn/  //        ");
 	draw_line2(nb++, "		 |###       ####|     //nnnnnnn/  //         ");
 	draw_line2(nb++, "                              ------------            ");
 	draw_line2(nb++, "			 C.O.W -- W.A.R");
@@ -54,7 +54,7 @@ void		angry_cow2(int nb)
 	draw_line2(nb++, "		 |   ###              //  //nnnnnnn/--//     ");
 	draw_line2(nb++, "		 |    ###      ______//  //nnnnnnn/  //      ");
 	draw_line2(nb++, "		 |#    ##       |       //nnnnnnn/  //       ");
-	draw_line2(nb++, "		 |##            |      //nnnnnnn/  //        ");
+	draw_line2(nb++, "		 |##            |      //nnnnnnnn/  //        ");
 	draw_line2(nb++, "		 |###       ####|     //nnnnnnn/  //         ");
 	draw_line2(nb++, "                              ------------            ");
 	draw_line2(nb++, "			 C.O.W -- W.A.R");
@@ -78,7 +78,7 @@ void		angry_cow3(int nb)
 	draw_line2(nb++, "		 |   ###     ###|\\_________|_ |nnnn/--//     ");
 	draw_line2(nb++, "		 |    ###               |  |nnnnnn/  //      ");
 	draw_line2(nb++, "		 |#    ##       \\_______|__|nnnnn/  //       ");
-	draw_line2(nb++, "		 |##                   //nnnnnnn/  //        ");
+	draw_line2(nb++, "		 |##                   //nnnnnnnn/  //        ");
 	draw_line2(nb++, "		 |###       ####|     //nnnnnnn/  //         ");
 	draw_line2(nb++, "                              ------------            ");
 	draw_line2(nb++, "			 C.O.W -- W.A.R");
