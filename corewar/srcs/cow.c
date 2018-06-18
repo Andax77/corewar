@@ -48,6 +48,14 @@ void		heart_color()
 	init_pair(29, COLOR_BLUE, COLOR_BLUE);
 }
 
+int			stat_heart(int player)
+{
+	attron(A_BOLD);
+	print_heart(4, player, 1);
+	attroff(A_BOLD);
+	return (1);
+}
+
 void		draw_cow1(int nb)
 {
 	nb = 35 + (4 * (nb - 1));

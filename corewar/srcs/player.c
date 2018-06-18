@@ -21,7 +21,7 @@ void		print_player(int nb, int player)
 	while (player)
 	{
 		nb = 26 + (4 * (x - 1));
-		draw_line2(nb++, "----------------------------------------------------");
+		draw_line2(nb++, "---------------------------------------------------");
 		draw_player(nb++, player, " __Player __ ");
 		mvprintw(39, 209 + player * 14 - 14 - player, ft_itoa(player));
 		draw_player(nb++, player, "|           |");
@@ -40,6 +40,8 @@ void		draw_heart(int line_idx, int y, char *line, int i)
 	int		x;
 	int		id;
 
+	if (i > 10)
+		i -= 10;
 	id = y;
 	x = 201 + y * 14 - 14 - y + i;
 	y = 30;

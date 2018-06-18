@@ -62,6 +62,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			stat_heart(cur_champ->id);
 		}
 		else
 		{
@@ -177,13 +178,13 @@ void	print_infos(t_cor *cor)
 	i = 0;
 	print_cow(cor);
 	if (x == 0 && ++x){
-heart(4, 1, 1);}
+print_heart(4, 1, 1);}
 else if (x == 1 && ++x){
-heart(4, 2, 2);}
+print_heart(4, 2, 2);}
 else if (x == 2 && ++x){ //                   LE TEST POUR VACHE + HEART
-heart(4, 3, 3);}
+print_heart(4, 3, 3);}
 else if (x == 3 && !(x = 0)){
-heart(4, 4, 4);}
+print_heart(4, 4, 4);}
 	champs = cor->champs;
 	if (cor->cycle == 0)
 		j = ft_lstcount(champs);
