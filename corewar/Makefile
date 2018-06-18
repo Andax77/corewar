@@ -25,6 +25,10 @@ FILES = main.c \
 		op1.c \
 		op2.c \
 		op3.c \
+		player.c\
+		cow2.c\
+		cow.c\
+		heart.c
 
 HFILES = includes/corewar.h \
 		 ../commun/includes/op.h \

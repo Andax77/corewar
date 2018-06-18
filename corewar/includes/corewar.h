@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 19:49:27 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/14 19:28:35 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,31 @@ void				cycle(t_cor *cor);
 int					change_r_cy(t_cor *cor, t_champ *champ);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
+
+
+/*
+COW ART
+*/
+void				draw_line2(int line_idx, char *line);
+void				draw_cow1(int nb);
+void				draw_cow2(int nb);
+void				draw_cow3(int nb);
+void				angry_cow1(int nb);
+void				angry_cow2(int nb);
+void				angry_cow3(int nb);
+
+/*
+HEART BEAT
+*/
+void				heart(int nb, int player, int stat);
+void				draw_heart(int line_idx, int y, char *line);
+void				stat1(int nb, int player);
+void				stat2(int nb, int player);
+void				stat3(int nb, int player);
+void				stat4(int nb, int player);
+void				draw_player(int line_idx, int y, char *line);
+void				draw_player_id(int line_idx, int y, char *line);
+void				player(int nb, int player);
 
 /*
 CYCLE FCT
