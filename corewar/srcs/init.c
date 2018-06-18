@@ -182,11 +182,12 @@ int			init_ncurses(t_cor *cor)
 		attron(COLOR_PAIR(2));
 		draw_map(cor);
 		init_pair(17, 17, COLOR_BLACK);
-		attron(COLOR_PAIR(COLOR_WHITE + 10));
+    attron(COLOR_PAIR(17));
 		draw_infos(cor->champs);
 		init_colors(cor->champs);
 		draw_names(cor->champs);
 		curs_set(0);
+		print_player(4, ft_lstcount(cor->champs));
 		return (1);
 	}
 	return (0);

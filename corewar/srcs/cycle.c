@@ -62,6 +62,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			stat_heart(cur_champ->id, (((t_champ*)cor->champs->content)->id - 1) * 14 + 2);
 		}
 		else
 		{
@@ -173,10 +174,19 @@ void	print_infos(t_cor *cor)
 	int			i;
 	static int	j;
 
-	i = 0;
 	champs = cor->champs;
 	if (cor->cycle == 0)
 		j = ft_lstcount(champs);
+	i = 0;
+	print_cow(cor);
+	if (j > 0)
+		print_heart(4, 1, 1, (((t_champ*)cor->champs->content)->id - 1) * 14);
+	if (j > 1)
+		print_heart(4, 2, 2, (((t_champ*)cor->champs->content)->id - 1) * 14);
+	if (j > 2)
+		print_heart(4, 3, 3, (((t_champ*)cor->champs->content)->id - 1) * 14);
+	if (j > 3)
+		print_heart(4, 4, 4, (((t_champ*)cor->champs->content)->id - 1) * 14);
 	cycle = ft_itoa((cor->cycle)++);
 	while (champs)
 	{
@@ -277,6 +287,7 @@ void	cycle(t_cor *cor)
 	last_pc = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	last_champ = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	first_champ = cor->champs;
+	// print_player
 	while ((champs = first_champ))
 	{
 		// Clean cursor
@@ -284,6 +295,7 @@ void	cycle(t_cor *cor)
 			clean(cor, champs, last_champ, last_pc);
 		while (champs)
 		{
+
 			cur_champ = champs->content;
 			if (cur_champ->r_cy > -1)
 			{

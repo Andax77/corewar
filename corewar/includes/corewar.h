@@ -87,6 +87,36 @@ int					change_r_cy(t_cor *cor, t_champ *champ);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 
+
+/*
+COW ART
+*/
+void				draw_line2(int line_idx, char *line);
+void				draw_cow1(int nb);
+void				draw_cow2(int nb);
+void				draw_cow3(int nb);
+void				angry_cow1(int nb);
+void				angry_cow2(int nb);
+void				angry_cow3(int nb);
+void				print_cow(t_cor *cor);
+
+/*
+HEART BEAT
+*/
+void				print_player(int nb, int player);
+void				print_heart(int nb, int player, int stat, int live);
+void				draw_heart(int line_idx, int y, char *line, int i);
+void				stat1(int nb, int player, int live);
+void				stat2(int nb, int player, int live);
+void				stat3(int nb, int player, int live);
+void				stat4(int nb, int player, int live);
+void				draw_player(int line_idx, int y, char *line);
+void				draw_player_id(int line_idx, int y, char *line);
+void				player(int nb, int player);
+void				draw_player(int line_idx, int y, char *line);
+void				heart_color();
+int					stat_heart(int player, int live);
+
 /*
 CYCLE FCT
 */
