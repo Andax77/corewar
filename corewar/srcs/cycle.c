@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 19:48:50 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/18 16:11:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,14 +194,14 @@ void	print_infos(t_cor *cor)
 	draw_line(7, 8, cycle);
 	draw_line(9, 12, "    ");
 	draw_line(9, 12, processes);
-	draw_line(37, 16, "    ");
-	draw_line(37, 16, cycle_to_die);
-	draw_line(39, 14, "    ");
-	draw_line(39, 14, cycle_delta);
-	draw_line(41, 11, "    ");
-	draw_line(41, 11, nbr_live);
-	draw_line(43, 11, "    ");
-	draw_line(43, 11, max_checks);
+	draw_line(27, 16, "    ");
+	draw_line(27, 16, cycle_to_die);
+	draw_line(29, 14, "    ");
+	draw_line(29, 14, cycle_delta);
+	draw_line(31, 11, "    ");
+	draw_line(31, 11, nbr_live);
+	draw_line(33, 13, "    ");
+	draw_line(33, 13, max_checks);
 	if (cor->cycle == 1)
 	{
 		attron(COLOR_PAIR(17));
@@ -242,6 +242,7 @@ int		check_lives(t_cor *cor)
 			((t_champ*)champs->content)->r_cy = -1;
 		else
 			nbr_live += ((t_champ*)champs->content)->lives;
+		((t_champ*)champs->content)->lives = 0;
 		champs = champs->next;
 	}
 	if (nbr_live >= NBR_LIVE || cor->checks == MAX_CHECKS)

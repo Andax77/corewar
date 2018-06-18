@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/04 13:09:25 by pmilan            #+#    #+#              #
-#    Updated: 2018/05/26 00:56:02 by eparisot         ###   ########.fr        #
+#    Updated: 2018/06/18 18:51:35 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,6 +109,7 @@ FILES = ft_strlen.c \
 		ft_smallest.c \
 		ft_biggest.c \
 		ft_str_and_free_join.c \
+		ft_countdigits.c \
 		get_next_line.c \
 		ft_printf/printf/ft_printf.c \
 		ft_printf/printf/ft_vprintf.c \
