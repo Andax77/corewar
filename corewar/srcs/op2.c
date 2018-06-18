@@ -116,7 +116,7 @@ void	ft_zjmp(t_cor *cor, t_champ *champ)
 	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	if (champ->carry == 1)
-		champ->pc = (ori + p) % MEM_SIZE;
+		champ->pc = ((ori + p) % IDX_MOD) % MEM_SIZE;
 	else
 		champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
