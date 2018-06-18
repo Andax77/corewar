@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/14 19:28:35 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/18 19:17:20 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void				print_cow(t_cor *cor);
 /*
 HEART BEAT
 */
+void				print_player(int nb, int player);
 void				print_heart(int nb, int player, int stat, int live);
 void				draw_heart(int line_idx, int y, char *line, int i);
 void				stat1(int nb, int player, int live);
@@ -113,7 +114,7 @@ void				draw_player_id(int line_idx, int y, char *line);
 void				player(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
 void				heart_color();
-int					stat_heart(int player);
+int					stat_heart(int player, int live);
 
 /*
 CYCLE FCT

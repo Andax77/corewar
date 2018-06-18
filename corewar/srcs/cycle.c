@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 19:48:50 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/18 20:13:28 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-			stat_heart(cur_champ->id);
+			stat_heart(cur_champ->id, (((t_champ*)cor->champs->content)->id - 1) * 14 + 2);
 		}
 		else
 		{
@@ -174,20 +174,19 @@ void	print_infos(t_cor *cor)
 	int			i;
 	static int	j;
 
-	static int x;
-	i = 0;
-	print_cow(cor);
-	if (x == 0 && ++x){
-print_heart(4, 1, 1);}
-else if (x == 1 && ++x){
-print_heart(4, 2, 2);}
-else if (x == 2 && ++x){ //                   LE TEST POUR VACHE + HEART
-print_heart(4, 3, 3);}
-else if (x == 3 && !(x = 0)){
-print_heart(4, 4, 4);}
 	champs = cor->champs;
 	if (cor->cycle == 0)
 		j = ft_lstcount(champs);
+	i = 0;
+	print_cow(cor);
+	if (j > 0)
+		print_heart(4, 1, 1, (((t_champ*)cor->champs->content)->id - 1) * 14);
+	if (j > 1)
+		print_heart(4, 2, 2, (((t_champ*)cor->champs->content)->id - 1) * 14);
+	if (j > 2)
+		print_heart(4, 3, 3, (((t_champ*)cor->champs->content)->id - 1) * 14);
+	if (j > 3)
+		print_heart(4, 4, 4, (((t_champ*)cor->champs->content)->id - 1) * 14);
 	cycle = ft_itoa((cor->cycle)++);
 	while (champs)
 	{
