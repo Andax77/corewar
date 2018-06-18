@@ -37,11 +37,8 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	p2 = recup_content(cor, champ, ocp, 4, 2);
 	if (p2 > 0 && p2 <= REG_SIZE)
 	{
-		champ->reg[p2 - 1] = (cor->map[(ori + p1) % MEM_SIZE] << 24) +
-			(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) +
-			(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) +
-			cor->map[(ori + p1 + 3) % MEM_SIZE];
-		if (champ->reg[p2 - 1] == 0)
+		champ->reg[p2 - 1] = p1;
+		if (p1 == 0)
 			champ->carry = 1;
 		else
 			champ->carry = 0;
