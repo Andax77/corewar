@@ -27,39 +27,43 @@ void		heart(int nb, int player, int stat)
 void		stat1(int nb, int player)
 {
 	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb++, player, "|   ** **   |");
-	draw_heart(nb++, player, "|  *******  |");
-	draw_heart(nb++, player, "|   *****   |");
-	draw_heart(nb++, player, "|    ***    |");
-	draw_heart(nb++, player, "|     *     |");
+	attron(COLOR_PAIR(player + 20));
+	draw_heart(nb++, player, "   ** **   ");
+	draw_heart(nb++, player, "  *******  ");
+	draw_heart(nb++, player, "   *****   ");
+	draw_heart(nb++, player, "    ***    ");
+	draw_heart(nb++, player, "     *     ");
 }
 
 void		stat2(int nb, int player)
 {
 	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb++, player, "|   ** *    |");
-	draw_heart(nb++, player, "|  *****    |");
-	draw_heart(nb++, player, "|   **  *   |");
-	draw_heart(nb++, player, "|    **     |");
-	draw_heart(nb++, player, "|     *     |");
+	attron(COLOR_PAIR(player + 20));
+	draw_heart(nb++, player, "   ** *    ");
+	draw_heart(nb++, player, "  *****    ");
+	draw_heart(nb++, player, "   **  *   ");
+	draw_heart(nb++, player, "    **     ");
+	draw_heart(nb++, player, "     *     ");
 }
 
 void		stat3(int nb, int player)
 {
 	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb++, player, "|   **      |");
-	draw_heart(nb++, player, "|    ***    |");
-	draw_heart(nb++, player, "|     **    |");
-	draw_heart(nb++, player, "|     *     |");
-	draw_heart(nb++, player, "|           |");
+	attron(COLOR_PAIR(player + 20));
+	draw_heart(nb++, player, "   **      ");
+	draw_heart(nb++, player, "    ***    ");
+	draw_heart(nb++, player, "     **    ");
+	draw_heart(nb++, player, "     *     ");
+	draw_heart(nb++, player, "           ");
 }
 
 void		stat4(int nb, int player)
 {
 	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb++, player, "|           |");
-	draw_heart(nb++, player, "|    IS     |");
-	draw_heart(nb++, player, "|           |");
-	draw_heart(nb++, player, "|   DEAD    |");
-	draw_heart(nb++, player, "|           |");
+	attron(COLOR_PAIR(player + 20));
+	draw_heart(nb++, player, "           ");
+	draw_heart(nb++, player, "    IS     ");
+	draw_heart(nb++, player, "           ");
+	draw_heart(nb++, player, "   DEAD    ");
+	draw_heart(nb++, player, "           ");
 }

@@ -174,6 +174,7 @@ void	print_infos(t_cor *cor)
 	static int	j;
 
 	i = 0;
+	// print_cow()
 	champs = cor->champs;
 	if (cor->cycle == 0)
 		j = ft_lstcount(champs);
@@ -194,14 +195,14 @@ void	print_infos(t_cor *cor)
 	draw_line(7, 8, cycle);
 	draw_line(9, 12, "    ");
 	draw_line(9, 12, processes);
-	draw_line(37, 16, "    ");
-	draw_line(37, 16, cycle_to_die);
-	draw_line(39, 14, "    ");
-	draw_line(39, 14, cycle_delta);
-	draw_line(41, 11, "    ");
-	draw_line(41, 11, nbr_live);
-	draw_line(43, 11, "    ");
-	draw_line(43, 11, max_checks);
+	draw_line(27, 16, "    ");
+	draw_line(27, 16, cycle_to_die);
+	draw_line(29, 14, "    ");
+	draw_line(29, 14, cycle_delta);
+	draw_line(31, 11, "    ");
+	draw_line(31, 11, nbr_live);
+	draw_line(33, 11, "    ");
+	draw_line(33, 11, max_checks);
 	if (cor->cycle == 1)
 	{
 		attron(COLOR_PAIR(17));
@@ -271,11 +272,14 @@ void	cycle(t_cor *cor)
 	int			ch;
 	int			ret;
 
+	int x = 0;
+
 	ret = 1;
 	timeout = 950;
 	last_pc = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	last_champ = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	first_champ = cor->champs;
+	// print_player
 	while ((champs = first_champ))
 	{
 		// Clean cursor
@@ -283,6 +287,23 @@ void	cycle(t_cor *cor)
 			clean(cor, champs, last_champ, last_pc);
 		while (champs)
 		{
+			attron(COLOR_PAIR(17));
+			if (x == 0 && ++x){
+	angry_cow1(4);
+	player(4, 1);
+	heart(4, 1, 1);}
+else if (x == 1 && ++x){
+	angry_cow2(4);
+	player(4, 2);
+	heart(4, 2, 2);}
+else if (x == 2 && ++x){ //                   LE TEST POUR VACHE + HEART
+	angry_cow3(4);
+	player(4, 3);
+	heart(4, 3, 3);}
+else if (x == 3 && !(x = 0)){
+	draw_cow1(4);
+	player(4, 4);
+	heart(4, 4, 4);}
 			cur_champ = champs->content;
 			if (cur_champ->r_cy > -1)
 			{

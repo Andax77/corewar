@@ -120,10 +120,10 @@ static void	draw_infos(int nb)
 	(nb > 3) ? draw_line(23, 0, "Player 4 :") : 0;
 	(nb > 3) ? draw_line(24, 0, "  Last live :			") : 0;
 	(nb > 3) ? draw_line(25, 0, "  Lives in current period :	") : 0;
-	draw_line(37, 0, "CYCLES_TO_DIE :");
-	draw_line(39, 0, "CYCLE_DELTA :");
-	draw_line(41, 0, "NBR_LIVE :");
-	draw_line(43, 0, "MAX_CHECKS :");
+	draw_line(27, 0, "CYCLES_TO_DIE :");
+	draw_line(29, 0, "CYCLE_DELTA :");
+	draw_line(31, 0, "NBR_LIVE :");
+	draw_line(33, 0, "MAX_CHECKS :");
 }
 
 void		draw_names(t_list *champs)
@@ -138,31 +138,6 @@ void		draw_names(t_list *champs)
 		i++;
 		champs = champs->next;
 	}
-}
-
-void		draw_cow(int nb)
-{
-	attron(COLOR_PAIR(17));
-	draw_line(nb++, 0, "----------------------------------------------------");
-	draw_line(nb++, 0, "");
-	draw_line(nb++, 0, "		    __    ____");
-	draw_line(nb++, 0, "		   /{_\\_/   `'\\____");
-	draw_line(nb++, 0, "		    \\___  (o)  (o   }");
-	draw_line(nb++, 0, "		     /            -'ô");
-	draw_line(nb++, 0, "		     #   \\_    `__\\");
-	draw_line(nb++, 0, "		    ###   \\__ (o'o)");
-	draw_line(nb++, 0, "		   ###    #(  `===='");
-	draw_line(nb++, 0, "		  ####     ##|                           __");
-	draw_line(nb++, 0, "		 ##         ###|                        //");
-	draw_line(nb++, 0, "		 #            #)                       //");
-	draw_line(nb++, 0, "		 |   ###    \\###|_____    //nnnnnnn/--//");
-	draw_line(nb++, 0, "		 |    ###    \\________|\\ //nnnnnnn/  //");
-	draw_line(nb++, 0, "		 |#    ##           | | //nnnnnnn/  //");
-	draw_line(nb++, 0, "		 |##       \\--------°- //nnnnnnn/  //");
-	draw_line(nb++, 0, "		 |###       ####|     //nnnnnnn/  //");
-	draw_line(nb++, 0, "                              ------------");
-	draw_line(nb++, 0, "");
-	draw_line(nb++, 0, "			 C.O.W -- W.A.R");
 }
 
 static void	init_colors(t_list *champs)
@@ -204,7 +179,6 @@ int			init_ncurses(t_cor *cor)
 		draw_infos(ft_lstcount(cor->champs));
 		init_colors(cor->champs);
 		draw_names(cor->champs);
-		draw_cow(45);
 		curs_set(0);
 		return (1);
 	}

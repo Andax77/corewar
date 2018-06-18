@@ -110,6 +110,7 @@ void				stat4(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
 void				draw_player_id(int line_idx, int y, char *line);
 void				player(int nb, int player);
+void				draw_player(int line_idx, int y, char *line);
 
 /*
 CYCLE FCT
