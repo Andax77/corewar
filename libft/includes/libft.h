@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 13:14:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/05 23:13:32 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/18 18:51:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,6 @@ int					ft_sqrt(int nb);
 int					ft_smallest(int a, int b);
 int					ft_biggest(int a, int b);
 char				*ft_str_and_free_join(char *s1, const char *s2);
+int					ft_countdigits(long long n);
 
 #endif

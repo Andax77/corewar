@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 17:06:47 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/18 18:58:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 	return (SUCCESS);
 }
 
-int				check_champ(t_champ **champ, char *path)
+int				check_champ(t_champ **champ, char *path, int nb)
 {
 	t_list		*instru;
 	static int	id;
@@ -144,9 +144,8 @@ int				check_champ(t_champ **champ, char *path)
 		return (ERROR);
 	if (!((*champ)->reg = ft_memalloc(REG_NUMBER * REG_SIZE)))
 		exit(EXIT_FAILURE);
-	(*champ)->reg[0] = ++id;
-	(*champ)->id = id;
-	//DEBUG
-	//ft_printf("champ name = %s, op_nb = %d,	 comment = %s, prog = %s, splited_prog[first] = %d, splited_prog[last] = %d, reg = %x\n", (*champ)->name, (*champ)->op_nb, (*champ)->comment, (*champ)->prog, (*champ)->splited_prog[0], (*champ)->splited_prog[(*champ)->op_nb - 1], (*champ)->reg[0]);
+	(*champ)->reg[0] = nb;
+	(*champ)->id = ++id;
+	(*champ)->v_id = nb;
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/18 20:12:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/18 18:55:28 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,24 +102,28 @@ void		draw_uchar(int pos, unsigned char val)
 	free(c);
 }
 
-static void	draw_infos(int nb)
+static void	draw_infos(t_list *champs)
 {
+	char	*tmp;
+	int		nb;
+
+	nb = 11;
 	draw_line(2, 0, "** PAUSED **");
 	draw_line(4, 0, "Cycles/second limit :");
 	draw_line(7, 0, "Cycle :");
 	draw_line(9, 0, "Processes :");
-	draw_line(11, 0, "Player 1 :");
-	draw_line(12, 0, "  Last live :			");
-	draw_line(13, 0, "  Lives in current period :	");
-	(nb > 1) ? draw_line(15, 0, "Player 2 :") : 0;
-	(nb > 1) ? draw_line(16, 0, "  Last live :			") : 0;
-	(nb > 1) ? draw_line(17, 0, "  Lives in current period :	") : 0;
-	(nb > 2) ? draw_line(19, 0, "Player 3 :") : 0;
-	(nb > 2) ? draw_line(20, 0, "  Last live :			") : 0;
-	(nb > 2) ? draw_line(21, 0, "  Lives in current period :	") : 0;
-	(nb > 3) ? draw_line(23, 0, "Player 4 :") : 0;
-	(nb > 3) ? draw_line(24, 0, "  Last live :			") : 0;
-	(nb > 3) ? draw_line(25, 0, "  Lives in current period :	") : 0;
+	while (champs)
+	{
+		draw_line(nb, 0, "Player");
+		tmp = ft_itoa(((t_champ*)champs->content)->v_id);
+		draw_line(nb, 7, tmp);
+		draw_line(nb, 7 + ft_strlen(tmp) + 1, ":");
+		free(tmp);
+		draw_line(++nb, 0, "  Last live :			");
+		draw_line(++nb, 0, "  Lives in current period :	");
+		nb += 2;
+		champs = champs->next;
+	}
 	draw_line(27, 0, "CYCLES_TO_DIE :");
 	draw_line(29, 0, "CYCLE_DELTA :");
 	draw_line(31, 0, "NBR_LIVE :");
@@ -129,12 +133,15 @@ static void	draw_infos(int nb)
 void		draw_names(t_list *champs)
 {
 	int		i;
+	t_champ	*champ;
 
 	i = 0;
 	while (champs)
 	{
+		champ = champs->content;
 		attron(COLOR_PAIR(i + 3));
-		draw_line(11 + (4 * i), 11, ((t_champ*)champs->content)->name);
+		draw_line(11 + (4 * i), 10 + ft_countdigits(champ->v_id), \
+				((t_champ*)champs->content)->name);
 		i++;
 		champs = champs->next;
 	}
@@ -175,8 +182,8 @@ int			init_ncurses(t_cor *cor)
 		attron(COLOR_PAIR(2));
 		draw_map(cor);
 		init_pair(17, 17, COLOR_BLACK);
-		attron(COLOR_PAIR(17));
-		draw_infos(ft_lstcount(cor->champs));
+    attron(COLOR_PAIR(17));
+		draw_infos(cor->champs);
 		init_colors(cor->champs);
 		draw_names(cor->champs);
 		curs_set(0);

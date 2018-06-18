@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/18 19:17:20 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/18 16:52:22 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_champ
 	unsigned int	*reg;
 	t_list			*instru;
 	int				id;
+	int				v_id;
 	int				op_nb;
 	int				pc;
 	int				carry;
@@ -75,7 +76,7 @@ void				draw_uchar(int pos, unsigned char val);
 void				draw_line(int line_idx, int col_idx, char *line);
 int					init_ncurses(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
-int					check_champ(t_champ **champ, char *path);
+int					check_champ(t_champ **champ, char *path, int nb);
 int64_t				swap_int(int64_t c);
 char				*translate(int64_t val);
 int					pad(char **str, int n);

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 19:46:52 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/18 16:52:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void		populate_instru(t_champ **champ, int64_t c)
 	free(tmp);
 }
 
-static int		get_champ(t_champ **champ, char *path)
+static int		get_champ(t_champ **champ, char *path, int nb)
 {
 	int64_t		c;
 	int			fd;
@@ -78,7 +78,7 @@ static int		get_champ(t_champ **champ, char *path)
 			close(fd);
 			if (ret == -1)
 				return (ERROR);
-			if (check_champ(champ, path) == ERROR)
+			if (check_champ(champ, path, nb) == ERROR)
 				return (ERROR);
 		}
 		else
@@ -91,13 +91,13 @@ static int		get_champ(t_champ **champ, char *path)
 	return (ERROR);
 }
 
-static int		populate_champs(t_list **champs, char *path)
+static int		populate_champs(t_list **champs, char *path, int nb)
 {
 	t_list		*new;
 	t_champ		*champ;
 
 	champ = ft_malloc(sizeof(t_champ), EXIT_FAILURE);
-	if (get_champ(&champ, path) == ERROR)
+	if (get_champ(&champ, path, nb) == ERROR)
 	{
 		del_champ(champ, 0);
 		return (ERROR);
@@ -126,7 +126,7 @@ int				init_cor(t_cor *cor, char **argv)
 	{
 		if (ft_strstr(*argv, ".cor") && ++n && n <= MAX_PLAYERS)
 		{
-			if (populate_champs(&cor->champs, *argv) == ERROR)
+			if (populate_champs(&cor->champs, *argv, *cor->opt->n++) == ERROR)
 				return (ERROR);
 		}
 		else if (!is_opt(*argv))
