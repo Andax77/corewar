@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 19:28:03 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/17 20:07:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	free_cor(cor);
-	//DEBUG
+	//DEBUG LEAKS
 	while (1);
 	exit(EXIT_SUCCESS);
 }
