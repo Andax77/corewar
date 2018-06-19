@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/17 20:07:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 16:05:10 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		del_champ(void *content, size_t content_size)
 
 static void	free_cor(t_cor *cor)
 {
+	free(cor->opt->n);
 	free(cor->opt);
 	ft_lstdel(&(cor->champs), del_champ);
 	free(cor->map);

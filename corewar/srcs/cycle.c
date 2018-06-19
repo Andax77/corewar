@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/18 23:37:37 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 16:15:15 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,14 +179,7 @@ void	print_infos(t_cor *cor)
 		j = ft_lstcount(champs);
 	i = 0;
 	print_cow(cor);
-	if (j > 0)
-		print_heart(4, 1, 1, (((t_champ*)cor->champs->content)->id - 1) * 14);
-	if (j > 1)
-		print_heart(4, 2, 2, (((t_champ*)cor->champs->content)->id - 1) * 14);
-	if (j > 2)
-		print_heart(4, 3, 3, (((t_champ*)cor->champs->content)->id - 1) * 14);
-	if (j > 3)
-		print_heart(4, 4, 4, (((t_champ*)cor->champs->content)->id - 1) * 14);
+// print_hearth
 	cycle = ft_itoa((cor->cycle)++);
 	while (champs)
 	{

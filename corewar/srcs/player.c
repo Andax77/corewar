@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:59 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:57:00 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/19 15:53:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		print_player(int nb, int player)
 {
-	int x;
+	int		x;
 
 	attron(COLOR_PAIR(17));
 	x = nb;
@@ -22,8 +22,7 @@ void		print_player(int nb, int player)
 	{
 		nb = 26 + (4 * (x - 1));
 		draw_line2(nb++, "---------------------------------------------------");
-		draw_player(nb++, player, " __Player __ ");
-		mvprintw(39, 209 + player * 14 - 14 - player, ft_itoa(player));
+		draw_player(nb++, player, " ___________ ");
 		draw_player(nb++, player, "|           |");
 		draw_player(nb++, player, "|           |");
 		draw_player(nb++, player, "|           |");
