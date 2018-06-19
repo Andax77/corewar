@@ -47,13 +47,13 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 	if (cor->cycle != 0)
 	{
 		// Do op
-		if (cor->map[cur_champ->pc] > 1 && cor->map[cur_champ->pc] <= 16)
+		if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
 			f[cor->map[cur_champ->pc]](cor, cur_champ);
 		else
 			f[0](cor, cur_champ);
 	}
 	// Change r_cy
-	if (cor->map[cur_champ->pc] > 1 && cor->map[cur_champ->pc] <= 16)
+	if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 	// Print process pos
 	if (cor->opt->v)
