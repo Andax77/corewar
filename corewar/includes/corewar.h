@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 15:11:10 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 17:55:43 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef struct		s_champ
 	int				lives;
 	int				last_live;
 	int				last_live_pc;
-	int				live;//a voir
+	int				live;
+	int				father;
 }					t_champ;
 
 typedef struct		s_cor
