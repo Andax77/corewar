@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/18 18:58:02 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 14:31:51 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 			(ft_strequ(argv[j], "-d")) ? opt->d = ft_atoi(argv[++j]) : 0;
 			(ft_strequ(argv[j], "-n")) ? opt->n[i++] = (int)ft_atoi(argv[++j]) \
 				: 0;
-			(ft_strstr(argv[j], ".cor") && !ft_strequ(argv[j - 2], "-n")) ? \
-				opt->n[i++] = ++id : 0;
+			(ft_strstr(argv[j], ".cor") && (j - 2 > 0) && \
+			 !ft_strequ(argv[j - 2], "-n")) ? opt->n[i++] = ++id : 0;
 			j++;
 		}
 		return (SUCCESS);

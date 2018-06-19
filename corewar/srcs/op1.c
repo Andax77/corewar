@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/17 19:49:06 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 15:32:59 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,19 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 
 	ori = champ->pc;
 	ocp = cor->map[++champ->pc % MEM_SIZE];
-	p1 = recup_content(cor, champ, ocp, 6, 2) % IDX_MOD;
+	p1 = recup_content(cor, champ, ocp, 6, 2);
 	p2 = recup_content(cor, champ, ocp, 4, 2);
 	if (p2 > 0 && p2 <= REG_SIZE)
 	{
-		champ->reg[p2 - 1] = p1;
+		if (((ocp >> 6) & 3) == REG_CODE)
+			champ->reg[p2 - 1] = p1;
+		else
+		{
+			champ->reg[p2 - 1] = ((cor->map[(ori + p1) % MEM_SIZE] << 24) +
+					(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) +
+					(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) +
+					cor->map[(ori + p1 + 3) % MEM_SIZE]) % IDX_MOD;
+		}
 		if (p1 == 0)
 			champ->carry = 1;
 		else
