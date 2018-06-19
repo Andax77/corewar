@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:07 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 14:50:40 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 15:34:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,18 +136,14 @@ void	ft_ldi(t_cor *cor, t_champ *champ)
 	p3 = recup_content(cor, champ, ocp, 2, 10);
 	if (((ocp >> 6) & 3) == REG_CODE)
 		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
-	else
-		p1 = p1 % IDX_MOD;
 	if (((ocp >> 4) & 3) == REG_CODE)
 		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
-	else
-		p2 = p2 % IDX_MOD;
 	if (p3 > 0 && p3 <= REG_SIZE)
 	{
-		champ->reg[p3 - 1] = (cor->map[(ori + p1 + p2) % MEM_SIZE] << 24) +
-		(cor->map[(ori + p1 + p2 + 1) % MEM_SIZE] << 16) +
-		(cor->map[(ori + p1 + p2 + 2) % MEM_SIZE] << 8) +
-		cor->map[(ori + p1 + p2 + 3) % MEM_SIZE];
+		champ->reg[p3 - 1] = (cor->map[(ori + (p1 + p2) % IDX_MOD) % MEM_SIZE] << 24) +
+		(cor->map[(ori + (p1 + p2) % IDX_MOD + 1) % MEM_SIZE] << 16) +
+		(cor->map[(ori + (p1 + p2) % IDX_MOD + 2) % MEM_SIZE] << 8) +
+		cor->map[(ori + (p1 + p2) % IDX_MOD + 3) % MEM_SIZE];
 		if (champ->reg[p3 - 1] == 0)
 			champ->carry = 1;
 		else
