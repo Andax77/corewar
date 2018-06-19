@@ -40,22 +40,6 @@ void		print_cow(t_cor *cor)
 	}
 }
 
-void		heart_color()
-{
-	init_pair(26, COLOR_RED, COLOR_RED);
-	init_pair(27, COLOR_GREEN, COLOR_GREEN);
-	init_pair(28, COLOR_YELLOW, COLOR_YELLOW);
-	init_pair(29, COLOR_BLUE, COLOR_BLUE);
-}
-
-int			stat_heart(int player, int live)
-{
-	attron(A_BOLD);
-	print_heart(4, player, 1, live);
-	attroff(A_BOLD);
-	return (1);
-}
-
 void		draw_cow1(int nb)
 {
 	nb = 35 + (4 * (nb - 1));

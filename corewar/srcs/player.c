@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:59 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:57:00 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/19 15:53:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		print_player(int nb, int player)
 {
-	int x;
+	int		x;
 
 	attron(COLOR_PAIR(17));
 	x = nb;
@@ -22,8 +22,7 @@ void		print_player(int nb, int player)
 	{
 		nb = 26 + (4 * (x - 1));
 		draw_line2(nb++, "---------------------------------------------------");
-		draw_player(nb++, player, " __Player __ ");
-		mvprintw(39, 209 + player * 14 - 14 - player, ft_itoa(player));
+		draw_player(nb++, player, " ___________ ");
 		draw_player(nb++, player, "|           |");
 		draw_player(nb++, player, "|           |");
 		draw_player(nb++, player, "|           |");
@@ -39,8 +38,10 @@ void		draw_heart(int line_idx, int y, char *line, int i)
 {
 	int		x;
 	int		id;
+	int		live;
 
-	if (i > 10)
+	live = 0;
+	if (i >= 10 && (live = 1))
 		i -= 10;
 	id = y;
 	x = 201 + y * 14 - 14 - y + i;
@@ -49,15 +50,32 @@ void		draw_heart(int line_idx, int y, char *line, int i)
 	{
 		if (line_idx == y)
 		{
-			if (ft_strchr(line, ' '))
-				attron(COLOR_PAIR(17));
-			else if (ft_strstr(line , "IS") || ft_strstr(line, "DEAD"))
-				attron(COLOR_PAIR(2 + id));
-			else
-				attron(COLOR_PAIR(id + 25));
+			get_color_heart(live, line, id);
 			mvprintw(y, x, line);
 		}
 		y++;
+	}
+}
+
+void		get_color_heart(int live, char *line, int id)
+{
+	if (live == 1)
+	{
+		if (ft_strchr(line, ' '))
+			attron(COLOR_PAIR(17) | A_BOLD);
+		else if (ft_strstr(line, "IS") || ft_strstr(line, "DEAD"))
+			attron(COLOR_PAIR(2 + id) | A_BOLD);
+		else
+			attron(COLOR_PAIR(id + 25) | A_BOLD);
+	}
+	else
+	{
+		if (ft_strchr(line, ' '))
+			attron(COLOR_PAIR(17));
+		else if (ft_strstr(line, "IS") || ft_strstr(line, "DEAD"))
+			attron(COLOR_PAIR(2 + id));
+		else
+			attron(COLOR_PAIR(id + 25));
 	}
 }
 
