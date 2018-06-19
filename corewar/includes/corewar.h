@@ -53,7 +53,7 @@ typedef struct		s_champ
 	int				lives;
 	int				last_live;
 	int				last_live_pc;
-	//int			live;//a voir
+	int				live;//a voir
 }					t_champ;
 
 typedef struct		s_cor
@@ -87,7 +87,6 @@ int					change_r_cy(t_cor *cor, t_champ *champ);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 
-
 /*
 COW ART
 */
@@ -104,7 +103,8 @@ void				print_cow(t_cor *cor);
 HEART BEAT
 */
 void				print_player(int nb, int player);
-void				print_heart(int nb, int player, int stat, int live);
+void				print_heart(t_cor *cor);
+void				print_heart2(int nb, int player, int stat, int live);
 void				draw_heart(int line_idx, int y, char *line, int i);
 void				stat1(int nb, int player, int live);
 void				stat2(int nb, int player, int live);
@@ -115,7 +115,8 @@ void				draw_player_id(int line_idx, int y, char *line);
 void				player(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
 void				heart_color();
-int					stat_heart(int player, int live);
+int					stat_heart(t_cor *cor, t_list *champs, int live);
+void				get_color_heart(int live, char *line, int id);
 
 /*
 CYCLE FCT
@@ -137,6 +138,5 @@ void				ft_lld(t_cor *cor, t_champ *champ);
 void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
 void				ft_aff(t_cor *cor, t_champ *champ);
-
 
 #endif

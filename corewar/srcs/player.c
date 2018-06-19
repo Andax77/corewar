@@ -14,7 +14,7 @@
 
 void		print_player(int nb, int player)
 {
-	int x;
+	int		x;
 
 	attron(COLOR_PAIR(17));
 	x = nb;
@@ -22,8 +22,7 @@ void		print_player(int nb, int player)
 	{
 		nb = 26 + (4 * (x - 1));
 		draw_line2(nb++, "---------------------------------------------------");
-		draw_player(nb++, player, " __Player __ ");
-		mvprintw(39, 209 + player * 14 - 14 - player, ft_itoa(player));
+		draw_player(nb++, player, " ___________ ");
 		draw_player(nb++, player, "|           |");
 		draw_player(nb++, player, "|           |");
 		draw_player(nb++, player, "|           |");

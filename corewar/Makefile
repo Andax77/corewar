@@ -28,7 +28,8 @@ FILES = main.c \
 		player.c\
 		cow2.c\
 		cow.c\
-		heart.c
+		heart.c\
+		heart2.c
 
 HFILES = includes/corewar.h \
 		 ../commun/includes/op.h \
