@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 20:28:53 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 20:39:51 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	}
 	ft_printf("end\n");
 	ft_bzero(&child, sizeof(t_champ));
-	ft_memcpy(&child, champ, sizeof(t_champ));
+	ft_memcpy(&child, champ, sizeof(t_champ));//TODO malloc each value
 	child.father = id;
 	ft_printf("child %d\n", child.id);
 	new = ft_lstnew(&child, sizeof(t_champ));
