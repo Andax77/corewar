@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 16:13:26 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 17:57:56 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void		init_memory(t_cor *cor)
 	{
 		((t_champ*)champs->content)->pc = i;
 		((t_champ*)champs->content)->live = 0;
+		((t_champ*)champs->content)->father = 0;
 		tmp_prog = ((t_champ *)champs->content)->splited_prog;
 		while (j < ((t_champ *)champs->content)->op_nb)
 		{
