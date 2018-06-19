@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 16:15:15 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 20:37:34 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 	if (cor->cycle != 0)
 	{
 		// Do op
-		if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+		if (cor->map[cur_champ->pc] > 1 && cor->map[cur_champ->pc] <= 16)
 			f[cor->map[cur_champ->pc]](cor, cur_champ);
 		else
 			f[0](cor, cur_champ);
 	}
 	// Change r_cy
-	if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+	if (cor->map[cur_champ->pc] > 1 && cor->map[cur_champ->pc] <= 16)
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 	// Print process pos
 	if (cor->opt->v)
@@ -181,7 +181,7 @@ void	print_infos(t_cor *cor)
 	i = 0;
 	print_cow(cor);
 	print_heart(cor);
-	cycle = ft_itoa((cor->cycle)++);
+	cycle = ft_itoa((cor->cycle));
 	while (champs)
 	{
 		if (((t_champ*)champs->content)->r_cy >= 0)
@@ -308,6 +308,8 @@ void	cycle(t_cor *cor)
 			print_infos(cor);
 		if (!ret)
 			break ;
+		else
+			cor->cycle++;
 		// Key event
 		if (cor->opt->v)
 			key_event(&timeout, &ch);
