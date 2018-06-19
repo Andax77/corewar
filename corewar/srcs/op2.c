@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:07 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:55:30 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/18 20:41:49 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	ft_zjmp(t_cor *cor, t_champ *champ)
 	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	if (champ->carry == 1)
-		champ->pc = (ori + p) % MEM_SIZE;
+		champ->pc = (ori + p) % MEM_SIZE;// ou mettre ce idx_mod ??
 	else
 		champ->pc = (champ->pc + 1) % MEM_SIZE;
 }

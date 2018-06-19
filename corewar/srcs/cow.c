@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:43 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:56:45 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/18 20:13:08 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void		heart_color()
 	init_pair(29, COLOR_BLUE, COLOR_BLUE);
 }
 
-int			stat_heart(int player)
+int			stat_heart(int player, int live)
 {
 	attron(A_BOLD);
-	print_heart(4, player, 1);
+	print_heart(4, player, 1, live);
 	attroff(A_BOLD);
 	return (1);
 }
