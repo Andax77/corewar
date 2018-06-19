@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/18 18:55:28 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 16:09:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int			init_ncurses(t_cor *cor)
 		attron(COLOR_PAIR(2));
 		draw_map(cor);
 		init_pair(17, 17, COLOR_BLACK);
-    attron(COLOR_PAIR(17));
+		attron(COLOR_PAIR(17));
 		draw_infos(cor->champs);
 		init_colors(cor->champs);
 		draw_names(cor->champs);

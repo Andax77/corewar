@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/16 11:21:49 by eparisot         ###   ########.fr        #
+#    Updated: 2018/06/19 15:13:01 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ FILES = main.c \
 		init_cor.c \
 		parse_champ.c \
 		tools.c \
+		tools2.c \
 		parse_op.c \
 		../../commun/srcs/op.c \
 		cycle.c \
