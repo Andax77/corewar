@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 15:19:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/19 19:29:34 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,9 @@ void	order_to_start(t_list **champs)
 	cur_champ->next = NULL;
 	last_champ->next = first_champ;
 	*champs = last_champ;
+}
+
+void	legacy(t_cor *cor, int id, int pc)
+{
+	
 }
