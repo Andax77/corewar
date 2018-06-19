@@ -62,7 +62,8 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-			stat_heart(cur_champ->id, (((t_champ*)cor->champs->content)->id - 1) * 14 + 2);
+			stat_heart(cor, cor->champs, 10);
+			cur_champ->live++;
 		}
 		else
 		{
@@ -179,14 +180,7 @@ void	print_infos(t_cor *cor)
 		j = ft_lstcount(champs);
 	i = 0;
 	print_cow(cor);
-	if (j > 0)
-		print_heart(4, 1, 1, (((t_champ*)cor->champs->content)->id - 1) * 14);
-	if (j > 1)
-		print_heart(4, 2, 2, (((t_champ*)cor->champs->content)->id - 1) * 14);
-	if (j > 2)
-		print_heart(4, 3, 3, (((t_champ*)cor->champs->content)->id - 1) * 14);
-	if (j > 3)
-		print_heart(4, 4, 4, (((t_champ*)cor->champs->content)->id - 1) * 14);
+	print_heart(cor);
 	cycle = ft_itoa((cor->cycle)++);
 	while (champs)
 	{
@@ -295,7 +289,6 @@ void	cycle(t_cor *cor)
 			clean(cor, champs, last_champ, last_pc);
 		while (champs)
 		{
-
 			cur_champ = champs->content;
 			if (cur_champ->r_cy > -1)
 			{

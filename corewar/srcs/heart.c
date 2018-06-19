@@ -12,7 +12,7 @@
 
 #include <corewar.h>
 
-void		print_heart(int nb, int player, int stat, int live)
+void		print_heart2(int nb, int player, int stat, int live)
 {
 	if (stat == 1)
 		stat1(nb, player, live);

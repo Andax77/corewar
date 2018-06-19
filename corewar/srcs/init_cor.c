@@ -27,6 +27,7 @@ static void		init_memory(t_cor *cor)
 	while (champs)
 	{
 		((t_champ*)champs->content)->pc = i;
+		((t_champ*)champs->content)->live = 0;
 		tmp_prog = ((t_champ *)champs->content)->splited_prog;
 		while (j < ((t_champ *)champs->content)->op_nb)
 		{

@@ -39,8 +39,10 @@ void		draw_heart(int line_idx, int y, char *line, int i)
 {
 	int		x;
 	int		id;
+	int		live;
 
-	if (i > 10)
+	live = 0;
+	if (i >= 10 && (live = 1))
 		i -= 10;
 	id = y;
 	x = 201 + y * 14 - 14 - y + i;
@@ -49,15 +51,32 @@ void		draw_heart(int line_idx, int y, char *line, int i)
 	{
 		if (line_idx == y)
 		{
-			if (ft_strchr(line, ' '))
-				attron(COLOR_PAIR(17));
-			else if (ft_strstr(line , "IS") || ft_strstr(line, "DEAD"))
-				attron(COLOR_PAIR(2 + id));
-			else
-				attron(COLOR_PAIR(id + 25));
+			get_color_heart(live, line, id);
 			mvprintw(y, x, line);
 		}
 		y++;
+	}
+}
+
+void		get_color_heart(int live, char *line, int id)
+{
+	if (live == 1)
+	{
+		if (ft_strchr(line, ' '))
+			attron(COLOR_PAIR(17) | A_BOLD);
+		else if (ft_strstr(line, "IS") || ft_strstr(line, "DEAD"))
+			attron(COLOR_PAIR(2 + id) | A_BOLD);
+		else
+			attron(COLOR_PAIR(id + 25) | A_BOLD);
+	}
+	else
+	{
+		if (ft_strchr(line, ' '))
+			attron(COLOR_PAIR(17));
+		else if (ft_strstr(line, "IS") || ft_strstr(line, "DEAD"))
+			attron(COLOR_PAIR(2 + id));
+		else
+			attron(COLOR_PAIR(id + 25));
 	}
 }
 
