@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 17:55:43 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/19 20:10:36 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void				ft_zjmp(t_cor *cor, t_champ *champ);
 void				ft_ldi(t_cor *cor, t_champ *champ);
 void				ft_sti(t_cor *cor, t_champ *champ);
 void				ft_fork(t_cor *cor, t_champ *champ);
+void				legacy(t_cor *cor, t_champ *champ, int id, int pc);
 void				ft_lld(t_cor *cor, t_champ *champ);
 void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
