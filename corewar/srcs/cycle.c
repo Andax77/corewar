@@ -69,8 +69,6 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-			stat_heart(cor, cor->champs, 10);
-			cur_champ->live++;
 		}
 		else
 		{
