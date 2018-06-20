@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/20 03:28:37 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/20 03:37:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,10 @@ int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 				opt->d = ft_atoi(argv[j]) : 0;
 			(ft_strequ(argv[j], "-n") && argv[j + 1]) ? opt->n[i++] = \
 				(int)ft_atoi(argv[j]) : 0;
-			(ft_strstr(argv[j], ".cor") && j - 1 >= 0 && argv[j - 1] && \
+			if (ft_strstr(argv[j], ".cor") && j - 1 >= 0 && argv[j - 1] && \
 				!ft_strisdigit(argv[j - 1]) && ((j - 2 > 0 && argv[j - 2] && \
-				!ft_strequ(argv[j - 2], "-n")) || j < 3)) ? opt->n[i++] = ++id : 0;
+				!ft_strequ(argv[j - 2], "-n")) || j < 3))
+					opt->n[i++] = ++id;//TODO Check if id is not already used
 		}
 		return (SUCCESS);
 	}

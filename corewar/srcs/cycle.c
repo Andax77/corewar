@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/20 02:52:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/20 04:02:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	clean(t_cor *cor, t_list *champs, t_list *champs_h)
 		if (last_champ->id && cur_champ->r_cy == 0)
 		{
 			if (cor->map[last_champ->pc] != 1 || \
-			cor->map[(cur_champ->pc - 1) % MEM_SIZE] + \
-			(cor->map[(cur_champ->pc - 2) % MEM_SIZE] << 8) + \
-			(cor->map[(cur_champ->pc - 3) % MEM_SIZE] << 16) + \
-			(cor->map[(cur_champ->pc - 4) % MEM_SIZE] << 24) != cur_champ->v_id)
+			cor->map[(cur_champ->pc + 4) % MEM_SIZE] + \
+			(cor->map[(cur_champ->pc + 3) % MEM_SIZE] << 8) + \
+			(cor->map[(cur_champ->pc + 2) % MEM_SIZE] << 16) + \
+			(cor->map[(cur_champ->pc + 1) % MEM_SIZE] << 24) != cur_champ->v_id)
 			{
 				attron(COLOR_PAIR(2 + last_champ->id));
 				draw_uchar(last_champ->pc, cor->map[last_champ->pc]);
@@ -58,7 +58,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, t_histo *last_champ, t_list *cham
 	if (cor->cycle != 0)
 	{
 		// Do op
-		if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+		if (cor->map[cur_champ->pc] >= 1 && cor->map[cur_champ->pc] <= 16)
 		{
 			if (cor->map[cur_champ->pc] == 12 || cor->map[cur_champ->pc] == 15)
 			{
@@ -82,16 +82,16 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, t_histo *last_champ, t_list *cham
 			f[0](cor, cur_champ);
 	}
 	// Change r_cy
-	if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+	if (cor->map[cur_champ->pc] >= 1 && cor->map[cur_champ->pc] <= 16)
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 	// Print process pos
 	if (cor->opt->v)
 	{
 		if (cor->map[cur_champ->pc] == 1 && \
-		cor->map[(cur_champ->pc - 1) % MEM_SIZE] + \
-		(cor->map[(cur_champ->pc - 2) % MEM_SIZE] << 8) + \
-		(cor->map[(cur_champ->pc - 3) % MEM_SIZE] << 16) + \
-		(cor->map[(cur_champ->pc - 4) % MEM_SIZE] << 24) == cur_champ->v_id)
+		cor->map[(cur_champ->pc + 4) % MEM_SIZE] + \
+		(cor->map[(cur_champ->pc + 3) % MEM_SIZE] << 8) + \
+		(cor->map[(cur_champ->pc + 2) % MEM_SIZE] << 16) + \
+		(cor->map[(cur_champ->pc + 1) % MEM_SIZE] << 24) == cur_champ->v_id)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
