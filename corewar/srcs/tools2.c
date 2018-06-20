@@ -34,23 +34,30 @@ void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	t_champ		child;
 	t_list		*new;
 	int			i;
+	int			j;
 
 	i = 0;
+	j = -1;
 	tmp = cor->champs;
 	while (tmp)
 	{
 		i++;
-		if (((t_champ*)tmp->content)->id == id && tmp->next && \
-			((t_champ*)tmp->next->content)->id != id)
+		if (((t_champ*)tmp->content)->id == id && tmp->next && ((t_champ*)tmp->next->content)->id != id)
 			break ;
 		tmp = tmp->next;
 	}
 	ft_bzero(&child, sizeof(t_champ));
-	ft_memcpy(&child, champ, sizeof(t_champ));
-	//TODO malloc each value
-	child.father = id;
+	if (!((child.reg = ft_memalloc(REG_NUMBER * REG_SIZE))))
+		exit(EXIT_FAILURE);
+	while (++i < REG_NUMBER)
+		child.reg[i] = champ->reg[i];
+	child.id = champ->id;
+	child.v_id = champ->v_id;
 	child.pc = pc;
-	child.lives = 0;
+	child.carry = champ->carry;
+	child.father = id;
 	new = ft_lstnew(&child, sizeof(t_champ));
 	ft_lstinsert(&cor->champs, new, i);
+	free(child.reg);
+	ft_lstdel(&new, del);
 }
