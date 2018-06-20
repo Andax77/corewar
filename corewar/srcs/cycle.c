@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/20 12:21:59 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/20 12:52:27 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,7 @@ void	cycle(t_cor *cor)
 	int			ch;
 	int			ret;
 
+	ch = ' ';
 	ret = 1;
 	timeout = 950;
 	first_champ = cor->champs;
@@ -307,12 +308,13 @@ void	cycle(t_cor *cor)
 		// Print infos
 		if (cor->opt->v)
 			print_infos(cor);
+		// Key event
+		if (cor->opt->v)
+			key_event(&timeout, &ch);
+		// Check end
 		if (!ret)
 			break ;
 		else
 			cor->cycle++;
-		// Key event
-		if (cor->opt->v)
-			key_event(&timeout, &ch);
 	}
 }
