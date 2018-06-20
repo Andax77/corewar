@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 15:32:59 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/20 15:49:24 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	p2 = recup_content(cor, champ, ocp, 4, 2);
 	if (p2 > 0 && p2 <= REG_SIZE)
 	{
-		if (((ocp >> 6) & 3) == REG_CODE)
+		if (((ocp >> 6) & 3) == DIR_CODE)
 			champ->reg[p2 - 1] = p1;
 		else
 		{
