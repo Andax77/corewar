@@ -32,11 +32,18 @@ void		del_champ(void *content, size_t content_size)
 
 static void	free_cor(t_cor *cor)
 {
-	free(cor->opt->n);
-	free(cor->opt);
-	ft_lstdel(&(cor->champs), del_champ);
-	free(cor->map);
-	free(cor);
+	if (cor)
+	{
+		if (cor->opt && cor->opt->n)
+			free(cor->opt->n);
+		if (cor->opt)
+			free(cor->opt);
+		if (cor->champs)
+			ft_lstdel(&(cor->champs), del_champ);
+		if (cor->map)
+			free(cor->map);
+		free(cor);
+	}
 }
 
 int			main(int argc, char **argv)
@@ -49,6 +56,8 @@ int			main(int argc, char **argv)
 	if (argc == 1)
 	{
 		print_usage();
+		free(cor);
+		free(opt);
 		exit(EXIT_FAILURE);
 	}
 	else if (parse_opt(argv, opt, cor) == ERROR)
