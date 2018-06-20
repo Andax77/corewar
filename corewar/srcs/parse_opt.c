@@ -50,6 +50,22 @@ static int	check_opt(char **argv)
 	return (SUCCESS);
 }
 
+static void	ft_verif_doublons(t_opt *opt, int index)
+{
+	int		i;
+
+	i = -1;
+	while (++i < index)
+	{
+		if (opt->n[i] == opt->n[index])
+		{
+			opt->n[index] += 1;
+			ft_verif_doublons(opt, index);
+			break ;
+		}
+	}
+}
+
 int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 {
 	int				i;
@@ -68,12 +84,17 @@ int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 			(ft_strequ(argv[j], "-v")) ? opt->v = 1 : 0;
 			(ft_strequ(argv[j], "-d") && argv[j + 1]) ? \
 				opt->d = ft_atoi(argv[j]) : 0;
-			(ft_strequ(argv[j], "-n") && argv[j + 1]) ? opt->n[i++] = \
-				(int)ft_atoi(argv[j]) : 0;
-			if (ft_strstr(argv[j], ".cor") && j - 1 >= 0 && argv[j - 1] && \
-				!ft_strisdigit(argv[j - 1]) && ((j - 2 > 0 && argv[j - 2] && \
-				!ft_strequ(argv[j - 2], "-n")) || j < 3))
-					opt->n[i++] = ++id;//TODO Check if id is not already used
+			if (ft_strequ(argv[j], "-n"))
+			{
+				opt->n[i] = ft_atoi(argv[++j]);
+				ft_verif_doublons(opt, ++i - 1);
+				++j;
+			}
+			else if (ft_strstr(argv[j], ".cor"))
+			{
+				opt->n[i] = ++id;
+				ft_verif_doublons(opt, ++i - 1);
+			}
 		}
 		return (SUCCESS);
 	}
