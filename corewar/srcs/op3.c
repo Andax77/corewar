@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 15:31:50 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/20 01:52:14 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,15 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 
 void	ft_fork(t_cor *cor, t_champ *champ)
 {
-	(void)cor;
-	(void)champ;
+	int		p;
+	int		pc;
+	int		ori;
+
+	ori = champ->pc;
+	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
+	pc = ori + ((ori + p) % MEM_SIZE - ori) % IDX_MOD;
+	legacy(cor, champ, champ->id, pc);
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
 void	ft_lld(t_cor *cor, t_champ *champ)
@@ -127,6 +134,13 @@ void	ft_lldi(t_cor *cor, t_champ *champ)
 
 void	ft_lfork(t_cor *cor, t_champ *champ)
 {
-	(void)cor;
-	(void)champ;
+	int		p;
+	int		pc;
+	int		ori;
+
+	ori = champ->pc;
+	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
+	pc = (ori + p) % MEM_SIZE;
+	legacy(cor, champ, champ->id, pc);
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }

@@ -6,40 +6,43 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 16:15:15 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/20 12:21:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void	clean(t_cor *cor, t_list *champs, int *last_champ, int *last_pc)
+void	clean(t_cor *cor, t_list *champs)
 {
-	t_champ *cur_champ;
+	t_champ		*cur_champ;
 
 	while (champs)
 	{
 		cur_champ = champs->content;
-		if (last_champ[cur_champ->id - 1] && cur_champ->r_cy == 0)
+		if (cur_champ->r_cy == 0)
 		{
-			if (cor->map[last_pc[cur_champ->id - 1]] != 1)
+			if (cor->map[cur_champ->last_pc] != 1 || \
+			cor->map[(cur_champ->last_pc + 4) % MEM_SIZE] + \
+			(cor->map[(cur_champ->last_pc + 3) % MEM_SIZE] << 8) + \
+			(cor->map[(cur_champ->last_pc + 2) % MEM_SIZE] << 16) + \
+			(cor->map[(cur_champ->last_pc + 1) % MEM_SIZE] << 24) != cur_champ->v_id)
 			{
-				attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
-				draw_uchar(last_pc[cur_champ->id - 1], \
-					(cor->map)[last_pc[cur_champ->id - 1]]);
+				attron(COLOR_PAIR(2 + cur_champ->id));
+				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 			}
 			else if (cur_champ->lives > 0 && \
-					last_pc[cur_champ->id - 1] != cur_champ->last_live_pc)
+					cur_champ->last_pc != cur_champ->last_live_pc)
 			{
-				attron(COLOR_PAIR(2 + last_champ[cur_champ->id - 1]));
+				attron(COLOR_PAIR(2 + cur_champ->id));
 				draw_uchar(cur_champ->last_live_pc, \
-					(cor->map)[last_pc[cur_champ->id - 1]]);
+					cor->map[cur_champ->last_live_pc]);
 			}
 		}
 		champs = champs->next;
 	}
 }
 
-void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
+void	cycle_job(t_cor *cor, t_champ *cur_champ)
 {
 	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
 
@@ -47,18 +50,22 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 	if (cor->cycle != 0)
 	{
 		// Do op
-		if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+		if (cor->map[cur_champ->pc] >= 1 && cor->map[cur_champ->pc] <= 16)
 			f[cor->map[cur_champ->pc]](cor, cur_champ);
 		else
 			f[0](cor, cur_champ);
 	}
 	// Change r_cy
-	if (cor->map[cur_champ->pc] > 1 || cor->map[cur_champ->pc] <= 16)
+	if (cor->map[cur_champ->pc] >= 1 && cor->map[cur_champ->pc] <= 16)
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 	// Print process pos
 	if (cor->opt->v)
 	{
-		if (cor->map[cur_champ->pc] == 1)
+		if (cor->map[cur_champ->pc] == 1 && \
+		cor->map[(cur_champ->pc + 4) % MEM_SIZE] + \
+		(cor->map[(cur_champ->pc + 3) % MEM_SIZE] << 8) + \
+		(cor->map[(cur_champ->pc + 2) % MEM_SIZE] << 16) + \
+		(cor->map[(cur_champ->pc + 1) % MEM_SIZE] << 24) == cur_champ->v_id)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
@@ -70,8 +77,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ, int *last_champ, int *last_pc)
 			attron(COLOR_PAIR(20 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 		}
-		last_pc[cur_champ->id - 1] = cur_champ->pc;
-		last_champ[cur_champ->id - 1] = cur_champ->id;
+		cur_champ->last_pc = cur_champ->pc;
 	}
 }
 
@@ -181,7 +187,7 @@ void	print_infos(t_cor *cor)
 	i = 0;
 	print_cow(cor);
 	print_heart(cor);
-	cycle = ft_itoa((cor->cycle)++);
+	cycle = ft_itoa((cor->cycle));
 	while (champs)
 	{
 		if (((t_champ*)champs->content)->r_cy >= 0)
@@ -270,23 +276,18 @@ void	cycle(t_cor *cor)
 	t_list		*champs;
 	t_list		*first_champ;
 	t_champ		*cur_champ;
-	int			*last_pc;
-	int			*last_champ;
 	int			timeout;
 	int			ch;
 	int			ret;
 
 	ret = 1;
 	timeout = 950;
-	last_pc = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
-	last_champ = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
 	first_champ = cor->champs;
-	// print_player
 	while ((champs = first_champ))
 	{
 		// Clean cursor
 		if (cor->opt->v)
-			clean(cor, champs, last_champ, last_pc);
+			clean(cor, champs);
 		while (champs)
 		{
 			cur_champ = champs->content;
@@ -294,7 +295,7 @@ void	cycle(t_cor *cor)
 			{
 				// Do op or decrement r_cy
 				if (cur_champ->r_cy == 0)
-					cycle_job(cor, cur_champ, last_champ, last_pc);
+					cycle_job(cor, cur_champ);
 				else
 					cur_champ->r_cy--;
 			}
@@ -308,10 +309,10 @@ void	cycle(t_cor *cor)
 			print_infos(cor);
 		if (!ret)
 			break ;
+		else
+			cor->cycle++;
 		// Key event
 		if (cor->opt->v)
 			key_event(&timeout, &ch);
 	}
-	free(last_pc);
-	free(last_champ);
 }

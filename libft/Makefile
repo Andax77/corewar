@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/04 13:09:25 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/18 18:51:35 by eparisot         ###   ########.fr        #
+#    Updated: 2018/06/19 18:32:37 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ FILES = ft_strlen.c \
 		ft_lstdelone.c \
 		ft_lstdel.c \
 		ft_lstadd.c \
+		ft_lstinsert.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		ft_lstget.c \
