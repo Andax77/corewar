@@ -66,6 +66,7 @@ typedef struct		s_cor
 	int				cycle;
 	int				cycle_to_die;
 	int				checks;
+	int				winner;
 }					t_cor;
 
 void				print_usage(void);
@@ -107,18 +108,18 @@ HEART BEAT
 */
 void				print_player(int nb, int player);
 void				print_heart(t_cor *cor);
-void				print_heart2(int nb, int player, int stat, int live);
+void				print_heart2(int nb, int player, int stat);
 void				draw_heart(int line_idx, int y, char *line, int i);
-void				stat1(int nb, int player, int live);
-void				stat2(int nb, int player, int live);
-void				stat3(int nb, int player, int live);
-void				stat4(int nb, int player, int live);
+void				stat1(int nb, int player);
+void				stat2(int nb, int player);
+void				stat3(int nb, int player);
+void				stat4(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
 void				draw_player_id(int line_idx, int y, char *line);
 void				player(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
 void				heart_color();
-int					stat_heart(t_cor *cor, t_list *champs, int live);
+int					stat_heart(t_cor *cor, t_list *champs);
 void				get_color_heart(int live, char *line, int id);
 
 /*
@@ -142,5 +143,7 @@ void				ft_lld(t_cor *cor, t_champ *champ);
 void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
 void				ft_aff(t_cor *cor, t_champ *champ);
+
+void				print_winner(t_cor *cor);
 
 #endif
