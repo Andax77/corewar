@@ -24,13 +24,14 @@ void		print_winner(t_cor *cor)
 	ft_printf("Introducing contestants...\n");
 	while (champ)
 	{
-		if (first == 0 && ++first && champ->next &&\
-			(tmp = (t_champ*)champ->content))
-			champ = champ->next;
 		if (((t_champ*)champ->content)->v_id == cor->winner && \
 			((t_champ*)champ->content)->father == 0)
 			winner = (t_champ*)champ->content;
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
+		if (first == 0 && ++first && champ->next &&\
+			(tmp = (t_champ*)champ->content))
+			champ = champ->next;
+		if (((t_champ*)champ->content)->father == 0)
+			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
 		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,\
 		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
 		champ = champ->next;
