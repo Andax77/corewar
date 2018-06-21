@@ -49,8 +49,8 @@ void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	ft_bzero(&child, sizeof(t_champ));
 	if (!((child.reg = ft_memalloc(REG_NUMBER * REG_SIZE))))
 		exit(EXIT_FAILURE);
-	while (++i < REG_NUMBER)
-		child.reg[i] = champ->reg[i];
+	while (++j < REG_NUMBER)
+		child.reg[j] = champ->reg[j];
 	child.id = champ->id;
 	child.v_id = champ->v_id;
 	child.pc = pc;

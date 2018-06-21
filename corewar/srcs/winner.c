@@ -24,19 +24,19 @@ void		print_winner(t_cor *cor)
 	ft_printf("Introducing contestants...\n");
 	while (champ)
 	{
-		if (first == 0 && ++first)
-		{
-			tmp = (t_champ*)champ->content;
+		if (first == 0 && ++first && champ->next &&\
+			(tmp = (t_champ*)champ->content))
 			champ = champ->next;
-		}
-		if (((t_champ*)champ->content)->v_id == cor->winner)
+		if (((t_champ*)champ->content)->v_id == cor->winner && \
+			((t_champ*)champ->content)->father == 0)
 			winner = (t_champ*)champ->content;
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
 		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,\
 		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
 		champ = champ->next;
 	}
-	ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
-	tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
+	if (tmp)
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
+		tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
 	ft_printf("Contestant %d, \"%s\", has won !\n", cor->winner, winner->name);
 }
