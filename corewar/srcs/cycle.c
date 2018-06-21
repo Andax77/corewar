@@ -315,4 +315,5 @@ void	cycle(t_cor *cor)
 		else
 			cor->cycle++;
 	}
+	print_winner(cor);
 }

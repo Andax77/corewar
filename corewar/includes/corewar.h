@@ -66,6 +66,7 @@ typedef struct		s_cor
 	int				cycle;
 	int				cycle_to_die;
 	int				checks;
+	int				winner;
 }					t_cor;
 
 void				print_usage(void);
@@ -142,5 +143,7 @@ void				ft_lld(t_cor *cor, t_champ *champ);
 void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
 void				ft_aff(t_cor *cor, t_champ *champ);
+
+void				print_winner(t_cor *cor);
 
 #endif
