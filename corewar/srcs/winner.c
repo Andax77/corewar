@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/20 01:55:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/21 15:22:32 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void		print_winner(t_cor *cor)
 	ft_printf("Introducing contestants...\n");
 	while (champ)
 	{
-		if (first == 0 && ++first)
+		if (first == 0 && ++first && champ->next)
 		{
 			tmp = (t_champ*)champ->content;
 			champ = champ->next;
 		}
-		if (((t_champ*)champ->content)->v_id == cor->winner)
+		if (((t_champ*)champ->content)->v_id == cor->winner && ((t_champ*)champ->content)->father == 0)
 			winner = (t_champ*)champ->content;
 		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
 		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,\
