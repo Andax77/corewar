@@ -19,9 +19,8 @@ void		print_winner(t_cor *cor)
 	t_champ	*winner;
 	int		first;
 
-	first = 0;
-	champ = cor->champs;
-	ft_printf("Introducing contestants...\n");
+	if ((champ = cor->champs) && ft_printf("Introducing contestants...\n"))
+		first = 0;
 	while (champ)
 	{
 		if (((t_champ*)champ->content)->v_id == cor->winner && \
