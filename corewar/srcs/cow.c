@@ -20,7 +20,7 @@ void		print_cow(t_cor *cor)
 	if (color == 0 && ++color)
 		heart_color();
 	attron(COLOR_PAIR(17));
-	if (cor->cycle_to_die)
+	if (cor->cycle_to_die < 750)
 	{
 		if (x == 0 && ++x)
 			angry_cow1(4);
