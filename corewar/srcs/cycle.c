@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/20 12:52:27 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/21 18:38:34 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,7 +246,7 @@ int		check_lives(t_cor *cor)
 	champs = cor->champs;
 	while (champs)
 	{
-		if (((t_champ*)champs->content)->lives == 0)
+		if (((t_champ*)champs->content)->lives == 0)// changer cette condition
 			((t_champ*)champs->content)->r_cy = -1;
 		else
 			nbr_live += ((t_champ*)champs->content)->lives;

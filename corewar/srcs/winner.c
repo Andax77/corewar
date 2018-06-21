@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/21 15:22:32 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/21 18:40:07 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void		print_winner(t_cor *cor)
 	t_champ	*winner;
 	int		first;
 
-	first = 0;
-	champ = cor->champs;
-	ft_printf("Introducing contestants...\n");
+	if ((champ = cor->champs) && ft_printf("Introducing contestants...\n"))// separer cette fonction et appeler le debut au debut du programme
+		first = 0;
 	while (champ)
 	{
 		if (((t_champ*)champ->content)->v_id == cor->winner && \

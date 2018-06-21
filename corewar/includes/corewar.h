@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/20 11:45:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/21 17:38:48 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct		s_cor
 	t_opt			*opt;
 	t_list			*champs;
 	unsigned char	*map;
+	char			*aff;
 	int				cycle;
 	int				cycle_to_die;
 	int				checks;

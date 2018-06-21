@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/20 15:38:37 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/21 19:31:29 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,50 @@ int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_cod
 	return (ret);
 }
 
-void	ft_aff(t_cor *cor, t_champ  *champ)
+static void	ft_aff_next(t_cor *cor, t_champ *champ, char *str)
 {
-	int p;
+	if (champ->id == 1)
+		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{red}")))
+			exit(EXIT_FAILURE);
+	if (champ->id == 2)
+		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{green}")))
+			exit(EXIT_FAILURE);
+	if (champ->id == 3)
+		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{yellow}")))
+			exit(EXIT_FAILURE);
+	if (champ->id == 4)
+		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{blue}")))
+			exit(EXIT_FAILURE);
+	if (!(cor->aff = ft_str_and_free_join(cor->aff, champ->name)))
+		exit(EXIT_FAILURE);
+	if (!(cor->aff = ft_str_and_free_join(cor->aff, " : ")))
+		exit(EXIT_FAILURE);
+	if (!(cor->aff = ft_str_and_free_join(cor->aff, str)))
+		exit(EXIT_FAILURE);
+	if (!(cor->aff = ft_str_and_free_join(cor->aff, "\n")))
+		exit(EXIT_FAILURE);
+	if (!(cor->aff = ft_str_and_free_join(cor->aff, "{eoc}")))
+		exit(EXIT_FAILURE);
+}
 
+void	ft_aff(t_cor *cor, t_champ *champ)
+{
+	int		p;
+	char	*str;
+
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	p = cor->map[++champ->pc % MEM_SIZE];
 	if (p > 0 && p <= REG_SIZE)
-		ft_printf("{magenta}%c{eoc}\n", champ->reg[p - 1] % 256);
+	{
+		if (cor->aff == NULL)
+			if (!(cor->aff = ft_strnew(1)))
+				exit(EXIT_FAILURE);
+		if (!(str = ft_strnew(2)))
+			exit(EXIT_FAILURE);
+		str[0] = champ->reg[p - 1] % 256;
+		ft_aff_next(cor, champ, str);
+		free(str);
+	}
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
