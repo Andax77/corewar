@@ -6,11 +6,21 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/21 18:38:34 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/22 21:09:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
+
+int		check_live_value(t_cor *cor, int pc, int v_id)
+{
+	if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE] + \
+					(cor->map[(pc + 3) % MEM_SIZE] << 8) + \
+					(cor->map[(pc + 2) % MEM_SIZE] << 16) + \
+					(cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
+		return (1);
+	return (0);
+}
 
 void	clean(t_cor *cor, t_list *champs)
 {
@@ -21,21 +31,20 @@ void	clean(t_cor *cor, t_list *champs)
 		cur_champ = champs->content;
 		if (cur_champ->r_cy == 0)
 		{
-			if (cor->map[cur_champ->last_pc] != 1 || \
-			cor->map[(cur_champ->last_pc + 4) % MEM_SIZE] + \
-			(cor->map[(cur_champ->last_pc + 3) % MEM_SIZE] << 8) + \
-			(cor->map[(cur_champ->last_pc + 2) % MEM_SIZE] << 16) + \
-			(cor->map[(cur_champ->last_pc + 1) % MEM_SIZE] << 24) != cur_champ->v_id)
+			if (check_live_value(cor, cur_champ->last_pc, cur_champ->v_id))
+			{
+				attron(COLOR_PAIR(40 + cur_champ->id));
+				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
+				if (cur_champ->lives > 0 && cur_champ->last_pc != cur_champ->last_live_pc)
+				{
+					attron(COLOR_PAIR(2 + cur_champ->id));
+					draw_uchar(cur_champ->last_live_pc, cor->map[cur_champ->last_live_pc]);
+				}
+			}
+			else
 			{
 				attron(COLOR_PAIR(2 + cur_champ->id));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
-			}
-			else if (cur_champ->lives > 0 && \
-					cur_champ->last_pc != cur_champ->last_live_pc)
-			{
-				attron(COLOR_PAIR(2 + cur_champ->id));
-				draw_uchar(cur_champ->last_live_pc, \
-					cor->map[cur_champ->last_live_pc]);
 			}
 		}
 		champs = champs->next;
@@ -61,22 +70,10 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 	// Print process pos
 	if (cor->opt->v)
 	{
-		if (cor->map[cur_champ->pc] == 1 && \
-		cor->map[(cur_champ->pc + 4) % MEM_SIZE] + \
-		(cor->map[(cur_champ->pc + 3) % MEM_SIZE] << 8) + \
-		(cor->map[(cur_champ->pc + 2) % MEM_SIZE] << 16) + \
-		(cor->map[(cur_champ->pc + 1) % MEM_SIZE] << 24) == cur_champ->v_id)
-		{
-			attron(COLOR_PAIR(40 + cur_champ->id));
-			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-		}
-		else
-		{
-			attron(COLOR_PAIR(20 + cur_champ->id));
-			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-		}
-		cur_champ->last_pc = cur_champ->pc;
+		attron(COLOR_PAIR(20 + cur_champ->id));
+		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 	}
+	cur_champ->last_pc = cur_champ->pc;
 }
 
 void	key_event(int *timeout, int *ch)
@@ -246,10 +243,7 @@ int		check_lives(t_cor *cor)
 	champs = cor->champs;
 	while (champs)
 	{
-		if (((t_champ*)champs->content)->lives == 0)// changer cette condition
-			((t_champ*)champs->content)->r_cy = -1;
-		else
-			nbr_live += ((t_champ*)champs->content)->lives;
+		nbr_live += ((t_champ*)champs->content)->lives;
 		((t_champ*)champs->content)->lives = 0;
 		champs = champs->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/21 19:32:48 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/22 20:39:30 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,19 @@ void	ft_fork(t_cor *cor, t_champ *champ)
 	pc = ori + ((ori + p) % MEM_SIZE - ori) % IDX_MOD;
 	legacy(cor, champ, champ->id, pc);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
+	if (cor->opt->v)
+	{
+		if (check_live_value(cor, pc, champ->v_id))
+		{
+			attron(COLOR_PAIR(40 + champ->id));
+			draw_uchar(pc, cor->map[pc]);
+		}
+		else
+		{
+			attron(COLOR_PAIR(20 + champ->id));
+			draw_uchar(pc, cor->map[pc]);
+		}
+	}
 }
 
 void	ft_lld(t_cor *cor, t_champ *champ)
@@ -145,4 +158,17 @@ void	ft_lfork(t_cor *cor, t_champ *champ)
 	pc = (ori + p) % MEM_SIZE;
 	legacy(cor, champ, champ->id, pc);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
+	if (cor->opt->v)
+	{
+		if (check_live_value(cor, pc, champ->v_id))
+		{
+			attron(COLOR_PAIR(40 + champ->id));
+			draw_uchar(pc, cor->map[pc]);
+		}
+		else
+		{
+			attron(COLOR_PAIR(20 + champ->id));
+			draw_uchar(pc, cor->map[pc]);
+		}
+	}
 }
