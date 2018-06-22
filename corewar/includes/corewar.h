@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/20 11:45:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/21 17:38:48 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ typedef struct		s_cor
 	t_opt			*opt;
 	t_list			*champs;
 	unsigned char	*map;
+	char			*aff;
 	int				cycle;
 	int				cycle_to_die;
 	int				checks;
+	int				winner;
 }					t_cor;
 
 void				print_usage(void);
@@ -97,28 +99,25 @@ void				draw_line2(int line_idx, char *line);
 void				draw_cow1(int nb);
 void				draw_cow2(int nb);
 void				draw_cow3(int nb);
-void				angry_cow1(int nb);
-void				angry_cow2(int nb);
-void				angry_cow3(int nb);
-void				print_cow(t_cor *cor);
+void				print_cow();
 
 /*
 HEART BEAT
 */
 void				print_player(int nb, int player);
 void				print_heart(t_cor *cor);
-void				print_heart2(int nb, int player, int stat, int live);
+void				print_heart2(int nb, int player, int stat);
 void				draw_heart(int line_idx, int y, char *line, int i);
-void				stat1(int nb, int player, int live);
-void				stat2(int nb, int player, int live);
-void				stat3(int nb, int player, int live);
-void				stat4(int nb, int player, int live);
+void				stat1(int nb, int player);
+void				stat2(int nb, int player);
+void				stat3(int nb, int player);
+void				stat4(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
 void				draw_player_id(int line_idx, int y, char *line);
 void				player(int nb, int player);
 void				draw_player(int line_idx, int y, char *line);
 void				heart_color();
-int					stat_heart(t_cor *cor, t_list *champs, int live);
+int					stat_heart(t_cor *cor, t_list *champs);
 void				get_color_heart(int live, char *line, int id);
 
 /*
@@ -142,5 +141,12 @@ void				ft_lld(t_cor *cor, t_champ *champ);
 void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
 void				ft_aff(t_cor *cor, t_champ *champ);
+
+/*
+PRINT WINNER
+*/
+void				print_winner(t_cor *cor);
+char				*get_name_champ(t_cor *cor);
+char				*color_player(int id);
 
 #endif

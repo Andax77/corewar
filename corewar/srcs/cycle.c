@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/20 12:52:27 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/21 18:38:34 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 		{
 			attron(COLOR_PAIR(40 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-			stat_heart(cor, cor->champs, 10);
-			cur_champ->live++;
 		}
 		else
 		{
@@ -248,7 +246,7 @@ int		check_lives(t_cor *cor)
 	champs = cor->champs;
 	while (champs)
 	{
-		if (((t_champ*)champs->content)->lives == 0)
+		if (((t_champ*)champs->content)->lives == 0)// changer cette condition
 			((t_champ*)champs->content)->r_cy = -1;
 		else
 			nbr_live += ((t_champ*)champs->content)->lives;
@@ -284,6 +282,7 @@ void	cycle(t_cor *cor)
 	ret = 1;
 	timeout = 950;
 	first_champ = cor->champs;
+	print_winner(cor);
 	while ((champs = first_champ))
 	{
 		// Clean cursor

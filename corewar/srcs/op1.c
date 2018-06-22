@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 15:32:59 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/21 16:15:59 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,28 @@
 void	ft_live(t_cor *cor, t_champ *champ)
 {
 	int		p;
+	int		ori;
+	t_list	*tmp;
 
-	champ->last_live_pc = champ->pc;
+	tmp = cor->champs;
+	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
 		(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
-	champ->lives++;
-	champ->last_live = cor->cycle;
+	while (tmp)
+	{
+		if (((t_champ*)tmp->content)->v_id == p)
+		{
+			((t_champ*)tmp->content)->lives++;
+			((t_champ*)tmp->content)->last_live = cor->cycle;
+			get_color_heart(1, "prochain draw heart pour Un live", ((t_champ*)tmp->content)->v_id);
+			((t_champ*)tmp->content)->live++;
+			cor->winner = ((t_champ*)tmp->content)->v_id;
+			((t_champ*)tmp->content)->last_live_pc = champ->pc;// voir si on clignotte pour live de l'adversaire
+			break ;
+		}
+		tmp = tmp->next;
+	}
 }
 
 void	ft_ld(t_cor *cor, t_champ *champ)
@@ -37,7 +52,7 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	p2 = recup_content(cor, champ, ocp, 4, 2);
 	if (p2 > 0 && p2 <= REG_SIZE)
 	{
-		if (((ocp >> 6) & 3) == REG_CODE)
+		if (((ocp >> 6) & 3) == DIR_CODE)
 			champ->reg[p2 - 1] = p1;
 		else
 		{
