@@ -27,14 +27,14 @@ void		print_winner(t_cor *cor)
 			champ = champ->next;
 		if (((t_champ*)champ->content)->father == 0)
 			ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\
-			\n{eoc}", color_player(((t_champ*)champ->content)->v_id),\
+			\n{eoc}", color_player(((t_champ*)champ->content)->id),\
 		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,\
 		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
 		champ = champ->next;
 	}
 	if (tmp)
 		ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n{eoc}",
-	color_player(tmp->v_id), tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
+	color_player(tmp->id), tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
 }
 
 char		*color_player(int id)
@@ -47,6 +47,7 @@ char		*color_player(int id)
 		return ("yellow");
 	else if (id == 4)
 		return ("blue");
+	return ("eoc");
 }
 
 char		*get_name_champ(t_cor *cor)
