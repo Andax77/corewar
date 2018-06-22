@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/21 16:15:59 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/22 15:27:01 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_live(t_cor *cor, t_champ *champ)
 		{
 			((t_champ*)tmp->content)->lives++;
 			((t_champ*)tmp->content)->last_live = cor->cycle;
-			get_color_heart(1, "prochain draw heart pour Un live", ((t_champ*)tmp->content)->v_id);
+			get_color_heart(1, "prochain draw heart pour Un live", ((t_champ*)tmp->content)->id);
 			((t_champ*)tmp->content)->live++;
 			cor->winner = ((t_champ*)tmp->content)->v_id;
 			((t_champ*)tmp->content)->last_live_pc = champ->pc;// voir si on clignotte pour live de l'adversaire
