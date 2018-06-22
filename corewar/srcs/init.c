@@ -203,9 +203,14 @@ int			init(char **argv, t_cor *cor)
 		endwin();
 	}
 	if (cor->opt->a)
+	{
 		if (cor->aff)
 			ft_printf("%s", cor->aff);
-	ft_printf("{%s}Contestant %d, \"%s\", has won !\n{eoc}",
-	color_player(cor->winner), cor->winner, get_name_champ(cor));
+		if (cor->winner == 0)
+			ft_printf("No Winner\n");
+		else
+			ft_printf("{%s}Contestant %d, \"%s\", has won !\n{eoc}",
+			color_player(cor->winner), cor->winner, get_name_champ(cor));
+	}
 	return (SUCCESS);
 }

@@ -18,6 +18,7 @@ void		print_winner(t_cor *cor)
 	t_champ	*tmp;
 	int		first;
 
+	tmp = NULL;
 	if ((champ = cor->champs) && ft_printf("Introducing contestants...\n"))
 		first = 0;
 	while (champ)
