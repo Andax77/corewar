@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 13:14:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/19 18:32:10 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/22 19:05:13 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <ft_printf.h>
 
-# define BUFF_SIZE 1024
+# define BUFF_SIZE 2048
 # define LINE_READ 1
 # define GNL_END 0
 # define GNL_SUCCESS 1
