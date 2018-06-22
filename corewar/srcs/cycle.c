@@ -282,6 +282,7 @@ void	cycle(t_cor *cor)
 	ret = 1;
 	timeout = 950;
 	first_champ = cor->champs;
+	print_winner(cor);
 	while ((champs = first_champ))
 	{
 		// Clean cursor
@@ -315,5 +316,4 @@ void	cycle(t_cor *cor)
 		else
 			cor->cycle++;
 	}
-	print_winner(cor);
 }

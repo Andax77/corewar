@@ -204,6 +204,8 @@ int			init(char **argv, t_cor *cor)
 	}
 	if (cor->opt->a)
 		if (cor->aff)
-			ft_printf("%s\n", cor->aff);
+			ft_printf("%s", cor->aff);
+	ft_printf("Contestant %d, \"%s\", has won !\n", cor->winner,\
+				get_name_champ(cor));
 	return (SUCCESS);
 }

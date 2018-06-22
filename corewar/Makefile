@@ -27,7 +27,6 @@ FILES = main.c \
 		op2.c \
 		op3.c \
 		player.c \
-		cow2.c \
 		cow.c \
 		heart.c \
 		heart2.c \
