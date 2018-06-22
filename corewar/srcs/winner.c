@@ -16,27 +16,53 @@ void		print_winner(t_cor *cor)
 {
 	t_list	*champ;
 	t_champ	*tmp;
-	t_champ	*winner;
 	int		first;
 
-	if ((champ = cor->champs) && ft_printf("Introducing contestants...\n"))// separer cette fonction et appeler le debut au debut du programme
+	tmp = NULL;
+	if ((champ = cor->champs) && ft_printf("Introducing contestants...\n"))
 		first = 0;
 	while (champ)
 	{
-		if (((t_champ*)champ->content)->v_id == cor->winner && \
-			((t_champ*)champ->content)->father == 0)
-			winner = (t_champ*)champ->content;
 		if (first == 0 && ++first && champ->next &&\
 			(tmp = (t_champ*)champ->content))
 			champ = champ->next;
 		if (((t_champ*)champ->content)->father == 0)
-			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
+			ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\
+			\n{eoc}", color_player(((t_champ*)champ->content)->id),\
 		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,\
 		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
 		champ = champ->next;
 	}
 	if (tmp)
-		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n",\
-		tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
-	ft_printf("Contestant %d, \"%s\", has won !\n", cor->winner, winner->name);
+		ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n{eoc}",
+	color_player(tmp->id), tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
+}
+
+char		*color_player(int id)
+{
+	if (id == 1)
+		return ("red");
+	else if (id == 2)
+		return ("green");
+	else if (id == 3)
+		return ("yellow");
+	else if (id == 4)
+		return ("blue");
+	return ("eoc");
+}
+
+char		*get_name_champ(t_cor *cor)
+{
+	t_list	*champ;
+	t_champ	*winner;
+
+	champ = cor->champs;
+	while (champ)
+	{
+		if (((t_champ*)champ->content)->id == cor->winner && \
+			((t_champ*)champ->content)->father == 0)
+			winner = (t_champ*)champ->content;
+		champ = champ->next;
+	}
+	return (winner->name);
 }

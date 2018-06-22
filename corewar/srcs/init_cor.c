@@ -140,6 +140,7 @@ int				init_cor(t_cor *cor, char **argv)
 	if (!(cor->map = malloc((MEM_SIZE + 1) * sizeof(unsigned char))))
 		exit(EXIT_FAILURE);
 	cor->aff = NULL;
+	cor->winner = 0;
 	init_memory(cor);
 	cor->cycle_to_die = CYCLE_TO_DIE;
 	if (cor->opt->v && !init_ncurses(cor))

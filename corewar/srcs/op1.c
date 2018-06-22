@@ -29,9 +29,9 @@ void	ft_live(t_cor *cor, t_champ *champ)
 		{
 			((t_champ*)tmp->content)->lives++;
 			((t_champ*)tmp->content)->last_live = cor->cycle;
-			get_color_heart(1, "prochain draw heart pour Un live", ((t_champ*)tmp->content)->id);
+			get_color_heart(1, "Faire un live", ((t_champ*)tmp->content)->id);
 			((t_champ*)tmp->content)->live++;
-			cor->winner = ((t_champ*)tmp->content)->v_id;
+			cor->winner = ((t_champ*)tmp->content)->id;
 			((t_champ*)tmp->content)->last_live_pc = champ->pc;// voir si on clignotte pour live de l'adversaire
 			break ;
 		}

@@ -99,10 +99,7 @@ void				draw_line2(int line_idx, char *line);
 void				draw_cow1(int nb);
 void				draw_cow2(int nb);
 void				draw_cow3(int nb);
-void				angry_cow1(int nb);
-void				angry_cow2(int nb);
-void				angry_cow3(int nb);
-void				print_cow(t_cor *cor);
+void				print_cow();
 
 /*
 HEART BEAT
@@ -145,6 +142,11 @@ void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
 void				ft_aff(t_cor *cor, t_champ *champ);
 
+/*
+PRINT WINNER
+*/
 void				print_winner(t_cor *cor);
+char				*get_name_champ(t_cor *cor);
+char				*color_player(int id);
 
 #endif
