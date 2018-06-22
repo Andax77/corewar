@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/20 01:55:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/21 18:10:22 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	free_cor(t_cor *cor)
 {
 	if (cor)
 	{
+		if (cor->aff)
+			free(cor->aff);
 		if (cor->opt && cor->opt->n)
 			free(cor->opt->n);
 		if (cor->opt)

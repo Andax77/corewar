@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/19 15:13:01 by eparisot         ###   ########.fr        #
+#    Updated: 2018/06/21 19:44:36 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ clean:
 	$(START)
 	@printf $(RED)"-x remove .o files\n"$(NORMAL)
 	@rm -rf $(OBJ_DIR)
+	@rm -rf ../commun/srcs/op.o
 	$(END)
 
 fclean: clean
