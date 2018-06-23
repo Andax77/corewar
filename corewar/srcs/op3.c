@@ -152,9 +152,9 @@ void	ft_lfork(t_cor *cor, t_champ *champ)
 	int		ori;
 
 	ori = champ->pc;
-	ft_printf("{magenta}->%d{eoc}\n", ori);// 1 ligne = 64//////////////////print
+//	ft_printf("{magenta}->%d{eoc}\n", ori);// 1 ligne = 64//////////////////print
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
-	ft_printf("{magenta}->%d{eoc}\n", p);////////////////////////////////print
+//	ft_printf("{magenta}->%d{eoc}\n", p);////////////////////////////////print
 	pc = (ori + p) % MEM_SIZE;
 	legacy(cor, champ, champ->id, pc);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;

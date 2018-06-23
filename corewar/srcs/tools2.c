@@ -55,7 +55,7 @@ void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	child.v_id = champ->v_id;
 	child.pc = pc;
 	child.last_pc = pc;
-	ft_printf("{magenta}->%d{eoc}\n", pc);/////////////////////////////////////////////print
+//	ft_printf("{magenta}->%d{eoc}\n", pc);/////////////////////////////////////////////print
 	child.carry = champ->carry;
 	child.r_cy = change_r_cy(cor, &child);
 	child.father = id;

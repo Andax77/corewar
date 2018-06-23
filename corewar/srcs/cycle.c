@@ -217,6 +217,7 @@ void	print_infos(t_cor *cor)
 	{
 		last_live = ft_itoa(((t_champ*)champs->content)->last_live);
 		lives = ft_itoa(((t_champ*)champs->content)->lives);
+			ft_printf("%s %s\n", ((t_champ*)champs->content)->name, last_live);
 		draw_line(12 + (4 * i), 32, "    ");
 		draw_line(12 + (4 * i), 32, last_live);
 		draw_line(13 + (4 * i), 32, "    ");
