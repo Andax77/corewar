@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/24 15:08:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:18:44 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void				ft_aff(t_cor *cor, t_champ *champ);
 /*
 PRINT WINNER
 */
-void				print_winner(t_cor *cor);
+void				print_intro(t_cor *cor);
 char				*get_name_champ(t_cor *cor);
 char				*color_player(int id);
 

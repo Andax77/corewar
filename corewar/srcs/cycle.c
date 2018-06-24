@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 15:11:49 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:18:32 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,7 +290,6 @@ void	cycle(t_cor *cor)
 	ret = 1;
 	timeout = 950;
 	first_champ = cor->champs;
-	print_winner(cor);
 	while ((champs = first_champ))
 	{
 		// Clean cursor

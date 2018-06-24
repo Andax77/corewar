@@ -6,13 +6,13 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/24 17:12:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:18:41 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_winner(t_cor *cor)
+void		print_intro(t_cor *cor)
 {
 	t_list	*champ;
 	t_champ	*tmp;
