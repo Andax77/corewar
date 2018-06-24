@@ -25,8 +25,9 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	while (tmp)
 	{
-		if (((t_champ*)tmp->content)->v_id == p)
+		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0)
 		{
+//			ft_printf("%s %d\n", ((t_champ*)tmp->content)->name, p);
 			((t_champ*)tmp->content)->lives++;
 			((t_champ*)tmp->content)->last_live = cor->cycle;
 			get_color_heart(1, "prochain draw heart pour Un live", ((t_champ*)tmp->content)->v_id);
