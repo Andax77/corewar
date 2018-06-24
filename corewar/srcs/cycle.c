@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 17:51:02 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:29:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,7 @@ void	cycle(t_cor *cor)
 			if (cur_champ->r_cy > -1)
 			{
 				// Do op or decrement r_cy
+
 				if (cur_champ->r_cy == 0)
 					cycle_job(cor, cur_champ);
 				else
