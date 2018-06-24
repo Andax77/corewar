@@ -280,7 +280,6 @@ int		check_lives(t_cor *cor)
 void	cycle(t_cor *cor)
 {
 	t_list		*champs;
-	t_list		*first_champ;
 	t_champ		*cur_champ;
 	int			timeout;
 	int			ch;
@@ -289,8 +288,7 @@ void	cycle(t_cor *cor)
 	ch = ' ';
 	ret = 1;
 	timeout = 950;
-	first_champ = cor->champs;
-	while ((champs = first_champ))
+	while ((champs = cor->champs))
 	{
 		// Clean cursor
 		if (cor->opt->v)
