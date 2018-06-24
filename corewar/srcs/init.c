@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/24 17:24:28 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 22:22:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,26 @@ void		draw_uchar(int pos, unsigned char val)
 			y++;
 	}
 	free(c);
+}
+
+short		get_color(int pos)
+{
+	int		x;
+	int		y;
+	int		i;
+
+	x = 3;
+	y = 2;
+	i = 0;
+	while (y < 66)
+	{
+		if (i++ == pos % MEM_SIZE)
+			return ((mvinch(y, x) & A_COLOR) >> 8);
+		x = x + 3;
+		if (x >= 194 && (x = 3))
+			y++;
+	}
+	return (0);
 }
 
 static void	draw_infos(t_list *champs)
