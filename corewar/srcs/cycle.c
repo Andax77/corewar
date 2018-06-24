@@ -6,34 +6,44 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 12:53:18 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 15:11:49 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-int		check_live_value(t_cor *cor, int pc, int v_id)
+int		check_live_value(t_cor *cor, int pc)
 {
-	if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE] + \
+	t_list	*champs;
+	int		v_id;
+
+	champs = cor->champs;
+	while (champs)
+	{
+		v_id = ((t_champ*)champs->content)->v_id;
+		if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE] + \
 					(cor->map[(pc + 3) % MEM_SIZE] << 8) + \
 					(cor->map[(pc + 2) % MEM_SIZE] << 16) + \
 					(cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
-		return (1);
+			return (v_id);
+		champs = champs->next;
+	}
 	return (0);
 }
 
 void	clean(t_cor *cor, t_list *champs)
 {
 	t_champ		*cur_champ;
+	int			v_id;
 
 	while (champs)
 	{
 		cur_champ = champs->content;
 		if (cur_champ->r_cy == 0)
 		{
-			if (check_live_value(cor, cur_champ->last_pc, cur_champ->v_id))
+			if ((v_id = check_live_value(cor, cur_champ->last_pc)))
 			{
-				attron(COLOR_PAIR(40 + cur_champ->id));
+				attron(COLOR_PAIR(40 + v_id));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 				if (cur_champ->lives > 0 && cur_champ->last_pc != cur_champ->last_live_pc)
 				{
