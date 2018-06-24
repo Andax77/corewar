@@ -51,7 +51,7 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 2);
 	p2 = recup_content(cor, champ, ocp, 4, 2);
-	if (p2 > 0 && p2 <= REG_SIZE)
+	if (p2 > 0 && p2 <= REG_NUMBER)
 	{
 		if (((ocp >> 6) & 3) == DIR_CODE)
 			champ->reg[p2 - 1] = p1;
@@ -60,7 +60,7 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 			champ->reg[p2 - 1] = ((cor->map[(ori + p1) % MEM_SIZE] << 24) +
 					(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) +
 					(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) +
-					cor->map[(ori + p1 + 3) % MEM_SIZE]) % IDX_MOD;
+					cor->map[(ori + p1 + 3) % MEM_SIZE]);
 		}
 		if (p1 == 0)
 			champ->carry = 1;
@@ -85,11 +85,11 @@ void	ft_st(t_cor *cor, t_champ *champ)
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 3);
 	p2 = recup_content(cor, champ, ocp, 4, 3);
-	if (p1 > 0 && p1 <= REG_SIZE)
+	if (p1 > 0 && p1 <= REG_NUMBER)
 	{
 		if (((ocp >> 4) & 3) == REG_CODE)
 		{
-			if (p2 > 0 && p2 <= REG_SIZE)
+			if (p2 > 0 && p2 <= REG_NUMBER)
 				champ->reg[p2 - 1] = champ->reg[p1 - 1];
 		}
 		else
@@ -137,7 +137,7 @@ void	ft_add(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, 6, 4);
 	p2 = recup_content(cor, champ, ocp, 4, 4);
 	p3 = recup_content(cor, champ, ocp, 2, 4);
-	if (p1 > 0 && p1 <= REG_SIZE && p2 > 0 && p2 <= REG_SIZE && p3 > 0 && p3 <= REG_SIZE)
+	if (p1 > 0 && p1 <= REG_NUMBER && p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] + champ->reg[p2 - 1];
 		if (champ->reg[p3 - 1] == 0)
@@ -163,7 +163,7 @@ void	ft_sub(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, 6, 4);
 	p2 = recup_content(cor, champ, ocp, 4, 4);
 	p3 = recup_content(cor, champ, ocp, 2, 4);
-	if (p1 > 0 && p1 <= REG_SIZE && p2 > 0 && p2 <= REG_SIZE && p3 > 0 && p3 <= REG_SIZE)
+	if (p1 > 0 && p1 <= REG_NUMBER && p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] - champ->reg[p2 - 1];
 		if (champ->reg[p3 - 1] == 0)
