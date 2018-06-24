@@ -1,13 +1,20 @@
-.name "zork"
-.comment "I'M ALIIIIVE"
+.name        "test"
+.comment    "test"
 
+        fork %:son1    
+        ld %0, r3                #carry a 1
+
+live1:    live %-1
+        zjmp %:live1            #live en boucle
+
+son1:    live %-1
+        fork %:son2
         aff r1
-        aff r3
-        ld %42, r2
-        ld %42, r2
-        aff r2
-l2:     sti r1, %:live, %1
-        and r1, %0, r1
+        sti r1, %:level2, %1    #sti en meme temps
+        aff r1
 
-live:   live %1
-        zjmp %:live
+son2:    aff r1
+        sti r2, %:level2, %1    #sti en meme temps
+        aff r1
+
+level2:    live %42
