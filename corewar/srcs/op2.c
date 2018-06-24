@@ -24,11 +24,11 @@ void	ft_and(t_cor *cor, t_champ *champ)
 	p2 = recup_content(cor, champ, ocp, 4, 6);
 	p3 = recup_content(cor, champ, ocp, 2, 6);
 	if (((ocp >> 6) & 3) == REG_CODE)
-		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+		p1 = (p1 > 0 && p1 <= REG_NUMBER) ? champ->reg[p1 - 1] : 0;
 	else
 		p1 = p1 % IDX_MOD;
 	if (((ocp >> 4) & 3) == REG_CODE)
-		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
+		p2 = (p2 > 0 && p2 <= REG_NUMBER) ? champ->reg[p2 - 1] : 0;
 	else
 		p2 = p2 % IDX_MOD;
 	if (p3 > 0 && p3 <= REG_NUMBER)
@@ -56,11 +56,11 @@ void	ft_or(t_cor *cor, t_champ *champ)
 	p2 = recup_content(cor, champ, ocp, 4, 7);
 	p3 = recup_content(cor, champ, ocp, 2, 7);
 	if (((ocp >> 6) & 3) == REG_CODE)
-		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+		p1 = (p1 > 0 && p1 <= REG_NUMBER) ? champ->reg[p1 - 1] : 0;
 	else
 		p1 = p1 % IDX_MOD;
 	if (((ocp >> 4) & 3) == REG_CODE)
-		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
+		p2 = (p2 > 0 && p2 <= REG_NUMBER) ? champ->reg[p2 - 1] : 0;
 	else
 		p2 = p2 % IDX_MOD;
 	if (p3 > 0 && p3 <= REG_NUMBER)
@@ -88,11 +88,11 @@ void	ft_xor(t_cor *cor, t_champ *champ)
 	p2 = recup_content(cor, champ, ocp, 4, 8);
 	p3 = recup_content(cor, champ, ocp, 2, 8);
 	if (((ocp >> 6) & 3) == REG_CODE)
-		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+		p1 = (p1 > 0 && p1 <= REG_NUMBER) ? champ->reg[p1 - 1] : 0;
 	else
 		p1 = p1 % IDX_MOD;
 	if (((ocp >> 4) & 3) == REG_CODE)
-		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
+		p2 = (p2 > 0 && p2 <= REG_NUMBER) ? champ->reg[p2 - 1] : 0;
 	else
 		p2 = p2 % IDX_MOD;
 	if (p3 > 0 && p3 <= REG_NUMBER)
@@ -135,10 +135,10 @@ void	ft_ldi(t_cor *cor, t_champ *champ)
 	p2 = recup_content(cor, champ, ocp, 4, 10);
 	p3 = recup_content(cor, champ, ocp, 2, 10);
 	if (((ocp >> 6) & 3) == REG_CODE)
-		p1 = (p1 > 0 && p1 <= REG_SIZE) ? champ->reg[p1 - 1] : 0;
+		p1 = (p1 > 0 && p1 <= REG_NUMBER) ? champ->reg[p1 - 1] : 0;
 	if (((ocp >> 4) & 3) == REG_CODE)
-		p2 = (p2 > 0 && p2 <= REG_SIZE) ? champ->reg[p2 - 1] : 0;
-	if (p3 > 0 && p3 <= REG_SIZE)
+		p2 = (p2 > 0 && p2 <= REG_NUMBER) ? champ->reg[p2 - 1] : 0;
+	if (p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = (cor->map[(ori + (p1 + p2) % IDX_MOD) % MEM_SIZE] << 24) +
 		(cor->map[(ori + (p1 + p2) % IDX_MOD + 1) % MEM_SIZE] << 16) +
