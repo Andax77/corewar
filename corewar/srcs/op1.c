@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 14:54:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 19:29:57 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	while (tmp)
 	{
-		if (((t_champ*)tmp->content)->v_id == p)
+		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0)
 		{
 //			ft_printf("%s %d\n", ((t_champ*)tmp->content)->name, p);
 			((t_champ*)tmp->content)->lives++;
@@ -78,7 +78,9 @@ void	ft_st(t_cor *cor, t_champ *champ)
 	int p2;
 	int	ocp;
 	int	ori;
+	int	i;
 
+	i = -1;
 	ori = champ->pc;
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 3);
@@ -105,6 +107,11 @@ void	ft_st(t_cor *cor, t_champ *champ)
 				draw_uchar((ori + p2 + 2) % MEM_SIZE, champ->reg[p1 - 1] >> 8);
 				draw_uchar((ori + p2 + 3) % MEM_SIZE, champ->reg[p1 - 1]);
 				attroff(A_BOLD);
+				if (champ->last_st)
+					while (++i < 4)
+						draw_uchar(champ->last_st_pc + i, cor->map[champ->last_st_pc + i]);
+				champ->last_st = 1;
+				champ->last_st_pc = (ori + p2) % MEM_SIZE;
 			}
 		}
 		if (champ->reg[p1 - 1] == 0)
