@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/22 19:57:55 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 14:54:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	while (tmp)
 	{
-		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0)
+		if (((t_champ*)tmp->content)->v_id == p)
 		{
 //			ft_printf("%s %d\n", ((t_champ*)tmp->content)->name, p);
 			((t_champ*)tmp->content)->lives++;

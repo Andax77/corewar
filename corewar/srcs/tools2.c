@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/24 12:22:58 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 14:39:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	child.r_cy = change_r_cy(cor, &child);
 	child.father = id;
 	new = ft_lstnew(&child, sizeof(t_champ));
+	//ft_printf("before = i = %d - %d\n", i, ((t_champ*)((t_list*)cor->champs)->content)->id);
 	ft_lstinsert(&cor->champs, new, i);
+	//ft_printf("aftert = i = %d - %d\n", i, ((t_champ*)((t_list*)cor->champs)->content)->id);
 //	free(child.reg);
 //	ft_lstdel(&new, del);
 	//

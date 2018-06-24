@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 12:20:53 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 12:53:18 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,14 +176,17 @@ void	print_infos(t_cor *cor)
 	int			i;
 	int			id;
 
-	champs = cor->champs;
+
 	i = 0;
 	id = 0;
 	print_cow(cor);
 	print_heart(cor);
+	champs = cor->champs;
 	cycle = ft_itoa((cor->cycle));
+	//ft_printf("id = %d\n", ((t_champ*)champs->content)->id);
 	while (champs)
 	{
+		//ft_printf("r_cy = %d\n", ((t_champ*)champs->content)->id);
 		if (((t_champ*)champs->content)->r_cy > -1)
 			i++;
 		champs = champs->next;
