@@ -37,7 +37,7 @@ debut:		live %42			#5
 		add  r4,r12,r4			#5	
 		sub  r10,r11,r10		#5
 		zjmp %:init			#3
-		fork %:debut			
+		lfork %:debut			
 		live %3
 level0:		fork %:level10
 level11:	live %4

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 16:09:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 22:22:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,26 @@ void		draw_uchar(int pos, unsigned char val)
 	free(c);
 }
 
+short		get_color(int pos)
+{
+	int		x;
+	int		y;
+	int		i;
+
+	x = 3;
+	y = 2;
+	i = 0;
+	while (y < 66)
+	{
+		if (i++ == pos % MEM_SIZE)
+			return ((mvinch(y, x) & A_COLOR) >> 8);
+		x = x + 3;
+		if (x >= 194 && (x = 3))
+			y++;
+	}
+	return (0);
+}
+
 static void	draw_infos(t_list *champs)
 {
 	char	*tmp;
@@ -163,7 +183,7 @@ static void	init_colors(t_list *champs)
 	while (champs)
 	{
 		i = ((t_champ*)champs->content)->id;
-		init_pair(i + 40, COLOR_WHITE, i);
+		init_pair(i + 40, 17, i);
 		champs = champs->next;
 	}
 }
@@ -202,5 +222,13 @@ int			init(char **argv, t_cor *cor)
 		getch();
 		endwin();
 	}
+	if (cor->opt->a)
+		if (cor->aff)
+			ft_printf("%s", cor->aff);
+	if (cor->winner == 0)
+		ft_printf("No Winner\n");
+	else
+		ft_printf("{%s}Contestant %d, \"%s\", has won !\n{eoc}",
+		color_player(cor->winner), cor->winner, get_name_champ(cor));
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/18 18:58:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 19:48:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static int		check_last(char *add, char **text, int size, t_list *instru)
 {
 	if (size % 4 == 3)
 	{
-		add = ft_itoa_base(ft_atoi(instru->content) >> 8, 16);
+		add = ft_itoa_base(ft_atoi(instru->content) >> 8 & 0x00FFFFFF , 16);
 		if (ft_strlen(add) < 6)
 			pad(&add, 6);
 	}
 	else if (size % 4 == 2)
 	{
-		add = ft_itoa_base(ft_atoi(instru->content) >> 16, 16);
+		add = ft_itoa_base(ft_atoi(instru->content) >> 16 & 0x0000FFFF, 16);
 		if (ft_strlen(add) < 4)
 			pad(&add, 4);
 	}
