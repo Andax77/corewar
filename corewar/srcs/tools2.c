@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/22 19:15:04 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 12:22:58 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	child.v_id = champ->v_id;
 	child.pc = pc;
 	child.last_pc = pc;
-	ft_printf("{magenta}->%d{eoc}\n", pc);/////////////////////////////////////////////print
+	//ft_printf("{magenta}->%d{eoc}\n", pc);/////////////////////////////////////////////print
 	child.carry = champ->carry;
 	child.r_cy = change_r_cy(cor, &child);
 	child.father = id;

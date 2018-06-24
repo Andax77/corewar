@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/22 20:39:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 12:05:09 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,9 @@ void	ft_lfork(t_cor *cor, t_champ *champ)
 	int		ori;
 
 	ori = champ->pc;
-	ft_printf("{magenta}->%d{eoc}\n", ori);// 1 ligne = 64//////////////////print
+	//ft_printf("{magenta}->%d{eoc}\n", ori);// 1 ligne = 64//////////////////print
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
-	ft_printf("{magenta}->%d{eoc}\n", p);////////////////////////////////print
+	//ft_printf("{magenta}->%d{eoc}\n", p);////////////////////////////////print
 	pc = (ori + p) % MEM_SIZE;
 	legacy(cor, champ, champ->id, pc);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;

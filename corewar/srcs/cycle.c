@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/22 21:09:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 12:20:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,18 +174,17 @@ void	print_infos(t_cor *cor)
 	char		*nbr_live;
 	char		*max_checks;
 	int			i;
-	static int	j;
+	int			id;
 
 	champs = cor->champs;
-	if (cor->cycle == 0)
-		j = ft_lstcount(champs);
 	i = 0;
+	id = 0;
 	print_cow(cor);
 	print_heart(cor);
 	cycle = ft_itoa((cor->cycle));
 	while (champs)
 	{
-		if (((t_champ*)champs->content)->r_cy >= 0)
+		if (((t_champ*)champs->content)->r_cy > -1)
 			i++;
 		champs = champs->next;
 	}
@@ -212,19 +211,21 @@ void	print_infos(t_cor *cor)
 		attron(COLOR_PAIR(17));
 		draw_line(4, 22, "50");
 	}
-	i = 0;
-	while (champs && i < j)
+	while (champs)
 	{
-		last_live = ft_itoa(((t_champ*)champs->content)->last_live);
-		lives = ft_itoa(((t_champ*)champs->content)->lives);
-		draw_line(12 + (4 * i), 32, "    ");
-		draw_line(12 + (4 * i), 32, last_live);
-		draw_line(13 + (4 * i), 32, "    ");
-		draw_line(13 + (4 * i), 32, lives);
-		i++;
+		if (!((t_champ*)champs->content)->father)
+		{
+			id = ((t_champ*)champs->content)->id - 1;
+			last_live = ft_itoa(((t_champ*)champs->content)->last_live);
+			lives = ft_itoa(((t_champ*)champs->content)->lives);
+			draw_line(12 + (4 * id), 32, "    ");
+			draw_line(12 + (4 * id), 32, last_live);
+			draw_line(13 + (4 * id), 32, "    ");
+			draw_line(13 + (4 * id), 32, lives);
+			free(last_live);
+			free(lives);
+		}
 		champs = champs->next;
-		free(last_live);
-		free(lives);
 	}
 	free(cycle);
 	free(processes);
