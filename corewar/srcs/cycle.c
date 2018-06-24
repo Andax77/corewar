@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 17:54:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:29:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,7 +280,6 @@ int		check_lives(t_cor *cor)
 void	cycle(t_cor *cor)
 {
 	t_list		*champs;
-	t_list		*first_champ;
 	t_champ		*cur_champ;
 	int			timeout;
 	int			ch;
@@ -289,8 +288,7 @@ void	cycle(t_cor *cor)
 	ch = ' ';
 	ret = 1;
 	timeout = 950;
-	first_champ = cor->champs;
-	while ((champs = first_champ))
+	while ((champs = cor->champs))
 	{
 		// Clean cursor
 		if (cor->opt->v)
@@ -301,6 +299,7 @@ void	cycle(t_cor *cor)
 			if (cur_champ->r_cy > -1)
 			{
 				// Do op or decrement r_cy
+
 				if (cur_champ->r_cy == 0)
 					cycle_job(cor, cur_champ);
 				else

@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 15:12:09 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 18:36:08 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_fork(t_cor *cor, t_champ *champ)
 	int		p;
 	int		pc;
 	int		ori;
-	int		v_id;
+	//int		id;
 
 	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
@@ -67,17 +67,17 @@ void	ft_fork(t_cor *cor, t_champ *champ)
 	legacy(cor, champ, champ->id, pc);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	if (cor->opt->v)
-	{
-		if ((v_id = check_live_value(cor, pc)))
+	{/*
+		if ((id = check_live_value(cor, pc)))
 		{
-			attron(COLOR_PAIR(40 + v_id));
+			attron(COLOR_PAIR(40 + id));
 			draw_uchar(pc, cor->map[pc]);
-		}
-		else
-		{
+		}*/
+		//else
+		//{
 			attron(COLOR_PAIR(20 + champ->id));
 			draw_uchar(pc, cor->map[pc]);
-		}
+		//}
 	}
 }
 
@@ -151,7 +151,7 @@ void	ft_lfork(t_cor *cor, t_champ *champ)
 	int		p;
 	int		pc;
 	int		ori;
-	int		v_id;
+	//int		id;
 
 	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
@@ -160,15 +160,15 @@ void	ft_lfork(t_cor *cor, t_champ *champ)
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	if (cor->opt->v)
 	{
-		if ((v_id = check_live_value(cor, pc)))
+		/*if ((id = check_live_value(cor, pc)))
 		{
-			attron(COLOR_PAIR(40 + v_id));
+			attron(COLOR_PAIR(40 + id));
 			draw_uchar(pc, cor->map[pc]);
-		}
-		else
-		{
+		}*/
+		//else
+		//{
 			attron(COLOR_PAIR(20 + champ->id));
 			draw_uchar(pc, cor->map[pc]);
-		}
+		//}
 	}
 }
