@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/21 18:40:07 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/24 17:12:05 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void		print_winner(t_cor *cor)
 		first = 0;
 	while (champ)
 	{
-		if (first == 0 && ++first && champ->next &&\
-			(tmp = (t_champ*)champ->content))
-			champ = champ->next;
+		//if (first == 0 && ++first && champ->next &&
+		//	(tmp = (t_champ*)champ->content))
+		//	champ = champ->next;
 		if (((t_champ*)champ->content)->father == 0)
 			ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\
 			\n{eoc}", color_player(((t_champ*)champ->content)->id),\
@@ -33,9 +33,9 @@ void		print_winner(t_cor *cor)
 		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
 		champ = champ->next;
 	}
-	if (tmp)
-		ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n{eoc}",
-	color_player(tmp->id), tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
+	//if (tmp)
+	//	ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\")!\n{eoc}",
+	//color_player(tmp->id), tmp->v_id, tmp->op_nb, tmp->name, tmp->comment);
 }
 
 char		*color_player(int id)
