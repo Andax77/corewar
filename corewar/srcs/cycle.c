@@ -228,6 +228,11 @@ void	print_infos(t_cor *cor)
 	{
 		if (!((t_champ*)champs->content)->father)
 		{
+			ft_printf("-> %d ", ((t_champ*)champs->content)->op_nb % 4);
+			for (int j = 0; j < ((t_champ*)champs->content)->op_nb; j++)
+			{
+				ft_printf("%x", ((t_champ*)champs->content)->splited_prog[j]);
+			}
 			id = ((t_champ*)champs->content)->id - 1;
 			last_live = ft_itoa(((t_champ*)champs->content)->last_live);
 			lives = ft_itoa(((t_champ*)champs->content)->lives);
