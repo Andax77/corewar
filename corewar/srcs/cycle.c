@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 19:44:20 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 22:35:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ int		check_live_value(t_cor *cor, int pc)
 void	clean(t_cor *cor, t_list *champs)
 {
 	t_champ		*cur_champ;
-	int			v_id;
+	int			id;
+	//short		color;
 
 	while (champs)
 	{
 		cur_champ = champs->content;
 		if (cur_champ->r_cy == 0)
 		{
-			if ((v_id = check_live_value(cor, cur_champ->last_pc)))
+			if ((id = check_live_value(cor, cur_champ->last_pc)))
 			{
-				attron(COLOR_PAIR(40 + v_id));
+				attron(COLOR_PAIR(40 + id));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 				if (cur_champ->lives > 0 && cur_champ->last_pc != cur_champ->last_live_pc)
 				{
@@ -53,6 +54,7 @@ void	clean(t_cor *cor, t_list *champs)
 			}
 			else
 			{
+				//color = get_color(cur_champ->last_pc);
 				attron(COLOR_PAIR(2 + cur_champ->id));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 			}
@@ -193,10 +195,8 @@ void	print_infos(t_cor *cor)
 	print_heart(cor);
 	champs = cor->champs;
 	cycle = ft_itoa((cor->cycle));
-	//ft_printf("id = %d\n", ((t_champ*)champs->content)->id);
 	while (champs)
 	{
-		//ft_printf("r_cy = %d\n", ((t_champ*)champs->content)->id);
 		if (((t_champ*)champs->content)->r_cy > -1)
 			i++;
 		champs = champs->next;
