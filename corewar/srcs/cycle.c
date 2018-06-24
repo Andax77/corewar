@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 17:41:49 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 17:54:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int		check_live_value(t_cor *cor, int pc)
 {
 	t_list	*champs;
-	int		id;
+	int		v_id;
 
 	champs = cor->champs;
 	while (champs)
 	{
-		id = ((t_champ*)champs->content)->id;
+		v_id = ((t_champ*)champs->content)->v_id;
 		if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE] + \
 					(cor->map[(pc + 3) % MEM_SIZE] << 8) + \
 					(cor->map[(pc + 2) % MEM_SIZE] << 16) + \
-					(cor->map[(pc + 1) % MEM_SIZE] << 24) == id)
-			return (id);
+					(cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
+			return (((t_champ*)champs->content)->id);
 		champs = champs->next;
 	}
 	return (0);
