@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 11:19:32 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 14:57:38 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,12 @@ int		check_lives(t_cor *cor)
 	while (champs)
 	{
 		nbr_live += ((t_champ*)champs->content)->lives;
+		if (!((t_champ*)champs->content)->lives)
+		{
+			((t_champ*)champs->content)->r_cy = -1;
+			attron(COLOR_PAIR(((t_champ*)champs->content)->last_color));
+			draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
+		}
 		((t_champ*)champs->content)->lives = 0;
 		champs = champs->next;
 	}
