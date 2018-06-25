@@ -1,7 +1,8 @@
-.name		"Celebration Funebre v0.99pl42"
-.comment	"Jour J"
+.namemange "name"
+.comment "comment"
 
-		ld   %0,r3		
+		live %42
+		ld   %0,r0
 label:		zjmp %:avantdebut
 		zjmp %0				# pour eviter ecrasement
 						# de l'instruction suivante
@@ -12,7 +13,7 @@ code:		live %42			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
 		live %42			# 5
-		sti  r15,%0,r14			# 6 -> ecriture zone adverse cycle 3k
+		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
 		live %42			# 5
 		sti  r15,%0,r14			# 6
@@ -32,7 +33,7 @@ init:		ld   %393216,r4		 	#7
 		ld   %917504,r12		#7	
 		ld   %1,r11			#7
 		ld   %6,r10			#7
-debut:		live %42			#5
+debut:		live %-2			#5
 		sti  r4,%:label , %1		#7
 		add  r4,r12,r4			#5	
 		sub  r10,r11,r10		#5
