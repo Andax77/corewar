@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:07 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 14:02:06 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/25 20:02:49 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,24 +98,28 @@ void	ft_xor(t_cor *cor, t_champ *champ)//verif si need idx_mod
 
 void	ft_zjmp(t_cor *cor, t_champ *champ)
 {
-	int p;
-	int	ori;
+	short	p;
+	int		ori;
 
 	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	if (champ->carry == 1)
-		champ->pc = ori + ((ori + p) % MEM_SIZE - ori) % IDX_MOD;
+	{
+		champ->pc = ori + ((p % IDX_MOD) % MEM_SIZE);
+		if (champ->pc < 0)
+			champ->pc += MEM_SIZE;
+	}
 	else
 		champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
 void	ft_ldi(t_cor *cor, t_champ *champ)
 {
-	int p1;
-	int p2;
-	int p3;
-	int	ocp;
-	int	ori;
+	short	p1;
+	short	p2;
+	int		p3;
+	int		ocp;
+	int		ori;
 
 	ori = champ->pc;
 	ocp = cor->map[++champ->pc % MEM_SIZE];
@@ -128,10 +132,10 @@ void	ft_ldi(t_cor *cor, t_champ *champ)
 		p2 = (p2 > 0 && p2 <= REG_NUMBER) ? champ->reg[p2 - 1] : 0;
 	if (p3 > 0 && p3 <= REG_NUMBER)
 	{
-		champ->reg[p3 - 1] = (cor->map[ori + ((ori + p2 + p3) % MEM_SIZE - ori) % IDX_MOD] << 24) +
-		(cor->map[ori + ((ori + p2 + p3 + 1) % MEM_SIZE - ori) % IDX_MOD] << 16) +
-		(cor->map[ori + ((ori + p2 + p3 + 2) % MEM_SIZE - ori) % IDX_MOD] << 8) +
-		cor->map[ori + ((ori + p2 + p3 + 3) % MEM_SIZE - ori) % IDX_MOD];
+		champ->reg[p3 - 1] = (cor->map[(ori + (p1 + p2) % IDX_MOD) % MEM_SIZE] << 24) +
+		(cor->map[(ori + (p1 + p2) % IDX_MOD + 1) % MEM_SIZE] << 16) +
+		(cor->map[(ori + (p1 + p2) % IDX_MOD + 2) % MEM_SIZE] << 8) +
+		cor->map[(ori + (p1 + p2) % IDX_MOD + 3) % MEM_SIZE];
 		if (champ->reg[p3 - 1] == 0)
 			champ->carry = 1;
 		else

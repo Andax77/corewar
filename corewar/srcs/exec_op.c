@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 11:19:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 19:57:09 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,13 @@ void	init_op(void (**f)(t_cor*, t_champ*))
 
 int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code)
 {
-	int type;
-	int ret;
+	int		type;
+	int		ret;
 
 	ret = 0;
 	type = (ocp >> decalage) & 3;
 	if (type == REG_CODE)
-	{
 		ret = cor->map[++champ->pc % MEM_SIZE];
-	}
 	else if (type == DIR_CODE)
 	{
 		if (g_op_tab[op_code - 1].dir_size == 0)
@@ -59,7 +57,7 @@ int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_cod
 		ret += (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	}
 	else
-		ret = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
+		ret = (short)((cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE]);//cast useless ?
 	return (ret);
 }
 
