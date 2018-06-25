@@ -2,6 +2,10 @@
 .comment "I'M ALIIIIVE"
 
 		aff r1
+		aff r1
+		aff r1
+		aff r1
+		aff r1
 		ld %42, r2
 		ld %42, r2
 		aff r2

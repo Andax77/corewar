@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/22 15:18:54 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/25 01:35:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,26 @@ void		draw_uchar(int pos, unsigned char val)
 	free(c);
 }
 
+short		get_color(int pos)
+{
+	int		x;
+	int		y;
+	int		i;
+
+	x = 3;
+	y = 2;
+	i = 0;
+	while (y < 66)
+	{
+		if (i++ == pos % MEM_SIZE)
+			return ((mvinch(y, x) & A_COLOR) >> 8);
+		x = x + 3;
+		if (x >= 194 && (x = 3))
+			y++;
+	}
+	return (0);
+}
+
 static void	draw_infos(t_list *champs)
 {
 	char	*tmp;
@@ -163,7 +183,7 @@ static void	init_colors(t_list *champs)
 	while (champs)
 	{
 		i = ((t_champ*)champs->content)->id;
-		init_pair(i + 40, COLOR_WHITE, i);
+		init_pair(i + 40, 17, i);
 		champs = champs->next;
 	}
 }
@@ -173,6 +193,7 @@ int			init_ncurses(t_cor *cor)
 	if (initscr())
 	{
 		start_color();
+		curs_set(0);
 		init_color(COLOR_MAGENTA, 500, 500, 500);
 		init_color(17, 1000, 1000, 1000);
 		init_pair(1, COLOR_MAGENTA, COLOR_MAGENTA);
@@ -186,8 +207,8 @@ int			init_ncurses(t_cor *cor)
 		draw_infos(cor->champs);
 		init_colors(cor->champs);
 		draw_names(cor->champs);
-		curs_set(0);
 		print_player(4, ft_lstcount(cor->champs));
+		attron(COLOR_PAIR(3));
 		return (1);
 	}
 	return (0);

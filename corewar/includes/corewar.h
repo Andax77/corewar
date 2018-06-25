@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/21 17:38:48 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/25 16:01:02 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ typedef struct		s_champ
 	int				carry;
 	int				r_cy;
 	int				lives;
+	int				v_lives;
 	int				last_live;
 	int				last_live_pc;
+	int				last_st_pc;
+	int				last_st;
+	int				last_color;
 	int				live;
 	int				father;
 }					t_champ;
@@ -77,6 +81,7 @@ int					init(char **argv, t_cor *cor);
 void				init_op(void (**f)(t_cor*, t_champ*));
 int					recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code);
 void				draw_uchar(int pos, unsigned char val);
+short				get_color(int pos);
 void				draw_line(int line_idx, int col_idx, char *line);
 int					init_ncurses(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
@@ -89,6 +94,7 @@ int					check_op_len(t_champ *t_champ);
 void				order_to_start(t_list **champs);
 void				cycle(t_cor *cor);
 int					change_r_cy(t_cor *cor, t_champ *champ);
+int					check_live_value(t_cor *cor, int pc);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 
@@ -145,7 +151,7 @@ void				ft_aff(t_cor *cor, t_champ *champ);
 /*
 PRINT WINNER
 */
-void				print_winner(t_cor *cor);
+void				print_intro(t_cor *cor);
 char				*get_name_champ(t_cor *cor);
 char				*color_player(int id);
 

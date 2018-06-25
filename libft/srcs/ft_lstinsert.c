@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 18:08:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 18:33:10 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/24 14:44:04 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_lstinsert(t_list **lst, t_list *new, int i)
 		next = (*lst)->next;
 		(*lst)->next = new;
 		new->next = next;
+		*lst = tmp;
 	}
 	else if (*lst && new && i == 0)
 		ft_lstadd(lst, new);
