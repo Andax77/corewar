@@ -130,12 +130,15 @@ void	ft_ldi(t_cor *cor, t_champ *champ)
 		p1 = (p1 > 0 && p1 <= REG_NUMBER) ? champ->reg[p1 - 1] : 0;
 	if (((ocp >> 4) & 3) == REG_CODE)
 		p2 = (p2 > 0 && p2 <= REG_NUMBER) ? champ->reg[p2 - 1] : 0;
+	p2 = ((p1 + p2) % IDX_MOD) % MEM_SIZE;
+	if ((p2 + ori) < 0)
+		p2 += MEM_SIZE;
 	if (p3 > 0 && p3 <= REG_NUMBER)
 	{
-		champ->reg[p3 - 1] = (cor->map[(ori + (p1 + p2) % IDX_MOD) % MEM_SIZE] << 24) +
-		(cor->map[(ori + (p1 + p2) % IDX_MOD + 1) % MEM_SIZE] << 16) +
-		(cor->map[(ori + (p1 + p2) % IDX_MOD + 2) % MEM_SIZE] << 8) +
-		cor->map[(ori + (p1 + p2) % IDX_MOD + 3) % MEM_SIZE];
+		champ->reg[p3 - 1] = (cor->map[(ori + p2) % MEM_SIZE] << 24) +
+		(cor->map[(ori + p2 + 1) % MEM_SIZE] << 16) +
+		(cor->map[(ori + p2 + 2) % MEM_SIZE] << 8) +
+		cor->map[(ori + p2 + 3) % MEM_SIZE];
 		if (champ->reg[p3 - 1] == 0)
 			champ->carry = 1;
 		else
