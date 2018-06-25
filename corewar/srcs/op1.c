@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 13:46:24 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/25 14:48:38 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void	ft_live(t_cor *cor, t_champ *champ)
 //			ft_printf("%s %d\n", ((t_champ*)tmp->content)->name, p);
 			((t_champ*)tmp->content)->lives++;
 			if ((t_champ*)tmp->content != champ)// pour pas faire mourir le fils////////////////////////
-			{
 				champ->lives++;
-				champ->live++;
-			}
 			((t_champ*)tmp->content)->last_live = cor->cycle;
 			get_color_heart(1, "prochain draw heart pour Un live", ((t_champ*)tmp->content)->v_id);
 			((t_champ*)tmp->content)->live++;
