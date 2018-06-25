@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/24 22:22:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 01:35:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ int			init_ncurses(t_cor *cor)
 	if (initscr())
 	{
 		start_color();
+		curs_set(0);
 		init_color(COLOR_MAGENTA, 500, 500, 500);
 		init_color(17, 1000, 1000, 1000);
 		init_pair(1, COLOR_MAGENTA, COLOR_MAGENTA);
@@ -206,8 +207,8 @@ int			init_ncurses(t_cor *cor)
 		draw_infos(cor->champs);
 		init_colors(cor->champs);
 		draw_names(cor->champs);
-		curs_set(0);
 		print_player(4, ft_lstcount(cor->champs));
+		attron(COLOR_PAIR(3));
 		return (1);
 	}
 	return (0);
