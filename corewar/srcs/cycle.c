@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/24 22:35:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 11:06:18 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	clean(t_cor *cor, t_list *champs)
 {
 	t_champ		*cur_champ;
 	int			id;
-	//short		color;
 
 	while (champs)
 	{
@@ -54,8 +53,7 @@ void	clean(t_cor *cor, t_list *champs)
 			}
 			else
 			{
-				//color = get_color(cur_champ->last_pc);
-				attron(COLOR_PAIR(2 + cur_champ->id));
+				attron(COLOR_PAIR(cur_champ->last_color));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 			}
 		}
@@ -66,6 +64,7 @@ void	clean(t_cor *cor, t_list *champs)
 void	cycle_job(t_cor *cor, t_champ *cur_champ)
 {
 	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
+	int			color;
 
 	init_op(f);
 	if (cor->cycle != 0)
@@ -82,7 +81,11 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 	// Print process pos
 	if (cor->opt->v)
 	{
-		attron(COLOR_PAIR(20 + cur_champ->id));
+		color = cur_champ->last_color;
+		if (color && color != 2 && color < 20)
+			color += 18;
+		cur_champ->last_color = get_color(cur_champ->pc);
+		attron(COLOR_PAIR(color));
 		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 	}
 	cur_champ->last_pc = cur_champ->pc;
@@ -219,7 +222,7 @@ void	print_infos(t_cor *cor)
 	draw_line(31, 11, nbr_live);
 	draw_line(33, 13, "    ");
 	draw_line(33, 13, max_checks);
-	if (cor->cycle == 1)
+	if (cor->cycle == 0)
 	{
 		attron(COLOR_PAIR(17));
 		draw_line(4, 22, "50");

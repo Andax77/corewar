@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/21 19:31:29 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/25 03:27:22 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	ft_aff(t_cor *cor, t_champ *champ)
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
-void	ft_move(t_cor *cor, t_champ  *champ)
+void	ft_move(t_cor *cor, t_champ *champ)
 {
 	(void)cor;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
