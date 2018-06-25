@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 14:48:38 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/25 16:02:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
 		(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
+	if (p == champ->id)
+		champ->lives++;
+	champ->v_lives++;
 	while (tmp)
 	{
-		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0)
+		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0 && (t_champ*)tmp->content != champ)
 		{
 //			ft_printf("%s %d\n", ((t_champ*)tmp->content)->name, p);
 			((t_champ*)tmp->content)->lives++;
-			if ((t_champ*)tmp->content != champ)// pour pas faire mourir le fils////////////////////////
-				champ->lives++;
 			((t_champ*)tmp->content)->last_live = cor->cycle;
 			get_color_heart(1, "prochain draw heart pour Un live", ((t_champ*)tmp->content)->v_id);
 			((t_champ*)tmp->content)->live++;
