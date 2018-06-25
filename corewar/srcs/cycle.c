@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 03:26:11 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 11:06:18 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	clean(t_cor *cor, t_list *champs)
 void	cycle_job(t_cor *cor, t_champ *cur_champ)
 {
 	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
+	int			color;
 
 	init_op(f);
 	if (cor->cycle != 0)
@@ -80,8 +81,11 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 	// Print process pos
 	if (cor->opt->v)
 	{
+		color = cur_champ->last_color;
+		if (color && color != 2 && color < 20)
+			color += 18;
 		cur_champ->last_color = get_color(cur_champ->pc);
-		attron(COLOR_PAIR(20 + cur_champ->id));
+		attron(COLOR_PAIR(color));
 		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 	}
 	cur_champ->last_pc = cur_champ->pc;
