@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/25 11:06:58 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 11:42:10 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,6 @@ int				check_champ(t_champ **champ, char *path, int nb)
 	(*champ)->reg[0] = nb;
 	(*champ)->id = ++id;
 	(*champ)->v_id = nb;
-	(*champ)->last_color = id + 20;
+	(*champ)->last_color = id + 2;
 	return (SUCCESS);
 }

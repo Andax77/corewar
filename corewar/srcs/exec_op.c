@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 03:27:22 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 11:19:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		change_r_cy(t_cor *cor, t_champ *champ)
 {
 	if (cor->map[champ->pc] <= 0 || cor->map[champ->pc] > 16)
-		return (0);
+		return (1);
 	else
 		return (g_op_tab[cor->map[champ->pc] - 1].nb_cycles);
 }
