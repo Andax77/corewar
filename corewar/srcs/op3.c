@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 14:18:14 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/25 16:05:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 	if (p1 > 0 && p1 <= REG_NUMBER)
 	{
 		cor->map[ori + ((ori + p2 + p3) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1] >> 24;
-		if (p1 == 15)//////////////////////////////////////////////////////print
-			ft_printf("->%x<- |%x|", champ->reg[p1 - 1], cor->map[ori + ((ori + p2 + p3) % MEM_SIZE - ori) % IDX_MOD]);
+		//if (p1 == 15)//////////////////////////////////////////////////////print
+			//ft_printf("->%x<- |%x|", champ->reg[p1 - 1], cor->map[ori + ((ori + p2 + p3) % MEM_SIZE - ori) % IDX_MOD]);
 		cor->map[ori + ((ori + p2 + p3 + 1) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1] >> 16;
 		cor->map[ori + ((ori + p2 + p3 + 2) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1] >> 8;
 		cor->map[ori + ((ori + p2 + p3 + 3) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1];
