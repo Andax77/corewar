@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/10 18:00:54 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/22 20:23:10 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,10 @@ static int		ft_get_label_name(t_instru *inst, char *str)
 	if (ft_strchr(str, LABEL_CHAR))
 	{
 		i = -1;
-		while (str[++i] && str[i] != LABEL_CHAR)
+		while (str[++i] && str[i] != LABEL_CHAR && str[i] != COMMENT_CHAR)
 			;
-		if (i == 0)
-			return (ERROR);
-		if (str[i - 1] == DIRECT_CHAR)
+		if (str[i - 1] == DIRECT_CHAR || str[i - 1] == ' ' || str[i - 1] == '\t'
+					|| str[i - 1] == SEPARATOR_CHAR || str[i] == COMMENT_CHAR)
 			return (SUCCESS);
 		if (!(inst->label_name = ft_strndup(str, i)))
 			exit(EXIT_FAILURE);
