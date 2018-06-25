@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 02:33:21 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 02:56:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	clean(t_cor *cor, t_list *champs)
 			}
 			else
 			{
-				cur_champ->last_color = get_color(cur_champ->last_pc);
-				attron(COLOR_PAIR(cur_champ->id + 2));
+				attron(COLOR_PAIR(cur_champ->last_color));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 			}
 		}

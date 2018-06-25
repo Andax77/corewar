@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 02:03:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 02:49:25 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	ft_fork(t_cor *cor, t_champ *champ)
 	legacy(cor, champ, champ->id, pc);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	if (cor->opt->v)
-	{ft_printf("fork\n");
-		champ->last_color = get_color(pc);
+	{
+		//ft_printf("fork\n");
 		attron(COLOR_PAIR(20 + champ->id));
 		draw_uchar(pc, cor->map[pc]);
 	}
@@ -157,8 +157,8 @@ void	ft_lfork(t_cor *cor, t_champ *champ)
 	legacy(cor, champ, champ->id, pc);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	if (cor->opt->v)
-	{ft_printf("l_fork\n");
-		champ->last_color = get_color(pc);
+	{
+		//ft_printf("l_fork\n");
 		attron(COLOR_PAIR(20 + champ->id));
 		draw_uchar(pc, cor->map[pc]);
 	}
