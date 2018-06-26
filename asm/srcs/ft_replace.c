@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 12:18:34 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/29 17:20:25 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/22 20:10:28 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ static int		ft_replace_direct_param(t_champ *champ, t_instru *cur, int i)
 	return (SUCCESS);
 }
 
+static int		ft_replace_indirect_param(t_champ *champ, t_instru *cur, int i)
+{
+	int			addr;
+
+	if ((addr = ft_get_addr_label(champ, cur->params[i] + 1)) == ERROR)
+		return (ft_error(champ, "error: indirect address has no match"));
+	addr -= cur->inst_addr;
+	free(cur->params[i]);
+	if (!(cur->params[i] = ft_itoa(addr)))
+		exit(EXIT_FAILURE);
+	return (SUCCESS);
+}
+
 static int		ft_replace_direct(t_champ *champ)
 {
 	int			i;
@@ -58,13 +71,18 @@ static int		ft_replace_direct(t_champ *champ)
 	while (tmp != NULL)
 	{
 		cur = (t_instru *)tmp->content;
-		if (cur->params)
+		if ((i = -1) && cur->params)
 		{
-			i = -1;
 			while (cur->params[++i])
 				if (ft_get_t_param(cur->params[i]) == T_DIR &&
-										ft_strchr(cur->params[i], LABEL_CHAR))
+											!ft_strisdigit(cur->params[i] + 2))
+				{
 					if (ft_replace_direct_param(champ, cur, i) == ERROR)
+						return (ERROR);
+				}
+				else if (ft_get_t_param(cur->params[i]) == T_IND &&
+											!ft_strisdigit(cur->params[i] + 1))
+					if (ft_replace_indirect_param(champ, cur, i) == ERROR)
 						return (ERROR);
 		}
 		tmp = tmp->next;
