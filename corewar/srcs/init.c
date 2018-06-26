@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/25 01:35:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/26 22:10:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,26 @@ static void	init_colors(t_list *champs)
 	}
 }
 
+static void	init_cmap(t_cor *cor)
+{
+	int		i;
+	t_list	*champs;
+	int		nb;
+	int		id;
+
+	i = -1;
+	id = 0;
+	champs = cor->champs;
+	nb = ft_lstcount(champs);
+	cor->c_map = (short*)ft_malloc(MEM_SIZE * sizeof(short), EXIT_FAILURE);
+	while (++i < MEM_SIZE)
+		if (champs && i >= id * (MEM_SIZE / nb) && i < (id * (MEM_SIZE / nb)) +\
+				(int)((t_champ *)champs->content)->op_nb)
+			cor->c_map[i] = 3 + id;
+		else
+			cor->c_map[i] = 2;
+}
+
 int			init_ncurses(t_cor *cor)
 {
 	if (initscr())
@@ -201,6 +221,7 @@ int			init_ncurses(t_cor *cor)
 		attron(COLOR_PAIR(1));
 		draw_borders();
 		attron(COLOR_PAIR(2));
+		init_cmap(cor);
 		draw_map(cor);
 		init_pair(17, 17, COLOR_BLACK);
 		attron(COLOR_PAIR(17));

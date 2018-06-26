@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/21 18:10:22 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/26 21:43:02 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	free_cor(t_cor *cor)
 			ft_lstdel(&(cor->champs), del_champ);
 		if (cor->map)
 			free(cor->map);
+		if (cor->c_map)
+			free(cor->c_map);
 		free(cor);
 	}
 }
