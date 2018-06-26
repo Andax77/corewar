@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/26 22:13:18 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/27 01:36:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,8 +259,11 @@ int		check_lives(t_cor *cor)
 		if (!((t_champ*)champs->content)->v_lives)
 		{
 			((t_champ*)champs->content)->r_cy = -1;
-			attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
-			draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
+			if (cor->opt->v)
+			{
+				attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
+				draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
+			}
 		}
 		((t_champ*)champs->content)->lives = 0;
 		((t_champ*)champs->content)->v_lives = 0;
@@ -308,6 +311,7 @@ void	cycle(t_cor *cor)
 					cycle_job(cor, cur_champ);
 				else
 					cur_champ->r_cy--;
+//ft_printf("carry = %d\n", cur_champ->carry);
 			}
 			champs = champs->next;
 		}
