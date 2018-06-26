@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 16:02:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/25 19:59:17 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	ft_live(t_cor *cor, t_champ *champ)
 
 void	ft_ld(t_cor *cor, t_champ *champ)
 {
-	int p1;
-	int p2;
-	int	ocp;
-	int	ori;
+	int		p1;
+	int		p2;
+	int		ocp;
+	int		ori;
 
 	ori = champ->pc;
 	ocp = cor->map[++champ->pc % MEM_SIZE];
@@ -60,12 +60,15 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 			champ->reg[p2 - 1] = p1;
 		else
 		{
-			champ->reg[p2 - 1] = (cor->map[ori + ((ori + p1) % MEM_SIZE - ori) % IDX_MOD] << 24) +
-				(cor->map[ori + ((ori + p1) % MEM_SIZE - ori + 1) % IDX_MOD] << 16) +
-				(cor->map[ori + ((ori + p1) % MEM_SIZE - ori + 2) % IDX_MOD] << 8) +
-				cor->map[ori + ((ori + p1) % MEM_SIZE - ori + 3) % IDX_MOD];
+			p1 = ((short)p1 % IDX_MOD) % MEM_SIZE;
+			if ((ori + p1) < 0)
+				p1 += MEM_SIZE;
+			champ->reg[p2 - 1] = (cor->map[(ori + p1) % MEM_SIZE] << 24) +
+				(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) +
+				(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) +
+				cor->map[(ori + p1 + 3) % MEM_SIZE];
 		}
-		if (p1 == 0)
+		if (champ->reg[p2 - 1] == 0)
 			champ->carry = 1;
 		else
 			champ->carry = 0;
@@ -77,11 +80,11 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 
 void	ft_st(t_cor *cor, t_champ *champ)
 {
-	int p1;
-	int p2;
-	int	ocp;
-	int	ori;
-	int	i;
+	int		p1;
+	short	p2;
+	int		ocp;
+	int		ori;
+	int		i;
 
 	i = -1;
 	ori = champ->pc;
@@ -97,17 +100,20 @@ void	ft_st(t_cor *cor, t_champ *champ)
 		}
 		else
 		{
-			cor->map[ori + ((ori + p2) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1] >> 24;
-			cor->map[ori + ((ori + p2 + 1) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1] >> 16;
-			cor->map[ori + ((ori + p2 + 2) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1] >> 8;
-			cor->map[ori + ((ori + p2 + 3) % MEM_SIZE - ori) % IDX_MOD] = champ->reg[p1 - 1];
+			p2 = ((short)p2 % IDX_MOD) % MEM_SIZE;
+			if ((ori + p2) < 0)
+				p2 += MEM_SIZE;
+			cor->map[(ori + p2) % MEM_SIZE] = champ->reg[p1 - 1] >> 24;
+			cor->map[(ori + p2 + 1) % MEM_SIZE] = champ->reg[p1 - 1] >> 16;
+			cor->map[(ori + p2 + 2) % MEM_SIZE] = champ->reg[p1 - 1] >> 8;
+			cor->map[(ori + p2 + 3) % MEM_SIZE] = champ->reg[p1 - 1];
 			if (cor->opt->v)
 			{
 				attron(COLOR_PAIR(2 + champ->id) | A_BOLD);
-				draw_uchar(ori + ((ori + p2) % MEM_SIZE - ori) % IDX_MOD, champ->reg[p1 - 1] >> 24);
-				draw_uchar(ori + ((ori + p2 + 1) % MEM_SIZE - ori) % IDX_MOD, champ->reg[p1 - 1] >> 16);
-				draw_uchar(ori + ((ori + p2 + 2) % MEM_SIZE - ori) % IDX_MOD, champ->reg[p1 - 1] >> 8);
-				draw_uchar(ori + ((ori + p2 + 3) % MEM_SIZE - ori) % IDX_MOD, champ->reg[p1 - 1]);
+				draw_uchar((ori + p2) % MEM_SIZE, champ->reg[p1 - 1] >> 24);
+				draw_uchar((ori + p2 + 1) % MEM_SIZE, champ->reg[p1 - 1] >> 16);
+				draw_uchar((ori + p2 + 2) % MEM_SIZE, champ->reg[p1 - 1] >> 8);
+				draw_uchar((ori + p2 + 3) % MEM_SIZE, champ->reg[p1 - 1]);
 				attroff(A_BOLD);
 				if (champ->last_st)
 					while (++i < 4)
