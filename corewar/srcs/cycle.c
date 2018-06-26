@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/26 18:57:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/26 20:01:57 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 			color += 18;
 		else if (color > 40)
 			color -= 20;
+		else if (color == 2)
+			color = cur_champ->id + 2;
 		cur_champ->last_color = get_color(cur_champ->pc);
 		attron(COLOR_PAIR(color));
 		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);

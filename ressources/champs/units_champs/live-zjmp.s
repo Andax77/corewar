@@ -1,5 +1,5 @@
-.name			"live"
-.comment		"live"
+.name			"live-zjmp"
+.comment		"live-zjmp"
 
 live:		live %42
 			sti  r1, %:live, %1
