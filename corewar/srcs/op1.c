@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/26 18:38:10 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/26 22:10:08 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,19 @@ void	ft_st(t_cor *cor, t_champ *champ)
 			{
 				if (champ->last_st)
 					while (++i < 4)
+					{
+						attron(COLOR_PAIR(cor->c_map[champ->last_st_pc + i]));
 						draw_uchar(champ->last_st_pc + i, cor->map[champ->last_st_pc + i]);
+					}
 				attron(COLOR_PAIR(2 + champ->id) | A_BOLD);
 				draw_uchar((ori + p2) % MEM_SIZE, champ->reg[p1 - 1] >> 24);
+				cor->c_map[(ori + p2) % MEM_SIZE] = champ->id + 2;
 				draw_uchar((ori + p2 + 1) % MEM_SIZE, champ->reg[p1 - 1] >> 16);
+				cor->c_map[(ori + p2 + 1) % MEM_SIZE] = champ->id + 2;
 				draw_uchar((ori + p2 + 2) % MEM_SIZE, champ->reg[p1 - 1] >> 8);
+				cor->c_map[(ori + p2 + 2) % MEM_SIZE] = champ->id + 2;
 				draw_uchar((ori + p2 + 3) % MEM_SIZE, champ->reg[p1 - 1]);
+				cor->c_map[(ori + p2 + 3) % MEM_SIZE] = champ->id + 2;
 				attroff(A_BOLD);
 				champ->last_st = 1;
 				champ->last_st_pc = (ori + p2) % MEM_SIZE;

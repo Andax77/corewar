@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/26 18:57:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/26 22:13:18 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	clean(t_cor *cor, t_list *champs)
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 				if (cur_champ->lives > 0 && cur_champ->last_pc != cur_champ->last_live_pc)
 				{
-					attron(COLOR_PAIR(2 + cur_champ->id));
+					attron(COLOR_PAIR(cor->c_map[cur_champ->last_live_pc]));
 					draw_uchar(cur_champ->last_live_pc, cor->map[cur_champ->last_live_pc]);
 				}
 			}
 			else
 			{
-				attron(COLOR_PAIR(cur_champ->last_color));
+				attron(COLOR_PAIR(cor->c_map[cur_champ->last_pc]));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 			}
 		}
@@ -64,7 +64,6 @@ void	clean(t_cor *cor, t_list *champs)
 void	cycle_job(t_cor *cor, t_champ *cur_champ)
 {
 	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
-	int			color;
 
 	init_op(f);
 	if (cor->cycle != 0)
@@ -81,13 +80,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 	// Print process pos
 	if (cor->opt->v)
 	{
-		color = cur_champ->last_color;
-		if (color && color != 2 && color < 20)
-			color += 18;
-		else if (color > 40)
-			color -= 20;
-		cur_champ->last_color = get_color(cur_champ->pc);
-		attron(COLOR_PAIR(color));
+		attron(COLOR_PAIR(cur_champ->id + 20));
 		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 	}
 	cur_champ->last_pc = cur_champ->pc;
@@ -266,7 +259,7 @@ int		check_lives(t_cor *cor)
 		if (!((t_champ*)champs->content)->v_lives)
 		{
 			((t_champ*)champs->content)->r_cy = -1;
-			attron(COLOR_PAIR(((t_champ*)champs->content)->last_color));
+			attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
 			draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
 		}
 		((t_champ*)champs->content)->lives = 0;
