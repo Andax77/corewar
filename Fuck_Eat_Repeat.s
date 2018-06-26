@@ -1,8 +1,7 @@
 .name		"Fuck, Eat, Repeat"
 .comment	"Basics..."
 
-fuck:			live %1
-				live %1
+fuck:			
 
 eat:			sti r1, %:live, %1
 				ld  %1, r2
