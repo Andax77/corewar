@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/09 15:05:17 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/22 19:35:41 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ static void	get_champ_name_comment_other_lines(char **member, int fd)
 	tmp = NULL;
 	while (get_next_line(fd, &tmp) == GNL_SUCCESS)
 	{
-		if (!strchr(tmp, '"'))
-			if (!(*member = ft_str_and_free_join(*member, "\n")))
-				exit(EXIT_FAILURE);
+		if (!(*member = ft_str_and_free_join(*member, "\n")))
+			exit(EXIT_FAILURE);
 		if (!(*member = ft_str_and_free_join(*member, tmp)))
 			exit(EXIT_FAILURE);
 		if (strchr(tmp, '"'))

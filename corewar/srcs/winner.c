@@ -59,7 +59,7 @@ char		*get_name_champ(t_cor *cor)
 	champ = cor->champs;
 	while (champ)
 	{
-		if (((t_champ*)champ->content)->v_id == cor->winner && \
+		if (((t_champ*)champ->content)->id == cor->winner && \
 			((t_champ*)champ->content)->father == 0)
 			winner = (t_champ*)champ->content;
 		champ = champ->next;
