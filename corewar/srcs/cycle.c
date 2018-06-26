@@ -259,8 +259,11 @@ int		check_lives(t_cor *cor)
 		if (!((t_champ*)champs->content)->v_lives)
 		{
 			((t_champ*)champs->content)->r_cy = -1;
-			attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
-			draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
+			if (cor->opt->v)
+			{
+				attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
+				draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
+			}
 		}
 		((t_champ*)champs->content)->lives = 0;
 		((t_champ*)champs->content)->v_lives = 0;

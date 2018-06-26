@@ -26,6 +26,7 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	if (p == champ->id)
 		champ->lives++;
 	champ->v_lives++;
+	champ->last_live = cor->cycle;
 	while (tmp)
 	{
 		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0 && (t_champ*)tmp->content != champ)
