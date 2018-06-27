@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/27 00:48:02 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/27 17:21:36 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_live(t_cor *cor, t_champ *champ)
 			get_color_heart(1, "Faire un live", ((t_champ*)tmp->content)->id);
 			((t_champ*)tmp->content)->live++;
 			cor->winner = ((t_champ*)tmp->content)->id;
-			((t_champ*)tmp->content)->last_live_pc = champ->pc;
+			((t_champ*)tmp->content)->last_live_pc = ori;
 			((t_champ*)tmp->content)->last_live = cor->cycle;
 			break ;
 		}
