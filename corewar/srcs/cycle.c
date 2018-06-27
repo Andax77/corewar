@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/27 19:54:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/27 20:05:30 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,10 +273,6 @@ int		check_lives(t_cor *cor)
 		{
 			if (((t_champ*)champs->content)->r_cy > 0)
 				((t_champ*)champs->content)->to_kill = 1;
-			else
-			{
-
-			}
 		}
 		((t_champ*)champs->content)->lives = 0;
 		((t_champ*)champs->content)->v_lives = 0;
