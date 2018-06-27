@@ -23,9 +23,12 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
 		(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
-	if (p == champ->id)
+	if (p == champ->v_id)
 		champ->lives++;
 	champ->v_lives++;
+	champ->last_live = cor->cycle;
+	if (champ->father == 0 && champ->v_id == p)
+		cor->winner = champ->id;
 	while (tmp)
 	{
 		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0 && (t_champ*)tmp->content != champ)
