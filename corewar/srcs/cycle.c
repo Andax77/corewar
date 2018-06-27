@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/27 17:19:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/27 18:29:55 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ void	clean(t_cor *cor, t_list *champs)
 			{
 				attron(COLOR_PAIR(40 + id));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
-				if (cur_champ->lives > 0)
+				if (cur_champ->lives > 0 && cur_champ->last_pc != cur_champ->last_live_pc)
 				{
 					attron(COLOR_PAIR(cor->c_map[cur_champ->last_live_pc]));
 					draw_uchar(cur_champ->last_live_pc, cor->map[cur_champ->last_live_pc]);
 				}
+				cur_champ->last_live_pc = cur_champ->last_pc;
 			}
 			else
 			{
@@ -316,7 +317,7 @@ void	cycle(t_cor *cor)
 			champs = champs->next;
 		}
 		// Check champs lives
-		if (cor->cycle % cor->cycle_to_die == 0 && cor->cycle > 0)
+		if (cor->cycle_to_die && cor->cycle && !cor->cycle % cor->cycle_to_die)
 			ret = check_lives(cor);
 		// Print infos
 		if (cor->opt->v)
