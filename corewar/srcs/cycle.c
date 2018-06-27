@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/27 18:29:55 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/27 19:54:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	clean(t_cor *cor, t_list *champs)
 		cur_champ = champs->content;
 		if (cur_champ->r_cy == 0)
 		{
+			
 			if ((id = check_live_value(cor, cur_champ->last_pc)))
 			{
 				attron(COLOR_PAIR(40 + id));
@@ -75,11 +76,22 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 		else
 			f[0](cor, cur_champ);
 	}
+		if (cur_champ->to_kill == 0)
+		{
+			cur_champ->r_cy = -1;
+			if (cor->opt->v)
+			{
+				attron(COLOR_PAIR(cor->c_map[cur_champ->pc]));
+				draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			}
+		}
 	// Change r_cy
 	if (cor->map[cur_champ->pc] >= 0 && cor->map[cur_champ->pc] <= 16)
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+	if (cur_champ->to_kill)
+		cur_champ->r_cy = -1;
 	// Print process pos
-	if (cor->opt->v)
+	else if (cor->opt->v)
 	{
 		attron(COLOR_PAIR(cur_champ->id + 20));
 		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
@@ -259,11 +271,11 @@ int		check_lives(t_cor *cor)
 		nbr_live += ((t_champ*)champs->content)->lives;
 		if (!((t_champ*)champs->content)->v_lives)
 		{
-			((t_champ*)champs->content)->r_cy = -1;
-			if (cor->opt->v)
+			if (((t_champ*)champs->content)->r_cy > 0)
+				((t_champ*)champs->content)->to_kill = 1;
+			else
 			{
-				attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
-				draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
+
 			}
 		}
 		((t_champ*)champs->content)->lives = 0;
@@ -273,8 +285,8 @@ int		check_lives(t_cor *cor)
 	if (nbr_live >= NBR_LIVE || cor->checks == MAX_CHECKS)
 	{
 		cor->cycle_to_die -= CYCLE_DELTA;
-		if (cor->checks == MAX_CHECKS)
-			cor->checks = 0;
+		//if (cor->checks == MAX_CHECKS)
+		cor->checks = 0;
 	}
 	else
 		cor->checks++;
@@ -302,6 +314,9 @@ void	cycle(t_cor *cor)
 		// Clean cursor
 		if (cor->opt->v)
 			clean(cor, champs);
+		// Check champs lives
+		if (cor->cycle && cor->cycle_to_die && cor->cycle % cor->cycle_to_die == 0)
+			ret = check_lives(cor);
 		while (champs)
 		{
 			cur_champ = champs->content;
@@ -316,9 +331,6 @@ void	cycle(t_cor *cor)
 			}
 			champs = champs->next;
 		}
-		// Check champs lives
-		if (cor->cycle_to_die && cor->cycle && !cor->cycle % cor->cycle_to_die)
-			ret = check_lives(cor);
 		// Print infos
 		if (cor->opt->v)
 			print_infos(cor);
