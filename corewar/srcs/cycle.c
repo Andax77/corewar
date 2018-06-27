@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/26 22:13:18 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/27 01:36:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ void	cycle(t_cor *cor)
 					cycle_job(cor, cur_champ);
 				else
 					cur_champ->r_cy--;
+//ft_printf("carry = %d\n", cur_champ->carry);
 			}
 			champs = champs->next;
 		}
