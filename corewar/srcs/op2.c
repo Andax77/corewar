@@ -139,12 +139,6 @@ void	ft_ldi(t_cor *cor, t_champ *champ)
 		(cor->map[(ori + p2 + 1) % MEM_SIZE] << 16) +
 		(cor->map[(ori + p2 + 2) % MEM_SIZE] << 8) +
 		cor->map[(ori + p2 + 3) % MEM_SIZE];
-		if (champ->reg[p3 - 1] == 0)
-			champ->carry = 1;
-		else
-			champ->carry = 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
