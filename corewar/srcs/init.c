@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/26 22:10:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/27 13:02:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,12 @@ static void	init_cmap(t_cor *cor)
 				(int)((t_champ *)champs->content)->op_nb)
 			cor->c_map[i] = 3 + id;
 		else
+		{
+			if (champs->next && i == (id + 1) * (MEM_SIZE / nb) - 1)
+				if (++id < MAX_PLAYERS)
+					champs = champs->next;
 			cor->c_map[i] = 2;
+		}
 }
 
 int			init_ncurses(t_cor *cor)
