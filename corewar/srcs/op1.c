@@ -132,13 +132,7 @@ void	ft_st(t_cor *cor, t_champ *champ)
 				champ->last_st_pc = (ori + p2) % MEM_SIZE;
 			}
 		}
-		if (champ->reg[p1 - 1] == 0)
-			champ->carry = 1;
-		else
-			champ->carry = 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
