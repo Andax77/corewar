@@ -17,7 +17,7 @@ eat:			sti r1, %:repeat, %4			# names live
 repeat:			fork	%:eat					# fork back to eat
 				live %42
 				sub r5, r6, r7					# catch the last son's adress
-				ld  %25, r8						# calc offset for next zjmp
+				ld  %20, r8						# calc offset for next zjmp
 				add r7, r8, r7					# calc address for next zjmp
 				sti r7, %:repeat, %53			# write address for next zjmp
 				ld %9, r9						# load jump opcode
