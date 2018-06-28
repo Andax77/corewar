@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/28 17:24:52 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 20:36:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,34 @@ int		check_lives(t_cor *cor)
 	return (1);
 }
 
-void	cycle(t_cor *cor)
+static void	dump(t_cor *cor)
+{
+	int		x;
+	int		y;
+	int		i;
+	int		j;
+
+	y = 0;
+	x = 0;
+	i = 0;
+	j = 0;
+	while (y < 64)
+	{
+		(y) ? ft_printf("%#06x :", j) : ft_putstr("0x0000 :");
+		while (x < 64)
+		{
+			ft_printf(" %02x", cor->map[i]);
+			x++;
+			i++;
+		}
+		x = 0;
+		y++;
+		j += 64;
+		ft_putchar('\n');
+	}
+}
+
+void		cycle(t_cor *cor)
 {
 	t_list		*champs;
 	t_champ		*cur_champ;
@@ -319,6 +346,12 @@ void	cycle(t_cor *cor)
 //ft_printf("carry = %d\n", cur_champ->carry);
 			}
 			champs = champs->next;
+		}
+		// Dump memory in term at cor->opt->d cycles
+		if (cor->opt->d && cor->opt->d == cor->cycle)
+		{
+			dump(cor);
+			break ;
 		}
 		// Print infos
 		if (cor->opt->v)
