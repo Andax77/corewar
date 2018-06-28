@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/28 19:11:33 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/28 21:41:52 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char		*ft_get_name_op_code(t_instru *inst, char *str)
 	return (ptr);
 }
 
-static void		ft_get_op_code(t_instru *inst, char *str)
+static int		ft_get_op_code(t_instru *inst, char *str)
 {
 	int		i;
 	char	*ptr;
@@ -73,24 +73,27 @@ static void		ft_get_op_code(t_instru *inst, char *str)
 		}
 	}
 	free(ptr);
+	if (inst->op_code == 0 && inst->label_name == NULL)
+		return (ERROR);
+	return (SUCCESS);
 }
 
 static int		ft_get_label_name(t_instru *inst, char *str)
 {
 	int		i;
 
-//	ft_printf("{red}%s{eoc}\n", str);///////////////////
 	if (ft_strchr(str, LABEL_CHAR))
 	{
+		while (*str && (*str == ' ' || *str == '\t'))
+			str++;
 		i = -1;
-		while (str[++i] && str[i] != LABEL_CHAR && str[i] != COMMENT_CHAR)
+		while (str[++i] && str[i] != LABEL_CHAR)
 			;
 		if (str[i - 1] == DIRECT_CHAR || str[i - 1] == ' ' || str[i - 1] == '\t'
-					|| str[i - 1] == SEPARATOR_CHAR || str[i] == COMMENT_CHAR)
+					|| str[i - 1] == SEPARATOR_CHAR)
 			return (SUCCESS);
 		if (!(inst->label_name = ft_strndup(str, i)))
 			exit(EXIT_FAILURE);
-		ft_printf("%s\n", inst->label_name);
 		i = -1;
 		while (inst->label_name[++i])
 			if (!ft_strchr(LABEL_CHARS, inst->label_name[i]))
@@ -101,9 +104,19 @@ static int		ft_get_label_name(t_instru *inst, char *str)
 
 int				ft_fill_instru(t_instru *inst, char *str)
 {
+	int		i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == COMMENT_CHAR)
+		{
+			str[i] = '\0';
+			break ;
+		}
 	if (ft_get_label_name(inst, str) == ERROR)
 		return (ERROR);
-	ft_get_op_code(inst, str);
+	if (ft_get_op_code(inst, str) == ERROR)
+		return (ERROR);
 	if (inst->op_code != 0)
 	{
 		if (ft_get_params(inst, str) == ERROR)

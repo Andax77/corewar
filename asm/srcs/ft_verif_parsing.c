@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 17:29:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/28 18:47:48 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/28 21:12:56 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,34 @@ int		ft_verif_format_comment(char *str)
 	while (str[++i] && str[i] != '"')
 		if (str[i] != ' ' && str[i] != '\t')
 			return (ERROR);
+	return (SUCCESS);
+}
+
+int		ft_verif_register(t_champ *champ)
+{
+	t_list		*tmp;
+	t_instru	*cur;
+	int			i;
+
+	tmp = champ->instru;
+	while (tmp != NULL)
+	{
+		cur = (t_instru *)tmp->content;
+		if (cur->params)
+		{
+			i = -1;
+			while (cur->params[++i])
+				if (cur->params[i][0] == 'r')
+				{
+					if (cur->params[i][1] == '\0')
+						return (ft_error(champ, "error: no reg number"));
+					else if (ft_atoi(cur->params[i] + 1) <= 0 ||
+									ft_atoi(cur->params[i] + 1) > REG_NUMBER)
+						return (ft_error(champ,
+								"error: reg number is too low or too high"));
+				}
+		}
+		tmp = tmp->next;
+	}
 	return (SUCCESS);
 }

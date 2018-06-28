@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/22 17:29:55 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/28 21:39:36 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void		ft_clean_spaces_comments(t_instru *inst)
 int				ft_get_params(t_instru *inst, char *str)
 {
 	int		i;
-	char	*sub;
 
 	if (ft_check_params_format(inst, str) == ERROR)
 		return (ERROR);
@@ -52,21 +51,18 @@ int				ft_get_params(t_instru *inst, char *str)
 	i = -1;
 	while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 		str++;
-	if (*str == LABEL_CHAR)
+	if (inst->label_name &&
+				ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
 	{
+		while (*str != LABEL_CHAR)
+			str++;
 		str = ft_strstr(str, g_op_tab[inst->op_code - 1].name);
 		i = -1;
 		while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 			str++;
 	}
-	i = -1;
-	while (str[++i] && str[i] != COMMENT_CHAR)
-		;
-	if (!(sub = ft_strsub(str, 0, i)))
-		exit(EXIT_FAILURE);
-	inst->params = ft_strsplit(sub, SEPARATOR_CHAR);
+	inst->params = ft_strsplit(str, SEPARATOR_CHAR);
 	ft_clean_spaces_comments(inst);
-	free(sub);
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/28 18:34:26 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/28 21:02:50 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int				ft_fill_binary_name(t_champ *champ);
 
 int				ft_verif_format_name(char *str);
 int				ft_verif_format_comment(char *str);
+int				ft_verif_register(t_champ *champ);
 int				ft_name_comment_other_lines_next(char **member, char *tmp);
 
 int				ft_parse_status(t_champ *champ, int status);
