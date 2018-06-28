@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 00:17:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 00:53:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,21 @@ void	clean(t_cor *cor, t_list *champs)
 		cur_champ = champs->content;
 		if (cur_champ->r_cy == 0)
 		{
-			
 			if ((id = check_live_value(cor, cur_champ->last_pc)))
 			{
-				attron(COLOR_PAIR(40 + id));
-				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
-				if (cur_champ->last_pc != cur_champ->last_live_pc)
+				if (cor->opt->v && !cor->opt->d)
 				{
-					attron(COLOR_PAIR(cor->c_map[cur_champ->last_live_pc]));
-					draw_uchar(cur_champ->last_live_pc, cor->map[cur_champ->last_live_pc]);
+					attron(COLOR_PAIR(40 + id));
+					draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
+					if (cur_champ->last_pc != cur_champ->last_live_pc)
+					{
+						attron(COLOR_PAIR(cor->c_map[cur_champ->last_live_pc]));
+						draw_uchar(cur_champ->last_live_pc, cor->map[cur_champ->last_live_pc]);
+					}
 				}
 				cur_champ->last_live_pc = cur_champ->last_pc;
 			}
-			else
+			else if (cor->opt->v && !cor->opt->d)
 			{
 				attron(COLOR_PAIR(cor->c_map[cur_champ->last_pc]));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
@@ -311,6 +313,29 @@ static void	dump(t_cor *cor)
 	}
 }
 
+void		jump(t_cor* cor)
+{
+	t_list	*champs;
+	t_champ	*cur_champ;
+
+	champs = cor->champs;
+	while (champs)
+	{
+		cur_champ = champs->content;
+		if (cur_champ->r_cy > -1)
+		{
+			attron(COLOR_PAIR(20 + cur_champ->id));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			if (cur_champ->last_live && cur_champ->lives)
+			{
+				attron(COLOR_PAIR(40 + cur_champ->id));
+				draw_uchar(cur_champ->last_live_pc, cor->map[cur_champ->last_live_pc]);
+			}
+		}
+		champs = champs->next;
+	}
+}
+
 void		cycle(t_cor *cor)
 {
 	t_list		*champs;
@@ -324,9 +349,8 @@ void		cycle(t_cor *cor)
 	timeout = 950;
 	while ((champs = cor->champs))
 	{
-		// Clean cursor
-		if (cor->opt->v && !cor->opt->d)
-			clean(cor, champs);
+		// Clean cursors
+		clean(cor, champs);
 		// Check champs lives
 		if (cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die)
 			ret = check_lives(cor);
@@ -357,6 +381,7 @@ void		cycle(t_cor *cor)
 				if (!init_ncurses(cor))
 					return ;
 				cor->opt->d = 0;
+				jump(cor);
 			}
 		}
 		// Print infos
