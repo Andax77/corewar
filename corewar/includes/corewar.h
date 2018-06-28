@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/27 19:30:14 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:06:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct		s_champ
 	int				last_st_pc;
 	int				last_st;
 	int				live;
-	int				to_kill;
 	int				father;
 }					t_champ;
 
@@ -71,6 +70,7 @@ typedef struct		s_cor
 	char			*aff;
 	int				cycle;
 	int				cycle_to_die;
+	int				v_cycle;
 	int				checks;
 	int				winner;
 }					t_cor;

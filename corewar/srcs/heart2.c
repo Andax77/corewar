@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 11:00:49 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/27 18:54:25 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:32:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,15 @@ int			stat_heart(t_cor *cor, t_list *champs)
 
 	stat = 1;
 	player = ((t_champ*)champs->content)->id + 1;
-	if (!cor->cycle_to_die)
-		return (4);
 	if (((t_champ*)champs->content)->r_cy == -1)
 		stat = 4;
-	else if (((cor->cycle % cor->cycle_to_die) > (cor->cycle_to_die / 2)) &&
+	else if ((cor->v_cycle > (3 * (cor->cycle_to_die / 4))) &&
 			((t_champ*)champs->content)->live == 0 && (stat = 3))
 		((t_champ*)champs->content)->live = 0;
-	else if (((cor->cycle % cor->cycle_to_die) > (cor->cycle_to_die / 3)) &&
+	else if ((cor->v_cycle > (cor->cycle_to_die / 2)) &&
 			((t_champ*)champs->content)->live == 0 && (stat = 2))
 		((t_champ*)champs->content)->live = 0;
-	else if (((cor->cycle % cor->cycle_to_die) > (cor->cycle_to_die / 4)) &&
+	else if ((cor->v_cycle > (cor->cycle_to_die / 4)) &&
 			((t_champ*)champs->content)->live == 0 && (stat = 1))
 		((t_champ*)champs->content)->live = 0;
 	return (stat);
