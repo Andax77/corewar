@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/27 18:03:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 21:57:09 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	{
 		if (((ocp >> 6) & 3) == DIR_CODE)
 			champ->reg[p2 - 1] = p1;
-		else
+		else if (((ocp >> 6) & 3) == IND_CODE)
 		{
 			p1 = ((short)p1 % IDX_MOD) % MEM_SIZE;
 			if ((ori + p1) < 0)
