@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/27 17:19:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:24:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ void	clean(t_cor *cor, t_list *champs)
 		cur_champ = champs->content;
 		if (cur_champ->r_cy == 0)
 		{
+			
 			if ((id = check_live_value(cor, cur_champ->last_pc)))
 			{
 				attron(COLOR_PAIR(40 + id));
 				draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
-				if (cur_champ->lives > 0)
+				if (cur_champ->last_pc != cur_champ->last_live_pc)
 				{
 					attron(COLOR_PAIR(cor->c_map[cur_champ->last_live_pc]));
 					draw_uchar(cur_champ->last_live_pc, cor->map[cur_champ->last_live_pc]);
 				}
+				cur_champ->last_live_pc = cur_champ->last_pc;
 			}
 			else
 			{
@@ -158,7 +160,7 @@ void	key_event(int *timeout, int *ch)
 		noecho();
 		draw_line(2, 0, "              ");
 		draw_line(2, 0, "** RUNNING **");
-		timeout(*timeout / 50);
+		timeout(*timeout / 600);
 		*ch = getch();
 		timeout(-1);
 		if (!ft_strchr("s rewq", *ch))
@@ -253,6 +255,7 @@ int		check_lives(t_cor *cor)
 
 	nbr_live = 0;
 	champs = cor->champs;
+	cor->v_cycle = 0;
 	while (champs)
 	{
 		nbr_live += ((t_champ*)champs->content)->lives;
@@ -272,8 +275,7 @@ int		check_lives(t_cor *cor)
 	if (nbr_live >= NBR_LIVE || cor->checks == MAX_CHECKS)
 	{
 		cor->cycle_to_die -= CYCLE_DELTA;
-		if (cor->checks == MAX_CHECKS)
-			cor->checks = 0;
+		cor->checks = 0;
 	}
 	else
 		cor->checks++;
@@ -301,6 +303,9 @@ void	cycle(t_cor *cor)
 		// Clean cursor
 		if (cor->opt->v)
 			clean(cor, champs);
+		// Check champs lives
+		if (cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die)
+			ret = check_lives(cor);
 		while (champs)
 		{
 			cur_champ = champs->content;
@@ -315,9 +320,6 @@ void	cycle(t_cor *cor)
 			}
 			champs = champs->next;
 		}
-		// Check champs lives
-		if (cor->cycle % cor->cycle_to_die == 0 && cor->cycle > 0)
-			ret = check_lives(cor);
 		// Print infos
 		if (cor->opt->v)
 			print_infos(cor);
@@ -328,6 +330,9 @@ void	cycle(t_cor *cor)
 		if (!ret)
 			break ;
 		else
+		{
 			cor->cycle++;
+			cor->v_cycle++;
+		}
 	}
 }
