@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/27 13:02:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:53:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,13 @@ static void	draw_borders(void)
 static void	draw_map(t_cor *cor)
 {
 	int		i;
-	t_list	*champs;
-	int		nb;
-	int		id;
 
 	i = -1;
-	id = 0;
-	champs = cor->champs;
-	nb = ft_lstcount(champs);
 	while (++i < MEM_SIZE)
-		if (champs && i >= id * (MEM_SIZE / nb) && i < (id * (MEM_SIZE / nb)) +\
-				(int)((t_champ *)champs->content)->op_nb)
-		{
-			init_pair(3 + id, COLOR_RED + id, COLOR_BLACK);
-			attron(COLOR_PAIR(3 + id));
-			draw_uchar(i, cor->map[i]);
-		}
-		else
-		{
-			attron(COLOR_PAIR(2));
-			if (champs->next && i == (id + 1) * (MEM_SIZE / nb) - 1)
-				if (++id < MAX_PLAYERS)
-					champs = champs->next;
-			draw_uchar(i, cor->map[i]);
-		}
+	{
+		attron(COLOR_PAIR(cor->c_map[i]));
+		draw_uchar(i, cor->map[i]);
+	}
 }
 
 void		draw_line(int line_idx, int col_idx, char *line)
@@ -129,19 +112,22 @@ static void	draw_infos(t_list *champs)
 
 	nb = 11;
 	draw_line(2, 0, "** PAUSED **");
-	draw_line(4, 0, "Cycles/second limit :");
+	draw_line(4, 0, "Cycles/second limit : 50");
 	draw_line(7, 0, "Cycle :");
 	draw_line(9, 0, "Processes :");
 	while (champs)
 	{
-		draw_line(nb, 0, "Player");
-		tmp = ft_itoa(((t_champ*)champs->content)->v_id);
-		draw_line(nb, 7, tmp);
-		draw_line(nb, 7 + ft_strlen(tmp) + 1, ":");
-		free(tmp);
-		draw_line(++nb, 0, "  Last live :			");
-		draw_line(++nb, 0, "  Lives in current period :	");
-		nb += 2;
+		if (!((t_champ*)champs->content)->father)
+		{
+			draw_line(nb, 0, "Player");
+			tmp = ft_itoa(((t_champ*)champs->content)->v_id);
+			draw_line(nb, 7, tmp);
+			draw_line(nb, 7 + ft_strlen(tmp) + 1, ":");
+			free(tmp);
+			draw_line(++nb, 0, "  Last live :			");
+			draw_line(++nb, 0, "  Lives in current period :	");
+			nb += 2;
+		}
 		champs = champs->next;
 	}
 	draw_line(27, 0, "CYCLES_TO_DIE :");
@@ -159,10 +145,13 @@ void		draw_names(t_list *champs)
 	while (champs)
 	{
 		champ = champs->content;
-		attron(COLOR_PAIR(i + 3));
-		draw_line(11 + (4 * i), 10 + ft_countdigits(champ->v_id), \
+		if (!champ->father)
+		{
+			attron(COLOR_PAIR(i + 3));
+			draw_line(11 + (4 * i), 10 + ft_countdigits(champ->v_id), \
 				((t_champ*)champs->content)->name);
-		i++;
+			i++;
+		}
 		champs = champs->next;
 	}
 }
@@ -173,6 +162,13 @@ static void	init_colors(t_list *champs)
 	int		i;
 
 	tmp = champs;
+	while (champs)
+	{
+		i = ((t_champ*)champs->content)->id;
+		init_pair(i + 2, COLOR_BLACK + i, COLOR_BLACK);
+		champs = champs->next;
+	}
+	champs = tmp;
 	while (champs)
 	{
 		i = ((t_champ*)champs->content)->id;
@@ -188,7 +184,7 @@ static void	init_colors(t_list *champs)
 	}
 }
 
-static void	init_cmap(t_cor *cor)
+void	init_cmap(t_cor *cor)
 {
 	int		i;
 	t_list	*champs;
@@ -215,6 +211,11 @@ static void	init_cmap(t_cor *cor)
 
 int			init_ncurses(t_cor *cor)
 {
+	t_list	*champs;
+	int		i;
+
+	i = 0;
+	champs = cor->champs;
 	if (initscr())
 	{
 		start_color();
@@ -226,14 +227,19 @@ int			init_ncurses(t_cor *cor)
 		attron(COLOR_PAIR(1));
 		draw_borders();
 		attron(COLOR_PAIR(2));
-		init_cmap(cor);
 		draw_map(cor);
 		init_pair(17, 17, COLOR_BLACK);
 		attron(COLOR_PAIR(17));
 		draw_infos(cor->champs);
 		init_colors(cor->champs);
 		draw_names(cor->champs);
-		print_player(4, ft_lstcount(cor->champs));
+		while (champs)
+		{
+			if (!((t_champ*)champs->content)->father)
+				i++;
+			champs = champs->next;
+		}
+		print_player(4, i);
 		attron(COLOR_PAIR(3));
 		return (1);
 	}

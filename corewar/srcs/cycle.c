@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/28 20:36:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 00:17:30 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	cycle_job(t_cor *cor, t_champ *cur_champ)
 	if (cor->map[cur_champ->pc] >= 0 && cor->map[cur_champ->pc] <= 16)
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 	// Print process pos
-	if (cor->opt->v)
+	if (cor->opt->v && !cor->opt->d)
 	{
 		attron(COLOR_PAIR(cur_champ->id + 20));
 		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
@@ -219,11 +219,6 @@ void	print_infos(t_cor *cor)
 	draw_line(31, 11, nbr_live);
 	draw_line(33, 13, "    ");
 	draw_line(33, 13, max_checks);
-	if (cor->cycle == 0)
-	{
-		attron(COLOR_PAIR(17));
-		draw_line(4, 22, "50");
-	}
 	while (champs)
 	{
 		if (!((t_champ*)champs->content)->father)
@@ -262,7 +257,7 @@ int		check_lives(t_cor *cor)
 		if (!((t_champ*)champs->content)->v_lives)
 		{
 			((t_champ*)champs->content)->r_cy = -1;
-			if (cor->opt->v)
+			if (cor->opt->v && !cor->opt->d)
 			{
 				attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
 				draw_uchar(((t_champ*)champs->content)->pc, cor->map[((t_champ*)champs->content)->pc]);
@@ -293,15 +288,17 @@ static void	dump(t_cor *cor)
 	int		y;
 	int		i;
 	int		j;
+	int		w;
 
 	y = 0;
 	x = 0;
 	i = 0;
 	j = 0;
-	while (y < 64)
+	w = ft_sqrt(MEM_SIZE);
+	while (y < w)
 	{
 		(y) ? ft_printf("%#06x :", j) : ft_putstr("0x0000 :");
-		while (x < 64)
+		while (x < w)
 		{
 			ft_printf(" %02x", cor->map[i]);
 			x++;
@@ -309,7 +306,7 @@ static void	dump(t_cor *cor)
 		}
 		x = 0;
 		y++;
-		j += 64;
+		j += w;
 		ft_putchar('\n');
 	}
 }
@@ -328,7 +325,7 @@ void		cycle(t_cor *cor)
 	while ((champs = cor->champs))
 	{
 		// Clean cursor
-		if (cor->opt->v)
+		if (cor->opt->v && !cor->opt->d)
 			clean(cor, champs);
 		// Check champs lives
 		if (cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die)
@@ -350,14 +347,23 @@ void		cycle(t_cor *cor)
 		// Dump memory in term at cor->opt->d cycles
 		if (cor->opt->d && cor->opt->d == cor->cycle)
 		{
-			dump(cor);
-			break ;
+			if (!cor->opt->v)
+			{
+				dump(cor);
+				break ;
+			}
+			else
+			{
+				if (!init_ncurses(cor))
+					return ;
+				cor->opt->d = 0;
+			}
 		}
 		// Print infos
-		if (cor->opt->v)
+		if (cor->opt->v && !cor->opt->d)
 			print_infos(cor);
 		// Key event
-		if (cor->opt->v)
+		if (cor->opt->v && !cor->opt->d)
 			key_event(&timeout, &ch);
 		// Check end
 		if (!ret)
