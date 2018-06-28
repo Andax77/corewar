@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/26 22:11:55 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 17:52:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	child.carry = champ->carry;
 	child.r_cy = change_r_cy(cor, &child) - 1;
 	child.father = id;
+	child.lives = champ->lives;
+	child.v_lives = champ->v_lives;
 	new = ft_lstnew(&child, sizeof(t_champ));
 	ft_lstinsert(&cor->champs, new, i);
 }
