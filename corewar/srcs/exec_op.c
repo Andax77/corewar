@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/25 19:57:09 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/28 21:53:14 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_cod
 			ret = ((cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16));
 		ret += ((cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE]);
 	}
-	else
+	else if (type == IND_CODE)
 		ret = (short)((cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE]);//cast useless ?
 	return (ret);
 }
