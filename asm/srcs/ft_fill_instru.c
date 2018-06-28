@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/22 20:23:10 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/28 19:11:33 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static int		ft_get_label_name(t_instru *inst, char *str)
 {
 	int		i;
 
+//	ft_printf("{red}%s{eoc}\n", str);///////////////////
 	if (ft_strchr(str, LABEL_CHAR))
 	{
 		i = -1;
@@ -89,6 +90,7 @@ static int		ft_get_label_name(t_instru *inst, char *str)
 			return (SUCCESS);
 		if (!(inst->label_name = ft_strndup(str, i)))
 			exit(EXIT_FAILURE);
+		ft_printf("%s\n", inst->label_name);
 		i = -1;
 		while (inst->label_name[++i])
 			if (!ft_strchr(LABEL_CHARS, inst->label_name[i]))

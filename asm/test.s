@@ -1,9 +1,12 @@
-.namemange "name"
-.comment "comment"
+.name"name"
+.comment "
+comment
+comment"  #gerge
 
 		live %42
 		ld   %0,r0
-label:		zjmp %:avantdebut
+label:  
+		zjmp %:avantdebut
 		zjmp %0				# pour eviter ecrasement
 						# de l'instruction suivante
 code:		live %42			# 5
