@@ -28,9 +28,9 @@ static void		get_values(char **argv, int j, int i, t_opt *opt)
 
 int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 {
-	int				i;
-	int				j;
-	int				id;
+	int		i;
+	int		j;
+	int		id;
 
 	i = 0;
 	j = 0;
