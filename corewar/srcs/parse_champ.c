@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/26 22:11:32 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 12:45:27 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,9 @@ int				check_champ(t_champ **champ, char *path, int nb)
 	}
 	if (check_champ_bis(instru->next, champ, path) == ERROR)
 		return (ERROR);
-	if (!((*champ)->reg = ft_memalloc(REG_NUMBER * REG_SIZE)))
-		exit(EXIT_FAILURE);
+	(*champ)->reg = ft_malloc(REG_NUMBER * REG_SIZE, EXIT_FAILURE);
 	(*champ)->reg[0] = nb;
 	(*champ)->id = ++id;
 	(*champ)->v_id = nb;
-	(*champ)->v_lives = 0;
 	return (SUCCESS);
 }

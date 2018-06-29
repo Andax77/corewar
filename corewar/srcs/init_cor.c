@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/28 23:24:50 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:27:32 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,6 @@ int				init_cor(t_cor *cor, char **argv)
 			return (ERROR);
 	print_intro(cor);
 	(ft_lstcount(cor->champs) > 1) ? order_to_start(&cor->champs) : 0;
-	cycle(cor);
+	cycle(cor, 1);
 	return (SUCCESS);
 }

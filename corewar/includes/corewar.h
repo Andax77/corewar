@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 09:57:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 19:42:00 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum				e_list
 typedef struct		s_opt
 {
 	int				*n;
+	int				n_ed;
 	int				a;
 	int				d;
 	int				v;
@@ -78,13 +79,24 @@ typedef struct		s_cor
 void				print_usage(void);
 int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
+void				init_opt(t_opt *opt, t_cor *cor);
+int					check_opt(char **argv);
+void				verif_doublons(t_opt *opt, int index);
+int					is_opt(char *str);
+void				print_usage(void);
 int					init(char **argv, t_cor *cor);
+int					count_champs(t_list *champs);
 void				init_op(void (**f)(t_cor*, t_champ*));
 int					recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code);
 void				draw_uchar(int pos, unsigned char val);
-short				get_color(int pos);
 void				draw_line(int line_idx, int col_idx, char *line);
+void				draw_names(t_list *champs);
 int					init_ncurses(t_cor *cor);
+void				draw_borders(void);
+void				draw_map(t_cor *cor);
+void				draw_infos(t_list *champs, int nb);
+void				init_colors(t_list *champs);
+void				init_special_colors(void);
 void				init_cmap(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
 int					check_champ(t_champ **champ, char *path, int nb);
@@ -94,9 +106,17 @@ int					pad(char **str, int n);
 void				split_bits(char **prog, unsigned char **splited_prog);
 int					check_op_len(t_champ *t_champ);
 void				order_to_start(t_list **champs);
-void				cycle(t_cor *cor);
+void				cycle(t_cor *cor, int ret);
+void				clean(t_cor *cor, t_list *champs);
+void				cycle_job(t_cor *cor, t_champ *cur_champ);
+int					check_lives(t_cor *cor);
+void				print_infos(t_cor *cor);
+void				key_event(int *timeout, int *ch);
+int					*key_handler(int *timeout, int *ch);
 int					change_r_cy(t_cor *cor, t_champ *champ);
 int					check_live_value(t_cor *cor, int pc);
+void				dump(t_cor *cor);
+void				jump(t_cor *cor);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 

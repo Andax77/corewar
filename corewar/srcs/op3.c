@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:12 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 18:00:21 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/29 18:56:06 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 			if (champ->last_st && !cor->opt->d)
 				while (++i < 4)
 				{
-					attron(COLOR_PAIR(cor->c_map[champ->last_st_pc + i]));
-					draw_uchar(champ->last_st_pc + i, cor->map[champ->last_st_pc + i]);
+					attron(COLOR_PAIR(cor->c_map[(champ->last_st_pc + i) % \
+						MEM_SIZE]));
+					draw_uchar((champ->last_st_pc + i) % MEM_SIZE, \
+						cor->map[(champ->last_st_pc + i) % MEM_SIZE]);
 				}
 			if (!cor->opt->d)
 			{
