@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/21 19:44:36 by pmilan           ###   ########.fr        #
+#    Updated: 2018/06/29 12:54:44 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,15 @@ NAME = corewar
 
 FILES = main.c \
 		parse_opt.c \
+		parse_opt2.c \
 		init.c \
+		init_ncurses.c \
+		init_ncurses2.c \
 		init_cor.c \
 		parse_champ.c \
 		tools.c \
 		tools2.c \
+		legacy.c \
 		parse_op.c \
 		../../commun/srcs/op.c \
 		cycle.c \

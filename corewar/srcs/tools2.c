@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/28 17:52:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 12:14:04 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,73 @@ void	order_to_start(t_list **champs)
 	}
 }
 
-void	legacy(t_cor *cor, t_champ *champ, int id, int pc)
+int		check_live_value(t_cor *cor, int pc)
 {
-	t_list		*tmp;
-	t_champ		child;
-	t_list		*new;
-	int			i;
-	int			j;
+	t_list	*champs;
+	int		v_id;
 
-	i = -1;
-	j = -1;
-	tmp = cor->champs;
-	while (tmp)
+	champs = cor->champs;
+	while (champs)
 	{
-		++i;
-		if (((t_champ*)tmp->content)->id == id)
-			break ;
-		tmp = tmp->next;
+		v_id = ((t_champ*)champs->content)->v_id;
+		if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE] + \
+				(cor->map[(pc + 3) % MEM_SIZE] << 8) + \
+				(cor->map[(pc + 2) % MEM_SIZE] << 16) + \
+				(cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
+			return (((t_champ*)champs->content)->id);
+		champs = champs->next;
 	}
-	ft_bzero(&child, sizeof(t_champ));
-	if (!((child.reg = ft_memalloc(REG_NUMBER * REG_SIZE))))
-		exit(EXIT_FAILURE);
-	while (++j < REG_NUMBER)
-		child.reg[j] = champ->reg[j];
-	child.id = champ->id;
-	child.v_id = champ->v_id;
-	child.pc = pc;
-	child.last_pc = pc;
-	child.carry = champ->carry;
-	child.r_cy = change_r_cy(cor, &child) - 1;
-	child.father = id;
-	child.lives = champ->lives;
-	child.v_lives = champ->v_lives;
-	new = ft_lstnew(&child, sizeof(t_champ));
-	ft_lstinsert(&cor->champs, new, i);
+	return (0);
+}
+
+void	dump(t_cor *cor)
+{
+	int	x;
+	int	y;
+	int	i;
+	int	j;
+
+	y = 0;
+	x = 0;
+	i = 0;
+	j = 0;
+	while (y < ft_sqrt(MEM_SIZE))
+	{
+		(y) ? ft_printf("%#06x :", j) : ft_putstr("0x0000 :");
+		while (x < ft_sqrt(MEM_SIZE))
+		{
+			ft_printf("{%s} %02x{eoc}", color_player(cor->c_map[i] - 2), \
+				cor->map[i]);
+			x++;
+			i++;
+		}
+		x = 0;
+		y++;
+		j += ft_sqrt(MEM_SIZE);
+		ft_putchar('\n');
+	}
+}
+
+void	jump(t_cor* cor)
+{
+	t_list	*champs;
+	t_champ	*cur_champ;
+
+	champs = cor->champs;
+	while (champs)
+	{
+		cur_champ = champs->content;
+		if (cur_champ->r_cy > -1)
+		{
+			attron(COLOR_PAIR(20 + cur_champ->id));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			if (cur_champ->last_live && cur_champ->lives)
+			{
+				attron(COLOR_PAIR(40 + cur_champ->id));
+				draw_uchar(cur_champ->last_live_pc, \
+					cor->map[cur_champ->last_live_pc]);
+			}
+		}
+		champs = champs->next;
+	}
 }
