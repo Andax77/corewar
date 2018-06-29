@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/16 20:20:15 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/16 20:20:15 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/29 19:02:12 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	ft_fill_instructions_m(t_champ *champ, char **f_instructions,
 
 	instructions = NULL;
 	ft_printf("{yellow}What is the champion's code ?{eoc}\n");
-	get_next_line(STDIN_FILENO, &instructions);
+	if (get_next_line(STDIN_FILENO, &instructions) != GNL_SUCCESS)
+		return (ft_error_m(champ, "error: oups something went wrong..."));
 	if (ft_strlen(instructions) % 2 == 1)
 	{
 		free(instructions);
@@ -85,53 +86,55 @@ static int	ft_fill_instructions_m(t_champ *champ, char **f_instructions,
 	return (SUCCESS);
 }
 
-static void	ft_write_cor_m(t_champ *champ, int instructions_length,
+static int	ft_write_cor_m(t_champ *champ, int instructions_length,
 														char *f_instructions)
 {
 	char	*output;
 	int		length_output;
 	int		fd;
 
-	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 +
-		sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
+	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 + \
+sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
 	ft_bzero(output, length_output + 1);
 	ft_fill_output_m(champ, output, f_instructions, instructions_length);
 	ft_printf("{yellow}What is the name of the program (.cor) ?{eoc}\n");
 	free(champ->file_name);
-	get_next_line(STDIN_FILENO, &champ->file_name);
+	if (get_next_line(STDIN_FILENO, &champ->file_name) != GNL_SUCCESS)
+		return (ft_error_m(champ, "error: oups something went wrong..."));
 	if ((fd = open(champ->file_name, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) <= 0)
 		exit(EXIT_FAILURE);
 	write(fd, output, length_output);
 	ft_printf("{yellow}Writing output program to %s{eoc}\n", champ->file_name);
 	free(output);
+	return (SUCCESS);
 }
 
 int			ft_manual(t_champ *champ)
 {
-	char	*f_instructions;
+	char	*f_inst;
 	int		inst_len;
 
-	f_instructions = NULL;
+	f_inst = NULL;
 	ft_printf("{yellow}What is the champion's name ?{eoc}\n");
-	get_next_line(STDIN_FILENO, &champ->name);
+	if (get_next_line(STDIN_FILENO, &champ->name) != GNL_SUCCESS)
+		return (ft_error_m(champ, "error: oups something went wrong..."));
 	if (ft_strlen(champ->name) > PROG_NAME_LENGTH)
 		return (ft_error_m(champ, "error: champion's name is too long"));
 	ft_printf("{yellow}What is the comment ?{eoc}\n");
-	get_next_line(STDIN_FILENO, &champ->comment);
+	if (get_next_line(STDIN_FILENO, &champ->comment) != GNL_SUCCESS)
+		return (ft_error_m(champ, "error: oups something went wrong..."));
 	if (ft_strlen(champ->comment) > COMMENT_LENGTH)
 		return (ft_error_m(champ, "error: comment is too long"));
-	if (ft_fill_instructions_m(champ, &f_instructions, &inst_len) == ERROR)
+	if (ft_fill_instructions_m(champ, &f_inst, &inst_len) == ERROR)
 		return (ERROR);
-	ft_write_cor_m(champ, inst_len, f_instructions);
-	free(f_instructions);
+	if (ft_write_cor_m(champ, inst_len, f_inst) == ERROR)
+		return (ERROR);
+	free(f_inst);
 	del_champ(champ);
 	ft_printf("{yellow}Please press ^d{eoc}\n");
-	while (get_next_line(STDIN_FILENO, &f_instructions) != GNL_END)
-	{
-		ft_printf("{yellow}Please press ^d{eoc}\n");
-		free(f_instructions);
-	}
-	free(f_instructions);
+	while (get_next_line(STDIN_FILENO, &f_inst) != GNL_END)
+		ft_printf("{yellow}Please press ^d{eoc}\n") && ft_fruit(1, &f_inst);
+	free(f_inst);
 	return (SUCCESS);
 }
