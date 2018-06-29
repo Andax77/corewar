@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/28 21:57:09 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/29 10:20:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,25 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
 		(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
+	// count lives for process
 	if (p == champ->v_id)
 		champ->lives++;
 	champ->v_lives++;
+	// record last live cycle
 	champ->last_live = cor->cycle;
+	// get the last living champ
 	if (champ->father == 0 && champ->v_id == p)
 		cor->winner = champ->id;
+	// check if live for another process (father or not)
 	while (tmp)
 	{
 		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0 && (t_champ*)tmp->content != champ)
 		{
-//			ft_printf("%s %d\n", ((t_champ*)tmp->content)->name, p);
 			((t_champ*)tmp->content)->lives++;
-			get_color_heart(1, "Faire un live", ((t_champ*)tmp->content)->id);
 			((t_champ*)tmp->content)->live++;
 			cor->winner = ((t_champ*)tmp->content)->id;
 			((t_champ*)tmp->content)->last_live = cor->cycle;
+			get_color_heart(1, "Faire un live", ((t_champ*)tmp->content)->id);
 			break ;
 		}
 		tmp = tmp->next;
@@ -111,25 +114,28 @@ void	ft_st(t_cor *cor, t_champ *champ)
 			cor->map[(ori + p2 + 3) % MEM_SIZE] = champ->reg[p1 - 1];
 			if (cor->opt->v)
 			{
-				if (champ->last_st)
+				if (champ->last_st && !cor->opt->d)
 					while (++i < 4)
 					{
 						attron(COLOR_PAIR(cor->c_map[champ->last_st_pc + i]));
 						draw_uchar(champ->last_st_pc + i, cor->map[champ->last_st_pc + i]);
 					}
-				attron(COLOR_PAIR(2 + champ->id) | A_BOLD);
-				draw_uchar((ori + p2) % MEM_SIZE, champ->reg[p1 - 1] >> 24);
-				cor->c_map[(ori + p2) % MEM_SIZE] = champ->id + 2;
-				draw_uchar((ori + p2 + 1) % MEM_SIZE, champ->reg[p1 - 1] >> 16);
-				cor->c_map[(ori + p2 + 1) % MEM_SIZE] = champ->id + 2;
-				draw_uchar((ori + p2 + 2) % MEM_SIZE, champ->reg[p1 - 1] >> 8);
-				cor->c_map[(ori + p2 + 2) % MEM_SIZE] = champ->id + 2;
-				draw_uchar((ori + p2 + 3) % MEM_SIZE, champ->reg[p1 - 1]);
-				cor->c_map[(ori + p2 + 3) % MEM_SIZE] = champ->id + 2;
-				attroff(A_BOLD);
+				if (!cor->opt->d)
+				{
+					attron(COLOR_PAIR(2 + champ->id) | A_BOLD);
+					draw_uchar((ori + p2) % MEM_SIZE, champ->reg[p1 - 1] >> 24);
+					draw_uchar((ori + p2 + 1) % MEM_SIZE, champ->reg[p1 - 1] >> 16);
+					draw_uchar((ori + p2 + 2) % MEM_SIZE, champ->reg[p1 - 1] >> 8);
+					draw_uchar((ori + p2 + 3) % MEM_SIZE, champ->reg[p1 - 1]);
+					attroff(A_BOLD);
+				}
 				champ->last_st = 1;
 				champ->last_st_pc = (ori + p2) % MEM_SIZE;
 			}
+			cor->c_map[(ori + p2) % MEM_SIZE] = champ->id + 2;
+			cor->c_map[(ori + p2 + 1) % MEM_SIZE] = champ->id + 2;
+			cor->c_map[(ori + p2 + 2) % MEM_SIZE] = champ->id + 2;
+			cor->c_map[(ori + p2 + 3) % MEM_SIZE] = champ->id + 2;
 		}
 	}
 	champ->pc = (champ->pc + 1) % MEM_SIZE;

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/26 23:09:25 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/28 23:24:50 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,10 @@ int				init_cor(t_cor *cor, char **argv)
 	cor->winner = 0;
 	init_memory(cor);
 	cor->cycle_to_die = CYCLE_TO_DIE;
-	if (cor->opt->v && !init_ncurses(cor))
-		return (ERROR);
+	init_cmap(cor);
+	if (!cor->opt->d)
+		if (cor->opt->v && !init_ncurses(cor))
+			return (ERROR);
 	print_intro(cor);
 	(ft_lstcount(cor->champs) > 1) ? order_to_start(&cor->champs) : 0;
 	cycle(cor);

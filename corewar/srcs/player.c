@@ -6,21 +6,20 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:59 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 15:53:53 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 09:52:15 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_player(int nb, int player)
+void		print_player(int player)
 {
-	int		x;
+	int		nb;
 
 	attron(COLOR_PAIR(17));
-	x = nb;
 	while (player)
 	{
-		nb = 26 + (4 * (x - 1));
+		nb = 38;
 		draw_line2(nb++, "---------------------------------------------------");
 		draw_player(nb++, player, " ___________ ");
 		draw_player(nb++, player, "|           |");

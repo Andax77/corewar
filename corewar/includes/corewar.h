@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/28 17:06:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 09:57:44 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void				draw_uchar(int pos, unsigned char val);
 short				get_color(int pos);
 void				draw_line(int line_idx, int col_idx, char *line);
 int					init_ncurses(t_cor *cor);
+void				init_cmap(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
 int					check_champ(t_champ **champ, char *path, int nb);
 int64_t				swap_int(int64_t c);
@@ -111,17 +112,17 @@ void				print_cow();
 /*
 HEART BEAT
 */
-void				print_player(int nb, int player);
+void				print_player(int player);
 void				print_heart(t_cor *cor);
-void				print_heart2(int nb, int player, int stat);
+void				print_heart2(int player, int stat);
 void				draw_heart(int line_idx, int y, char *line, int i);
-void				stat1(int nb, int player);
-void				stat2(int nb, int player);
-void				stat3(int nb, int player);
-void				stat4(int nb, int player);
+void				stat1(int player);
+void				stat2(int player);
+void				stat3(int player);
+void				stat4(int player);
 void				draw_player(int line_idx, int y, char *line);
 void				draw_player_id(int line_idx, int y, char *line);
-void				player(int nb, int player);
+void				player(int player);
 void				draw_player(int line_idx, int y, char *line);
 void				heart_color();
 int					stat_heart(t_cor *cor, t_list *champs);
