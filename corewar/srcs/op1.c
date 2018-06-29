@@ -63,7 +63,7 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	{
 		if (((ocp >> 6) & 3) == DIR_CODE)
 			champ->reg[p2 - 1] = p1;
-		else
+		else if (((ocp >> 6) & 3) == IND_CODE)
 		{
 			p1 = ((short)p1 % IDX_MOD) % MEM_SIZE;
 			if ((ori + p1) < 0)
