@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 12:53:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 18:36:47 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,13 @@ int					pad(char **str, int n);
 void				split_bits(char **prog, unsigned char **splited_prog);
 int					check_op_len(t_champ *t_champ);
 void				order_to_start(t_list **champs);
-void				cycle(t_cor *cor);
+void				cycle(t_cor *cor, int ret);
+void				clean(t_cor *cor, t_list *champs);
+void				cycle_job(t_cor *cor, t_champ *cur_champ);
+int					check_lives(t_cor *cor);
+void				print_infos(t_cor *cor);
+void				key_event(int *timeout, int *ch);
+int					*key_handler(int *timeout, int *ch);
 int					change_r_cy(t_cor *cor, t_champ *champ);
 int					check_live_value(t_cor *cor, int pc);
 void				dump(t_cor *cor);

@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/29 12:54:44 by eparisot         ###   ########.fr        #
+#    Updated: 2018/06/29 18:34:50 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,11 @@ FILES = main.c \
 		legacy.c \
 		parse_op.c \
 		../../commun/srcs/op.c \
+		key_handling.c \
+		key_handling2.c \
 		cycle.c \
+		cycle2.c \
+		cycle3.c \
 		exec_op.c \
 		op1.c \
 		op2.c \
