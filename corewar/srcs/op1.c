@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 10:20:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 17:36:19 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	ft_live(t_cor *cor, t_champ *champ)
 
 	tmp = cor->champs;
 	ori = champ->pc;
-	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
-		(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
+	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + \
+(cor->map[++champ->pc % MEM_SIZE] << 16) + \
+(cor->map[++champ->pc % MEM_SIZE] << 8) + \
+cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	// count lives for process
 	if (p == champ->v_id)
@@ -35,7 +37,8 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	// check if live for another process (father or not)
 	while (tmp)
 	{
-		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0 && (t_champ*)tmp->content != champ)
+		if (((t_champ*)tmp->content)->v_id == p && \
+((t_champ*)tmp->content)->father == 0 && (t_champ*)tmp->content != champ)
 		{
 			((t_champ*)tmp->content)->lives++;
 			((t_champ*)tmp->content)->live++;
@@ -59,7 +62,8 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 2);
 	p2 = recup_content(cor, champ, ocp, 4, 2);
-	if (p2 > 0 && p2 <= REG_NUMBER)
+	if (((ocp >> 4) & 3) == REG_CODE && (((ocp >> 6) & 3) == DIR_CODE || \
+((ocp >> 6) & 3) == IND_CODE) && p2 > 0 && p2 <= REG_NUMBER)
 	{
 		if (((ocp >> 6) & 3) == DIR_CODE)
 			champ->reg[p2 - 1] = p1;
@@ -68,15 +72,12 @@ void	ft_ld(t_cor *cor, t_champ *champ)
 			p1 = ((short)p1 % IDX_MOD) % MEM_SIZE;
 			if ((ori + p1) < 0)
 				p1 += MEM_SIZE;
-			champ->reg[p2 - 1] = (cor->map[(ori + p1) % MEM_SIZE] << 24) +
-				(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) +
-				(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) +
-				cor->map[(ori + p1 + 3) % MEM_SIZE];
+			champ->reg[p2 - 1] = (cor->map[(ori + p1) % MEM_SIZE] << 24) + \
+(cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) + \
+(cor->map[(ori + p1 + 2) % MEM_SIZE] << 8) + \
+cor->map[(ori + p1 + 3) % MEM_SIZE];
 		}
-		if (champ->reg[p2 - 1] == 0)
-			champ->carry = 1;
-		else
-			champ->carry = 0;
+		champ->carry = (champ->reg[p2 - 1] == 0) ? 1 : 0;
 	}
 	else
 		champ->carry = 0;
@@ -96,14 +97,11 @@ void	ft_st(t_cor *cor, t_champ *champ)
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 3);
 	p2 = recup_content(cor, champ, ocp, 4, 3);
-	if (p1 > 0 && p1 <= REG_NUMBER)
+	if (((ocp >> 6) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER)
 	{
-		if (((ocp >> 4) & 3) == REG_CODE)
-		{
-			if (p2 > 0 && p2 <= REG_NUMBER)
-				champ->reg[p2 - 1] = champ->reg[p1 - 1];
-		}
-		else
+		if (((ocp >> 4) & 3) == REG_CODE && p2 > 0 && p2 <= REG_NUMBER)
+			champ->reg[p2 - 1] = champ->reg[p1 - 1];
+		else if (((ocp >> 4) & 3) == IND_CODE)
 		{
 			p2 = ((short)p2 % IDX_MOD) % MEM_SIZE;
 			if ((ori + p2) < 0)
@@ -154,13 +152,12 @@ void	ft_add(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, 6, 4);
 	p2 = recup_content(cor, champ, ocp, 4, 4);
 	p3 = recup_content(cor, champ, ocp, 2, 4);
-	if (p1 > 0 && p1 <= REG_NUMBER && p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
+	if (((ocp >> 6) & 3) == REG_CODE && ((ocp >> 4) & 3) == REG_CODE
+			&& ((ocp >> 2) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER
+			&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] + champ->reg[p2 - 1];
-		if (champ->reg[p3 - 1] == 0)
-			champ->carry = 1;
-		else
-			champ->carry = 0;
+		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
 	}
 	else
 		champ->carry = 0;
@@ -180,13 +177,12 @@ void	ft_sub(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, 6, 4);
 	p2 = recup_content(cor, champ, ocp, 4, 4);
 	p3 = recup_content(cor, champ, ocp, 2, 4);
-	if (p1 > 0 && p1 <= REG_NUMBER && p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
+	if (((ocp >> 6) & 3) == REG_CODE && ((ocp >> 4) & 3) == REG_CODE
+			&& ((ocp >> 2) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER
+			&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] - champ->reg[p2 - 1];
-		if (champ->reg[p3 - 1] == 0)
-			champ->carry = 1;
-		else
-			champ->carry = 0;
+		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
 	}
 	else
 		champ->carry = 0;
