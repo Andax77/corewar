@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/28 21:53:14 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/29 18:06:55 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	init_op(void (**f)(t_cor*, t_champ*))
 	f[16] = &ft_aff;
 }
 
-int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code)
+int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage,
+																	int op_code)
 {
 	int		type;
 	int		ret;
@@ -53,11 +54,14 @@ int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_cod
 	else if (type == DIR_CODE)
 	{
 		if (g_op_tab[op_code - 1].dir_size == 0)
-			ret = ((cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16));
-		ret += ((cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE]);
+			ret = ((cor->map[++champ->pc % MEM_SIZE] << 24) + \
+(cor->map[++champ->pc % MEM_SIZE] << 16));
+		ret += ((cor->map[++champ->pc % MEM_SIZE] << 8) + \
+cor->map[++champ->pc % MEM_SIZE]);
 	}
 	else if (type == IND_CODE)
-		ret = (short)((cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE]);//cast useless ?
+		ret = (short)((cor->map[++champ->pc % MEM_SIZE] << 8) + \
+cor->map[++champ->pc % MEM_SIZE]);//cast useless ?
 	return (ret);
 }
 
@@ -90,11 +94,12 @@ static void	ft_aff_next(t_cor *cor, t_champ *champ, char *str)
 void	ft_aff(t_cor *cor, t_champ *champ)
 {
 	int		p;
+	int		ocp;
 	char	*str;
 
-	champ->pc = (champ->pc + 1) % MEM_SIZE;
-	p = cor->map[++champ->pc % MEM_SIZE];
-	if (p > 0 && p <= REG_SIZE)
+	ocp = cor->map[++champ->pc % MEM_SIZE];
+	p = recup_content(cor, champ, ocp, 6, 16);
+	if (((ocp >> 6) & 3) == REG_CODE && p > 0 && p <= REG_SIZE)
 	{
 		if (cor->aff == NULL)
 			if (!(cor->aff = ft_strnew(1)))
