@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/22 15:33:30 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/28 20:28:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 		{
 			(ft_strequ(argv[j], "-a")) ? opt->a = 1 : 0;
 			(ft_strequ(argv[j], "-v")) ? opt->v = 1 : 0;
-			(ft_strequ(argv[j], "-d") && argv[j + 1]) ? \
-				opt->d = ft_atoi(argv[j]) : 0;
-			if (ft_strequ(argv[j], "-n"))
+			(ft_strequ(argv[j], "-dump") && argv[j + 1]) ? \
+				opt->d = ft_atoi(argv[j + 1]) : 0;
+			if (ft_strequ(argv[j + 1], "-n"))
 			{
 				opt->n[i] = ft_atoi(argv[++j]);
 				ft_verif_doublons(opt, ++i - 1);

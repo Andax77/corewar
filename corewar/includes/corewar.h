@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/28 17:06:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 01:13:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void				draw_uchar(int pos, unsigned char val);
 short				get_color(int pos);
 void				draw_line(int line_idx, int col_idx, char *line);
 int					init_ncurses(t_cor *cor);
+void				init_cmap(t_cor *cor);
 int					init_cor(t_cor *cor, char **argv);
 int					check_champ(t_champ **champ, char *path, int nb);
 int64_t				swap_int(int64_t c);
