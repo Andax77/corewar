@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 00:50:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 10:20:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,25 @@ void	ft_live(t_cor *cor, t_champ *champ)
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + (cor->map[++champ->pc % MEM_SIZE] << 16) +
 		(cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
+	// count lives for process
 	if (p == champ->v_id)
 		champ->lives++;
 	champ->v_lives++;
+	// record last live cycle
 	champ->last_live = cor->cycle;
+	// get the last living champ
 	if (champ->father == 0 && champ->v_id == p)
 		cor->winner = champ->id;
+	// check if live for another process (father or not)
 	while (tmp)
 	{
 		if (((t_champ*)tmp->content)->v_id == p && ((t_champ*)tmp->content)->father == 0 && (t_champ*)tmp->content != champ)
 		{
-//			ft_printf("%s %d\n", ((t_champ*)tmp->content)->name, p);
 			((t_champ*)tmp->content)->lives++;
-			get_color_heart(1, "Faire un live", ((t_champ*)tmp->content)->id);
 			((t_champ*)tmp->content)->live++;
 			cor->winner = ((t_champ*)tmp->content)->id;
 			((t_champ*)tmp->content)->last_live = cor->cycle;
+			get_color_heart(1, "Faire un live", ((t_champ*)tmp->content)->id);
 			break ;
 		}
 		tmp = tmp->next;

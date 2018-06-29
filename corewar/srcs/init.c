@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/28 23:53:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 10:05:42 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,11 +235,11 @@ int			init_ncurses(t_cor *cor)
 		draw_names(cor->champs);
 		while (champs)
 		{
-			if (!((t_champ*)champs->content)->father)
+			if (((t_champ*)champs->content)->father == 0)
 				i++;
 			champs = champs->next;
 		}
-		print_player(4, i);
+		print_player(i);
 		attron(COLOR_PAIR(3));
 		return (1);
 	}

@@ -6,27 +6,29 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:57:09 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:57:11 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/06/29 09:57:08 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_heart2(int nb, int player, int stat)
+void		print_heart2(int player, int stat)
 {
 	if (stat == 1)
-		stat1(nb, player);
+		stat1(player);
 	if (stat == 2)
-		stat2(nb, player);
+		stat2(player);
 	if (stat == 3)
-		stat3(nb, player);
+		stat3(player);
 	if (stat == 4)
-		stat4(nb, player);
+		stat4(player);
 }
 
-void		stat1(int nb, int player)
+void		stat1(int player)
 {
-	nb = 29 + (4 * (nb - 1));
+	int		nb;
+
+	nb = 41;
 	draw_heart(nb, player, "   ", 0);
 	draw_heart(nb, player, "**", 3);
 	draw_heart(nb, player, " ", 5);
@@ -46,9 +48,11 @@ void		stat1(int nb, int player)
 	draw_heart(nb++, player, "     ", 6);
 }
 
-void		stat2(int nb, int player)
+void		stat2(int player)
 {
-	nb = 29 + (4 * (nb - 1));
+	int		nb;
+
+	nb = 41;
 	draw_heart(nb, player, "   ", 0);
 	draw_heart(nb, player, "**", 3);
 	draw_heart(nb, player, " ", 5);
@@ -70,9 +74,11 @@ void		stat2(int nb, int player)
 	draw_heart(nb++, player, "     ", 6);
 }
 
-void		stat3(int nb, int player)
+void		stat3(int player)
 {
-	nb = 29 + (4 * (nb - 1));
+	int		nb;
+
+	nb = 41;
 	draw_heart(nb, player, "   ", 0);
 	draw_heart(nb, player, "**", 3);
 	draw_heart(nb++, player, "      ", 5);
@@ -88,9 +94,11 @@ void		stat3(int nb, int player)
 	draw_heart(nb++, player, "           ", 0);
 }
 
-void		stat4(int nb, int player)
+void		stat4(int player)
 {
-	nb = 29 + (4 * (nb - 1));
+	int		nb;
+
+	nb = 41;
 	draw_heart(nb++, player, "           ", 0);
 	draw_heart(nb, player, "    ", 0);
 	draw_heart(nb, player, "IS", 4);

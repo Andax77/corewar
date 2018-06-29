@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/28 20:28:53 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 09:25:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static int	check_opt(char **argv)
 				ft_printf("{red}Wrong [-n nbr] value{eoc}\n");
 				return (ERROR);
 			}
-		if (ft_strequ(argv[i], "-dump"))
+		if (ft_strequ(argv[i], "-d"))
 			if (!argv[i + 1] || !ft_strisdigit(argv[i + 1]))
 			{
-				ft_printf("{red}Wrong [-dump nbr_cycles] value{eoc}\n");
+				ft_printf("{red}Wrong [-d nbr_cycles] value{eoc}\n");
 				return (ERROR);
 			}
 		i++;
@@ -82,7 +82,7 @@ int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
 		{
 			(ft_strequ(argv[j], "-a")) ? opt->a = 1 : 0;
 			(ft_strequ(argv[j], "-v")) ? opt->v = 1 : 0;
-			(ft_strequ(argv[j], "-dump") && argv[j + 1]) ? \
+			(ft_strequ(argv[j], "-d") && argv[j + 1]) ? \
 				opt->d = ft_atoi(argv[j + 1]) : 0;
 			if (ft_strequ(argv[j + 1], "-n"))
 			{
@@ -110,7 +110,7 @@ int			is_opt(char *str)
 	(ft_strequ(str, "-a")) ? ret = 1 : 0;
 	(ft_strequ(str, "-v")) ? ret = 1 : 0;
 	(ft_strequ(str, "-n" )) ? ret = 1 : 0;
-	(ft_strequ(str, "-dump")) ? ret = 1 : 0;
+	(ft_strequ(str, "-d")) ? ret = 1 : 0;
 	(ft_strisdigit(str)) ? ret = 1 : 0;
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 11:00:49 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/28 17:32:52 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 10:05:32 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ void		print_heart(t_cor *cor)
 	champs = cor->champs;
 	while (champs)
 	{
-		stat = stat_heart(cor, champs);
-		print_heart2(4, ((t_champ *)champs->content)->id, stat);
+		if (((t_champ*)champs->content)->father == 0)
+		{
+			stat = stat_heart(cor, champs);
+			print_heart2(((t_champ *)champs->content)->id, stat);
+		}
 		champs = champs->next;
 	}
 }
