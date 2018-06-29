@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 00:53:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/29 09:18:11 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,7 @@ static void	dump(t_cor *cor)
 		(y) ? ft_printf("%#06x :", j) : ft_putstr("0x0000 :");
 		while (x < w)
 		{
-			ft_printf(" %02x", cor->map[i]);
+			ft_printf("{%s} %02x{eoc}", color_player(cor->c_map[i] - 2), cor->map[i]);
 			x++;
 			i++;
 		}
@@ -313,7 +313,7 @@ static void	dump(t_cor *cor)
 	}
 }
 
-void		jump(t_cor* cor)
+static void	jump(t_cor* cor)
 {
 	t_list	*champs;
 	t_champ	*cur_champ;
