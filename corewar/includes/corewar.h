@@ -87,7 +87,8 @@ void				print_usage(void);
 int					init(char **argv, t_cor *cor);
 int					count_champs(t_list *champs);
 void				init_op(void (**f)(t_cor*, t_champ*));
-int					recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage, int op_code);
+int					recup_content(t_cor *cor, t_champ *champ, int ocp,
+													int decalage, int op_code);
 void				draw_uchar(int pos, unsigned char val);
 void				draw_line(int line_idx, int col_idx, char *line);
 void				draw_names(t_list *champs);
@@ -108,7 +109,8 @@ int					check_op_len(t_champ *t_champ);
 void				order_to_start(t_list **champs);
 void				cycle(t_cor *cor, int ret);
 void				clean(t_cor *cor, t_list *champs);
-void				cycle_job(t_cor *cor, t_champ *cur_champ);
+void				cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
+		   															t_champ*));
 int					check_lives(t_cor *cor);
 void				print_infos(t_cor *cor);
 void				key_event(int *timeout, int *ch);

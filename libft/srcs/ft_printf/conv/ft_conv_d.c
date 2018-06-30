@@ -71,8 +71,9 @@ static int		ft_width(char **new_ret, char **new_nb, t_arg *arg)
 				ft_strncpy((*new_ret) + len - nb_len, *new_nb, nb_len);
 			else
 				ft_strncpy(*new_ret, *new_nb, nb_len);
-		else if (!(*new_ret = ft_strdup(*new_nb)))
-			return (ERROR);
+		else if (ft_fruit(1, new_ret))
+			if (!(*new_ret = ft_strdup(*new_nb)))
+				return (ERROR);
 	}
 	return (SUCCESS);
 }
@@ -107,6 +108,7 @@ int				ft_conv_d(char **ret, t_arg *arg)
 	int		len;
 
 	new_nb = NULL;
+	new_ret = NULL;
 	if (arg->preci == 0 && arg->arg.d == 0)
 		return (ft_regle_zero(ret, arg));
 	if (arg->preci != -1 && ft_precision(&new_nb, arg) == ERROR && \
