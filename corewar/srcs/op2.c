@@ -139,7 +139,7 @@ void	ft_zjmp(t_cor *cor, t_champ *champ)
 MEM_SIZE];
 	if (champ->carry == 1)
 	{
-		champ->pc = ori + ((p % IDX_MOD) % MEM_SIZE);
+		champ->pc = ((ori + (p % IDX_MOD)) % MEM_SIZE);
 		if (champ->pc < 0)
 			champ->pc += MEM_SIZE;
 	}
