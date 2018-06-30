@@ -109,16 +109,16 @@ int				ft_conv_d(char **ret, t_arg *arg)
 	new_nb = NULL;
 	if (arg->preci == 0 && arg->arg.d == 0)
 		return (ft_regle_zero(ret, arg));
-	if (arg->preci != -1 && ft_precision(&new_nb, arg) == ERROR &&
-			ft_fruit(1, &new_nb))
+	if (arg->preci != -1 && ft_precision(&new_nb, arg) == ERROR && \
+ft_fruit(1, &new_nb))
 		return (ERROR);
-	if (ft_width(&new_ret, &new_nb, arg) == ERROR &&
-			ft_fruit(2, &new_ret, &new_nb))
+	if (ft_width(&new_ret, &new_nb, arg) == ERROR && \
+ft_fruit(2, &new_ret, &new_nb))
 		return (ERROR);
 	ft_fruit(1, &new_nb);
 	len = ft_strlen(new_ret);
-	if (!(*ret = ft_strfreejoin(*ret, new_ret, len, arg)) &&
-			ft_fruit(1, &new_ret))
+	if (!(*ret = ft_strfreejoin(*ret, new_ret, len, arg)) && \
+ft_fruit(1, &new_ret))
 		return (ERROR);
 	arg->cmpt += len;
 	ft_fruit(1, &new_ret);

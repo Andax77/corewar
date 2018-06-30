@@ -85,7 +85,7 @@ static int	ft_strcpy_cust_bigs(char **str, t_arg *arg, wchar_t *x, int *nbcar)
 		arg->preci -= ft_strlenw_bigs(*x);
 		x++;
 	}
-	str = ft_strw_cpy(str, i, tmp);
+	ft_strw_cpy(str, i, tmp);
 	free(tmp);
 	return (SUCCESS);
 }

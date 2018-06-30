@@ -57,7 +57,8 @@ static int	ft_width(char **new_ret, char **new_nb, t_arg *arg)
 		if (!(*new_ret = malloc(sizeof(**new_ret) * (len + 1))) &&
 				ft_fruit(1, new_nb))
 			return (ERROR);
-		(*new_ret)[len] = '\0';
+		if (*new_ret)
+			(*new_ret)[len] = '\0';
 		if (arg->preci < arg->wi && ft_memset(*new_ret, ' ', len))
 			if (arg->flag.minus == 0)
 				ft_strncpy((*new_ret) + len - nb_len, *new_nb, nb_len);

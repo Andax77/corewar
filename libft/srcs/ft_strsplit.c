@@ -42,7 +42,6 @@ static int		ft_malloc_strings(const char *s, char **ret, int nb, char c)
 
 	i = 0;
 	j = 0;
-	length = 0;
 	while (s[i] && j < nb)
 	{
 		length = 0;
@@ -67,7 +66,6 @@ static void		ft_cpy_words(const char *s, char **ret, int nb, char c)
 	int		k;
 
 	i = 0;
-	j = 0;
 	k = 0;
 	while (s[k] && nb != 0)
 	{
@@ -99,7 +97,10 @@ char			**ft_strsplit(char const *s, char c)
 	if (nb_words != 0)
 	{
 		if (ft_malloc_strings(s, ret, nb_words, c) == -1)
+		{
+			free(ret);
 			return (NULL);
+		}
 		ft_cpy_words(s, ret, nb_words, c);
 	}
 	return (ret);
