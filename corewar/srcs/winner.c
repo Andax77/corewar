@@ -47,16 +47,14 @@ char		*color_player(int id)
 char		*get_name_champ(t_cor *cor)
 {
 	t_list	*champ;
-	t_champ	*winner;
 
 	champ = cor->champs;
-	winner = NULL;
 	while (champ)
 	{
 		if (((t_champ*)champ->content)->id == cor->winner && \
 			((t_champ*)champ->content)->father == 0)
-			winner = (t_champ*)champ->content;
+			return (((t_champ*)champ->content)->name);
 		champ = champ->next;
 	}
-	return (winner->name);
+	return (NULL);
 }
