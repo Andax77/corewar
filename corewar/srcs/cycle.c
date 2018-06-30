@@ -6,13 +6,13 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 18:35:57 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 11:46:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static void	processes(t_cor *cor, t_list *champs)
+static void	exec_processes(t_cor *cor, t_list *champs)
 {
 	t_champ	*cur_champ;
 
@@ -60,10 +60,10 @@ void		cycle(t_cor *cor, int ret)
 	timeout = 950;
 	while ((champs = cor->champs))
 	{
-		clean(cor, champs);
-		(cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die) ? \
-			ret = check_lives(cor) : 0;
-		processes(cor, champs);
+		(cor->opt->v || cor->opt->d) ? clean(cor, champs) : 0;
+		if (cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die)
+			ret = check_lives(cor);
+		exec_processes(cor, champs);
 		if (!(dump_handler(cor)))
 			break ;
 		(cor->opt->v && !cor->opt->d) ? print_infos(cor) : 0;

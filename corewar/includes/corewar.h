@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 19:42:00 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 12:23:46 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct		s_champ
 	int				op_nb;
 	int				pc;
 	int				last_pc;
+	int				cur_op;
 	int				carry;
 	int				r_cy;
 	int				lives;
@@ -58,7 +59,6 @@ typedef struct		s_champ
 	int				last_live_pc;
 	int				last_st_pc;
 	int				last_st;
-	int				live;
 	int				father;
 }					t_champ;
 

@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 18:34:08 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 12:21:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,16 @@ void		cycle_job(t_cor *cor, t_champ *cur_champ)
 	init_op(f);
 	if (cor->cycle != 0)
 	{
-		if (cor->map[cur_champ->pc] >= 1 && cor->map[cur_champ->pc] <= 16)
-			f[cor->map[cur_champ->pc]](cor, cur_champ);
+		if (cur_champ->cur_op >= 1 && cur_champ->cur_op <= 16)
+			f[cur_champ->cur_op](cor, cur_champ);
 		else
 			f[0](cor, cur_champ);
 	}
-	if (cor->map[cur_champ->pc] >= 0 && cor->map[cur_champ->pc] <= 16)
+	if (cur_champ->cur_op >= 0 && cur_champ->cur_op <= 16)
+	{
+		cur_champ->cur_op = cor->map[cur_champ->pc];
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+	}
 	if (cor->opt->v && !cor->opt->d)
 	{
 		attron(COLOR_PAIR(cur_champ->id + 20));
@@ -72,8 +75,13 @@ void		cycle_job(t_cor *cor, t_champ *cur_champ)
 	cur_champ->last_pc = cur_champ->pc;
 }
 
-static int	check_champs_lives(t_cor* cor, t_list *champs, int nbr_live)
+static int	check_champs_lives(t_cor* cor)
 {
+	t_list	*champs;
+	int		nbr_live;
+
+	nbr_live = 0;
+	champs = cor->champs;
 	while (champs)
 	{
 		nbr_live += ((t_champ*)champs->content)->lives;
@@ -96,13 +104,11 @@ static int	check_champs_lives(t_cor* cor, t_list *champs, int nbr_live)
 
 int			check_lives(t_cor *cor)
 {
-	t_list	*champs;
 	int		nbr_live;
 
-	champs = cor->champs;
 	cor->v_cycle = 0;
-	nbr_live = check_champs_lives(cor, champs, 0);
-	if (nbr_live >= NBR_LIVE || cor->checks == MAX_CHECKS)
+	nbr_live = check_champs_lives(cor);
+	if (nbr_live >= NBR_LIVE || cor->checks == MAX_CHECKS - 1)
 	{
 		cor->cycle_to_die -= CYCLE_DELTA;
 		cor->checks = 0;
