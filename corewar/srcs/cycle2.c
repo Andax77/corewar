@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 18:26:00 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 18:35:07 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void		cycle_job(t_cor *cor, t_champ *cur_champ)
 		else
 			f[0](cor, cur_champ);
 	}
+	else
+		cur_champ->cur_op = cor->map[cur_champ->pc];
 	if (cur_champ->cur_op >= 0 && cur_champ->cur_op <= 16)
 	{
 		cur_champ->cur_op = cor->map[cur_champ->pc];
