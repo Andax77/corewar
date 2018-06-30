@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:07 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 17:59:19 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/06/30 17:49:50 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	ft_zjmp(t_cor *cor, t_champ *champ)
 MEM_SIZE];
 	if (champ->carry == 1)
 	{
-		champ->pc = ori + ((p % IDX_MOD) % MEM_SIZE);
+		champ->pc = ori + ((p % IDX_MOD) % MEM_SIZE) % MEM_SIZE;
 		if (champ->pc < 0)
 			champ->pc += MEM_SIZE;
 	}
