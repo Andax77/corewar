@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/30 12:19:59 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 18:30:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,13 @@ static void	init_child(t_champ *child, t_champ *father, t_cor *cor, int pc)
 	child->lives = father->lives;
 	child->v_lives = father->v_lives;
 }
-/*
-static int	child_pos(t_cor *cor, int id)
-{
-	int		i;
-	t_list	*tmp;
 
-	i = 0;
-	tmp = cor->champs;
-	while (tmp)
-	{
-		if (((t_champ*)tmp->content)->id == id)
-			break ;
-		i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-*/
 void		legacy(t_cor *cor, t_champ *champ, int id, int pc)
 {
 	t_champ		*child;
 	t_list		*new;
-	//int			i;
 	int			j;
 
-	//i = child_pos(cor, id);
 	j = -1;
 	child = ft_malloc(sizeof(t_champ), EXIT_FAILURE);
 	ft_bzero(child, sizeof(t_champ));
@@ -63,7 +44,6 @@ void		legacy(t_cor *cor, t_champ *champ, int id, int pc)
 	child->father = id;
 	if (!(new = ft_lstnew(child, sizeof(t_champ))))
 		exit(EXIT_FAILURE);
-	//ft_lstinsert(&cor->champs, new, i);
 	ft_lstadd(&cor->champs, new);
 	free(child);
 }
