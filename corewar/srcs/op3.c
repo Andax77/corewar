@@ -136,8 +136,6 @@ cor->map[(ori + p1 + 3) % MEM_SIZE];
 		}
 		champ->carry = (champ->reg[p2 - 1] == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -161,7 +159,6 @@ void	ft_lldi(t_cor *cor, t_champ *champ)
 		else
 		{
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
-			champ->carry = 0;
 			return ;
 		}
 	}
@@ -172,7 +169,6 @@ void	ft_lldi(t_cor *cor, t_champ *champ)
 		else
 		{
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
-			champ->carry = 0;
 			return ;
 		}
 	}
@@ -188,8 +184,6 @@ void	ft_lldi(t_cor *cor, t_champ *champ)
 cor->map[(ori + p2 + 3) % MEM_SIZE];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 

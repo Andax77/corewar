@@ -29,7 +29,6 @@ void	ft_and(t_cor *cor, t_champ *champ)//verif si need idx_mod
 			p1 = champ->reg[p1 - 1];
 		else
 		{
-			champ->carry = 0;
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
 			return ;
 		}
@@ -40,7 +39,6 @@ void	ft_and(t_cor *cor, t_champ *champ)//verif si need idx_mod
 			p2 = champ->reg[p2 - 1];
 		else
 		{
-			champ->carry = 0;
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
 			return ;
 		}
@@ -50,8 +48,6 @@ void	ft_and(t_cor *cor, t_champ *champ)//verif si need idx_mod
 		champ->reg[p3 - 1] = p1 & p2;
 		champ->carry = ((p1 & p2) == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -72,7 +68,6 @@ void	ft_or(t_cor *cor, t_champ *champ)//verif si need idx_mod
 			p1 = champ->reg[p1 - 1];
 		else
 		{
-			champ->carry = 0;
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
 			return ;
 		}
@@ -83,7 +78,6 @@ void	ft_or(t_cor *cor, t_champ *champ)//verif si need idx_mod
 			p2 = champ->reg[p2 - 1];
 		else
 		{
-			champ->carry = 0;
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
 			return ;
 		}
@@ -93,8 +87,6 @@ void	ft_or(t_cor *cor, t_champ *champ)//verif si need idx_mod
 		champ->reg[p3 - 1] = p1 | p2;
 		champ->carry = ((p1 | p2) == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -115,7 +107,6 @@ void	ft_xor(t_cor *cor, t_champ *champ)//verif si need idx_mod
 			p1 = champ->reg[p1 - 1];
 		else
 		{
-			champ->carry = 0;
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
 			return ;
 		}
@@ -126,7 +117,6 @@ void	ft_xor(t_cor *cor, t_champ *champ)//verif si need idx_mod
 			p2 = champ->reg[p2 - 1];
 		else
 		{
-			champ->carry = 0;
 			champ->pc = (champ->pc + 1) % MEM_SIZE;
 			return ;
 		}
@@ -136,8 +126,6 @@ void	ft_xor(t_cor *cor, t_champ *champ)//verif si need idx_mod
 		champ->reg[p3 - 1] = p1 ^ p2;
 		champ->carry = ((p1 ^ p2) == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
