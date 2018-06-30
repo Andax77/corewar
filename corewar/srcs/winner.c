@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 12:46:55 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 19:25:28 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ void		print_intro(t_cor *cor)
 {
 	t_list	*champ;
 	t_champ	*tmp;
-	int		first;
 
 	tmp = NULL;
-	if ((champ = cor->champs) && ft_printf("Introducing contestants...\n"))
-		first = 0;
+	if ((champ = cor->champs))
+		ft_printf("Introducing contestants...\n");
 	while (champ)
 	{
 		if (((t_champ*)champ->content)->father == 0)
@@ -51,6 +50,7 @@ char		*get_name_champ(t_cor *cor)
 	t_champ	*winner;
 
 	champ = cor->champs;
+	winner = NULL;
 	while (champ)
 	{
 		if (((t_champ*)champ->content)->id == cor->winner && \

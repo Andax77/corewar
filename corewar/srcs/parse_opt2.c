@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 12:56:29 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 19:27:42 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void		init_opt(t_opt *opt, t_cor *cor)
 {
-	int		i;
-
-	i = 0;
 	opt->a = 0;
 	opt->v = 0;
 	opt->d = 0;
