@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 18:18:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 18:26:00 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void		cycle_job(t_cor *cor, t_champ *cur_champ)
 	if (cor->opt->v && !cor->opt->d)
 	{
 		attron(COLOR_PAIR(cur_champ->id + 20));
-		draw_uchar(cur_champ->pc, \
-			cor->map[cur_champ->pc]);
+		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 	}
 	cur_champ->last_pc = cur_champ->pc;
 }
