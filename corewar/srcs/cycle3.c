@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 18:36:02 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 00:09:01 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static void		print_champ_values(t_cor *cor, char **values)
 			id = ((t_champ*)champs->content)->id - 1;
 			values[6] = ft_itoa(((t_champ*)champs->content)->last_live);
 			values[7] = ft_itoa(((t_champ*)champs->content)->lives);
-			draw_line(12 + (4 * id), 32, "    ");
+			draw_line(12 + (4 * id), 32, "      ");
 			draw_line(12 + (4 * id), 32, values[6]);
-			draw_line(13 + (4 * id), 32, "    ");
+			draw_line(13 + (4 * id), 32, "      ");
 			draw_line(13 + (4 * id), 32, values[7]);
 			free(values[6]);
 			values[6] = NULL;
