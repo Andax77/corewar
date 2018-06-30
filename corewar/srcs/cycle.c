@@ -12,7 +12,8 @@
 
 #include <corewar.h>
 
-static void	exec_processes(t_cor *cor, t_list *champs)
+static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
+																	t_champ*))
 {
 	t_champ	*cur_champ;
 
@@ -22,7 +23,7 @@ static void	exec_processes(t_cor *cor, t_list *champs)
 		if (cur_champ->r_cy > -1)
 		{
 			if (cur_champ->r_cy == 0)
-				cycle_job(cor, cur_champ);
+				cycle_job(cor, cur_champ, f);
 			else
 			{
 				cur_champ->r_cy--;
@@ -59,18 +60,20 @@ static int	dump_handler(t_cor *cor)
 
 void		cycle(t_cor *cor, int ret)
 {
+	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
 	t_list		*champs;
 	int			timeout;
 	int			ch;
 
 	ch = ' ';
 	timeout = 950;
+	init_op(f);
 	while ((champs = cor->champs))
 	{
 		(cor->opt->v || cor->opt->d) ? clean(cor, champs) : 0;
 		if (cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die)
 			ret = check_lives(cor);
-		exec_processes(cor, champs);
+		exec_processes(cor, champs, f);
 		if (!(dump_handler(cor)))
 			break ;
 		(cor->opt->v && !cor->opt->d) ? print_infos(cor) : 0;
