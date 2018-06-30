@@ -99,6 +99,7 @@ static int		populate_champs(t_list **champs, char *path, int nb)
 	t_champ		*champ;
 
 	champ = ft_malloc(sizeof(t_champ), EXIT_FAILURE);
+	ft_bzero(champ, sizeof(t_champ));
 	if (get_champ(&champ, path, nb) == ERROR)
 	{
 		del_champ(champ, 0);
