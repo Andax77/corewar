@@ -120,7 +120,6 @@ int			read_file(t_champ *champ)
 	if ((champ->fd = open(champ->argv, O_RDONLY)) <= 0)
 		return (ERROR);
 	line = NULL;
-	stock = UNFINISHED;
 	while ((result_gnl = get_next_line(champ->fd, &line)) == GNL_SUCCESS)
 	{
 		if ((stock = parse_line(line, champ)) == ERROR && ft_fruit(1, &line))

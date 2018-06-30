@@ -32,9 +32,7 @@ int64_t		swap_int64(int64_t val)
 char		*translate(int64_t val)
 {
 	char	*text;
-	int		i;
 
-	i = 0;
 	if (!(text = ft_strnew(5)))
 		exit(EXIT_FAILURE);
 	text[0] = val >> 24;

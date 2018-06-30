@@ -116,6 +116,7 @@ int			ft_manual(t_champ *champ)
 	int		inst_len;
 
 	f_inst = NULL;
+	inst_len = 0;
 	ft_printf("{yellow}What is the champion's name ?{eoc}\n");
 	if (get_next_line(STDIN_FILENO, &champ->name) != GNL_SUCCESS)
 		return (ft_error_m(champ, "error: oups something went wrong..."));
@@ -130,9 +131,8 @@ int			ft_manual(t_champ *champ)
 		return (ERROR);
 	if (ft_write_cor_m(champ, inst_len, f_inst) == ERROR)
 		return (ERROR);
-	free(f_inst);
 	del_champ(champ);
-	ft_printf("{yellow}Please press ^d{eoc}\n");
+	ft_printf("{yellow}Please press ^d{eoc}\n") && ft_fruit(1, &f_inst);
 	while (get_next_line(STDIN_FILENO, &f_inst) != GNL_END)
 		ft_printf("{yellow}Please press ^d{eoc}\n") && ft_fruit(1, &f_inst);
 	free(f_inst);

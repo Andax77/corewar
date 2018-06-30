@@ -45,6 +45,7 @@ static int		check_prog_len(t_list *input, int size, char **text)
 	char	*add;
 
 	i = 0;
+	add = NULL;
 	if (!(*text = ft_strnew(size * 2 + 1)))
 		exit(EXIT_FAILURE);
 	while (input && (i += 4))
@@ -59,6 +60,7 @@ static int		check_prog_len(t_list *input, int size, char **text)
 				pad(&add, 8);
 			ft_strcat(*text, add);
 			free(add);
+			add = NULL;
 		}
 		input = input->next;
 	}

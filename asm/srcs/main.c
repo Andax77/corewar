@@ -68,6 +68,6 @@ int				main(int argc, char **argv)
 	champ = NULL;
 	main_boucle(champ, argc_c, argv);
 	if (argc == 1)
-		ft_printf("{yellow}Usage: %s [-r] <sourcefile> ...{eoc}\n", argv[0]);
+		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n", argv[0]);
 	exit(EXIT_SUCCESS);
 }

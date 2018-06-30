@@ -33,6 +33,7 @@ int		ft_name_comment_other_lines_next(char **member, char *tmp)
 
 	i = -1;
 	count = 0;
+	index = 0;
 	while ((*member)[++i])
 		if ((*member)[i] == '"')
 		{
