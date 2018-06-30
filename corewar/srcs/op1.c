@@ -15,11 +15,9 @@
 void	ft_live(t_cor *cor, t_champ *champ)
 {
 	int		p;
-	int		ori;
 	t_list	*tmp;
 
 	tmp = cor->champs;
-	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 24) + \
 	(cor->map[++champ->pc % MEM_SIZE] << 16) + \
 	(cor->map[++champ->pc % MEM_SIZE] << 8) + \
@@ -146,9 +144,7 @@ void	ft_add(t_cor *cor, t_champ *champ)
 	int p2;
 	int p3;
 	int	ocp;
-	int	ori;
 
-	ori = champ->pc;
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 4);
 	p2 = recup_content(cor, champ, ocp, 4, 4);
@@ -169,9 +165,7 @@ void	ft_sub(t_cor *cor, t_champ *champ)
 	int p2;
 	int p3;
 	int	ocp;
-	int	ori;
 
-	ori = champ->pc;
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, 6, 4);
 	p2 = recup_content(cor, champ, ocp, 4, 4);
