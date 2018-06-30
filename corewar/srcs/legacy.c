@@ -14,6 +14,8 @@
 
 static void	init_child(t_champ *child, t_champ *father, t_cor *cor, int pc)
 {
+	if (!(child->name = ft_strdup(father->name)))
+		exit(EXIT_FAILURE);
 	child->id = father->id;
 	child->v_id = father->v_id;
 	child->pc = pc;

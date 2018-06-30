@@ -96,7 +96,7 @@ void	ft_fork(t_cor *cor, t_champ *champ)
 	ori = champ->pc;
 	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + \
 	cor->map[++champ->pc % MEM_SIZE];
-	pc = ori + ((p % IDX_MOD) % MEM_SIZE);
+	pc = (ori + (p % IDX_MOD)) % MEM_SIZE;
 	if (pc < 0)
 		pc += MEM_SIZE;
 	legacy(cor, champ, champ->id, pc);
