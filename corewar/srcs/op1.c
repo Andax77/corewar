@@ -80,8 +80,6 @@ cor->map[(ori + p1 + 3) % MEM_SIZE];
 		}
 		champ->carry = (champ->reg[p2 - 1] == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -162,8 +160,6 @@ void	ft_add(t_cor *cor, t_champ *champ)
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] + champ->reg[p2 - 1];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -187,7 +183,5 @@ void	ft_sub(t_cor *cor, t_champ *champ)
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] - champ->reg[p2 - 1];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
 	}
-	else
-		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
