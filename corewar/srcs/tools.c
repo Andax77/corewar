@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/07 19:54:38 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 19:27:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int64_t					swap_int(int64_t c)
 char					*translate(int64_t val)
 {
 	char	*text;
-	int		i;
 
-	i = 0;
 	if (!(text = ft_strnew(5)))
 		exit(EXIT_FAILURE);
 	text[0] = val >> 24;

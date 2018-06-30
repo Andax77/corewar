@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 00:09:01 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/06/30 19:16:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void		print_champ_values(t_cor *cor, char **values)
 	t_list	*champs;
 	int		id;
 
-	id = 0;
 	champs = cor->champs;
 	while (champs)
 	{
