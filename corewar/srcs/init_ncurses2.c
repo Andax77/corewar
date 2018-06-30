@@ -94,7 +94,7 @@ void	init_cmap(t_cor *cor)
 			cor->c_map[i] = 3 + id;
 		else
 		{
-			if (champs->next && i == (id + 1) * (MEM_SIZE / nb) - 1)
+			if (champs && champs->next && i == (id + 1) * (MEM_SIZE / nb) - 1)
 				if (++id < MAX_PLAYERS)
 					champs = champs->next;
 			cor->c_map[i] = 2;
