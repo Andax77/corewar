@@ -99,6 +99,7 @@ static int		populate_champs(t_list **champs, char *path, int nb)
 	t_champ		*champ;
 
 	champ = ft_malloc(sizeof(t_champ), EXIT_FAILURE);
+	ft_bzero(champ, sizeof(t_champ));
 	if (get_champ(&champ, path, nb) == ERROR)
 	{
 		del_champ(champ, 0);
@@ -137,8 +138,7 @@ int				init_cor(t_cor *cor, char **argv)
 			print_usage();
 			return (ERROR);
 		}
-	if (!(cor->map = malloc((MEM_SIZE + 1) * sizeof(unsigned char))))
-		exit(EXIT_FAILURE);
+	cor->map = ft_malloc((MEM_SIZE + 1) * sizeof(unsigned char), EXIT_FAILURE);
 	cor->aff = NULL;
 	cor->winner = 0;
 	init_memory(cor);

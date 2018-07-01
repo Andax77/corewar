@@ -55,7 +55,6 @@ static void	key_event_noechoed(int *timeout, int *ch)
 			timeout =  key_handler(timeout, ch);
 			if (*ch == ' ' || k == 1)
 			{
-				k = 0;
 				*ch = ERR;
 				break ;
 			}

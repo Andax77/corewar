@@ -52,11 +52,9 @@ void		clean(t_cor *cor, t_list *champs)
 	}
 }
 
-void		cycle_job(t_cor *cor, t_champ *cur_champ)
+void		cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
+																	t_champ*))
 {
-	void		(*f[17])(t_cor *cor, t_champ *cur_champ);
-
-	init_op(f);
 	if (cor->cycle != 0)
 	{
 		if (cur_champ->cur_op >= 1 && cur_champ->cur_op <= 16)

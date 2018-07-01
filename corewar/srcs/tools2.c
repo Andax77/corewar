@@ -75,7 +75,7 @@ void	dump(t_cor *cor)
 	}
 }
 
-void	jump(t_cor* cor)
+void	jump(t_cor *cor)
 {
 	t_list	*champs;
 	t_champ	*cur_champ;
