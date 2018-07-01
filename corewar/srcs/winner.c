@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/30 19:25:28 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/01 13:00:44 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		print_intro(t_cor *cor)
 		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
 		champ = champ->next;
 	}
+	ft_putchar('\n');
 }
 
 char		*color_player(int id)
@@ -57,4 +58,29 @@ char		*get_name_champ(t_cor *cor)
 		champ = champ->next;
 	}
 	return (NULL);
+}
+
+void		game_over(t_cor* cor)
+{
+	char	*winner;
+	int		id;
+	int		nb;
+
+	nb = 56;
+	id = cor->winner;
+	winner = get_name_champ(cor);
+	if (!winner)
+		winner = "No One..";
+	draw_line(36, 0, "WINNER IS : ");
+	attron(COLOR_PAIR(id + 2));
+	draw_line(36, 12, winner);
+	draw_line(nb++, 50, "  ");
+	draw_line(nb++, 0, "                                                    ");
+	draw_line(nb++, 0, "  ****  ***  *   * *****    ***  ** ** ***** *****  ");
+	draw_line(nb++, 0, " ***** ***** ** ** **      ***** ** ** **    ** **  ");
+	draw_line(nb++, 0, " **    ** ** ***** ***     ** ** ***** ***   ** **  ");
+	draw_line(nb++, 0, " ** ** ***** ***** **      ** ** ***** **    *****  ");
+	draw_line(nb++, 0, " ***** ** ** ** ** *****   *****  ***  ***** ** **  ");
+	draw_line(nb++, 0, "  ***  ** ** ** ** *****    ***    *   ***** **  *  ");
+	draw_line(nb++, 0, "                                                    ");
 }
