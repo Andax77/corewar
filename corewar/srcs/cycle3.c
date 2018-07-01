@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 19:16:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/01 17:54:41 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,17 @@ void		print_infos(t_cor *cor)
 	while (values[i])
 		free(values[i++]);
 	free(values);
+}
+
+void		clean_list(t_list *champs)
+{
+	t_list		*tmp;
+
+	while (champs->next && ((t_champ*)champs->next->content)->r_cy == -1 && \
+			((t_champ*)champs->next->content)->father)
+	{
+		tmp = champs->next->next;
+		ft_lstdelone(&champs->next, del_champ);
+		champs->next = tmp;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 18:56:29 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/01 17:59:58 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static void	check_champs_lives(t_cor* cor, int *nbr_lives, int *nbr_v_lives)
 		}
 		((t_champ*)champs->content)->lives = 0;
 		((t_champ*)champs->content)->v_lives = 0;
+		//clean_list(champs);
 		champs = champs->next;
 	}
 }
