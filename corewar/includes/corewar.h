@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/30 12:23:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/01 12:10:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int					change_r_cy(t_cor *cor, t_champ *champ);
 int					check_live_value(t_cor *cor, int pc);
 void				dump(t_cor *cor);
 void				jump(t_cor *cor);
+void				game_over(t_cor* cor);
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 
