@@ -19,8 +19,8 @@ static int	ft_check_sz_n(t_arg *arg)
 	else if (arg->conv == 'p')
 		return (arg->wi + (arg->wi == 0 ? 2 : 0));
 	else if (ft_strchr("Ddi", arg->conv))
-		return (arg->wi + (arg->wi == 0
-			&& (arg->flag.plus || arg->flag.space) ? 1 : 0));
+		return (arg->wi + (arg->wi == 0 && \
+(arg->flag.plus || arg->flag.space) ? 1 : 0));
 	else
 		return (arg->wi);
 }

@@ -42,7 +42,7 @@ static char	*ft_clean_zero(char *mantisse)
 	count = 0;
 	while (mantisse[--i] == '0')
 		count++;
-	if (!(cpy = malloc(sizeof(*cpy) * (57 - count))))
+	if (!(cpy = (char *)malloc(sizeof(*cpy) * (57 - count))))
 		return (NULL);
 	cpy[56 - count] = '\0';
 	cpy[0] = '1';
@@ -61,7 +61,7 @@ static char	*ft_clean_zero(char *mantisse)
 static int	ft_conv_w2(char **str, int size, int size_e, long long exposant_f)
 {
 	free(*str);
-	if (!(*str = malloc(sizeof(char) * (size + 1))))
+	if (!(*str = (char *)malloc(sizeof(char) * (size + 1))))
 		return (ERROR);
 	ft_strcpy(*str + 1, "2e");
 	(*str)[3] = ((exposant_f *= 10) == 0) ? '0' : '-';
@@ -81,8 +81,8 @@ int			ft_conv_w(char **ret, t_arg *arg, int size, int size_exposant)
 	char		*exp_new_ret;
 
 	f.f = arg->arg.f;
-	if ((!(str = ft_int_to_nbase(f.l, "01", 64))) ||
-		(!(exp_new_ret = ft_strndup(str + 1, 11))))
+	if ((!(str = ft_int_to_nbase(f.l, "01", 64))) || \
+(!(exp_new_ret = ft_strndup(str + 1, 11))))
 		return (ERROR);
 	exposant_f = ft_base_to_int(exp_new_ret, "01") - 1023;
 	size_exposant = ft_nb_len(exposant_f);

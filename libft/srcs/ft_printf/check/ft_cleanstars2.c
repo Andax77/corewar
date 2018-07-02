@@ -17,8 +17,8 @@ static int	ft_replace_stars_2(long nb_len, int *j, int *i, char *new)
 	int		n;
 	int		marqueur;
 
-	n = ((ft_get2arg(nb_len, 0) < 0) ? -(unsigned int)ft_get2arg(nb_len, 0) :
-			(unsigned int)ft_get2arg(nb_len, 0)) * 10;
+	n = ((ft_get2arg(nb_len, 0) < 0) ? -(unsigned int)ft_get2arg(nb_len, 0) : \
+(unsigned int)ft_get2arg(nb_len, 0)) * 10;
 	marqueur = *i + ft_get2arg(nb_len, 1);
 	while ((n /= 10) > 0)
 		new[--(*j)] = n % 10 + '0';

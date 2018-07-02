@@ -49,7 +49,7 @@ static int	ft_conv_o_type(char **nbx, int *size_nb, t_arg *arg)
 	int			i;
 
 	ft_get_size_o(arg, size_nb);
-	if (!(*nbx = malloc(sizeof(char) * (*size_nb + 1))))
+	if (!(*nbx = (char *)malloc(sizeof(char) * (*size_nb + 1))))
 		return (ERROR);
 	(*nbx)[*size_nb] = '\0';
 	nbbit = sizeof(long long) * 8;
@@ -124,8 +124,8 @@ int			ft_conv_o(char **ret, t_arg *arg)
 		return (ERROR);
 	if (new)
 		ft_place_nb_o(arg, new, nbx, size_new);
-	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg)) &&
-			ft_fruit(2, &nbx, &new))
+	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg)) && \
+ft_fruit(2, &nbx, &new))
 		return (ERROR);
 	arg->cmpt += size_new;
 	free(nbx);

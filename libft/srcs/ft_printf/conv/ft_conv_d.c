@@ -18,8 +18,8 @@ static int		ft_nb_len_d(t_arg *arg)
 	int		nb_len;
 
 	tmp = (arg->arg.d < 0) ? -(t_ull)arg->arg.d : (t_ull)arg->arg.d;
-	nb_len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1) ? 2
-		: 1;
+	nb_len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1) ? \
+2: 1;
 	while (tmp /= 10)
 		nb_len++;
 	return (nb_len);
@@ -31,7 +31,7 @@ static int		ft_no_precision(char **new_ret, t_arg *arg, int len)
 
 	nb_len = ft_nb_len_d(arg);
 	len = (nb_len > len) ? nb_len : len;
-	if (!((*new_ret) = malloc(sizeof(**new_ret) * (len + 1))))
+	if (!((*new_ret) = (char *)malloc(sizeof(**new_ret) * (len + 1))))
 		return (ERROR);
 	(*new_ret)[len] = '\0';
 	*new_ret = (arg->flag.zero == 1) ?
@@ -84,8 +84,8 @@ static int		ft_precision(char **new_nb, t_arg *arg)
 	int		nb_len;
 
 	nb_len = ft_nb_len_d(arg);
-	len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1) ?
-		(arg->preci + 1) : arg->preci;
+	len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1) ? \
+(arg->preci + 1) : arg->preci;
 	len = (nb_len > len) ? nb_len : len;
 	if (!((*new_nb) = malloc(sizeof(**new_nb) * (len + 1))))
 		return (ERROR);

@@ -19,8 +19,8 @@ static int	ft_checklimit(char const *format, int i, char **expression)
 
 	index = i;
 	nbchar = 1;
-	while (ft_strchr("+- 0#123456789.*lhzjtq", format[i]) != NULL
-			&& format[i] != '\0')
+	while (ft_strchr("+- 0#123456789.*lhzjtq", format[i]) != NULL && \
+format[i] != '\0')
 	{
 		++i;
 		++nbchar;
@@ -69,8 +69,8 @@ int			ft_parse(char **str, const char *format, va_list ap, t_arg *arg)
 	while (format[i] && i < (int)ft_strlen(format))
 		if (format[i] == '%' && ++i)
 		{
-			if ((nbchar = ft_checklimit(format, i, &expression))
-					== (int)(ft_strlen(format) + 10))
+			if ((nbchar = ft_checklimit(format, i, &expression)) == \
+(int)(ft_strlen(format) + 10))
 				return (ERROR);
 			if (nbchar <= 0 && ((i += -nbchar) ? 1 : 1))
 				continue;

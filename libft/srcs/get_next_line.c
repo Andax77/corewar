@@ -81,8 +81,8 @@ tmp->s[size_line] != '\0')
 	ft_strncpy(*line, tmp->s, size_line);
 	(*line)[size_line] = '\0';
 	ft_memmove(tmp->s, tmp->s + size_line + 1, tmp->size - size_line);
-	if (!(tmp->s = ft_realloc(tmp->s, tmp->size + 1,
-													tmp->size - size_line + 1)))
+	if (!(tmp->s = ft_realloc(tmp->s, tmp->size + 1, \
+tmp->size - size_line + 1)))
 		return (GNL_ERROR);
 	tmp->s[tmp->size - size_line] = '\0';
 	tmp->size = ft_strlen(tmp->s) + 1;
