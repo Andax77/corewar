@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <limits.h>
 
-int	ft_is_int(const char *s)
+int		ft_is_int(const char *s)
 {
 	int				i;
 	unsigned long	result;
@@ -23,7 +23,7 @@ int	ft_is_int(const char *s)
 	result = 0;
 	sign = 1;
 	while (s[i] == '\n' || s[i] == '\t' || s[i] == '\r' || s[i] == '\v' || \
-			s[i] == '\f' || s[i] == ' ')
+s[i] == '\f' || s[i] == ' ')
 		i++;
 	if (s[i] == '+' || s[i] == '-')
 		if (s[i++] == '-')

@@ -19,7 +19,7 @@ int		ft_conv_invalid(char **ret, t_arg *arg)
 	int		i;
 
 	len = (arg->wi == 0) ? 1 : arg->wi;
-	if (!(new = malloc(sizeof(*new) * (len + 1))))
+	if (!(new = (char *)malloc(sizeof(*new) * (len + 1))))
 		return (ERROR);
 	new[len] = '\0';
 	ft_memset(new, ' ', len);

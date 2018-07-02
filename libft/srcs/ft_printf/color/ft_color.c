@@ -36,8 +36,8 @@ static int	ft_put_color(t_color *color, char **str, long long pl_numc,
 
 	size_del = ft_strlen(color[ft_get2arg(pl_numc, 1)].name) + 2;
 	size_add = ft_strlen(color[ft_get2arg(pl_numc, 1)].color);
-	if (!(new_str = malloc(sizeof(char) * (ft_strlen(*str) + size_add - size_del
-						+ 1))))
+	if (!(new_str = (char *)malloc(sizeof(char) * (ft_strlen(*str) + \
+size_add - size_del + 1))))
 		return (ERROR);
 	ft_strncpy(new_str, *str, ft_get2arg(pl_numc, 0));
 	new_str[ft_get2arg(pl_numc, 0)] = '\0';
