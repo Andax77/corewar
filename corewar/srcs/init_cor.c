@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 11:44:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 19:55:39 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int		get_champ(t_champ **champ, char *path, int nb)
 	return (ERROR);
 }
 
-int		populate_champs(t_list **champs, char *path, int nb)
+int				populate_champs(t_list **champs, char *path, int nb)
 {
 	t_list		*new;
 	t_champ		*champ;

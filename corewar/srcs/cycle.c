@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/02 18:29:22 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 19:51:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,6 @@ static int	dump_handler(t_cor *cor)
 		if (!cor->opt->v)
 		{
 			dump(cor);
-
-t_list	*tmp = cor->champs;
-while (tmp)
-{
-ft_printf("id = %d - %d ; pc = %d\n", ((t_champ*)tmp->content)->id, ((t_champ*)tmp->content)->father, ((t_champ*)tmp->content)->pc);
-tmp = tmp->next;
-}
-
 			return (0);
 		}
 		else

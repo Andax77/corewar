@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 11:14:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 20:49:33 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int					init_ncurses(t_cor *cor);
 void				draw_borders(void);
 void				draw_map(t_cor *cor);
 void				draw_infos(t_list *champs, int nb);
+int					get_v_ids(t_list *champs, int id, int *nb);
 void				init_colors(t_list *champs);
 void				init_special_colors(void);
 void				init_cmap(t_cor *cor);
