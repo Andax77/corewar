@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 01:39:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 11:14:44 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,15 @@ typedef struct		s_cor
 	int				winner;
 }					t_cor;
 
-void				print_usage(void);
+int					print_usage(void);
 int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 void				init_opt(t_opt *opt, t_cor *cor);
 int					check_opt(char **argv);
 void				verif_doublons(t_opt *opt, int index);
-int					is_opt(char *str);
-void				print_usage(void);
 int					init(char **argv, t_cor *cor);
+int					read_args(t_cor *cor, char **argv);
+int					populate_champs(t_list **champs, char *path, int nb);
 int					count_champs(t_list *champs);
 void				init_op(void (**f)(t_cor*, t_champ*));
 int					recup_content(t_cor *cor, t_champ *champ, int ocp,

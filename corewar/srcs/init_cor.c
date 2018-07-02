@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/30 18:56:18 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 11:44:43 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int		get_champ(t_champ **champ, char *path, int nb)
 	return (ERROR);
 }
 
-static int		populate_champs(t_list **champs, char *path, int nb)
+int		populate_champs(t_list **champs, char *path, int nb)
 {
 	t_list		*new;
 	t_champ		*champ;
@@ -122,33 +122,26 @@ static int		populate_champs(t_list **champs, char *path, int nb)
 
 int				init_cor(t_cor *cor, char **argv)
 {
-	int			i;
-	int			n;
-
-	i = 0;
-	n = 0;
-	while (++argv && *argv)
-		if (ft_strstr(*argv, ".cor") && ++i && i <= MAX_PLAYERS)
-		{
-			if (populate_champs(&cor->champs, *argv, cor->opt->n[n++]) == ERROR)
-				return (ERROR);
-		}
-		else if (!is_opt(*argv))
-		{
-			print_usage();
+	if (read_args(cor, argv) == ERROR)
+		return (ERROR);
+	if (MEM_SIZE > 0 && CYCLE_TO_DIE > 0 && CYCLE_DELTA > 0 && NBR_LIVE > 0 && \
+		MAX_CHECKS > 0 && REG_NUMBER > 0) //TODO Check int max
+	{
+		cor->aff = NULL;
+		cor->winner = 0;
+		cor->cycle_to_die = CYCLE_TO_DIE;
+		cor->map = ft_malloc((MEM_SIZE + 1) * \
+			sizeof(unsigned char), EXIT_FAILURE);
+		init_memory(cor);
+		init_cmap(cor);
+		if (MAX_PLAYERS > 4 || \
+				(!cor->opt->d && cor->opt->v && !init_ncurses(cor)))
 			return (ERROR);
-		}
-	cor->map = ft_malloc((MEM_SIZE + 1) * sizeof(unsigned char), EXIT_FAILURE);
-	cor->aff = NULL;
-	cor->winner = 0;
-	init_memory(cor);
-	cor->cycle_to_die = CYCLE_TO_DIE;
-	init_cmap(cor);
-	if (!cor->opt->d)
-		if (cor->opt->v && !init_ncurses(cor))
-			return (ERROR);
-	print_intro(cor);
-	(ft_lstcount(cor->champs) > 1) ? order_to_start(&cor->champs) : 0;
-	cycle(cor, 1);
-	return (SUCCESS);
+		print_intro(cor);
+		(ft_lstcount(cor->champs) > 1) ? order_to_start(&cor->champs) : 0;
+		cycle(cor, 1);
+		return (SUCCESS);
+	}
+	ft_printf("{red}Wrong value in op.h\n{eoc}");
+	return (ERROR);
 }
