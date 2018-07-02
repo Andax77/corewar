@@ -16,7 +16,8 @@ static int	*key_event_e(int *timeout)
 {
 	char	*p_p_c;
 
-	p_p_c = ft_itoa(1000 - --*timeout);
+	if (!(p_p_c = ft_itoa(1000 - --*timeout)))
+		exit(EXIT_FAILURE);
 	attron(COLOR_PAIR(17));
 	draw_line(4, 22, "    ");
 	draw_line(4, 22, p_p_c);
@@ -29,9 +30,13 @@ static int	*key_event_r(int *timeout)
 	char	*p_p_c;
 
 	if (1000 - (*timeout - 10) > 1000)
-		p_p_c = ft_itoa(1000 - (*timeout = 0));
+	{
+		if (!(p_p_c = ft_itoa(1000 - (*timeout = 0))))
+			exit(EXIT_FAILURE);
+	}
 	else
-		p_p_c = ft_itoa(1000 - (*timeout -= 10));
+		if (!(p_p_c = ft_itoa(1000 - (*timeout -= 10))))
+			exit(EXIT_FAILURE);
 	attron(COLOR_PAIR(17));
 	draw_line(4, 22, "    ");
 	draw_line(4, 22, p_p_c);
@@ -43,7 +48,8 @@ static int	*key_event_w(int *timeout)
 {
 	char	*p_p_c;
 
-	p_p_c = ft_itoa(1000 - ++*timeout);
+	if (!(p_p_c = ft_itoa(1000 - ++*timeout)))
+		exit(EXIT_FAILURE);
 	attron(COLOR_PAIR(17));
 	draw_line(4, 22, "    ");
 	draw_line(4, 22, p_p_c);
@@ -56,9 +62,13 @@ static int	*key_event_q(int *timeout)
 	char	*p_p_c;
 
 	if (1000 - (*timeout + 10) < 50)
-		p_p_c = ft_itoa(1000 - (*timeout = 950));
+	{
+		if (!(p_p_c = ft_itoa(1000 - (*timeout = 950))))
+			exit(EXIT_FAILURE);
+	}
 	else
-		p_p_c = ft_itoa(1000 - (*timeout += 10));
+		if (!(p_p_c = ft_itoa(1000 - (*timeout += 10))))
+			exit(EXIT_FAILURE);
 	attron(COLOR_PAIR(17));
 	draw_line(4, 22, "    ");
 	draw_line(4, 22, p_p_c);

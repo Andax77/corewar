@@ -29,37 +29,39 @@ void		draw_line(int line_idx, int col_idx, char *line)
 
 void		draw_uchar(int pos, unsigned char val)
 {
+	char	*str;
+	char	*tmp;
 	int		x;
 	int		y;
-	char	*c;
 	int		i;
-	char	*tmp_c;
 
 	x = 3;
 	y = 2;
 	i = 0;
-	c = ft_itoa_base(val, 16);
-	if (ft_strlen(c) < 2)
+	if (!(str = ft_itoa_base(val, 16)))
+		exit(EXIT_FAILURE);
+	if (ft_strlen(str) < 2)
 	{
-		tmp_c = c;
-		c = ft_strjoin("0", c);
-		free(tmp_c);
+		tmp = str;
+		if (!(str = ft_strjoin("0", tmp)))
+			exit(EXIT_FAILURE);
+		free(tmp);
 	}
 	while (y < 66)
 	{
 		if (i++ == pos % MEM_SIZE)
-			mvprintw(y, x, c);
+			mvprintw(y, x, str);
 		x = x + 3;
 		if (x >= 194 && (x = 3))
 			y++;
 	}
-	free(c);
+	free(str);
 }
 
 void		draw_names(t_list *champs)
 {
-	int		id;
 	t_champ	*champ;
+	int		id;
 
 	while (champs)
 	{
@@ -77,8 +79,8 @@ void		draw_names(t_list *champs)
 
 void	init_cmap(t_cor *cor)
 {
-	int		i;
 	t_list	*champs;
+	int		i;
 	int		nb;
 	int		id;
 
@@ -88,8 +90,8 @@ void	init_cmap(t_cor *cor)
 	nb = ft_lstcount(champs);
 	cor->c_map = (short*)ft_malloc(MEM_SIZE * sizeof(short), EXIT_FAILURE);
 	while (++i < MEM_SIZE)
-		if (champs && i >= id * (MEM_SIZE / nb) && i < (id * (MEM_SIZE / nb)) +\
-				(int)((t_champ *)champs->content)->op_nb)
+		if (champs && i >= id * (MEM_SIZE / nb) && \
+i < (id * (MEM_SIZE / nb)) + (int)((t_champ *)champs->content)->op_nb)
 			cor->c_map[i] = 3 + id;
 		else
 		{

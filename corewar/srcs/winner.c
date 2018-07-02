@@ -53,7 +53,7 @@ char		*get_name_champ(t_cor *cor)
 	while (champ)
 	{
 		if (((t_champ*)champ->content)->id == cor->winner && \
-			((t_champ*)champ->content)->father == 0)
+((t_champ*)champ->content)->father == 0)
 			return (((t_champ*)champ->content)->name);
 		champ = champ->next;
 	}

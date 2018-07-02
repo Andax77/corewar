@@ -67,15 +67,15 @@ static void		print_champ_values(t_cor *cor, char **values)
 		if (!((t_champ*)champs->content)->father)
 		{
 			id = ((t_champ*)champs->content)->id - 1;
-			values[6] = ft_itoa(((t_champ*)champs->content)->last_live);
-			values[7] = ft_itoa(((t_champ*)champs->content)->lives);
+			if (!(values[6] = ft_itoa(((t_champ*)champs->content)->last_live)))
+				exit(EXIT_FAILURE);
+			if (!(values[7] = ft_itoa(((t_champ*)champs->content)->lives)))
+				exit(EXIT_FAILURE);
 			draw_line(12 + (4 * id), 32, "      ");
 			draw_line(12 + (4 * id), 32, values[6]);
 			draw_line(13 + (4 * id), 32, "      ");
 			draw_line(13 + (4 * id), 32, values[7]);
-			free(values[6]);
-			values[6] = NULL;
-			free(values[7]);
+			ft_fruit(2, &values[6], &values[7]);
 		}
 		champs = champs->next;
 	}

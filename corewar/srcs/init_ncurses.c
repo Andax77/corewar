@@ -54,7 +54,8 @@ void	draw_infos(t_list *champs, int nb)
 		if (((t_champ*)champs->content)->father == 0)
 		{
 			draw_line(nb, 0, "Player");
-			tmp = ft_itoa(((t_champ*)champs->content)->v_id);
+			if (!(tmp = ft_itoa(((t_champ*)champs->content)->v_id)))
+				exit(EXIT_FAILURE);
 			draw_line(nb, 7, tmp);
 			draw_line(nb, 7 + ft_strlen(tmp) + 1, ":");
 			free(tmp);
