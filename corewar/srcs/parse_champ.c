@@ -45,24 +45,27 @@ static int		check_last(char *add, char **text, int size, t_list *instru)
 {
 	if (size % 4 == 3)
 	{
-		add = ft_itoa_base(ft_atoi(instru->content) >> 8 & 0x00FFFFFF , 16);
+		if (!(add = ft_itoa_base(ft_atoi(instru->content) >> 8 & 16777215, 16)))
+			exit(EXIT_FAILURE);
 		if (ft_strlen(add) < 6)
 			pad(&add, 6);
 	}
 	else if (size % 4 == 2)
 	{
-		add = ft_itoa_base(ft_atoi(instru->content) >> 16 & 0x0000FFFF, 16);
+		if (!(add = ft_itoa_base(ft_atoi(instru->content) >> 16 & 65535, 16)))
+			exit(EXIT_FAILURE);
 		if (ft_strlen(add) < 4)
 			pad(&add, 4);
 	}
 	else if (size % 4 == 1)
 	{
-		add = ft_itoa_base(ft_atoi(instru->content) >> 24 & 0x000000FF, 16);
+		if (!(add = ft_itoa_base(ft_atoi(instru->content) >> 24 & 255, 16)))
+			exit(EXIT_FAILURE);
 		if (ft_strlen(add) < 2)
 			pad(&add, 2);
 	}
 	ft_strcat(*text, add);
-	free(add);
+	ft_fruit(1, &add);
 	(*text)[size * 2] = '\0';
 	return (SUCCESS);
 }
@@ -82,12 +85,12 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 			break ;
 		else
 		{
-			add = ft_itoa_base(ft_atoi(instru->content), 16);
+			if (!(add = ft_itoa_base(ft_atoi(instru->content), 16)))
+				exit(EXIT_FAILURE);
 			if (ft_strlen(add) < 8)
 				pad(&add, 8);
 			ft_strcat(*text, add);
-			free(add);
-			add = NULL;
+			ft_fruit(1, &add);
 		}
 		instru = instru->next;
 	}
