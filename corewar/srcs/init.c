@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 12:37:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/01 12:09:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		init(char **argv, t_cor *cor)
 		return (ERROR);
 	if (cor->opt->v)
 	{
+		game_over(cor);
 		getch();
 		endwin();
 	}

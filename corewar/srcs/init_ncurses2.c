@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 12:31:52 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/01 12:29:31 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,18 @@ void		draw_uchar(int pos, unsigned char val)
 
 void		draw_names(t_list *champs)
 {
-	int		i;
+	int		id;
 	t_champ	*champ;
 
-	i = 0;
 	while (champs)
 	{
 		champ = champs->content;
 		if (!champ->father)
 		{
-			attron(COLOR_PAIR(i + 3));
-			draw_line(11 + (4 * i), 10 + ft_countdigits(champ->v_id), \
+			id = champ->id;
+			attron(COLOR_PAIR(id + 2));
+			draw_line(11 + (4 * (id - 1)), 10 + ft_countdigits(champ->v_id), \
 				((t_champ*)champs->content)->name);
-			i++;
 		}
 		champs = champs->next;
 	}
