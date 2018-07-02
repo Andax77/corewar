@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 20:52:49 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 23:39:08 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	draw_map(t_cor *cor)
 
 void	draw_infos(t_list *champs, int nb)
 {
-	char	*tmp;
 	int		id;
 
 	id = 1;
