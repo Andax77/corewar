@@ -54,7 +54,7 @@ static int	ft_width(char **new_ret, char **new_nb, t_arg *arg)
 	{
 		nb_len = ft_strlen(*new_nb);
 		len = (nb_len > len) ? nb_len : len;
-		if (!(*new_ret = malloc(sizeof(**new_ret) * (len + 1))) && \
+		if (!(*new_ret = (char *)malloc(sizeof(**new_ret) * (len + 1))) && \
 ft_fruit(1, new_nb))
 			return (ERROR);
 		if (*new_ret)
