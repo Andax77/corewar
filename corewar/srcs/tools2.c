@@ -57,9 +57,9 @@ int		check_live_value(t_cor *cor, int pc)
 	{
 		v_id = ((t_champ*)champs->content)->v_id;
 		if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE] + \
-				(cor->map[(pc + 3) % MEM_SIZE] << 8) + \
-				(cor->map[(pc + 2) % MEM_SIZE] << 16) + \
-				(cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
+(cor->map[(pc + 3) % MEM_SIZE] << 8) + \
+(cor->map[(pc + 2) % MEM_SIZE] << 16) + \
+(cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
 			return (((t_champ*)champs->content)->id);
 		champs = champs->next;
 	}
