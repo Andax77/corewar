@@ -49,8 +49,8 @@ char		*ft_ftoa(double f, int sign)
 	tab[i++] = '.';
 	ff = (double)(((double)f) - ((long long)f));
 	while (i < sizeof(tab))
-		if (((long long)(ff * 10)) < 0 ||
-				((tab[i++] = ((long long)(ff *= 10)) % 10 + '0') ? 0 : 0))
+		if (((long long)(ff * 10)) < 0 || \
+((tab[i++] = ((long long)(ff *= 10)) % 10 + '0') ? 0 : 0))
 			break ;
 	if ((str_final = malloc(i + sign + 1)) == NULL)
 		return (NULL);

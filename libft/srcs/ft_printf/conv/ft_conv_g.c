@@ -46,7 +46,7 @@ static int	ft_improve_ge(char **new_r, int i, int len, t_arg *arg)
 	count = 0;
 	while ((*new_r)[--i] == '0')
 		count++;
-	if ((!(cpy = malloc(sizeof(*cpy) * (len - count + 1)))))
+	if ((!(cpy = (char *)malloc(sizeof(*cpy) * (len - count + 1)))))
 		return (ERROR);
 	j = -1;
 	while (++j < i + 1 || ((j--) ? 0 : 0))

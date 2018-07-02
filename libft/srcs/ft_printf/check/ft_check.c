@@ -27,18 +27,18 @@ static void	ft_checkflag(t_arg *arg, char *str)
 			arg->flag.minus = 1;
 		else if (str[i] == ' ')
 			arg->flag.space = 1;
-		else if ((str[i] == '0' && i == 0) ||
-				(str[i] == '0' && (str[i - 1] < '0' || str[i - 1] > '9') &&
-				str[i - 1] != '.' && str[i - 1] != '*'))
+		else if ((str[i] == '0' && i == 0) || \
+(str[i] == '0' && (str[i - 1] < '0' || str[i - 1] > '9') && \
+str[i - 1] != '.' && str[i - 1] != '*'))
 			arg->flag.zero = 1;
 	}
 }
 
 static int	ft_checkwidth2(t_arg *arg, char *str, int *i)
 {
-	if ((*i == 0) || (!ft_isdigit(str[*i - 1]) && ((str[*i - 1] != '*' &&
-						str[*i - 1] != '.') || (*i == 1 && str[*i - 1] != '.')
-					|| (*i >= 2 && str[*i - 1] == '*' && str[*i - 2] != '.'))))
+	if ((*i == 0) || (!ft_isdigit(str[*i - 1]) && ((str[*i - 1] != '*' && \
+str[*i - 1] != '.') || (*i == 1 && str[*i - 1] != '.') || \
+(*i >= 2 && str[*i - 1] == '*' && str[*i - 2] != '.'))))
 	{
 		arg->wi = ft_atoi(str + *i);
 		return (SUCCESS);

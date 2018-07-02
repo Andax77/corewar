@@ -65,9 +65,7 @@ void			ft_lstsort(t_list *lst)
 		while (lst->next)
 		{
 			if (ft_memcmp(lst->content, next->content, bigger(lst, next)) > 0)
-			{
 				ft_lstswap(mem, mem_size, lst, next);
-			}
 			lst = lst->next;
 			next = next->next;
 		}

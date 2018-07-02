@@ -48,7 +48,7 @@ static int	ft_conv_x_type(char **nbx, int *size_nb, t_arg *arg)
 	int			i;
 
 	ft_get_size_x(arg, size_nb);
-	if (!(*nbx = malloc(sizeof(char) * (*size_nb + 1))))
+	if (!(*nbx = (char *)malloc(sizeof(char) * (*size_nb + 1))))
 		return (ERROR);
 	(*nbx)[*size_nb] = '\0';
 	nb_bit = sizeof(long long) * 8;

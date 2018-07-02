@@ -49,7 +49,7 @@ static char	*ft_decalage_exposant(char *s, int exposant, t_arg *arg)
 	if (arg->arg.f != 0 && (!(s = ft_tej_zero(s))))
 		return (NULL);
 	new_l = (s[1] == '.' || s[2] == '.') ? ft_strlen(s) + 4 : ft_strlen(s) + 5;
-	if (!(cpy = malloc(sizeof(*cpy) * (new_l + 1))))
+	if (!(cpy = (char *)malloc(sizeof(*cpy) * (new_l + 1))))
 		return (NULL);
 	i = -1;
 	j = -1;

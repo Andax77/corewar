@@ -37,10 +37,9 @@ static void	ft_simplify(t_arg *arg, char *str)
 
 static int	ft_check_error_height(t_arg *arg)
 {
-	if (((ft_strchr(arg->height, 'j') || ft_strchr(arg->height, 'z') ||
-			(ft_strchr(arg->height, 'l') && ft_strchr(arg->height, 'h')))
-			&& (arg->conv != 'c' && arg->conv != 's'))
-			|| ft_strchr(&(arg->conv), 'O'))
+	if (((ft_strchr(arg->height, 'j') || ft_strchr(arg->height, 'z') || \
+(ft_strchr(arg->height, 'l') && ft_strchr(arg->height, 'h'))) && \
+(arg->conv != 'c' && arg->conv != 's')) || ft_strchr(&(arg->conv), 'O'))
 	{
 		ft_memset(arg->height, '\0', 7);
 		arg->height[0] = 'j';

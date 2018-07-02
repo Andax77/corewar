@@ -50,8 +50,8 @@ unsigned int	ft_atoi_base(const char *str, int base)
 	static char		eq_base[17] = "0123456789ABCDEF";
 
 	nb = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n'
-			|| *str == '\v' || *str == '\f' || *str == '\r')
+	while (*str == ' ' || *str == '\t' || *str == '\n' || \
+*str == '\v' || *str == '\f' || *str == '\r')
 		++str;
 	ft_skip(&str, base);
 	ft_str_toupper((char *)str);

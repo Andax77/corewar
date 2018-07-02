@@ -77,8 +77,8 @@ static char	*flag_hashtag_f(char *str)
 
 int			ft_flags_f(char **str, int sign, t_arg *arg)
 {
-	if (arg->flag.zero == 1 && arg->wi > 0
-			&& (size_t)arg->wi > ft_strlen(*str))
+	if (arg->flag.zero == 1 && arg->wi > 0 && \
+(size_t)arg->wi > ft_strlen(*str))
 		if (!(*str = flag_zero_f(*str, arg->wi, arg->flag.space, arg)))
 			return (ERROR);
 	if (arg->flag.space == 1 && sign == 0)
