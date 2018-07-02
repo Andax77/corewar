@@ -43,7 +43,6 @@ void	draw_map(t_cor *cor)
 
 void	draw_infos(t_list *champs, int nb)
 {
-	char	*tmp;
 	int		id;
 
 	id = 1;
