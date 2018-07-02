@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/02 19:51:59 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 22:38:07 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void		cycle(t_cor *cor, int ret)
 	while ((champs = cor->champs))
 	{
 		(cor->opt->v || cor->opt->d) ? clean(cor, champs) : 0;
+		exec_processes(cor, champs, f);
 		if (cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die)
 			ret = check_lives(cor);
-		exec_processes(cor, champs, f);
 		if (!(dump_handler(cor)))
 			break ;
 		(cor->opt->v && !cor->opt->d) ? print_infos(cor) : 0;
