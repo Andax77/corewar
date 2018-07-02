@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/01 12:29:31 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 20:49:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,37 @@ void		draw_names(t_list *champs)
 			id = champ->id;
 			attron(COLOR_PAIR(id + 2));
 			draw_line(11 + (4 * (id - 1)), 10 + ft_countdigits(champ->v_id), \
-				((t_champ*)champs->content)->name);
+					((t_champ*)champs->content)->name);
 		}
 		champs = champs->next;
 	}
+}
+
+int		get_v_ids(t_list *champs, int id, int *nb)
+{
+	char	*tmp;
+	t_list	*champ;
+
+	champ = champs;
+	while (champ)
+	{
+		if (((t_champ*)champ->content)->father == 0 && \
+				((t_champ*)champ->content)->id == id)
+		{
+			draw_line(*nb, 0, "Player");
+			tmp = ft_itoa(((t_champ*)champ->content)->v_id);
+			draw_line(*nb, 7, tmp);
+			draw_line(*nb, 7 + ft_strlen(tmp) + 1, ":");
+			free(tmp);
+			draw_line(++*nb, 0, "  Last live :");
+			draw_line(++*nb, 0, "  Lives in current period :");
+			*nb += 2;
+			id++;
+			break ;
+		}
+		champ = champ->next;
+	}
+	return (id);
 }
 
 void	init_cmap(t_cor *cor)

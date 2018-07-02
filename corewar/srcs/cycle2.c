@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 18:56:29 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 19:48:28 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static void	check_champs_lives(t_cor* cor, int *nbr_lives, int *nbr_v_lives)
 		}
 		((t_champ*)champs->content)->lives = 0;
 		((t_champ*)champs->content)->v_lives = 0;
+		clean_list(champs);
 		champs = champs->next;
 	}
 }
@@ -112,7 +113,7 @@ int			check_lives(t_cor *cor)
 	nbr_v_lives = 0;
 	cor->v_cycle = 0;
 	check_champs_lives(cor, &nbr_lives, &nbr_v_lives);
-	if (nbr_lives >= NBR_LIVE || cor->checks == MAX_CHECKS - 1)
+	if (nbr_v_lives >= NBR_LIVE || cor->checks == MAX_CHECKS - 1)
 	{
 		cor->cycle_to_die -= CYCLE_DELTA;
 		cor->checks = 0;

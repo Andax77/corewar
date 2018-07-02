@@ -6,11 +6,30 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/29 12:14:04 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 11:15:21 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <corewar.h>
+
+int		read_args(t_cor *cor, char **argv)
+{
+	int		i;
+	int		n;
+
+	i = 0;
+	n = 0;
+	while (++argv && *argv)
+		if (ft_strstr(*argv, ".cor") && ++i && \
+			i <= MAX_ARGS_NUMBER && i <= MAX_PLAYERS)
+		{
+			if (populate_champs(&cor->champs, *argv, cor->opt->n[n++]) == ERROR)
+				return (ERROR);
+		}
+		else if (!is_opt(*argv) && (print_usage() || !print_usage()))
+			return (ERROR);
+	return (SUCCESS);
+}
 
 void	order_to_start(t_list **champs)
 {

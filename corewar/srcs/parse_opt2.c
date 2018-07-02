@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/30 19:27:42 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 10:39:39 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ int		is_opt(char *str)
 	return (ret);
 }
 
-void	print_usage(void)
+int		print_usage(void)
 {
 	char	*line;
 	int		fd;
 
 	line = NULL;
 	if (!(fd = open("usage.txt", O_RDONLY)))
-		return ;
+		return (0);
 	while (fd && get_next_line(fd, &line) == GNL_SUCCESS)
 	{
 		ft_printf("%s\n", line);
@@ -91,4 +91,5 @@ void	print_usage(void)
 	}
 	if (fd)
 		close(fd);
+	return (1);
 }

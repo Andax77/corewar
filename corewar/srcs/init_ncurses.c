@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/01 12:45:43 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 20:52:49 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,14 @@ void	draw_map(t_cor *cor)
 void	draw_infos(t_list *champs, int nb)
 {
 	char	*tmp;
+	int		id;
 
+	id = 1;
 	draw_line(2, 0, "** PAUSED **");
 	draw_line(4, 0, "Cycles/second limit : 50");
 	draw_line(7, 0, "Cycle :");
 	draw_line(9, 0, "Processes :");
-	while (champs)
-	{
-		if (((t_champ*)champs->content)->father == 0)
-		{
-			draw_line(nb, 0, "Player");
-			if (!(tmp = ft_itoa(((t_champ*)champs->content)->v_id)))
-				exit(EXIT_FAILURE);
-			draw_line(nb, 7, tmp);
-			draw_line(nb, 7 + ft_strlen(tmp) + 1, ":");
-			free(tmp);
-			draw_line(++nb, 0, "  Last live :			");
-			draw_line(++nb, 0, "  Lives in current period :	");
-			nb += 2;
-		}
-		champs = champs->next;
-	}
+	while (get_v_ids(champs, id++, &nb) != count_champs(champs) + 1);
 	draw_line(27, 0, "CYCLES_TO_DIE :");
 	draw_line(29, 0, "CYCLE_DELTA :");
 	draw_line(31, 0, "NBR_LIVE :");

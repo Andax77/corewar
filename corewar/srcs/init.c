@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/01 12:09:53 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/02 19:53:54 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		init(char **argv, t_cor *cor)
 			ft_printf("%s", cor->aff);
 	if (cor->winner == 0)
 		ft_printf("No Winner\n");
-	else
+	else if (!cor->opt->d || cor->opt->v)
 		ft_printf("{%s}Contestant %d, \"%s\", has won !\n{eoc}",
 				color_player(cor->winner), cor->winner, get_name_champ(cor));
 	return (SUCCESS);
