@@ -86,10 +86,11 @@ int		get_v_ids(t_list *champs, int id, int *nb)
 	while (champ)
 	{
 		if (((t_champ*)champ->content)->father == 0 && \
-				((t_champ*)champ->content)->id == id)
+((t_champ*)champ->content)->id == id)
 		{
 			draw_line(*nb, 0, "Player");
-			tmp = ft_itoa(((t_champ*)champ->content)->v_id);
+			if (!(tmp = ft_itoa(((t_champ*)champ->content)->v_id)))
+				exit(EXIT_FAILURE);
 			draw_line(*nb, 7, tmp);
 			draw_line(*nb, 7 + ft_strlen(tmp) + 1, ":");
 			free(tmp);

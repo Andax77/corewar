@@ -51,7 +51,8 @@ void	draw_infos(t_list *champs, int nb)
 	draw_line(4, 0, "Cycles/second limit : 50");
 	draw_line(7, 0, "Cycle :");
 	draw_line(9, 0, "Processes :");
-	while (get_v_ids(champs, id++, &nb) != count_champs(champs) + 1);
+	while (get_v_ids(champs, id++, &nb) != count_champs(champs) + 1)
+		;
 	draw_line(27, 0, "CYCLES_TO_DIE :");
 	draw_line(29, 0, "CYCLE_DELTA :");
 	draw_line(31, 0, "NBR_LIVE :");
