@@ -33,8 +33,8 @@ int			ft_fill_params_binary(t_champ *champ, t_instru *inst,
 		else if (inst->params[j][0] == 'r')
 			if (!(tmp = prog[(*i)++]) && (tmp > REG_NUMBER || tmp < 1))
 				return (ft_error(champ, "wrong reg number"));
-		if ((!(tmp_num = ft_itoa(tmp))) ||
-		(!(inst->params[j] = ft_str_and_free_join(inst->params[j], tmp_num))))
+		if ((!(tmp_num = ft_itoa(tmp))) || \
+(!(inst->params[j] = ft_str_and_free_join(inst->params[j], tmp_num))))
 			exit(EXIT_FAILURE);
 		free(tmp_num);
 	}
@@ -69,13 +69,13 @@ int			ft_fill_ocp_binary(t_champ *champ, t_instru *inst,
 
 	inst->ocp = prog[(*i)++];
 	j = -1;
-	inst->params = ft_malloc(sizeof(char *) *
-					(g_op_tab[inst->op_code - 1].nb_params + 1), EXIT_FAILURE);
+	inst->params = ft_malloc(sizeof(char *) * \
+(g_op_tab[inst->op_code - 1].nb_params + 1), EXIT_FAILURE);
 	inst->params[g_op_tab[inst->op_code - 1].nb_params] = 0;
 	while (++j < g_op_tab[inst->op_code - 1].nb_params)
 	{
-		tmp_ocp = (((inst->ocp >> (2 * (3 - j))) & 0x3) == 3) ? 4 :
-											(inst->ocp >> (2 * (3 - j))) & 0x3;
+		tmp_ocp = (((inst->ocp >> (2 * (3 - j))) & 0x3) == 3) ? 4 : \
+(inst->ocp >> (2 * (3 - j))) & 0x3;
 		if ((tmp_ocp & (g_op_tab[inst->op_code - 1].params_type[j])) != tmp_ocp)
 			return (ft_error(champ, "wrong ocp"));
 		ft_malloc_params_binary(&inst->params[j], tmp_ocp);

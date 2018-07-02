@@ -26,16 +26,10 @@ static void		ft_clean_spaces_comments(t_instru *inst)
 		while (inst->params[i][++j] == ' ' || inst->params[i][j] == '\t')
 			;
 		k = ft_strlen(inst->params[i]) - 1;
-		if (ft_strchr(inst->params[i], COMMENT_CHAR))
-		{
-			while (inst->params[i][k] != COMMENT_CHAR)
-				--k;
-			while (inst->params[i][k] == COMMENT_CHAR)
-				--k;
-		}
 		while (inst->params[i][k] == ' ' || inst->params[i][k] == '\t')
 			--k;
-		clean = ft_strndup(inst->params[i] + j, k - j + 1);
+		if (!(clean = ft_strndup(inst->params[i] + j, k - j + 1)))
+			exit(EXIT_FAILURE);
 		free(inst->params[i]);
 		inst->params[i] = clean;
 	}
@@ -51,8 +45,8 @@ int				ft_get_params(t_instru *inst, char *str)
 	i = -1;
 	while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 		str++;
-	if (inst->label_name &&
-				ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
+	if (inst->label_name && \
+ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
 	{
 		while (*str != LABEL_CHAR)
 			str++;
@@ -61,7 +55,8 @@ int				ft_get_params(t_instru *inst, char *str)
 		while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 			str++;
 	}
-	inst->params = ft_strsplit(str, SEPARATOR_CHAR);
+	if (!(inst->params = ft_strsplit(str, SEPARATOR_CHAR)))
+		exit(EXIT_FAILURE);
 	ft_clean_spaces_comments(inst);
 	return (SUCCESS);
 }

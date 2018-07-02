@@ -46,8 +46,8 @@ int		ft_name_comment_other_lines_next(char **member, char *tmp)
 	while ((*member)[++i])
 		if ((*member)[i] == COMMENT_CHAR)
 			break ;
-		else if ((*member)[i] != ' ' && (*member)[i] != '\t' &&
-															ft_fruit(1, &tmp))
+		else if ((*member)[i] != ' ' && (*member)[i] != '\t' && \
+ft_fruit(1, &tmp))
 			return (ERROR);
 	(*member)[index] = '\0';
 	free(tmp);
@@ -62,8 +62,8 @@ int		ft_verif_format_name(char *str)
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
 	--i;
-	if (str[++i] != '.' || str[++i] != 'n' || str[++i] != 'a' || str[++i] != 'm'
-			|| str[++i] != 'e')
+	if (str[++i] != '.' || str[++i] != 'n' || str[++i] != 'a' || \
+str[++i] != 'm' || str[++i] != 'e')
 		return (ERROR);
 	while (str[++i] && str[i] != '"')
 		if (str[i] != ' ' && str[i] != '\t')
@@ -79,9 +79,9 @@ int		ft_verif_format_comment(char *str)
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
 	--i;
-	if (str[++i] != '.' || str[++i] != 'c' || str[++i] != 'o' ||
-			str[++i] != 'm' || str[++i] != 'm' || str[++i] != 'e' ||
-			str[++i] != 'n' || str[++i] != 't')
+	if (str[++i] != '.' || str[++i] != 'c' || str[++i] != 'o' || \
+str[++i] != 'm' || str[++i] != 'm' || str[++i] != 'e' || \
+str[++i] != 'n' || str[++i] != 't')
 		return (ERROR);
 	while (str[++i] && str[i] != '"')
 		if (str[i] != ' ' && str[i] != '\t')

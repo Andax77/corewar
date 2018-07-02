@@ -74,14 +74,14 @@ static int		ft_replace_direct(t_champ *champ)
 		if ((i = -1) && cur->params)
 		{
 			while (cur->params[++i])
-				if (ft_get_t_param(cur->params[i]) == T_DIR &&
-						ft_strchr(cur->params[i], LABEL_CHAR))
+				if (ft_get_t_param(cur->params[i]) == T_DIR && \
+ft_strchr(cur->params[i], LABEL_CHAR))
 				{
 					if (ft_replace_direct_param(champ, cur, i) == ERROR)
 						return (ERROR);
 				}
-				else if (ft_get_t_param(cur->params[i]) == T_IND &&
-						ft_strchr(cur->params[i], LABEL_CHAR))
+				else if (ft_get_t_param(cur->params[i]) == T_IND && \
+ft_strchr(cur->params[i], LABEL_CHAR))
 					if (ft_replace_indirect_param(champ, cur, i) == ERROR)
 						return (ERROR);
 		}

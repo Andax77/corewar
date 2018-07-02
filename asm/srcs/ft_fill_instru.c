@@ -89,8 +89,8 @@ static int		ft_get_label_name(t_instru *inst, char *str)
 		i = -1;
 		while (str[++i] && str[i] != LABEL_CHAR)
 			;
-		if (str[i - 1] == DIRECT_CHAR || str[i - 1] == ' ' || str[i - 1] == '\t'
-					|| str[i - 1] == SEPARATOR_CHAR)
+		if (str[i - 1] == DIRECT_CHAR || str[i - 1] == ' ' || \
+str[i - 1] == '\t' || str[i - 1] == SEPARATOR_CHAR)
 			return (SUCCESS);
 		if (!(inst->label_name = ft_strndup(str, i)))
 			exit(EXIT_FAILURE);

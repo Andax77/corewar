@@ -98,7 +98,8 @@ sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
 	ft_bzero(output, length_output + 1);
 	ft_fill_output_m(champ, output, f_instructions, instructions_length);
-	ft_printf("{yellow}What is the name of the program (.cor) ?{eoc}\n");
+	ft_printf("{yellow}What is the name of the program (please finish the name \
+with '.cor') ?{eoc}\n");
 	free(champ->file_name);
 	if (get_next_line(STDIN_FILENO, &champ->file_name) != GNL_SUCCESS)
 		return (ft_error_m(champ, "error: oups something went wrong..."));

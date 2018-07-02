@@ -18,7 +18,7 @@ int			ft_error(t_champ *champ, char *msg)
 	int		ret;
 
 	tmp = NULL;
-	while ((ret = get_next_line(champ->fd, &tmp)) == GNL_SUCCESS)
+	while ((ret = get_next_line(champ->fd, &tmp)) != GNL_END)
 		ft_fruit(1, &tmp);
 	if (ret == GNL_ERROR)
 		ft_fruit(1, &tmp);
