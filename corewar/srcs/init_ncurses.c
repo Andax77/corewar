@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 23:39:08 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 12:52:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	draw_infos(t_list *champs, int nb)
 	draw_line(9, 0, "Processes :");
 	while (get_v_ids(champs, id++, &nb) != count_champs(champs) + 1)
 		;
-	draw_line(27, 0, "CYCLES_TO_DIE :");
-	draw_line(29, 0, "CYCLE_DELTA :");
-	draw_line(31, 0, "NBR_LIVE :");
-	draw_line(33, 0, "MAX_CHECKS :");
+	draw_line(27, 0, "CYCLES_TO_DIE :         /");
+	draw_line(30, 0, "CYCLE_DELTA :");
+	draw_line(32, 0, "NBR_LIVE :");
+	draw_line(34, 0, "MAX_CHECKS :");
 }
 
 void	init_colors(t_list *champs)
