@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 10:39:39 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 16:17:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		check_opt(char **argv)
 				ft_printf("{red}Wrong [-n nbr] value{eoc}\n");
 				return (ERROR);
 			}
-		if (ft_strequ(argv[i], "-d"))
+		if (ft_strequ(argv[i], "-d") || ft_strequ(argv[i], "-dump"))
 			if (!argv[i + 1] || !ft_strisdigit(argv[i + 1]))
 			{
 				ft_printf("{red}Wrong [-d nbr_cycles] value{eoc}\n");
@@ -71,7 +71,7 @@ int		is_opt(char *str)
 	(ft_strequ(str, "-a")) ? ret = 1 : 0;
 	(ft_strequ(str, "-v")) ? ret = 1 : 0;
 	(ft_strequ(str, "-n" )) ? ret = 1 : 0;
-	(ft_strequ(str, "-d")) ? ret = 1 : 0;
+	(ft_strequ(str, "-d") || ft_strequ(str, "-dump")) ? ret = 1 : 0;
 	(ft_strisdigit(str)) ? ret = 1 : 0;
 	return (ret);
 }
