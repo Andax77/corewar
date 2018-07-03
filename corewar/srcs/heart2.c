@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 11:00:49 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 15:53:29 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 15:59:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int			stat_heart(t_list *champs, int lives, int nb)
 
 	stat = 3;
 	champs_lives = ((t_champ*)champs->content)->lives;
-	if (lives && champs_lives > lives / nb)
+	if (lives == 0 || champs_lives > lives / nb)
 		stat = 1;
 	else if (lives)
 		stat = 2;
