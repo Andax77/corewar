@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 11:00:49 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 15:59:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 16:11:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		heart_color(void)
 	init_pair(27, COLOR_GREEN, COLOR_GREEN);
 	init_pair(28, COLOR_YELLOW, COLOR_YELLOW);
 	init_pair(29, COLOR_BLUE, COLOR_BLUE);
-	init_pair(30, COLOR_WHITE, COLOR_WHITE);
+	init_pair(30, 17, 17);
 }
 
 int			stat_heart(t_list *champs, int lives, int nb)
