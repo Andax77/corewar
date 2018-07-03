@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 20:49:33 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 15:50:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void				draw_player_id(int line_idx, int y, char *line);
 void				player(int player);
 void				draw_player(int line_idx, int y, char *line);
 void				heart_color();
-int					stat_heart(t_cor *cor, t_list *champs);
+int					stat_heart(t_list *champs, int lives, int nb);
 void				get_color_heart(int live, char *line, int id);
 
 /*

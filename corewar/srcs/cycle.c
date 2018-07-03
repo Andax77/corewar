@@ -6,14 +6,47 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/02 22:38:07 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 17:29:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
+void		clean_list(t_list *champs)
+{
+	t_list	*tmp;
+
+	while (champs->next && ((t_champ*)champs->next->content)->r_cy == -1 && \
+			((t_champ*)champs->next->content)->father)
+	{
+		tmp = champs->next->next;
+		ft_lstdelone(&champs->next, del_champ);
+		champs->next = tmp;
+	}
+}
+
+static void	set_cur_op(t_cor *cor)
+{
+	t_champ	*cur_champ;
+	t_list	*champs;
+
+	champs = cor->champs;
+	while (champs)
+	{
+		cur_champ = champs->content;
+		if (cur_champ->r_cy == 0 /*&& cor->map[cur_champ->pc] > 0 && cor->map[cur_champ->pc] < 17*/)
+		{
+			cur_champ->cur_op = cor->map[cur_champ->pc];// ft_printf("%d\n", cur_champ->r_cy);
+			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;// ft_printf("%d\n", cur_champ->r_cy);
+		}
+		else
+			cur_champ->r_cy--;
+		champs = champs->next;
+	}
+}
+
 static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
-																	t_champ*))
+			t_champ*))
 {
 	t_champ	*cur_champ;
 
@@ -26,7 +59,6 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 				cycle_job(cor, cur_champ, f);
 			else
 			{
-				cur_champ->r_cy--;
 				if (cor->opt->v)
 				{
 					attron(COLOR_PAIR(cur_champ->id + 20));
@@ -36,6 +68,7 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 		}
 		champs = champs->next;
 	}
+	set_cur_op(cor);
 }
 
 static int	dump_handler(t_cor *cor)
