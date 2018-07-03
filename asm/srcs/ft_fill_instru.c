@@ -72,6 +72,11 @@ static int		ft_get_op_code(t_instru *inst, char *str)
 			break ;
 		}
 	}
+	if (ptr[0] != '\0' && inst->op_code == 0)
+	{
+		free(ptr);
+		return (ERROR);
+	}
 	free(ptr);
 	if (inst->op_code == 0 && inst->label_name == NULL)
 		return (ERROR);
@@ -89,6 +94,8 @@ static int		ft_get_label_name(t_instru *inst, char *str)
 		i = -1;
 		while (str[++i] && str[i] != LABEL_CHAR)
 			;
+		if (i == 0)
+			return (ERROR);
 		if (str[i - 1] == DIRECT_CHAR || str[i - 1] == ' ' || \
 str[i - 1] == '\t' || str[i - 1] == SEPARATOR_CHAR)
 			return (SUCCESS);

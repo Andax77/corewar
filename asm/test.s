@@ -3,9 +3,8 @@
 comment
 comment"  #gerge
 
-
 		live %42
-		ld   %0,r-15 #:
+		ld   %0,r-1
 label:  
 		zjmp %:avantdebut
 		zjmp %0				# pour eviter ecrasement
@@ -20,7 +19,7 @@ code:		live %42			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
 		live %42			# 5
-		sti  r15,%0,r14			# 6
+		sti  r15,%0,r2		# 6
 		zjmp %-200			# 3
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3
