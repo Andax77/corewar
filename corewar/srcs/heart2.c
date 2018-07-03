@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 11:00:49 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 00:06:31 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 15:53:29 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,17 @@ void		heart_color(void)
 	init_pair(30, COLOR_WHITE, COLOR_WHITE);
 }
 
-int			stat_heart(t_cor *cor, t_list *champs)
+int			stat_heart(t_list *champs, int lives, int nb)
 {
 	int		stat;
+	int		champs_lives;
 
-	stat = 1;
-	if (((t_champ*)champs->content)->r_cy == -1)
-		stat = 4;
-	else if (cor->v_cycle > (3 * (cor->cycle_to_die / 4)))
-		stat = 3;
-	else if (cor->v_cycle > (cor->cycle_to_die / 2))
-		stat = 2;
-	else if (cor->v_cycle > (cor->cycle_to_die / 4))
+	stat = 3;
+	champs_lives = ((t_champ*)champs->content)->lives;
+	if (lives && champs_lives > lives / nb)
 		stat = 1;
+	else if (lives)
+		stat = 2;
 	return (stat);
 }
 
@@ -41,13 +39,24 @@ void		print_heart(t_cor *cor)
 {
 	t_list	*champs;
 	int		stat;
+	int		lives;
+	int		nb;
 
+	nb = 0;
+	lives = 0;
+	champs = cor->champs;
+	while (champs)
+	{
+		if (((t_champ*)champs->content)->father == 0 && ++nb)
+			lives += ((t_champ*)champs->content)->lives;
+		champs = champs->next;
+	}
 	champs = cor->champs;
 	while (champs)
 	{
 		if (((t_champ*)champs->content)->father == 0)
 		{
-			stat = stat_heart(cor, champs);
+			stat = stat_heart(champs, lives, nb);
 			print_heart2(((t_champ *)champs->content)->id, stat);
 		}
 		champs = champs->next;

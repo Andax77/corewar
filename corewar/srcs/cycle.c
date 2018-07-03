@@ -6,11 +6,24 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 12:43:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 15:44:32 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
+
+void		clean_list(t_list *champs)
+{
+	t_list	*tmp;
+
+	while (champs->next && ((t_champ*)champs->next->content)->r_cy == -1 && \
+			((t_champ*)champs->next->content)->father)
+	{
+		tmp = champs->next->next;
+		ft_lstdelone(&champs->next, del_champ);
+		champs->next = tmp;
+	}
+}
 
 static void	set_cur_op(t_cor *cor)
 {
@@ -27,19 +40,6 @@ static void	set_cur_op(t_cor *cor)
 			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 		}
 		champs = champs->next;
-	}
-}
-
-void		clean_list(t_list *champs)
-{
-	t_list	*tmp;
-
-	while (champs->next && ((t_champ*)champs->next->content)->r_cy == -1 && \
-			((t_champ*)champs->next->content)->father)
-	{
-		tmp = champs->next->next;
-		ft_lstdelone(&champs->next, del_champ);
-		champs->next = tmp;
 	}
 }
 

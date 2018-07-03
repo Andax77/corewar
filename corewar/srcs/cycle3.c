@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 12:58:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/03 14:04:03 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static void	init_values(t_cor *cor, char **values)
 	champs = cor->champs;
 	while (champs)
 	{
-		if (((t_champ*)champs->content)->r_cy > -1)
-			i++;
+		(((t_champ*)champs->content)->r_cy > -1) ? i++ : 0;
 		champs = champs->next;
 	}
 	if (!(values[0] = ft_itoa(cor->cycle)))
