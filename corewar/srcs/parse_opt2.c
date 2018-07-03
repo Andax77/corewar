@@ -12,14 +12,13 @@
 
 #include <corewar.h>
 
-void		init_opt(t_opt *opt, t_cor *cor)
+static int	err_print(char *str, char *arg)
 {
-	opt->a = 0;
-	opt->v = 0;
-	opt->d = 0;
-	opt->n = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
-	ft_bzero(opt->n, MAX_PLAYERS * sizeof(int));
-	cor->opt = opt;
+	if (arg)
+		ft_printf("{red}'%s' %s{eoc}\n", arg, str);
+	else
+		ft_printf("{red}%s{eoc}\n", str);
+	return (ERROR);
 }
 
 int		check_opt(char **argv)
@@ -27,22 +26,26 @@ int		check_opt(char **argv)
 	int		i;
 
 	i = 0;
-	while (argv[i])
+	while (argv[++i])
 	{
 		if (ft_strequ(argv[i], "-n"))
+		{
 			if (!argv[i + 1] || !ft_strisdigit(argv[i + 1]) || !argv[i + 2] || \
-					!ft_strstr(argv[i + 2], ".cor"))
-			{
-				ft_printf("{red}Wrong [-n nbr] value{eoc}\n");
-				return (ERROR);
-			}
-		if (ft_strequ(argv[i], "-d") || ft_strequ(argv[i], "-dump"))
-			if (!argv[i + 1] || !ft_strisdigit(argv[i + 1]))
-			{
-				ft_printf("{red}Wrong [-d nbr_cycles] value{eoc}\n");
-				return (ERROR);
-			}
-		i++;
+!ft_strstr(argv[i + 2], ".cor"))
+				return (err_print("Wrong [-n nbr] value", NULL));
+			else
+				i += 2;
+		}
+		else if (ft_strequ(argv[i], "-d") || ft_strequ(argv[i], "-dump"))
+		{
+			if (!argv[i + 1] || !ft_isint(argv[i + 1]) || argv[i + 1][0] == '-')
+				return (err_print("Wrong [-d(ump) nbr_cycles] value", NULL));
+			else
+				++i;
+		}
+		else if (!ft_strstr(argv[i], ".cor") && !ft_strequ(argv[i], "-a") && \
+!ft_strequ(argv[i], "-v"))
+				return (err_print("invalid file <champion.cor>", argv[i]));
 	}
 	return (SUCCESS);
 }
