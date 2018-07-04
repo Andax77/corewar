@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 11:15:21 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/04 15:06:52 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	jump(t_cor *cor)
 		{
 			attron(COLOR_PAIR(20 + cur_champ->id));
 			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-			if (cur_champ->last_live && cur_champ->lives)
+			if (cur_champ->last_live)
 			{
 				attron(COLOR_PAIR(40 + cur_champ->id));
 				draw_uchar(cur_champ->last_live_pc, \

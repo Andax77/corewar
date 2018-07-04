@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 17:29:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/04 14:47:25 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void	set_cur_op(t_cor *cor)
 	while (champs)
 	{
 		cur_champ = champs->content;
-		if (cur_champ->r_cy == 0 /*&& cor->map[cur_champ->pc] > 0 && cor->map[cur_champ->pc] < 17*/)
+		if (cur_champ->r_cy == 0)
 		{
-			cur_champ->cur_op = cor->map[cur_champ->pc];// ft_printf("%d\n", cur_champ->r_cy);
-			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;// ft_printf("%d\n", cur_champ->r_cy);
+			cur_champ->cur_op = cor->map[cur_champ->pc];
+			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
 		}
 		else
 			cur_champ->r_cy--;
