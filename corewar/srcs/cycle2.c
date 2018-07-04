@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/04 15:56:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/04 17:07:41 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	check_champs_lives(t_cor* cor, int *nbr_lives, int *nbr_v_lives)
 	while (champs)
 	{
 		if (((t_champ*)champs->content)->father == 0)
-			*nbr_lives += ((t_champ*)champs->content)->v_lives;
+			*nbr_lives += ((t_champ*)champs->content)->lives;
 		*nbr_v_lives += ((t_champ*)champs->content)->v_lives;
 		if (!((t_champ*)champs->content)->v_lives)
 		{
@@ -115,7 +115,7 @@ int			check_lives(t_cor *cor)
 	}
 	else
 		cor->checks++;
-	if (cor->cycle_to_die <= 0 || nbr_v_lives == 0)
+	if (cor->cycle_to_die <= 0 || nbr_lives == 0)
 	{
 		if (cor->cycle_to_die <= 0)
 			cor->cycle_to_die = 0;
