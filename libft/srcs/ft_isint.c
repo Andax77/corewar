@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_int.c                                        :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 #include <limits.h>
 
-int		ft_is_int(const char *s)
+int		ft_isint(const char *s)
 {
 	int				i;
 	unsigned long	result;

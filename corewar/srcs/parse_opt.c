@@ -12,6 +12,16 @@
 
 #include <corewar.h>
 
+void		init_opt(t_opt *opt, t_cor *cor)
+{
+	opt->a = 0;
+	opt->v = 0;
+	opt->d = 0;
+	opt->n = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
+	ft_bzero(opt->n, MAX_PLAYERS * sizeof(int));
+	cor->opt = opt;
+}
+
 static void		get_values(char **argv, int j, int i, t_opt *opt)
 {
 	(ft_strequ(argv[j], "-a")) ? opt->a = 1 : 0;

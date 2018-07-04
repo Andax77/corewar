@@ -67,7 +67,8 @@ int			main(int argc, char **argv)
 	else if (parse_opt(argv, opt, cor) == ERROR)
 	{
 		print_usage();
-		free_cor(cor);
+		free(cor);
+		free(opt);
 		exit(EXIT_FAILURE);
 	}
 	else if (init(argv, cor) == ERROR)
