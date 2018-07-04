@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/04 14:47:25 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/04 19:46:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,14 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 	while (champs)
 	{
 		cur_champ = champs->content;
-		if (cur_champ->r_cy > -1)
+		if (cur_champ->r_cy == 0)
+			cycle_job(cor, cur_champ, f);
+		else
 		{
-			if (cur_champ->r_cy == 0)
-				cycle_job(cor, cur_champ, f);
-			else
+			if (cor->opt->v)
 			{
-				if (cor->opt->v)
-				{
-					attron(COLOR_PAIR(cur_champ->id + 20));
-					draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-				}
+				attron(COLOR_PAIR(cur_champ->id + 20));
+				draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 			}
 		}
 		champs = champs->next;
@@ -104,7 +101,8 @@ void		cycle(t_cor *cor, int ret)
 	while ((champs = cor->champs))
 	{
 		(cor->opt->v || cor->opt->d) ? clean(cor, champs) : 0;
-		exec_processes(cor, champs, f);
+		if (((t_champ*)champs->content)->r_cy > -1)
+			exec_processes(cor, champs, f);
 		if (cor->cycle_to_die && cor->v_cycle == cor->cycle_to_die)
 			ret = check_lives(cor);
 		if (!(dump_handler(cor)))
