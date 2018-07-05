@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/05 18:04:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/05 18:57:20 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,15 @@ void		clean(t_cor *cor, t_list *champs)
 	}
 }
 
-int			cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
+void			cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
 																	t_champ*))
 {
-	int		changed;
-
-	changed = 0;
 	if (cor->cycle != 0)
 	{
 		if (cur_champ->cur_op >= 1 && cur_champ->cur_op <= 16)
 			f[cur_champ->cur_op](cor, cur_champ);
 		else if (cor->map[cur_champ->pc] == cur_champ->cur_op)
 			f[0](cor, cur_champ);
-		else if (cor->map[cur_champ->pc] == cur_champ->cur_op)
-		{
-			cur_champ->cur_op = cor->map[cur_champ->pc];
-			changed = 1;
-		}
 	}
 	else
 		cur_champ->cur_op = cor->map[cur_champ->pc];
@@ -78,7 +70,6 @@ int			cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
 		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 	}
 	cur_champ->last_pc = cur_champ->pc;
-	return (changed);
 }
 
 static void	check_champs_lives(t_cor* cor, int *nbr_lives, int *nbr_v_lives)
