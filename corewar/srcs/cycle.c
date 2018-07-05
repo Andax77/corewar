@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/04 19:46:35 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/05 13:09:25 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		clean_list(t_list *champs)
 	}
 }
 
-static void	set_cur_op(t_cor *cor)
+static void	set_cur_op(t_cor *cor, int changed)
 {
 	t_champ	*cur_champ;
 	t_list	*champs;
@@ -38,6 +38,8 @@ static void	set_cur_op(t_cor *cor)
 		{
 			cur_champ->cur_op = cor->map[cur_champ->pc];
 			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+			if (changed)
+				cur_champ->r_cy--;
 		}
 		else
 			cur_champ->r_cy--;
@@ -49,12 +51,13 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 			t_champ*))
 {
 	t_champ	*cur_champ;
+	int		changed;
 
 	while (champs)
 	{
 		cur_champ = champs->content;
 		if (cur_champ->r_cy == 0)
-			cycle_job(cor, cur_champ, f);
+			changed = cycle_job(cor, cur_champ, f);
 		else
 		{
 			if (cor->opt->v)
@@ -65,7 +68,7 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 		}
 		champs = champs->next;
 	}
-	set_cur_op(cor);
+	set_cur_op(cor, changed);
 }
 
 static int	dump_handler(t_cor *cor)
