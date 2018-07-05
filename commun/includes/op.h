@@ -79,7 +79,7 @@ typedef struct		s_op
 	int				op_code;
 	int				nb_cycles;
 	char			*full_name;
-	int				modif_carry;
+	int				ocp;
 	int				dir_size;
 }					t_op;
 

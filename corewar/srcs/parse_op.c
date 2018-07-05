@@ -18,7 +18,7 @@ static int	check_op(unsigned char *prog, int i)
 	int	tmp_ocp;
 
 	j = -1;
-	if (g_op_tab[prog[i] - 1].modif_carry == 1)
+	if (g_op_tab[prog[i] - 1].ocp == 1)
 	{
 		while (++j < g_op_tab[prog[i] - 1].nb_params)
 		{
