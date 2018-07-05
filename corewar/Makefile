@@ -31,9 +31,13 @@ FILES = main.c \
 		cycle2.c \
 		cycle3.c \
 		exec_op.c \
+		op_move_add_sub_aff.c \
+		op_ld_st.c \
+		op_and_or_xor.c \
+		op_sti.c \
+		op_ldi_lld_lldi.c \
+		op_zjmp_fork_lfork.c \
 		op1.c \
-		op2.c \
-		op3.c \
 		player.c \
 		cow.c \
 		heart.c \

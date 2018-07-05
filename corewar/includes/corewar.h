@@ -86,9 +86,6 @@ int					init(char **argv, t_cor *cor);
 int					read_args(t_cor *cor, char **argv);
 int					populate_champs(t_list **champs, char *path, int nb);
 int					count_champs(t_list *champs);
-void				init_op(void (**f)(t_cor*, t_champ*));
-int					recup_content(t_cor *cor, t_champ *champ, int ocp,
-													int decalage, int op_code);
 void				draw_uchar(int pos, unsigned char val);
 void				draw_line(int line_idx, int col_idx, char *line);
 void				draw_names(t_list *champs);
@@ -154,8 +151,11 @@ int					stat_heart(t_list *champs, int lives, int nb);
 void				get_color_heart(int live, char *line, int id);
 
 /*
-CYCLE FCT
+OP FCT
 */
+void				init_op(void (**f)(t_cor*, t_champ*));
+int					recup_content(t_cor *cor, t_champ *champ, int ocp,
+															long long dec_op);
 void				ft_move(t_cor *cor, t_champ *champ);
 void				ft_live(t_cor *cor, t_champ *champ);
 void				ft_ld(t_cor *cor, t_champ *champ);
