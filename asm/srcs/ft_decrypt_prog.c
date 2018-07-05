@@ -89,7 +89,7 @@ int			ft_fill_instru_binary(t_champ *champ, t_instru *inst,
 	if (prog[*i] > 16 || prog[*i] < 1)
 		return (ft_error(champ, "wrong op_code"));
 	inst->op_code = prog[(*i)++];
-	if (g_op_tab[inst->op_code - 1].modif_carry == 1)
+	if (g_op_tab[inst->op_code - 1].ocp == 1)
 	{
 		if (ft_fill_ocp_binary(champ, inst, prog, i) == ERROR)
 			return (ERROR);
