@@ -41,19 +41,18 @@ void	init_op(void (**f)(t_cor*, t_champ*))
 	f[16] = &ft_aff;
 }
 
-int		recup_content(t_cor *cor, t_champ *champ, int ocp, int decalage,
-																	int op_code)
+int		recup_content(t_cor *cor, t_champ *champ, int ocp, long long dec_op)
 {
 	int		type;
 	int		ret;
 
 	ret = 0;
-	type = (ocp >> decalage) & 3;
+	type = (ocp >> ft_get2arg(dec_op, 0)) & 3;
 	if (type == REG_CODE)
 		ret = cor->map[++champ->pc % MEM_SIZE];
 	else if (type == DIR_CODE)
 	{
-		if (g_op_tab[op_code - 1].dir_size == 0)
+		if (g_op_tab[ft_get2arg(dec_op, 1) - 1].dir_size == 0)
 			ret = ((cor->map[++champ->pc % MEM_SIZE] << 24) + \
 (cor->map[++champ->pc % MEM_SIZE] << 16));
 		ret += ((cor->map[++champ->pc % MEM_SIZE] << 8) + \
@@ -61,61 +60,6 @@ cor->map[++champ->pc % MEM_SIZE]);
 	}
 	else if (type == IND_CODE)
 		ret = (short)((cor->map[++champ->pc % MEM_SIZE] << 8) + \
-cor->map[++champ->pc % MEM_SIZE]);//cast useless ?
+cor->map[++champ->pc % MEM_SIZE]);
 	return (ret);
-}
-
-static void	ft_aff_next(t_cor *cor, t_champ *champ, char *str)
-{
-	if (champ->id == 1)
-		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{red}")))
-			exit(EXIT_FAILURE);
-	if (champ->id == 2)
-		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{green}")))
-			exit(EXIT_FAILURE);
-	if (champ->id == 3)
-		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{yellow}")))
-			exit(EXIT_FAILURE);
-	if (champ->id == 4)
-		if (!(cor->aff = ft_str_and_free_join(cor->aff, "{blue}")))
-			exit(EXIT_FAILURE);
-	if (!(cor->aff = ft_str_and_free_join(cor->aff, champ->name)))
-		exit(EXIT_FAILURE);
-	if (!(cor->aff = ft_str_and_free_join(cor->aff, " : ")))
-		exit(EXIT_FAILURE);
-	if (!(cor->aff = ft_str_and_free_join(cor->aff, str)))
-		exit(EXIT_FAILURE);
-	if (!(cor->aff = ft_str_and_free_join(cor->aff, "\n")))
-		exit(EXIT_FAILURE);
-	if (!(cor->aff = ft_str_and_free_join(cor->aff, "{eoc}")))
-		exit(EXIT_FAILURE);
-}
-
-void	ft_aff(t_cor *cor, t_champ *champ)
-{
-	int		p;
-	int		ocp;
-	char	*str;
-
-	ocp = cor->map[++champ->pc % MEM_SIZE];
-	p = recup_content(cor, champ, ocp, 6, 16);
-	if (((ocp >> 6) & 3) == REG_CODE && p > 0 && p <= REG_SIZE)
-	{
-		if (cor->aff == NULL)
-			if (!(cor->aff = ft_strnew(1)))
-				exit(EXIT_FAILURE);
-		if (!(str = ft_strnew(2)))
-			exit(EXIT_FAILURE);
-		str[0] = champ->reg[p - 1] % 256;
-		ft_aff_next(cor, champ, str);
-		free(str);
-	}
-	champ->pc = (champ->pc + 1) % MEM_SIZE;
-}
-
-void	ft_move(t_cor *cor, t_champ *champ)
-{
-	(void)cor;
-	champ->pc = (champ->pc + 1) % MEM_SIZE;
-	champ->cur_op = 0;
 }
