@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 17:29:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/06 13:15:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		clean_list(t_list *champs)
 	}
 }
 
-static void	set_cur_op(t_cor *cor)
+static void	set_cur_op(t_cor *cor, void(**f)(t_cor*, t_champ*))
 {
 	t_champ	*cur_champ;
 	t_list	*champs;
@@ -34,13 +34,24 @@ static void	set_cur_op(t_cor *cor)
 	while (champs)
 	{
 		cur_champ = champs->content;
-		if (cur_champ->r_cy == 0 /*&& cor->map[cur_champ->pc] > 0 && cor->map[cur_champ->pc] < 17*/)
+		if (cur_champ->r_cy > -1)
 		{
-			cur_champ->cur_op = cor->map[cur_champ->pc];// ft_printf("%d\n", cur_champ->r_cy);
-			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;// ft_printf("%d\n", cur_champ->r_cy);
+			if (cur_champ->r_cy == 0)
+			{
+				cur_champ->cur_op = cor->map[cur_champ->pc];
+				cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+			}
+			else if ((cur_champ->cur_op != cor->map[cur_champ->pc] && \
+			cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1))
+			{
+				if (cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
+					f[0](cor, cur_champ);
+				cur_champ->cur_op = cor->map[cur_champ->pc];
+				cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+			}
+			else
+				cur_champ->r_cy--;
 		}
-		else
-			cur_champ->r_cy--;
 		champs = champs->next;
 	}
 }
@@ -54,21 +65,18 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 	{
 		cur_champ = champs->content;
 		if (cur_champ->r_cy > -1)
+			cycle_job(cor, cur_champ, f);
+		else if (cur_champ->r_cy <= -1)
 		{
-			if (cur_champ->r_cy == 0)
-				cycle_job(cor, cur_champ, f);
-			else
+			if (cor->opt->v)
 			{
-				if (cor->opt->v)
-				{
-					attron(COLOR_PAIR(cur_champ->id + 20));
-					draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-				}
+				attron(COLOR_PAIR(cur_champ->id + 20));
+				draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
 			}
 		}
 		champs = champs->next;
 	}
-	set_cur_op(cor);
+	set_cur_op(cor, f);
 }
 
 static int	dump_handler(t_cor *cor)
