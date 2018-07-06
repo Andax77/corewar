@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/06 23:40:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/06 23:53:50 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 	{
 		cur_champ = champs->content;
 		if (cur_champ->r_cy > -1)
-			cycle_job(cor, cur_champ, f);
-		else if (cur_champ->r_cy <= -1)
 		{
+			cycle_job(cor, cur_champ, f);
 			if (cor->opt->v && !cor->opt->d)
 			{
 				attron(COLOR_PAIR(cur_champ->id + 20));
