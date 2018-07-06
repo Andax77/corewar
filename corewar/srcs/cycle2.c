@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/05 19:13:59 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/06 11:31:46 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ void		clean(t_cor *cor, t_list *champs)
 void			cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
 																	t_champ*))
 {
-	if (cor->cycle != 0)
+	if (cor->cycle != 0 && cur_champ->r_cy == 0)
 	{
 		if (cur_champ->cur_op >= 1 && cur_champ->cur_op <= 16)
 			f[cur_champ->cur_op](cor, cur_champ);
 		else if (cor->map[cur_champ->pc] == cur_champ->cur_op)
 			f[0](cor, cur_champ);
 	}
-	else
+	else if (cur_champ->r_cy == 0)
 		cur_champ->cur_op = cor->map[cur_champ->pc];
 	if (cor->opt->v && !cor->opt->d)
 	{

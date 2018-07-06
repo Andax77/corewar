@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/05 19:37:36 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/06 13:00:54 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		clean_list(t_list *champs)
 	}
 }
 
-static void	set_cur_op(t_cor *cor)
+static void	set_cur_op(t_cor *cor, void(**f)(t_cor*, t_champ*))
 {
 	t_champ	*cur_champ;
 	t_list	*champs;
@@ -40,6 +40,21 @@ static void	set_cur_op(t_cor *cor)
 			{
 				cur_champ->cur_op = cor->map[cur_champ->pc];
 				cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+			}
+			else if ((cur_champ->cur_op != cor->map[cur_champ->pc] && \
+			cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1))
+			{
+				if (cor->map[cur_champ->pc] > 0 && cor->map[cur_champ->pc] < 17)
+				{
+					cur_champ->cur_op = cor->map[cur_champ->pc];
+					cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+				}
+				else
+				{
+					f[0](cor, cur_champ);
+					cur_champ->cur_op = cor->map[cur_champ->pc];
+					cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+				}
 			}
 			else
 				cur_champ->r_cy--;
@@ -56,7 +71,7 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 	while (champs)
 	{
 		cur_champ = champs->content;
-		if (cur_champ->r_cy > -1 && cur_champ->r_cy == 0)
+		if (cur_champ->r_cy > -1)
 			cycle_job(cor, cur_champ, f);
 		else if (cur_champ->r_cy <= -1)
 		{
@@ -68,7 +83,7 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 		}
 		champs = champs->next;
 	}
-	set_cur_op(cor);
+	set_cur_op(cor, f);
 }
 
 static int	dump_handler(t_cor *cor)
