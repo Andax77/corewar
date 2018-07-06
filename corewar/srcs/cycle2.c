@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 20:09:38 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/06 11:31:46 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,18 @@ void		clean(t_cor *cor, t_list *champs)
 	}
 }
 
-void		cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
+void			cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
 																	t_champ*))
 {
-	if (cor->cycle != 0)
+	if (cor->cycle != 0 && cur_champ->r_cy == 0)
 	{
 		if (cur_champ->cur_op >= 1 && cur_champ->cur_op <= 16)
 			f[cur_champ->cur_op](cor, cur_champ);
-		else
+		else if (cor->map[cur_champ->pc] == cur_champ->cur_op)
 			f[0](cor, cur_champ);
 	}
-	else
+	else if (cur_champ->r_cy == 0)
 		cur_champ->cur_op = cor->map[cur_champ->pc];
-//	if (cur_champ->cur_op >= 0 && cur_champ->cur_op <= 16)
-//	{
-//		cur_champ->cur_op = cor->map[cur_champ->pc];
-//		cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
-//	}
 	if (cor->opt->v && !cor->opt->d)
 	{
 		attron(COLOR_PAIR(cur_champ->id + 20));
@@ -84,9 +79,8 @@ static void	check_champs_lives(t_cor* cor, int *nbr_lives, int *nbr_v_lives)
 	champs = cor->champs;
 	while (champs)
 	{
-		if (((t_champ*)champs->content)->father == 0)
-			*nbr_lives += ((t_champ*)champs->content)->lives;
 		*nbr_v_lives += ((t_champ*)champs->content)->v_lives;
+		*nbr_lives += ((t_champ*)champs->content)->lives;
 		if (!((t_champ*)champs->content)->v_lives)
 		{
 			((t_champ*)champs->content)->r_cy = -1;
@@ -113,7 +107,7 @@ int			check_lives(t_cor *cor)
 	nbr_v_lives = 0;
 	cor->v_cycle = 0;
 	check_champs_lives(cor, &nbr_lives, &nbr_v_lives);
-	if (nbr_lives >= NBR_LIVE || cor->checks == MAX_CHECKS - 1)
+	if (nbr_v_lives >= NBR_LIVE || cor->checks == MAX_CHECKS - 1)
 	{
 		cor->cycle_to_die -= CYCLE_DELTA;
 		cor->checks = 0;

@@ -6,11 +6,12 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 19:53:54 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/05 11:50:50 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
+#include <locale.h>
 
 int		count_champs(t_list *champs)
 {
@@ -33,6 +34,7 @@ int		init_ncurses(t_cor *cor)
 
 	champs = cor->champs;
 	i = count_champs(champs);
+	setlocale(LC_ALL, "");
 	if (initscr())
 	{
 		start_color();
