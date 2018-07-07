@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/07 14:35:50 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/07 14:47:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 		}
 		champs = champs->next;
 	}
-	if (cor->opt->v && !cor->opt->d && (tmp = champs))
+	if (cor->opt->v && !cor->opt->d && (tmp = cor->champs))
 		while (tmp)
 		{
 			cur_champ = tmp->content;
