@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/07 18:28:09 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/08 01:23:34 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,36 @@ void		clean_list(t_list *champs)
 static void	cycle_job2(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*, \
 			t_champ*))
 {
+	int		changed;
+
+	changed = 0;
 	if (cur_champ->r_cy == 0)
 	{
+		//exec good opcode, always
 		if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17)
 			f[cur_champ->cur_op](cor, cur_champ);
+		//exec bad op_code if not changed
 		else if (cur_champ->cur_op == cor->map[cur_champ->pc])
 			f[0](cor, cur_champ);
+		//if bad -> good
+		else if (cor->map[cur_champ->pc] > 0 && cor->map[cur_champ->pc] < 17)
+			changed = 1;
+		//update whatever
 		cur_champ->cur_op = cor->map[cur_champ->pc];
-		cur_champ->r_cy = change_r_cy(cor, cur_champ);
+		cur_champ->r_cy = change_r_cy(cor, cur_champ) - changed;
 	}
-	else if ((cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1)\
+	//if good opcode changed at cycle 1
+	else if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17 \
+		&& (cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1)\
 		&& cur_champ->cur_op != cor->map[cur_champ->pc])
 	{
+		//if good -> bad
 		if (cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
 			cur_champ->r_cy = 1;
+		//if good -> good
 		else
 			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+		//update
 		cur_champ->cur_op = cor->map[cur_champ->pc];
 	}
 }
