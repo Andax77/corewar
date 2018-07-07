@@ -6,13 +6,13 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/06 23:35:54 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/07 15:06:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static void	clean_print(t_cor *cor, t_champ *cur_champ, int id)
+void		clean_print(t_cor *cor, t_champ *cur_champ, int id)
 {
 	if (cor->opt->v && !cor->opt->d)
 	{
