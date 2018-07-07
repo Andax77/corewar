@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/07 12:26:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/07 12:53:34 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,31 @@ static void		cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
 	}
 	cur_champ->r_cy--;
 	cur_champ->last_pc = cur_champ->pc;
-	if (cor->opt->v && !cor->opt->d)
-	{
-		attron(COLOR_PAIR(cur_champ->id + 20));
-		draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-	}
 }
 
 static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 			t_champ*))
 {
 	t_champ	*cur_champ;
+	t_list	*tmp;
 
 	while (champs)
 	{
 		cur_champ = champs->content;
 		if (cur_champ->r_cy > -1)
-		{
 			cycle_job(cor, cur_champ, f);
-			if (cor->opt->v && !cor->opt->d)
-			{
-				attron(COLOR_PAIR(cur_champ->id + 20));
-				draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-			}
-		}
 		champs = champs->next;
+	}
+	if (cor->opt->v && !cor->opt->d)
+	{
+		tmp = champs;
+		while (tmp)
+		{
+			cur_champ = tmp->content;
+			attron(COLOR_PAIR(cur_champ->id + 20));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			tmp = tmp->next;
+		}
 	}
 }
 
