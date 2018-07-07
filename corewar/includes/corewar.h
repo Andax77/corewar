@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/07 00:13:27 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/07 15:06:31 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int					check_op_len(t_champ *t_champ);
 void				order_to_start(t_list **champs);
 void				cycle(t_cor *cor, int ret);
 void				clean(t_cor *cor, t_list *champs);
+void				clean_print(t_cor *cor, t_champ* cur_champ, int id);
 void				clean_list(t_list *champs);
 int					check_lives(t_cor *cor);
 void				print_infos(t_cor *cor);
