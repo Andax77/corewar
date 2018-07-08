@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/08 15:41:26 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/08 18:00:46 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,6 @@ static void	cycle_job2(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*, \
 		//update whatever
 		cur_champ->cur_op = cor->map[cur_champ->pc];
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - changed;
-
-
-if (cur_champ->cur_op == 9 && cor->cycle == 9936)
-{
-	ft_printf("test = %d\n", cur_champ->last_pc);
-	attron(COLOR_PAIR(17));
-	draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
-}
-
-
-
 	}
 	//if good opcode changed at cycle 1
 	else if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17 \
