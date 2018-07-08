@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/04 19:03:25 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/07 19:33:39 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_child(t_champ *child, t_champ *father, t_cor *cor, int pc)
 	child->pc = pc;
 	child->last_pc = pc;
 	child->carry = father->carry;
-	child->r_cy = change_r_cy(cor, child);
+	child->r_cy = change_r_cy(cor, child) - 1;
 	child->cur_op = cor->map[child->pc];
 	child->last_live = 0;
 	child->lives = father->lives;

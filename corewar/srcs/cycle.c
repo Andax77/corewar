@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/06 13:15:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/08 15:41:26 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,78 +25,91 @@ void		clean_list(t_list *champs)
 	}
 }
 
-static void	set_cur_op(t_cor *cor, void(**f)(t_cor*, t_champ*))
-{
-	t_champ	*cur_champ;
-	t_list	*champs;
 
-	champs = cor->champs;
-	while (champs)
+static void	cycle_job2(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*, \
+			t_champ*))
+{
+	int		changed;
+
+	changed = 0;
+	if (cur_champ->r_cy == 0)
 	{
-		cur_champ = champs->content;
-		if (cur_champ->r_cy > -1)
-		{
-			if (cur_champ->r_cy == 0)
-			{
-				cur_champ->cur_op = cor->map[cur_champ->pc];
-				cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
-			}
-			else if ((cur_champ->cur_op != cor->map[cur_champ->pc] && \
-			cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1))
-			{
-				if (cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
-					f[0](cor, cur_champ);
-				cur_champ->cur_op = cor->map[cur_champ->pc];
-				cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
-			}
-			else
-				cur_champ->r_cy--;
-		}
-		champs = champs->next;
+		//exec good op_code, always
+		if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17)
+			f[cur_champ->cur_op](cor, cur_champ);
+		//exec bad op_code if not changed (or bad -> bad)
+		else if (cur_champ->cur_op == cor->map[cur_champ->pc] || \
+		cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
+			f[0](cor, cur_champ);
+		//if bad -> good
+		else if (cor->map[cur_champ->pc] > 0 && cor->map[cur_champ->pc] < 17)
+			changed = 1;
+		//update whatever
+		cur_champ->cur_op = cor->map[cur_champ->pc];
+		cur_champ->r_cy = change_r_cy(cor, cur_champ) - changed;
+
+
+if (cur_champ->cur_op == 9 && cor->cycle == 9936)
+{
+	ft_printf("test = %d\n", cur_champ->last_pc);
+	attron(COLOR_PAIR(17));
+	draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
+}
+
+
+
 	}
+	//if good opcode changed at cycle 1
+	else if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17 \
+		&& (cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1)\
+		&& cur_champ->cur_op != cor->map[cur_champ->pc])
+	{
+		//if good -> bad
+		if (cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
+			cur_champ->r_cy = 1;
+		//if good -> good
+		else
+			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
+		//update
+		cur_champ->cur_op = cor->map[cur_champ->pc];
+	}
+}
+
+static void		cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
+			t_champ*))
+{
+	if (cor->cycle != 0)
+		cycle_job2(cor, cur_champ, f);
+	else
+	{
+		cur_champ->cur_op = cor->map[cur_champ->pc];
+		cur_champ->r_cy = change_r_cy(cor, cur_champ);
+	}
+	cur_champ->r_cy--;
+	cur_champ->last_pc = cur_champ->pc;
 }
 
 static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 			t_champ*))
 {
 	t_champ	*cur_champ;
+	t_list	*tmp;
 
 	while (champs)
 	{
 		cur_champ = champs->content;
 		if (cur_champ->r_cy > -1)
 			cycle_job(cor, cur_champ, f);
-		else if (cur_champ->r_cy <= -1)
-		{
-			if (cor->opt->v)
-			{
-				attron(COLOR_PAIR(cur_champ->id + 20));
-				draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
-			}
-		}
 		champs = champs->next;
 	}
-	set_cur_op(cor, f);
-}
-
-static int	dump_handler(t_cor *cor)
-{
-	if (cor->opt->d && cor->opt->d == cor->cycle)
-	{
-		if (!cor->opt->v)
+	if (cor->opt->v && !cor->opt->d && (tmp = cor->champs))
+		while (tmp)
 		{
-			dump(cor);
-			return (0);
+			cur_champ = tmp->content;
+			attron(COLOR_PAIR(cur_champ->id + 20));
+			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			tmp = tmp->next;
 		}
-		else
-		{
-			if (!init_ncurses(cor))
-				return (0);
-			cor->opt->d = 0;
-			jump(cor);
-		}
-	}
-	return (1);
 }
 
 void		cycle(t_cor *cor, int ret)
