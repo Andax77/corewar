@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/08 18:00:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/09 10:51:53 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ static void	cycle_job2(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*, \
 	{
 		//if good -> bad
 		if (cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
+		{
+			f[0](cor, cur_champ);
 			cur_champ->r_cy = 1;
+		}
 		//if good -> good
 		else
 			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
@@ -95,8 +98,11 @@ static void	exec_processes(t_cor *cor, t_list *champs, void (**f)(t_cor*,
 		while (tmp)
 		{
 			cur_champ = tmp->content;
-			attron(COLOR_PAIR(cur_champ->id + 20));
-			draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			if (cur_champ->r_cy > -1)
+			{
+				attron(COLOR_PAIR(cur_champ->id + 20));
+				draw_uchar(cur_champ->pc, cor->map[cur_champ->pc]);
+			}
 			tmp = tmp->next;
 		}
 }
