@@ -1,74 +1,64 @@
-.name"name"
-.comment "
-comment
-comment"  #gerge
+.name "Celebration Funebre v0.99pl42"
+.comment "Jour J"
 
-		live %42
-		ld   %0,r1
-label:  
-		zjmp %:avantdebut
-		zjmp %0				# pour eviter ecrasement
-						# de l'instruction suivante
-code:		live %42			# 5
-		sti  r15,%0,r1		# 6
-		zjmp %-200			# 3
-		live %42			# 5
-		sti  r15,%0,r14			# 6
-		zjmp %-200			# 3
-		live %42			# 5
-		sti  r15,%0,r14			# 6
-		zjmp %-200			# 3
-		live %42			# 5
-		sti  r15,%0,r2		# 6
-		zjmp %-200			# 3
-		sti  r15,%0,r14			# 6
-		zjmp %-200			# 3
-		sti  r15,%0,r14			# 6
-		zjmp %-200
-	
-avantdebut:	sti   r1,%:code,%1  # 		#7	
-		sti   r1,%:code,%15 # 		#7	
-		sti   r1,%:code,%29 # 		#7	
-		sti   r1,%:code,%43 # 		#7	
-		sti   r1,%:code,%57 # 		#7	
-		sti   r1,%:code,%71 # 		#7	
-init:		ld   %393216,r4		 	#7	
-		ld   %917504,r12		#7	
-		ld   %1,r11			#7
-		ld   %6,r10			#7
-debut:		live %-2			#5
-		sti  r4,%:label , %1		#7
-		add  r4,r12,r4			#5	
-		sub  r10,r11,r10		#5
-		zjmp %:init			#3
-		lfork %:debut			
-		live %3
-level0:		fork %:level10
-level11:	live %4
-		fork %:level111
-
-level110:	live %42
-		ldi  %8, %:code, r15		#set des octets 9-12
-		ld   %-186, r14			#=$A-6-8
-		ld   %0,r2
-		zjmp  %:label
-			
-level10:	live %42
-		fork %:level100
-level101:	live %42
-		ldi  %4, %:code, r15 		#set des octets 5-8
-		ld   %-190, r14			#=$A-6-4
-		ld   %0,r2
-		zjmp %:label
-		
-level111:	live %42	
-		ldi  %12, %:code, r15		#set des octets 13-16
-		ld   %-182, r14			# $A -6 -12
-		ld   %0,r2
-		zjmp %:label
-		
-level100:	live %42
-		ldi  %0, %:code, r15		#set des octets 1-4
-		ld   %-194, r14			# $A -6 -0
-		ld   %0,r2			#
-		zjmp %:label			#
+ld %0, r3
+zjmp %80
+zjmp %0
+live %42
+sti r15, %0, r14
+zjmp %65336
+live %42
+sti r15, %0, r14
+zjmp %65336
+live %42
+sti r15, %0, r14
+zjmp %65336
+live %42
+sti r15, %0, r14
+zjmp %65336
+sti r15, %0, r14
+zjmp %65336
+sti r15, %0, r14
+zjmp %65336
+sti r1, %65462, %1
+sti r1, %65455, %15
+sti r1, %65448, %29
+sti r1, %65441, %43
+sti r1, %65434, %57
+sti r1, %65427, %71
+ld %393216, r4
+ld %917504, r12
+ld %1, r11
+ld %6, r10
+live %42
+sti r4, %65381, %1
+add r4, r12, r4
+sub r10, r11, r10
+zjmp %65486
+lfork %65511
+live %3
+fork %40
+live %4
+fork %69
+live %42
+ldi %8, %65343, r15
+ld %-186, r14
+ld %0, r2
+zjmp %65316
+live %42
+fork %61
+live %42
+ldi %4, %65306, r15
+ld %-190, r14
+ld %0, r2
+zjmp %65279
+live %42
+ldi %12, %65277, r15
+ld %-182, r14
+ld %0, r2
+zjmp %65250
+live %42
+ldi %0, %65248, r15
+ld %-194, r14
+ld %0, r2
+zjmp %65221
