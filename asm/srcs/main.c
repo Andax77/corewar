@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/12 17:24:22 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/09 19:34:23 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		main_normal(t_champ *champ)
 	return (SUCCESS);
 }
 
-static void		main_boucle(t_champ *champ, int argc_c, char **argv)
+static void		main_loop(t_champ *champ, int argc_c, char **argv)
 {
 	while (--argc_c)
 	{
@@ -66,8 +66,13 @@ int				main(int argc, char **argv)
 
 	argc_c = argc;
 	champ = NULL;
-	main_boucle(champ, argc_c, argv);
+	main_loop(champ, argc_c, argv);
 	if (argc == 1)
-		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n", argv[0]);
+		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n\
+*****************************************************************\n\
+*	normal mode (compiles a .s in .cor)			*\n\
+*  -r : reverse mode (compiles a .cor in .s)			*\n\
+*  -m : manual mode (opens a manual mode to create a .cor)	*\n\
+*****************************************************************\n", argv[0]);
 	exit(EXIT_SUCCESS);
 }
