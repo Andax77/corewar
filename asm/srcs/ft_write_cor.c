@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 00:43:44 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/28 21:45:04 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/09 18:38:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int			ft_write_cor(t_champ *champ)
 		return (ft_error(champ, "error: too many instructions"));
 	if (sizeof(COREWAR_EXEC_MAGIC) > 4)
 		return (ft_error(champ, "error: magic number is not an integer"));
-	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 +
-		sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
+	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 + \
+sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
 	ft_bzero(output, length_output + 1);
 	ft_fill_output(champ, output, instructions_length);

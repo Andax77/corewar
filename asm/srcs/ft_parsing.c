@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/09 17:51:42 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/09 18:41:07 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int			read_file(t_champ *champ)
 	int		result_gnl;
 
 	if ((champ->fd = open(champ->argv, O_RDONLY)) <= 0)
-		return (ERROR);
+		return (ft_error(champ, "error: bad file descriptor"));
 	line = NULL;
 	while ((result_gnl = get_next_line(champ->fd, &line)) == GNL_SUCCESS)
 	{
