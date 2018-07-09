@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/09 14:56:04 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/09 15:29:07 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,6 @@ ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
 	ft_clean_spaces_comments(inst);
 	if (ft_verif_params(inst->params) == ERROR)
 		return (ERROR);
-//	i = -1;
-//	while (inst->params[++i])
-//		ft_printf("{green}%s, ", inst->params[i]);
-//	ft_printf("\n{eoc}");
 	return (SUCCESS);
 }
 
