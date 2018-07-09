@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/28 21:39:36 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/09 14:56:04 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,35 @@ static void		ft_clean_spaces_comments(t_instru *inst)
 	}
 }
 
+static int		ft_verif_params(char **params)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (params[++i])
+		if (params[i][0] == DIRECT_CHAR)
+		{
+			if (params[i][1] == LABEL_CHAR)
+			{
+				j = 1;
+				while (params[i][++j])
+					if (!ft_strchr(LABEL_CHARS, params[i][j]))
+						return (ERROR);
+			}
+			else if (!ft_strisdigit(params[i] + 1))
+				return (ERROR);
+		}
+		else if (params[i][0] == LABEL_CHAR)
+		{
+			j = 0;
+			while (params[i][++j])
+				if (!ft_strchr(LABEL_CHARS, params[i][j]))
+					return (ERROR);
+		}
+	return (SUCCESS);
+}
+
 int				ft_get_params(t_instru *inst, char *str)
 {
 	int		i;
@@ -58,6 +87,12 @@ ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
 	if (!(inst->params = ft_strsplit(str, SEPARATOR_CHAR)))
 		exit(EXIT_FAILURE);
 	ft_clean_spaces_comments(inst);
+	if (ft_verif_params(inst->params) == ERROR)
+		return (ERROR);
+//	i = -1;
+//	while (inst->params[++i])
+//		ft_printf("{green}%s, ", inst->params[i]);
+//	ft_printf("\n{eoc}");
 	return (SUCCESS);
 }
 

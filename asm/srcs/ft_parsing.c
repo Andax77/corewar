@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/28 18:36:01 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/09 15:05:15 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ static int	parse_line(char *line, t_champ *champ)
 		else
 			return (ft_error(champ, "error: .comment is badly spelled"));
 	}
+	else
+		return (ft_error(champ, "error: unknown command"));
 	return (ft_parse_status(champ, status));
 }
 
