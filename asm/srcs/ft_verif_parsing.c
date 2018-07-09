@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 17:29:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/28 21:12:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/09 15:42:19 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ int		ft_verif_register(t_champ *champ)
 			while (cur->params[++i])
 				if (cur->params[i][0] == 'r')
 				{
-					if (cur->params[i][1] == '\0')
-						return (ft_error(champ, "error: no reg number"));
+					if (!ft_strisdigit(cur->params[i] + 1))
+						return (ft_error(champ, "error: wrong reg number"));
 					else if (ft_atoi(cur->params[i] + 1) <= 0 ||
 									ft_atoi(cur->params[i] + 1) > REG_NUMBER)
 						return (ft_error(champ,
