@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/10 13:38:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/10 15:50:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	cycle_job2(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*, \
 		if (cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
 		{
 			f[0](cor, cur_champ);
-			cur_champ->r_cy = 1;
+			cur_champ->r_cy = change_r_cy(cor, cur_champ);
 		}
 		//if good -> good
 		else
