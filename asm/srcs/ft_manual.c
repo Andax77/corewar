@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/16 20:20:15 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 16:15:55 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 17:34:33 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static int	ft_fill_instructions_m(t_champ *champ, char **f_instructions,
 	}
 	ft_str_toupper(instructions);
 	*instructions_length = ft_strlen(instructions) / 2;
-	if (ft_fill_instructions_next_m(champ, instructions, f_instructions,
-												instructions_length) == ERROR)
+	if (ft_fill_instructions_next_m(champ, instructions, f_instructions, \
+instructions_length) == ERROR)
 		return (ERROR);
 	return (SUCCESS);
 }
@@ -96,14 +96,14 @@ static int	ft_write_cor_m(t_champ *champ, int instructions_length,
 	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 + \
 sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
 	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
-	ft_bzero(output, length_output + 1);
 	ft_fill_output_m(champ, output, f_instructions, instructions_length);
 	ft_printf("{yellow}What is the name of the program (please finish the name \
 with '.cor') ?{eoc}\n");
 	ft_fruit(1, &champ->file_name);
-	if (get_next_line(STDIN_FILENO, &champ->file_name) != GNL_SUCCESS)
+	if (get_next_line(STDIN_FILENO, &champ->file_name) != GNL_SUCCESS && \
+ft_fruit(1, &output))
 		return (ft_error_m(champ, "error: oups something went wrong..."));
-	if (!champ->file_name || champ->file_name[0] == '\0' || ft_strchr(champ->file_name, '/'))
+	if (champ->file_name[0] == '\0' || ft_strchr(champ->file_name, '/'))
 	{
 		ft_fruit(1, &output);
 		return (ft_error_m(champ, "error: oups something went wrong..."));
