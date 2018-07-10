@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/16 20:20:15 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 14:01:09 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 16:15:55 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ with '.cor') ?{eoc}\n");
 	ft_fruit(1, &champ->file_name);
 	if (get_next_line(STDIN_FILENO, &champ->file_name) != GNL_SUCCESS)
 		return (ft_error_m(champ, "error: oups something went wrong..."));
-	if (!champ->file_name || champ->file_name[0] == '\0')
+	if (!champ->file_name || champ->file_name[0] == '\0' || ft_strchr(champ->file_name, '/'))
 	{
 		ft_fruit(1, &output);
 		return (ft_error_m(champ, "error: oups something went wrong..."));
