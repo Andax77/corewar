@@ -6,13 +6,13 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 20:29:56 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/05 20:29:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 14:05:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static int	ft_change_sh_p1_p2(t_champ *champ, int ocp, short *p1, short *p2)
+static int	ft_change_sh_p1_p2(t_champ *champ, int ocp, int *p1, int *p2)
 {
 	if (((ocp >> 6) & 3) == REG_CODE)
 	{
@@ -24,6 +24,8 @@ static int	ft_change_sh_p1_p2(t_champ *champ, int ocp, short *p1, short *p2)
 			return (ERROR);
 		}
 	}
+	else
+		*p1 = (short)*p1;
 	if (((ocp >> 4) & 3) == REG_CODE)
 	{
 		if (*p2 > 0 && *p2 <= REG_NUMBER)
@@ -34,13 +36,15 @@ static int	ft_change_sh_p1_p2(t_champ *champ, int ocp, short *p1, short *p2)
 			return (ERROR);
 		}
 	}
+	else
+		*p2 = (short)*p2;
 	return (SUCCESS);
 }
 
 void		ft_ldi(t_cor *cor, t_champ *champ)
 {
-	short	p1;
-	short	p2;
+	int		p1;
+	int		p2;
 	int		p3;
 	int		ocp;
 	int		ori;
@@ -68,8 +72,8 @@ cor->map[(ori + p2 + 3) % MEM_SIZE];
 
 void	ft_lldi(t_cor *cor, t_champ *champ)
 {
-	short	p1;
-	short	p2;
+	int		p1;
+	int		p2;
 	int		p3;
 	int		ocp;
 	int		ori;
