@@ -66,6 +66,11 @@ int				main(int argc, char **argv)
 
 	argc_c = argc;
 	champ = NULL;
+	if (MAX_ARGS_NUMBER != 4)
+	{
+		ft_printf("{red}stop touching op.h !\n{eoc}");
+		exit(EXIT_FAILURE);
+	}
 	main_loop(champ, argc_c, argv);
 	if (argc == 1)
 		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n\
