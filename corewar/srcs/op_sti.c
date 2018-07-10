@@ -6,13 +6,13 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 21:22:18 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/05 21:22:18 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 13:13:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static int	ft_change_sh_p2_p3(t_champ *champ, int ocp, short *p2, short *p3)
+static int	ft_change_sh_p2_p3(t_champ *champ, int ocp, int *p2, int *p3)
 {
 	if (((ocp >> 4) & 3) == REG_CODE)
 	{
@@ -24,6 +24,8 @@ static int	ft_change_sh_p2_p3(t_champ *champ, int ocp, short *p2, short *p3)
 			return (ERROR);
 		}
 	}
+	else
+		*p2 = (short)*p2;
 	if (((ocp >> 2) & 3) == REG_CODE)
 	{
 		if (*p3 > 0 && *p3 <= REG_NUMBER)
@@ -34,6 +36,8 @@ static int	ft_change_sh_p2_p3(t_champ *champ, int ocp, short *p2, short *p3)
 			return (ERROR);
 		}
 	}
+	else
+		*p3 = (short)*p3;
 	return (SUCCESS);
 }
 
@@ -87,8 +91,8 @@ champ->reg[ft_get2arg(p1_ori, 0) - 1];
 void	ft_sti(t_cor *cor, t_champ *champ)
 {
 	int		p1;
-	short	p2;
-	short	p3;
+	int		p2;
+	int		p3;
 	int		ocp;
 	int		ori;
 
