@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 16:22:52 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/28 21:24:32 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 17:39:46 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int				ft_check_input_format(t_champ *champ)
 			;
 		if (str[i] && str[i] == '.')
 		{
-			if (ft_strncmp(str + i, ".name", 5) == 0)
+			if (ft_strcmp(str + i, NAME_CMD_STRING) == 0)
 				return (ft_error(champ, "error: several names of file found"));
-			else if (ft_strncmp(str + i, ".comment", 8) == 0)
+			else if (ft_strcmp(str + i, COMMENT_CMD_STRING) == 0)
 				return (ft_error(champ, "error: several comments found"));
 			return (ft_error(champ, "error: unknown command found"));
 		}

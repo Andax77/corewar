@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/09 18:41:07 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 17:38:02 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ static int	parse_line(char *line, t_champ *champ)
 			return (UNFINISHED);
 		else if (line[i] != ' ' && line[i] != '\t')
 			break ;
-	if (ft_strstr(line, ".name") && !champ->name)
+	if (ft_strstr(line, NAME_CMD_STRING) && !champ->name)
 	{
 		if (ft_verif_format_name(line) == SUCCESS)
 			status = get_champ_name_comment(line, &champ->name, champ->fd);
 		else
 			return (ft_error(champ, "error: .name is badly spelled"));
 	}
-	else if (ft_strstr(line, ".comment") && !champ->comment)
+	else if (ft_strstr(line, COMMENT_CMD_STRING) && !champ->comment)
 		if (ft_verif_format_comment(line) == SUCCESS)
 			status = get_champ_name_comment(line, &champ->comment, champ->fd);
 		else

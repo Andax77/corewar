@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 17:29:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/09 15:42:19 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 17:50:15 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ int		ft_verif_format_name(char *str)
 	i = -1;
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
-	--i;
-	if (str[++i] != '.' || str[++i] != 'n' || str[++i] != 'a' || \
-str[++i] != 'm' || str[++i] != 'e')
+	if (strncmp(str + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) != 0)
 		return (ERROR);
+	i += ft_strlen(NAME_CMD_STRING);
 	while (str[++i] && str[i] != '"')
 		if (str[i] != ' ' && str[i] != '\t')
 			return (ERROR);
@@ -78,11 +77,10 @@ int		ft_verif_format_comment(char *str)
 	i = -1;
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
-	--i;
-	if (str[++i] != '.' || str[++i] != 'c' || str[++i] != 'o' || \
-str[++i] != 'm' || str[++i] != 'm' || str[++i] != 'e' || \
-str[++i] != 'n' || str[++i] != 't')
+	if (strncmp(str + i, COMMENT_CMD_STRING, \
+ft_strlen(COMMENT_CMD_STRING)) != 0)
 		return (ERROR);
+	i += ft_strlen(COMMENT_CMD_STRING);
 	while (str[++i] && str[i] != '"')
 		if (str[i] != ' ' && str[i] != '\t')
 			return (ERROR);
