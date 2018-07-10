@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 19:54:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 11:35:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/10 13:20:36 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ champ->reg[ft_get2arg(p1_ori, 0) - 1];
 void		ft_st(t_cor *cor, t_champ *champ)
 {
 	int		p1;
-	short	p2;
+	int		p2;
 	int		ocp;
 	int		ori;
 
