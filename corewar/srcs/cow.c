@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:43 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/18 20:13:08 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 14:33:23 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		draw_cow2(int nb)
 	draw_line2(nb++, "		 |   ###              //  //nnnnnnn/--//");
 	draw_line2(nb++, "		 |    ###      ______//  //nnnnnnn/  //");
 	draw_line2(nb++, "		 |#    ##       |       //nnnnnnn/  //");
-	draw_line2(nb++, "		 |##            |      //nnnnnnnn/  //");
+	draw_line2(nb++, "		 |##            |      //nnnnnnn/  //");
 	draw_line2(nb++, "		 |###       ####|     //nnnnnnn/  //");
 	draw_line2(nb++, "                              ------------");
 	draw_line2(nb++, "			 C.O.W -- W.A.R");
@@ -95,7 +95,7 @@ void		draw_cow3(int nb)
 	draw_line2(nb++, "		 |   ###     ###|\\_________|_ |nnnn/--//");
 	draw_line2(nb++, "		 |    ###               |  |nnnnnn/  //");
 	draw_line2(nb++, "		 |#    ##       \\_______|__|nnnnn/  //");
-	draw_line2(nb++, "		 |##                   //nnnnnnnn/  //");
+	draw_line2(nb++, "		 |##                   //nnnnnnn/  //");
 	draw_line2(nb++, "		 |###       ####|     //nnnnnnn/  //");
 	draw_line2(nb++, "                              ------------");
 	draw_line2(nb++, "			 C.O.W -- W.A.R");
