@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 20:07:41 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/05 20:08:20 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:45:04 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int			ft_conv_w(char **ret, t_arg *arg, int size, int size_exposant)
 	char		*exp_new_ret;
 
 	f.f = arg->arg.f;
-	if ((!(str = ft_int_to_nbase(f.l, "01", 64))) || \
-(!(exp_new_ret = ft_strndup(str + 1, 11))))
+	if ((!(str = ft_int_to_nbase(f.l, "01", 64)))
+			|| (!(exp_new_ret = ft_strndup(str + 1, 11))))
 		return (ERROR);
 	exposant_f = ft_base_to_int(exp_new_ret, "01") - 1023;
 	size_exposant = ft_nb_len(exposant_f);

@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 13:11:44 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/07 19:09:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:24:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		ft_fruit_gnl(t_file **f, size_t n)
 	if (n > 0)
 	{
 		((t_file*)ft_lstget((t_list*)*f, n - 1))->next = \
-((t_file*)ft_lstget((t_list*)*f, n + 1));
+			((t_file*)ft_lstget((t_list*)*f, n + 1));
 	}
 	else
 	{
@@ -73,16 +73,16 @@ static int		ft_get_line(t_file *tmp, char **line)
 
 	tmp->size = ft_strlen(tmp->s);
 	size_line = 0;
-	while (tmp->s[size_line] != '\n' && tmp->s[size_line] != '\r' && \
-tmp->s[size_line] != '\0')
+	while (tmp->s[size_line] != '\n' && tmp->s[size_line] != '\r'
+			&& tmp->s[size_line] != '\0')
 		size_line++;
 	if (!(*line = malloc(sizeof(**line) * (size_line + 1))))
 		return (GNL_ERROR);
 	ft_strncpy(*line, tmp->s, size_line);
 	(*line)[size_line] = '\0';
 	ft_memmove(tmp->s, tmp->s + size_line + 1, tmp->size - size_line);
-	if (!(tmp->s = ft_realloc(tmp->s, tmp->size + 1, \
-tmp->size - size_line + 1)))
+	if (!(tmp->s = ft_realloc(tmp->s, tmp->size + 1,
+					tmp->size - size_line + 1)))
 		return (GNL_ERROR);
 	tmp->s[tmp->size - size_line] = '\0';
 	tmp->size = ft_strlen(tmp->s) + 1;

@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 19:04:14 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/08 16:11:53 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:28:41 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ static void	ft_simplify(t_arg *arg, char *str)
 
 static int	ft_check_error_height(t_arg *arg)
 {
-	if (((ft_strchr(arg->height, 'j') || ft_strchr(arg->height, 'z') || \
-(ft_strchr(arg->height, 'l') && ft_strchr(arg->height, 'h'))) && \
-(arg->conv != 'c' && arg->conv != 's')) || ft_strchr(&(arg->conv), 'O'))
+	if (((ft_strchr(arg->height, 'j') || ft_strchr(arg->height, 'z')
+					|| (ft_strchr(arg->height, 'l')
+						&& ft_strchr(arg->height, 'h')))
+				&& (arg->conv != 'c' && arg->conv != 's'))
+			|| ft_strchr(&(arg->conv), 'O'))
 	{
 		ft_memset(arg->height, '\0', 7);
 		arg->height[0] = 'j';

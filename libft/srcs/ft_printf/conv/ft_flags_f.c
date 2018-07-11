@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 18:30:52 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/08 17:44:53 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:47:28 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static char	*flag_hashtag_f(char *str)
 
 int			ft_flags_f(char **str, int sign, t_arg *arg)
 {
-	if (arg->flag.zero == 1 && arg->wi > 0 && \
-(size_t)arg->wi > ft_strlen(*str))
+	if (arg->flag.zero == 1 && arg->wi > 0
+			&& (size_t)arg->wi > ft_strlen(*str))
 		if (!(*str = flag_zero_f(*str, arg->wi, arg->flag.space, arg)))
 			return (ERROR);
 	if (arg->flag.space == 1 && sign == 0)
