@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 19:44:20 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:34:53 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:39:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int			ft_flags_e(char **nr, char *nn, t_arg *arg)
 	int		ln;
 
 	ln = ((t_ull)arg->wi > ft_strlen(nn)) ? arg->wi : ft_strlen(nn);
-	ln += ((arg->flag.space == 1 || arg->flag.plus == 1) && nn[0] != '-' && \
-(t_ull)arg->wi <= ft_strlen(nn)) ? 1 : 0;
+	ln += ((arg->flag.space == 1 || arg->flag.plus == 1) && nn[0] != '-'
+			&& (t_ull)arg->wi <= ft_strlen(nn)) ? 1 : 0;
 	if (!(*nr = malloc(sizeof(**nr) * (ln + 1))))
 		return (ERROR);
 	(*nr)[ln] = '\0';
-	*nr = (arg->flag.zero == 1) ? ft_memset(*nr, '0', ln) : \
-ft_memset(*nr, ' ', ln);
+	*nr = (arg->flag.zero == 1) ? ft_memset(*nr, '0', ln)
+		: ft_memset(*nr, ' ', ln);
 	if (arg->flag.minus == 0)
 		ft_strncpy((*nr) + ln - ft_strlen(nn), nn, ft_strlen(nn));
 	else
@@ -79,13 +79,13 @@ int			ft_conv_e(char **ret, t_arg *arg)
 
 	if (ft_precision_e(&new_nb, arg) == ERROR && ft_fruit(1, &new_nb))
 		return (ERROR);
-	if (ft_flags_e(&new_ret, new_nb, arg) == ERROR && \
-ft_fruit(2, &new_ret, &new_nb))
+	if (ft_flags_e(&new_ret, new_nb, arg) == ERROR
+			&& ft_fruit(2, &new_ret, &new_nb))
 		return (ERROR);
 	free(new_nb);
 	len = ft_strlen(new_ret);
-	if (!(*ret = ft_strfreejoin(*ret, new_ret, len, arg)) && \
-ft_fruit(1, &new_ret))
+	if (!(*ret = ft_strfreejoin(*ret, new_ret, len, arg))
+			&& ft_fruit(1, &new_ret))
 		return (ERROR);
 	arg->cmpt += len;
 	ft_fruit(1, &new_ret);

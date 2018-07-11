@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 19:27:23 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/08 11:54:18 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:32:58 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ static int		ft_forest2(char **ret, t_arg *arg, va_list ap)
 	else if (ft_strchr("gG", arg->conv) != NULL)
 		return (ft_conv_g(ret, (arg->arg.f = va_arg(ap, double)) ? arg : arg));
 	else if (ft_strchr("wW", arg->conv) != NULL)
-		return (ft_conv_w(ret, ((arg->arg.f = va_arg(ap, double)) ? arg : \
-arg), 0, 0));
+		return (ft_conv_w(ret, ((arg->arg.f = va_arg(ap, double)) ? arg
+						: arg), 0, 0));
 	else if (ft_strchr("r", arg->conv) != NULL)
-		return (ft_conv_r(ret, (arg->arg.p = va_arg(ap, void *)) ? arg : \
-arg, ap));
+		return (ft_conv_r(ret, (arg->arg.p = va_arg(ap, void *)) ? arg
+					: arg, ap));
 	else
 		return (ft_conv_invalid(ret, arg));
 	return (SUCCESS);
@@ -117,7 +117,7 @@ int				ft_forest(char **ret, t_arg *arg, va_list ap)
 		return (ft_conv_o(ret, (arg->arg.d = ft_int_ll(arg, ap)) ? arg : arg));
 	else if (ft_strchr("u", arg->conv) != NULL)
 		return (ft_conv_u(ret, (arg->arg.u = \
-ft_uint_ull(arg, ap)) ? arg : arg));
+						ft_uint_ull(arg, ap)) ? arg : arg));
 	else if (ft_strchr("U", arg->conv) != NULL)
 		return (ft_conv_u(ret, (arg->arg.u = va_arg(ap, t_ull)) ? arg : arg));
 	else if (ft_strchr("xX", arg->conv) != NULL)

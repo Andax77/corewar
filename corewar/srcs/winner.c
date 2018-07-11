@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 13:04:51 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:01:38 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		*get_name_champ(t_cor *cor)
 	return (NULL);
 }
 
-void		game_over(t_cor* cor)
+void		game_over(t_cor *cor)
 {
 	char	*winner;
 	int		id;

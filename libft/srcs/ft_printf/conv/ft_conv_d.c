@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 20:24:20 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:34:15 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:38:27 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int		ft_nb_len_d(t_arg *arg)
 	int		nb_len;
 
 	tmp = (arg->arg.d < 0) ? -(t_ull)arg->arg.d : (t_ull)arg->arg.d;
-	nb_len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1) ? \
-2: 1;
+	nb_len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1)
+		? 2 : 1;
 	while (tmp /= 10)
 		nb_len++;
 	return (nb_len);
@@ -34,8 +34,8 @@ static int		ft_no_precision(char **new_ret, t_arg *arg, int len)
 	if (!((*new_ret) = (char *)malloc(sizeof(**new_ret) * (len + 1))))
 		return (ERROR);
 	(*new_ret)[len] = '\0';
-	*new_ret = (arg->flag.zero == 1) ?
-		ft_memset(*new_ret, '0', len) : ft_memset(*new_ret, ' ', len);
+	*new_ret = (arg->flag.zero == 1)
+		? ft_memset(*new_ret, '0', len) : ft_memset(*new_ret, ' ', len);
 	nb_len = (arg->flag.minus == 0) ? len : nb_len;
 	ft_fill_str_ud(new_ret, arg->arg.d, &nb_len, arg);
 	if (arg->arg.d == 0)
@@ -84,8 +84,8 @@ static int		ft_precision(char **new_nb, t_arg *arg)
 	int		nb_len;
 
 	nb_len = ft_nb_len_d(arg);
-	len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1) ? \
-(arg->preci + 1) : arg->preci;
+	len = (arg->arg.d < 0 || arg->flag.plus == 1 || arg->flag.space == 1)
+		? (arg->preci + 1) : arg->preci;
 	len = (nb_len > len) ? nb_len : len;
 	if (!((*new_nb) = malloc(sizeof(**new_nb) * (len + 1))))
 		return (ERROR);
@@ -111,16 +111,16 @@ int				ft_conv_d(char **ret, t_arg *arg)
 	new_ret = NULL;
 	if (arg->preci == 0 && arg->arg.d == 0)
 		return (ft_regle_zero(ret, arg));
-	if (arg->preci != -1 && ft_precision(&new_nb, arg) == ERROR && \
-ft_fruit(1, &new_nb))
+	if (arg->preci != -1 && ft_precision(&new_nb, arg) == ERROR
+			&& ft_fruit(1, &new_nb))
 		return (ERROR);
-	if (ft_width(&new_ret, &new_nb, arg) == ERROR && \
-ft_fruit(2, &new_ret, &new_nb))
+	if (ft_width(&new_ret, &new_nb, arg) == ERROR
+			&& ft_fruit(2, &new_ret, &new_nb))
 		return (ERROR);
 	ft_fruit(1, &new_nb);
 	len = ft_strlen(new_ret);
-	if (!(*ret = ft_strfreejoin(*ret, new_ret, len, arg)) && \
-ft_fruit(1, &new_ret))
+	if (!(*ret = ft_strfreejoin(*ret, new_ret, len, arg))
+			&& ft_fruit(1, &new_ret))
 		return (ERROR);
 	arg->cmpt += len;
 	ft_fruit(1, &new_ret);
