@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/11 16:04:28 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:37:12 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void			print_infos(t_cor *cor)
 	char		**values;
 
 	i = 0;
-	print_cow(cor);
+	print_cow();
 	print_heart(cor);
 	values = ft_malloc(10 * sizeof(char*), EXIT_FAILURE);
 	init_values(cor, values);

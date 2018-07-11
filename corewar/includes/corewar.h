@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 16:02:54 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:37:35 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void				draw_line2(int line_idx, char *line);
 void				draw_cow1(int nb);
 void				draw_cow2(int nb);
 void				draw_cow3(int nb);
-void				print_cow();
+void				print_cow(void);
 
 /*
 HEART BEAT
