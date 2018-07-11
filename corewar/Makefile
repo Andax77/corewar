@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/07/05 11:48:23 by eparisot         ###   ########.fr        #
+#    Updated: 2018/07/11 17:33:16 by eparisot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ FILES = main.c \
 		op_sti.c \
 		op_ldi_lld_lldi.c \
 		op_zjmp_fork_lfork.c \
-		op1.c \
+		op_live.c \
 		player.c \
 		cow.c \
 		heart.c \

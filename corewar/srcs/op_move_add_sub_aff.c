@@ -6,20 +6,20 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 22:02:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/05 22:02:12 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:07:50 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void	ft_move(t_cor *cor, t_champ *champ)
+void		ft_move(t_cor *cor, t_champ *champ)
 {
 	(void)cor;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	champ->cur_op = 0;
 }
 
-void	ft_add(t_cor *cor, t_champ *champ)
+void		ft_add(t_cor *cor, t_champ *champ)
 {
 	int p1;
 	int p2;
@@ -40,7 +40,7 @@ void	ft_add(t_cor *cor, t_champ *champ)
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
-void	ft_sub(t_cor *cor, t_champ *champ)
+void		ft_sub(t_cor *cor, t_champ *champ)
 {
 	int p1;
 	int p2;
@@ -87,7 +87,7 @@ static void	ft_aff_next(t_cor *cor, t_champ *champ, char *str)
 		exit(EXIT_FAILURE);
 }
 
-void	ft_aff(t_cor *cor, t_champ *champ)
+void		ft_aff(t_cor *cor, t_champ *champ)
 {
 	int		p;
 	int		ocp;

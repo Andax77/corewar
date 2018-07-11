@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 12:52:01 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:08:20 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ int		recup_content(t_cor *cor, t_champ *champ, int ocp, long long dec_op)
 	else if (type == DIR_CODE)
 	{
 		if (g_op_tab[ft_get2arg(dec_op, 1) - 1].dir_size == 0)
-			ret = ((cor->map[++champ->pc % MEM_SIZE] << 24) + \
-(cor->map[++champ->pc % MEM_SIZE] << 16));
-		ret += ((cor->map[++champ->pc % MEM_SIZE] << 8) + \
-cor->map[++champ->pc % MEM_SIZE]);
+			ret = ((cor->map[++champ->pc % MEM_SIZE] << 24)
+					+ (cor->map[++champ->pc % MEM_SIZE] << 16));
+		ret += ((cor->map[++champ->pc % MEM_SIZE] << 8)
+				+ cor->map[++champ->pc % MEM_SIZE]);
 	}
 	else if (type == IND_CODE)
-		ret = (short)((cor->map[++champ->pc % MEM_SIZE] << 8) + \
-cor->map[++champ->pc % MEM_SIZE]);
+		ret = (short)((cor->map[++champ->pc % MEM_SIZE] << 8)
+				+ cor->map[++champ->pc % MEM_SIZE]);
 	return (ret);
 }

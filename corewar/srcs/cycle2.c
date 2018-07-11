@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/09 01:11:27 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:04:08 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@ void		clean_print(t_cor *cor, t_champ *cur_champ, int id)
 	if (cor->opt->v && !cor->opt->d)
 	{
 		attron(COLOR_PAIR(40 + id));
-		draw_uchar(cur_champ->last_pc, \
-				cor->map[cur_champ->last_pc]);
+		draw_uchar(cur_champ->last_pc, cor->map[cur_champ->last_pc]);
 		if (cur_champ->last_pc != cur_champ->last_live_pc)
 		{
 			attron(COLOR_PAIR(cor->c_map[cur_champ->last_live_pc]));
-			draw_uchar(cur_champ->last_live_pc, \
+			draw_uchar(cur_champ->last_live_pc,
 					cor->map[cur_champ->last_live_pc]);
 		}
 	}
@@ -44,7 +43,7 @@ void		clean(t_cor *cor, t_list *champs)
 			else if (cor->opt->v && !cor->opt->d)
 			{
 				attron(COLOR_PAIR(cor->c_map[cur_champ->last_pc]));
-				draw_uchar(cur_champ->last_pc, \
+				draw_uchar(cur_champ->last_pc,
 						cor->map[cur_champ->last_pc]);
 			}
 		}
@@ -52,7 +51,7 @@ void		clean(t_cor *cor, t_list *champs)
 	}
 }
 
-int		dump_handler(t_cor *cor)
+int			dump_handler(t_cor *cor)
 {
 	if (cor->opt->d && cor->opt->d == cor->cycle)
 	{
@@ -72,7 +71,7 @@ int		dump_handler(t_cor *cor)
 	return (1);
 }
 
-static void	check_champs_lives(t_cor* cor, int *nbr_lives, int *nbr_v_lives)
+static void	check_champs_lives(t_cor *cor, int *nbr_lives, int *nbr_v_lives)
 {
 	t_list	*champs;
 
@@ -87,7 +86,7 @@ static void	check_champs_lives(t_cor* cor, int *nbr_lives, int *nbr_v_lives)
 			if (cor->opt->v && !cor->opt->d)
 			{
 				attron(COLOR_PAIR(cor->c_map[((t_champ*)champs->content)->pc]));
-				draw_uchar(((t_champ*)champs->content)->pc, \
+				draw_uchar(((t_champ*)champs->content)->pc,
 						cor->map[((t_champ*)champs->content)->pc]);
 			}
 		}

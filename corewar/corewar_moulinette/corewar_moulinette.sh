@@ -16,17 +16,22 @@ echo "${BLU}Done${NC}\n"
 
 echo "${YEL}Testings :${NC}\n--------------------"
 
-/bin/echo -n "NO ARGS ..."
+/bin/echo -n "NO ARGS ... : "
 if [ "`./../corewar`" == "$USAGE" ]
 then echo "${GRE}\tOK${NC}\n"
 else echo "${RED}\tKO${NC}\n"
 fi
 
-/bin/echo  "1 Zork ...\n"
-echo `./../corewar zork.cor`
-echo `./corewar zork.cor`
-echo ""
-if [ "`./../corewar zork.cor`" == "`./corewar zork.cor`" ]
+/bin/echo  "1 Zork ... : "
+
+A="`./../corewar zork.cor | cat -e | tr -d '\n' | tr -d ' '`"
+
+B="`./corewar zork.cor | cat -e | tr -d '\n' | tr -d ' '`"
+
+echo "$A"
+echo "$B"
+
+if [ "$A" == "$B" ]
 then echo "${GRE}\tOK${NC}\n"
 else echo "${RED}\tKO${NC}\n"
 fi
