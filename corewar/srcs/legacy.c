@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   legacy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 15:58:37 by pmilan           ###   ########.fr       */
+/*   Created: 2018/07/11 17:19:57 by pmilan            #+#    #+#             */
+/*   Updated: 2018/07/11 17:46:13 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static void	init_child(t_champ *child, t_champ *father, t_cor *cor, int pc)
+static void	ft_init_child(t_champ *child, t_champ *father, t_cor *cor, int pc)
 {
 	if (!(child->name = ft_strdup(father->name)))
 		exit(EXIT_FAILURE);
@@ -32,15 +32,17 @@ void		legacy(t_cor *cor, t_champ *champ, int id, int pc)
 {
 	t_champ		*child;
 	t_list		*new;
+	int			reg_number;
 	int			j;
 
+	reg_number = REG_NUMBER;
 	j = -1;
 	child = ft_malloc(sizeof(t_champ), EXIT_FAILURE);
-	if (!((child->reg = ft_memalloc(REG_NUMBER * sizeof(int)))))
+	if (!((child->reg = ft_memalloc(reg_number * sizeof(int)))))
 		exit(EXIT_FAILURE);
-	while (++j < REG_NUMBER)
+	while (++j < reg_number)
 		child->reg[j] = champ->reg[j];
-	init_child(child, champ, cor, pc);
+	ft_init_child(child, champ, cor, pc);
 	child->father = id;
 	if (!(new = ft_lstnew(child, sizeof(t_champ))))
 		exit(EXIT_FAILURE);

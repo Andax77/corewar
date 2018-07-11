@@ -6,19 +6,22 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/05 02:44:54 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:47:13 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		init_opt(t_opt *opt, t_cor *cor)
+void			init_opt(t_opt *opt, t_cor *cor)
 {
+	int		max_players;
+
+	max_players = MAX_PLAYERS;
 	opt->a = 0;
 	opt->v = 0;
 	opt->d = 0;
-	opt->n = (int*)ft_malloc(MAX_PLAYERS * sizeof(int), EXIT_FAILURE);
-	ft_bzero(opt->n, MAX_PLAYERS * sizeof(int));
+	opt->n = (int*)ft_malloc(max_players * sizeof(int), EXIT_FAILURE);
+	ft_bzero(opt->n, max_players * sizeof(int));
 	cor->opt = opt;
 }
 
@@ -36,7 +39,7 @@ static void		get_values(char **argv, int j, int i, t_opt *opt)
 	}
 }
 
-int			parse_opt(char **argv, t_opt *opt, t_cor *cor)
+int				parse_opt(char **argv, t_opt *opt, t_cor *cor)
 {
 	int		i;
 	int		j;

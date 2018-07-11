@@ -6,13 +6,13 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:43 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/10 14:33:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:37:22 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_cow()
+void		print_cow(void)
 {
 	static int x;
 	static int color;
@@ -26,7 +26,6 @@ void		print_cow()
 		draw_cow2(4);
 	else if (x == 2 && !(x = 0))
 		draw_cow3(4);
-
 }
 
 void		draw_cow1(int nb)
