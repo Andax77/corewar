@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 19:55:19 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/13 23:39:04 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:17:36 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	check_op(unsigned char *prog, int i)
 	{
 		while (++j < g_op_tab[prog[i] - 1].nb_params)
 		{
-			tmp_ocp = (((prog[i + 1] >> (2 * (3 - j))) & 0x3) == 3) ? 4 : \
-					  (prog[i + 1] >> (2 * (3 - j))) & 0x3;
+			tmp_ocp = (((prog[i + 1] >> (2 * (3 - j))) & 0x3) == 3) ? 4
+				: (prog[i + 1] >> (2 * (3 - j))) & 0x3;
 			if ((tmp_ocp & (g_op_tab[prog[i] - 1].params_type[j])) != tmp_ocp)
 				return (ERROR);
 		}

@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/30 19:26:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:05:10 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	key_event_noechoed(int *timeout, int *ch)
 			k = 1;
 		while (*ch != 's' && *ch != ERR)
 		{
-			timeout =  key_handler(timeout, ch);
+			timeout = key_handler(timeout, ch);
 			if (*ch == ' ' || k == 1)
 			{
 				*ch = ERR;

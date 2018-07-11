@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/29 14:39:03 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:28:00 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ static int	*key_event_r(int *timeout)
 
 	if (1000 - (*timeout - 10) > 1000)
 	{
-		if (!(p_p_c = ft_itoa(1000 - (*timeout = 0))))
+		if (!(p_p_c = ft_itoa(1000
+						- (*timeout = 0))))
 			exit(EXIT_FAILURE);
 	}
-	else
-		if (!(p_p_c = ft_itoa(1000 - (*timeout -= 10))))
-			exit(EXIT_FAILURE);
+	else if (!(p_p_c = ft_itoa(1000
+					- (*timeout -= 10))))
+		exit(EXIT_FAILURE);
 	attron(COLOR_PAIR(17));
 	draw_line(4, 22, "    ");
 	draw_line(4, 22, p_p_c);
@@ -63,12 +64,13 @@ static int	*key_event_q(int *timeout)
 
 	if (1000 - (*timeout + 10) < 50)
 	{
-		if (!(p_p_c = ft_itoa(1000 - (*timeout = 950))))
+		if (!(p_p_c = ft_itoa(1000
+						- (*timeout = 950))))
 			exit(EXIT_FAILURE);
 	}
-	else
-		if (!(p_p_c = ft_itoa(1000 - (*timeout += 10))))
-			exit(EXIT_FAILURE);
+	else if (!(p_p_c = ft_itoa(1000
+					- (*timeout += 10))))
+		exit(EXIT_FAILURE);
 	attron(COLOR_PAIR(17));
 	draw_line(4, 22, "    ");
 	draw_line(4, 22, p_p_c);

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 19:55:39 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:09:07 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,14 @@ int				init_cor(t_cor *cor, char **argv)
 {
 	if (read_args(cor, argv) == ERROR)
 		return (ERROR);
-	if (MEM_SIZE > 0 && CYCLE_TO_DIE > 0 && CYCLE_DELTA > 0 && NBR_LIVE > 0 && \
-		MAX_CHECKS > 0 && REG_NUMBER > 0) //TODO Check int max
+	if (MEM_SIZE > 0 && CYCLE_TO_DIE > 0 && CYCLE_DELTA > 0 && NBR_LIVE > 0
+			&& MAX_CHECKS > 0 && REG_NUMBER > 0)
 	{
 		cor->aff = NULL;
 		cor->winner = 0;
 		cor->cycle_to_die = CYCLE_TO_DIE;
 		cor->map = ft_malloc((MEM_SIZE + 1) * \
-			sizeof(unsigned char), EXIT_FAILURE);
+				sizeof(unsigned char), EXIT_FAILURE);
 		init_memory(cor);
 		init_cmap(cor);
 		if (MAX_PLAYERS > 4 || \

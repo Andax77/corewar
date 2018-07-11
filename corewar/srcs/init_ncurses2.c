@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 20:49:59 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:22:41 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ void		draw_uchar(int pos, unsigned char val)
 	}
 	while (y < 66)
 	{
-		if (i++ == pos % MEM_SIZE)
-			mvprintw(y, x, str);
+		(i++ == pos % MEM_SIZE) ? mvprintw(y, x, str) : 0;
 		x = x + 3;
-		if (x >= 194 && (x = 3))
-			y++;
+		(x >= 194 && (x = 3)) ? y++ : 0;
 	}
 	free(str);
 }
@@ -70,14 +68,14 @@ void		draw_names(t_list *champs)
 		{
 			id = champ->id;
 			attron(COLOR_PAIR(id + 2));
-			draw_line(11 + (4 * (id - 1)), 10 + ft_countdigits(champ->v_id), \
+			draw_line(11 + (4 * (id - 1)), 10 + ft_countdigits(champ->v_id),
 					((t_champ*)champs->content)->name);
 		}
 		champs = champs->next;
 	}
 }
 
-int		get_v_ids(t_list *champs, int id, int *nb)
+int			get_v_ids(t_list *champs, int id, int *nb)
 {
 	char	*tmp;
 	t_list	*champ;
@@ -85,8 +83,8 @@ int		get_v_ids(t_list *champs, int id, int *nb)
 	champ = champs;
 	while (champ)
 	{
-		if (((t_champ*)champ->content)->father == 0 && \
-((t_champ*)champ->content)->id == id)
+		if (((t_champ*)champ->content)->father == 0
+				&& ((t_champ*)champ->content)->id == id)
 		{
 			draw_line(*nb, 0, "Player");
 			if (!(tmp = ft_itoa(((t_champ*)champ->content)->v_id)))
@@ -105,7 +103,7 @@ int		get_v_ids(t_list *champs, int id, int *nb)
 	return (id);
 }
 
-void	init_cmap(t_cor *cor)
+void		init_cmap(t_cor *cor)
 {
 	t_list	*champs;
 	int		i;
@@ -118,8 +116,8 @@ void	init_cmap(t_cor *cor)
 	nb = ft_lstcount(champs);
 	cor->c_map = (short*)ft_malloc(MEM_SIZE * sizeof(short), EXIT_FAILURE);
 	while (++i < MEM_SIZE)
-		if (champs && i >= id * (MEM_SIZE / nb) && \
-i < (id * (MEM_SIZE / nb)) + (int)((t_champ *)champs->content)->op_nb)
+		if (champs && i >= id * (MEM_SIZE / nb) && i < (id * (MEM_SIZE / nb))
+				+ (int)((t_champ *)champs->content)->op_nb)
 			cor->c_map[i] = 3 + id;
 		else
 		{

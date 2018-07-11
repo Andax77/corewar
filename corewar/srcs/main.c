@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/02 10:40:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:15:40 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ static void	free_cor(t_cor *cor)
 	}
 }
 
+static void	deal_w_error(t_opt *opt, t_cor *cor)
+{
+	print_usage();
+	free(cor);
+	free(opt);
+}
+
 int			main(int argc, char **argv)
 {
 	t_opt	*opt;
@@ -59,16 +66,12 @@ int			main(int argc, char **argv)
 	cor = ft_malloc(sizeof(t_cor), EXIT_FAILURE);
 	if (argc == 1)
 	{
-		print_usage();
-		free(cor);
-		free(opt);
+		deal_w_error(opt, cor);
 		exit(EXIT_FAILURE);
 	}
 	else if (parse_opt(argv, opt, cor) == ERROR)
 	{
-		print_usage();
-		free(cor);
-		free(opt);
+		deal_w_error(opt, cor);
 		exit(EXIT_FAILURE);
 	}
 	else if (init(argv, cor) == ERROR)
@@ -77,7 +80,5 @@ int			main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	free_cor(cor);
-	//DEBUG LEAKS
-	//while (1);
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 17:31:57 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 17:52:05 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct		s_cor
 	int				winner;
 }					t_cor;
 
-int					print_usage(void);
+void				print_usage(void);
 int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 void				init_opt(t_opt *opt, t_cor *cor);

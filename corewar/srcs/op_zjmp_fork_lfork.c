@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 20:24:52 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/05 20:24:52 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:12:24 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void		ft_zjmp(t_cor *cor, t_champ *champ)
 	int		ori;
 
 	ori = champ->pc;
-	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc % \
-MEM_SIZE];
+	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + cor->map[++champ->pc
+		% MEM_SIZE];
 	if (champ->carry == 1)
 	{
 		champ->pc = ((ori + (p % IDX_MOD)) % MEM_SIZE);
@@ -30,15 +30,15 @@ MEM_SIZE];
 		champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
-void	ft_fork(t_cor *cor, t_champ *champ)
+void		ft_fork(t_cor *cor, t_champ *champ)
 {
 	short	p;
 	int		pc;
 	int		ori;
 
 	ori = champ->pc;
-	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + \
-	cor->map[++champ->pc % MEM_SIZE];
+	p = (cor->map[++champ->pc % MEM_SIZE] << 8)
+		+ cor->map[++champ->pc % MEM_SIZE];
 	pc = (ori + (p % IDX_MOD)) % MEM_SIZE;
 	if (pc < 0)
 		pc += MEM_SIZE;
@@ -51,15 +51,15 @@ void	ft_fork(t_cor *cor, t_champ *champ)
 	}
 }
 
-void	ft_lfork(t_cor *cor, t_champ *champ)
+void		ft_lfork(t_cor *cor, t_champ *champ)
 {
 	short	p;
 	int		pc;
 	int		ori;
 
 	ori = champ->pc;
-	p = (cor->map[++champ->pc % MEM_SIZE] << 8) + \
-cor->map[++champ->pc % MEM_SIZE];
+	p = (cor->map[++champ->pc % MEM_SIZE] << 8)
+		+ cor->map[++champ->pc % MEM_SIZE];
 	pc = (ori + p) % MEM_SIZE;
 	if (pc < 0)
 		pc += MEM_SIZE;

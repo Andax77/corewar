@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/03 16:17:45 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:30:40 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	err_print(char *str, char *arg)
 	return (ERROR);
 }
 
-int		check_opt(char **argv)
+int			check_opt(char **argv)
 {
 	int		i;
 
@@ -30,8 +30,8 @@ int		check_opt(char **argv)
 	{
 		if (ft_strequ(argv[i], "-n"))
 		{
-			if (!argv[i + 1] || !ft_strisdigit(argv[i + 1]) || !argv[i + 2] || \
-!ft_strstr(argv[i + 2], ".cor"))
+			if (!argv[i + 1] || !ft_strisdigit(argv[i + 1]) || !argv[i + 2]
+					|| !ft_strstr(argv[i + 2], ".cor"))
 				return (err_print("Wrong [-n nbr] value", NULL));
 			else
 				i += 2;
@@ -43,14 +43,14 @@ int		check_opt(char **argv)
 			else
 				++i;
 		}
-		else if (!ft_strstr(argv[i], ".cor") && !ft_strequ(argv[i], "-a") && \
-!ft_strequ(argv[i], "-v"))
-				return (err_print("invalid file <champion.cor>", argv[i]));
+		else if (!ft_strstr(argv[i], ".cor") && !ft_strequ(argv[i], "-a")
+				&& !ft_strequ(argv[i], "-v"))
+			return (err_print("invalid file <champion.cor>", argv[i]));
 	}
 	return (SUCCESS);
 }
 
-void	verif_doublons(t_opt *opt, int index)
+void		verif_doublons(t_opt *opt, int index)
 {
 	int		i;
 
@@ -66,27 +66,27 @@ void	verif_doublons(t_opt *opt, int index)
 	}
 }
 
-int		is_opt(char *str)
+int			is_opt(char *str)
 {
 	int		ret;
 
 	ret = 0;
 	(ft_strequ(str, "-a")) ? ret = 1 : 0;
 	(ft_strequ(str, "-v")) ? ret = 1 : 0;
-	(ft_strequ(str, "-n" )) ? ret = 1 : 0;
+	(ft_strequ(str, "-n")) ? ret = 1 : 0;
 	(ft_strequ(str, "-d") || ft_strequ(str, "-dump")) ? ret = 1 : 0;
 	(ft_strisdigit(str)) ? ret = 1 : 0;
 	return (ret);
 }
 
-int		print_usage(void)
+void		print_usage(void)
 {
 	char	*line;
 	int		fd;
 
 	line = NULL;
 	if (!(fd = open("usage.txt", O_RDONLY)))
-		return (0);
+		return ;
 	while (fd && get_next_line(fd, &line) == GNL_SUCCESS)
 	{
 		ft_printf("%s\n", line);
@@ -94,5 +94,4 @@ int		print_usage(void)
 	}
 	if (fd)
 		close(fd);
-	return (1);
 }
