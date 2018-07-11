@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/07/11 17:33:16 by eparisot         ###   ########.fr        #
+#    Updated: 2018/07/11 19:19:11 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ FILES = main.c \
 		cow.c \
 		heart.c \
 		heart2.c \
+		print.c \
 		winner.c
 
 HFILES = includes/corewar.h \

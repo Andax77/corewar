@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/30 18:56:02 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 19:25:29 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,21 @@ static t_list	*check_len(t_list *instru, int size, char **text)
 	i = 0;
 	if (!(*text = ft_strnew(size + 1)))
 		exit(EXIT_FAILURE);
-	while (instru && (i += 4))
+	while (instru && i < size)
 	{
-		if (i == size)
-		{
-			if (ft_atoi(instru->content) != 0)
-				return (NULL);
-			else
-				break ;
-		}
 		if (ft_atoi(instru->content) != 0)
 		{
-			ft_strcat(*text, (add = translate(ft_atoi(instru->content))));
+			if (!(add = translate(ft_atoi(instru->content))))
+				exit(EXIT_FAILURE);
+			ft_strcat(*text, add);
 			free(add);
 		}
 		instru = instru->next;
+		i += 4;
 	}
-	if (!instru)
+	if (!instru || ft_atoi(instru->content) != 0)
 		return (NULL);
-	return (instru->next);
+	return (instru);
 }
 
 static int		check_last(char *add, char **text, int size, t_list *instru)
@@ -102,26 +98,14 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 static int		check_champ_bis(t_list *instru, t_champ **champ, char *path)
 {
 	if (((*champ)->op_nb = ft_atoi(instru->content)) > CHAMP_MAX_SIZE)
-	{
-		ft_printf("{red}error : '%s' has wrong length{eoc}\n", path);
-		return (ERROR);
-	}
+		return (ft_print_error("has wrong length", path));
 	if (!(instru = check_len(instru->next, COMMENT_LENGTH, &(*champ)->comment)))
-	{
-		ft_printf("{red}error : '%s' has wrong comment length{eoc}\n", path);
-		return (ERROR);
-	}
+		return (ft_print_error("has wrong comment length", path));
 	if (check_prog_len(instru->next, (*champ)->op_nb, &(*champ)->prog) == ERROR)
-	{
-		ft_printf("{red}error : '%s' has wrong length{eoc}\n", path);
-		return (ERROR);
-	}
+		return (ft_print_error("has wrong length", path));
 	split_bits(&(*champ)->prog, &(*champ)->splited_prog);
 	if (check_op_len(*champ) == ERROR)
-	{
-		ft_printf("{red}Invalid operation in %s\n{eoc}", path);
-		return (ERROR);
-	}
+		return (ft_print_error("invalid operation", path));
 	return (SUCCESS);
 }
 
@@ -131,20 +115,13 @@ int				check_champ(t_champ **champ, char *path, int nb)
 	static int	id;
 
 	if (!(instru = (*champ)->instru))
-	{
-		ft_printf("{red}error : '%s' is empty{eoc}\n", path);
-		return (ERROR);
-	}
+		return (ft_print_error("is empty", path));
 	if (ft_atoi(instru->content) != COREWAR_EXEC_MAGIC)
-	{
-		ft_printf("{red}error : '%s' has wrong CEM{eoc}\n", path);
-		return (ERROR);
-	}
+		return (ft_print_error("has wrong CEM", path));
+	if (PROG_NAME_LENGTH % 4 != 0 || COMMENT_LENGTH % 4 != 0)
+		return (ft_print_error("stop touching op.h !", NULL));
 	if (!(instru = check_len(instru->next, PROG_NAME_LENGTH, &(*champ)->name)))
-	{
-		ft_printf("{red}error : '%s' has wrong name length{eoc}\n", path);
-		return (ERROR);
-	}
+		return (ft_print_error("has wrong name length", path));
 	if (check_champ_bis(instru->next, champ, path) == ERROR)
 		return (ERROR);
 	(*champ)->reg = ft_malloc(REG_NUMBER * REG_SIZE, EXIT_FAILURE);
