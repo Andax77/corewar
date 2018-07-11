@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 11:23:46 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:36:37 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:42:55 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ int			ft_conv_o(char **ret, t_arg *arg)
 		return (ERROR);
 	if (new)
 		ft_place_nb_o(arg, new, nbx, size_new);
-	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg)) && \
-ft_fruit(2, &nbx, &new))
+	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg))
+			&& ft_fruit(2, &nbx, &new))
 		return (ERROR);
 	arg->cmpt += size_new;
 	free(nbx);

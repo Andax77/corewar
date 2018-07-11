@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 19:57:21 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:35:52 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:41:19 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int			ft_conv_g(char **ret, t_arg *arg)
 	else
 	{
 		if ((!(new_ret = ft_ftoa(f, (arg->arg.f < 0))))
-			|| (!(new_ret = ft_arrondis_f(new_ret, arg->preci))))
+				|| (!(new_ret = ft_arrondis_f(new_ret, arg->preci))))
 			return (ERROR);
 		ft_precision_f(new_ret, arg->preci);
 	}
