@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 17:52:05 by pmilan           ###   ########.fr       */
+/*   Created: 2018/07/11 18:03:10 by pmilan            #+#    #+#             */
+/*   Updated: 2018/07/11 18:15:00 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
-
 # define COREWAR_H
 
 # include <sys/types.h>
@@ -19,9 +18,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <libft.h>
 # include <ncurses.h>
 # include <op.h>
+# include <libft.h>
 
 enum				e_list
 {
@@ -103,11 +102,11 @@ int64_t				swap_int(int64_t c);
 char				*translate(int64_t val);
 int					pad(char **str, int n);
 void				split_bits(char **prog, unsigned char **splited_prog);
-int					check_op_len(t_champ *t_champ);
+int					check_op_len(t_champ *champ);
 void				order_to_start(t_list **champs);
 void				cycle(t_cor *cor, int ret);
 void				clean(t_cor *cor, t_list *champs);
-void				clean_print(t_cor *cor, t_champ* cur_champ, int id);
+void				clean_print(t_cor *cor, t_champ *cur_champ, int id);
 void				clean_list(t_list *champs);
 int					check_lives(t_cor *cor);
 void				print_infos(t_cor *cor);
@@ -118,22 +117,16 @@ int					change_r_cy(t_cor *cor, t_champ *champ);
 int					check_live_value(t_cor *cor, int pc);
 void				dump(t_cor *cor);
 void				jump(t_cor *cor);
-void				game_over(t_cor* cor);
+void				game_over(t_cor *cor);
+
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
 
-/*
-COW ART
-*/
 void				draw_line2(int line_idx, char *line);
 void				draw_cow1(int nb);
 void				draw_cow2(int nb);
 void				draw_cow3(int nb);
 void				print_cow(void);
-
-/*
-HEART BEAT
-*/
 void				print_player(int player);
 void				print_heart(t_cor *cor);
 void				print_heart2(int player, int stat);
@@ -150,12 +143,9 @@ void				heart_color(void);
 int					stat_heart(t_list *champs, int lives, int nb);
 void				get_color_heart(int live, char *line, int id);
 
-/*
-OP FCT
-*/
 void				init_op(void (**f)(t_cor*, t_champ*));
 int					recup_content(t_cor *cor, t_champ *champ, int ocp,
-															long long dec_op);
+		long long dec_op);
 void				ft_move(t_cor *cor, t_champ *champ);
 void				ft_live(t_cor *cor, t_champ *champ);
 void				ft_ld(t_cor *cor, t_champ *champ);
@@ -175,11 +165,7 @@ void				ft_lldi(t_cor *cor, t_champ *champ);
 void				ft_lfork(t_cor *cor, t_champ *champ);
 void				ft_aff(t_cor *cor, t_champ *champ);
 
-/*
-PRINT WINNER
-*/
 void				print_intro(t_cor *cor);
 char				*get_name_champ(t_cor *cor);
 char				*color_player(int id);
-
 #endif
