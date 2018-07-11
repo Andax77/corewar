@@ -6,11 +6,11 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/10 18:32:18 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:13:06 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <corewar.h>
+#include <corewar.h>
 
 int		read_args(t_cor *cor, char **argv)
 {
@@ -25,8 +25,11 @@ int		read_args(t_cor *cor, char **argv)
 			if (populate_champs(&cor->champs, *argv, cor->opt->n[n++]) == ERROR)
 				return (ERROR);
 		}
-		else if (!is_opt(*argv) && (print_usage() || !print_usage()))
+		else if (!is_opt(*argv))
+		{
+			print_usage();
 			return (ERROR);
+		}
 	return (SUCCESS);
 }
 
@@ -55,10 +58,10 @@ int		check_live_value(t_cor *cor, int pc)
 	while (champs)
 	{
 		v_id = ((t_champ*)champs->content)->v_id;
-		if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE] + \
-(cor->map[(pc + 3) % MEM_SIZE] << 8) + \
-(cor->map[(pc + 2) % MEM_SIZE] << 16) + \
-(cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
+		if (cor->map[pc] == 1 && cor->map[(pc + 4) % MEM_SIZE]
+				+ (cor->map[(pc + 3) % MEM_SIZE] << 8)
+				+ (cor->map[(pc + 2) % MEM_SIZE] << 16)
+				+ (cor->map[(pc + 1) % MEM_SIZE] << 24) == v_id)
 			return (((t_champ*)champs->content)->id);
 		champs = champs->next;
 	}
@@ -81,7 +84,7 @@ void	dump(t_cor *cor)
 		(y) ? ft_printf("%#06x :", j) : ft_putstr("0x0000 :");
 		while (x < ft_sqrt(MEM_SIZE))
 		{
-			ft_printf("{%s} %02x{eoc}", color_player(cor->c_map[i] - 2), \
+			ft_printf("{%s} %02x{eoc}", color_player(cor->c_map[i] - 2),
 				cor->map[i]);
 			x++;
 			i++;

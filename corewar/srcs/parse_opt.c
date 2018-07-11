@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/05 02:44:54 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:59:10 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		get_values(char **argv, int j, int i, t_opt *opt)
 {
 	(ft_strequ(argv[j], "-a")) ? opt->a = 1 : 0;
 	(ft_strequ(argv[j], "-v")) ? opt->v = 1 : 0;
-	((ft_strequ(argv[j], "-d") || ft_strequ(argv[j], "-dump")) && argv[j + 1]) \
+	((ft_strequ(argv[j], "-d") || ft_strequ(argv[j], "-dump")) && argv[j + 1])
 		? opt->d = ft_atoi(argv[j + 1]) : 0;
 	if (ft_strequ(argv[j], "-n") && argv[j + 1])
 	{

@@ -6,11 +6,11 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/07 19:33:39 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:58:28 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <corewar.h>
+#include <corewar.h>
 
 static void	init_child(t_champ *child, t_champ *father, t_cor *cor, int pc)
 {

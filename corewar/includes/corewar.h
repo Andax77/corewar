@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/07 18:28:06 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:02:54 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct		s_cor
 	int				winner;
 }					t_cor;
 
-int					print_usage(void);
+void				print_usage(void);
 int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 void				init_opt(t_opt *opt, t_cor *cor);
@@ -146,7 +146,7 @@ void				draw_player(int line_idx, int y, char *line);
 void				draw_player_id(int line_idx, int y, char *line);
 void				player(int player);
 void				draw_player(int line_idx, int y, char *line);
-void				heart_color();
+void				heart_color(void);
 int					stat_heart(t_list *champs, int lives, int nb);
 void				get_color_heart(int live, char *line, int id);
 

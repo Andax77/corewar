@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 21:22:18 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 13:13:23 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:17:44 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ static void	ft_sti_optv(t_cor *cor, t_champ *champ, short p3, long long p1_ori)
 		while (++i < 4)
 		{
 			attron(COLOR_PAIR(cor->c_map[(champ->last_st_pc + i) % MEM_SIZE]));
-			draw_uchar((champ->last_st_pc + i) % MEM_SIZE, \
-cor->map[(champ->last_st_pc + i) % MEM_SIZE]);
+			draw_uchar((champ->last_st_pc + i) % MEM_SIZE,
+					cor->map[(champ->last_st_pc + i) % MEM_SIZE]);
 		}
 	if (!cor->opt->d)
 	{
 		attron(COLOR_PAIR(2 + champ->id) | A_BOLD);
-		draw_uchar((ft_get2arg(p1_ori, 1) + p3) % MEM_SIZE, \
-champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 24);
-		draw_uchar((ft_get2arg(p1_ori, 1) + p3 + 1) % MEM_SIZE, \
-champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 16);
-		draw_uchar((ft_get2arg(p1_ori, 1) + p3 + 2) % MEM_SIZE, \
-champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 8);
-		draw_uchar((ft_get2arg(p1_ori, 1) + p3 + 3) % MEM_SIZE, \
-champ->reg[ft_get2arg(p1_ori, 0) - 1]);
+		draw_uchar((ft_get2arg(p1_ori, 1) + p3) % MEM_SIZE,
+				champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 24);
+		draw_uchar((ft_get2arg(p1_ori, 1) + p3 + 1) % MEM_SIZE,
+				champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 16);
+		draw_uchar((ft_get2arg(p1_ori, 1) + p3 + 2) % MEM_SIZE,
+				champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 8);
+		draw_uchar((ft_get2arg(p1_ori, 1) + p3 + 3) % MEM_SIZE,
+				champ->reg[ft_get2arg(p1_ori, 0) - 1]);
 		attroff(A_BOLD);
 	}
 	champ->last_st = 1;
@@ -73,13 +73,13 @@ champ->reg[ft_get2arg(p1_ori, 0) - 1]);
 static void	ft_sti_if(t_cor *cor, t_champ *champ, short p3, long long p1_ori)
 {
 	cor->map[(ft_get2arg(p1_ori, 1) + p3) % MEM_SIZE] = \
-champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 24;
+		champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 24;
 	cor->map[(ft_get2arg(p1_ori, 1) + p3 + 1) % MEM_SIZE] = \
-champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 16;
+		champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 16;
 	cor->map[(ft_get2arg(p1_ori, 1) + p3 + 2) % MEM_SIZE] = \
-champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 8;
+		champ->reg[ft_get2arg(p1_ori, 0) - 1] >> 8;
 	cor->map[(ft_get2arg(p1_ori, 1) + p3 + 3) % MEM_SIZE] = \
-champ->reg[ft_get2arg(p1_ori, 0) - 1];
+		champ->reg[ft_get2arg(p1_ori, 0) - 1];
 	if (cor->opt->v)
 		ft_sti_optv(cor, champ, p3, p1_ori);
 	cor->c_map[(ft_get2arg(p1_ori, 1) + p3) % MEM_SIZE] = champ->id + 2;
@@ -88,7 +88,7 @@ champ->reg[ft_get2arg(p1_ori, 0) - 1];
 	cor->c_map[(ft_get2arg(p1_ori, 1) + p3 + 3) % MEM_SIZE] = champ->id + 2;
 }
 
-void	ft_sti(t_cor *cor, t_champ *champ)
+void		ft_sti(t_cor *cor, t_champ *champ)
 {
 	int		p1;
 	int		p2;
@@ -106,8 +106,8 @@ void	ft_sti(t_cor *cor, t_champ *champ)
 	p3 = ((p2 + p3) % IDX_MOD) % MEM_SIZE;
 	if ((p3 + ori) < 0)
 		p3 += MEM_SIZE;
-	if ((((ocp >> 2) & 3) == DIR_CODE || ((ocp >> 2) & 3) == REG_CODE) && \
-((ocp >> 6) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER)
+	if ((((ocp >> 2) & 3) == DIR_CODE || ((ocp >> 2) & 3) == REG_CODE)
+			&& ((ocp >> 6) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER)
 		ft_sti_if(cor, champ, p3, ft_2arg(p1, ori));
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
