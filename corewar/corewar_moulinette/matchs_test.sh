@@ -14,14 +14,6 @@ make
 					-n -2 ../ressources/champs/Gagnant.cor \
 					-n -3 ../ressources/champs/championships/2017/gnebie/ultima.cor
 
-#./corewar -v -d 10042 -n -1 ../ressources/champs/Octobre_Rouge_V4.2.cor \
-#					-n -2 ../ressources/champs/Gagnant.cor \
-#					-n -3 ../ressources/champs/examples/zork.cor
-
-#./corewar -v -d 10042 -n -1 ../ressources/champs/Octobre_Rouge_V4.2.cor \
-#					-n -2 ../ressources/champs/Gagnant.cor \
-#					-n -3 ../champion/Fuck_Eat_Repeat.cor
-
 ./corewar -v -d 10042 -n -1 ../ressources/champs/Octobre_Rouge_V4.2.cor \
 					-n -2 ../ressources/champs/Gagnant.cor \
 					-n -3 ../ressources/champs/championships/2017/gnebie/ultima.cor \
