@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/10 15:50:24 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 16:26:18 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void		clean_list(t_list *champs)
 {
 	t_list	*tmp;
 
-	while (champs->next && ((t_champ*)champs->next->content)->r_cy == -1 && \
-			((t_champ*)champs->next->content)->father)
+	while (champs->next && ((t_champ*)champs->next->content)->r_cy == -1
+			&& ((t_champ*)champs->next->content)->father)
 	{
 		tmp = champs->next->next;
 		ft_lstdelone(&champs->next, del_champ);
@@ -25,53 +25,39 @@ void		clean_list(t_list *champs)
 	}
 }
 
-
-static void	cycle_job2(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*, \
-			t_champ*))
+static void	cycle_job2(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
+			t_champ*), int changed)
 {
-	int		changed;
-
-	changed = 0;
 	if (cur_champ->r_cy == 0)
 	{
-		//exec good op_code, always
 		if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17)
 			f[cur_champ->cur_op](cor, cur_champ);
-		//exec bad op_code if not changed (or bad -> bad)
-		else if (cur_champ->cur_op == cor->map[cur_champ->pc] || \
-		cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
+		else if (cur_champ->cur_op == cor->map[cur_champ->pc]
+				|| cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
 			f[0](cor, cur_champ);
-		//if bad -> good
 		else if (cor->map[cur_champ->pc] > 0 && cor->map[cur_champ->pc] < 17)
 			changed = 1;
-		//update whatever
 		cur_champ->cur_op = cor->map[cur_champ->pc];
 		cur_champ->r_cy = change_r_cy(cor, cur_champ) - changed;
 	}
-	//if good opcode changed at cycle 1
-	else if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17 \
-		&& (cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1)\
+	else if (cur_champ->cur_op > 0 && cur_champ->cur_op < 17
+		&& (cur_champ->r_cy == g_op_tab[cur_champ->cur_op - 1].nb_cycles - 1)
 		&& cur_champ->cur_op != cor->map[cur_champ->pc])
 	{
-		//if good -> bad
 		if (cor->map[cur_champ->pc] < 1 || cor->map[cur_champ->pc] > 16)
-		{
 			f[0](cor, cur_champ);
-			cur_champ->r_cy = change_r_cy(cor, cur_champ);
-		}
-		//if good -> good
 		else
-			cur_champ->r_cy = change_r_cy(cor, cur_champ) - 1;
-		//update
+			changed = 1;
+		cur_champ->r_cy = change_r_cy(cor, cur_champ) - changed;
 		cur_champ->cur_op = cor->map[cur_champ->pc];
 	}
 }
 
-static void		cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
+static void	cycle_job(t_cor *cor, t_champ *cur_champ, void (**f)(t_cor*,
 			t_champ*))
 {
 	if (cor->cycle != 0)
-		cycle_job2(cor, cur_champ, f);
+		cycle_job2(cor, cur_champ, f, 0);
 	else
 	{
 		cur_champ->cur_op = cor->map[cur_champ->pc];
@@ -129,10 +115,7 @@ void		cycle(t_cor *cor, int ret)
 		(cor->opt->v && !cor->opt->d) ? key_event(&timeout, &ch) : 0;
 		if (!ret)
 			break ;
-		else
-		{
-			cor->cycle++;
-			cor->v_cycle++;
-		}
+		cor->cycle++;
+		cor->v_cycle++;
 	}
 }

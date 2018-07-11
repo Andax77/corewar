@@ -6,13 +6,13 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:06:17 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/03 14:04:03 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:37:12 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static void	init_values(t_cor *cor, char **values)
+static void		init_values(t_cor *cor, char **values)
 {
 	t_list		*champs;
 	int			i;
@@ -95,13 +95,13 @@ static void		print_champ_values(t_cor *cor, char **values)
 	}
 }
 
-void		print_infos(t_cor *cor)
+void			print_infos(t_cor *cor)
 {
 	int			i;
 	char		**values;
 
 	i = 0;
-	print_cow(cor);
+	print_cow();
 	print_heart(cor);
 	values = ft_malloc(10 * sizeof(char*), EXIT_FAILURE);
 	init_values(cor, values);

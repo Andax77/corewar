@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/30 19:27:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:20:31 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void					split_bits(char **prog, unsigned char **splited_prog)
 
 	i = 0;
 	j = 0;
-	if (!(splited = (unsigned char *)malloc((ft_strlen(*prog) / 2) + 1 * \
-					sizeof(unsigned char))))
+	if (!(splited = (unsigned char *)malloc((ft_strlen(*prog) / 2)
+					+ 1 * sizeof(unsigned char))))
 		exit(EXIT_FAILURE);
 	while ((*prog)[i] && j < (int)ft_strlen(*prog))
 	{
