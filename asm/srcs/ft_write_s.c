@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/11 21:38:34 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 17:41:46 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:40:22 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_fill_output_prog_binary(t_champ *champ, char **output)
 	{
 		cur = (t_instru *)tmp->content;
 		if (!(*output = ft_str_and_free_join(*output,
-											g_op_tab[cur->op_code - 1].name)))
+						g_op_tab[cur->op_code - 1].name)))
 			exit(EXIT_FAILURE);
 		if (!(*output = ft_str_and_free_join(*output, " ")))
 			exit(EXIT_FAILURE);

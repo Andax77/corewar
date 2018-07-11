@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:47:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 17:27:19 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:21:33 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static int		check_prog_len(t_list *input, int size, char **text)
 		exit(EXIT_FAILURE);
 	while (input && (i += 4))
 	{
-		if (i > size && (size % 4) != 0 && \
-check_last(add, text, size, input) == SUCCESS)
+		if (i > size && (size % 4) != 0
+				&& check_last(add, text, size, input) == SUCCESS)
 			break ;
 		else
 		{

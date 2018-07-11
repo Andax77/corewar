@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/09 19:35:02 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:28:16 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void		ft_clean_spaces_comments(t_instru *inst)
 {
+	char	*clean;
 	int		i;
 	int		j;
 	int		k;
-	char	*clean;
 
 	i = -1;
 	while (inst->params[++i])
@@ -74,8 +74,8 @@ int				ft_get_params(t_instru *inst, char *str)
 	i = -1;
 	while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 		str++;
-	if (inst->label_name && \
-ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
+	if (inst->label_name
+			&& ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
 	{
 		while (*str != LABEL_CHAR)
 			str++;

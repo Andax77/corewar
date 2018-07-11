@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 17:29:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 17:50:15 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:35:11 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int		ft_name_comment_other_lines_next(char **member, char *tmp)
 	while ((*member)[++i])
 		if ((*member)[i] == COMMENT_CHAR)
 			break ;
-		else if ((*member)[i] != ' ' && (*member)[i] != '\t' && \
-ft_fruit(1, &tmp))
+		else if ((*member)[i] != ' ' && (*member)[i] != '\t'
+				&& ft_fruit(1, &tmp))
 			return (ERROR);
 	(*member)[index] = '\0';
 	free(tmp);
@@ -77,8 +77,8 @@ int		ft_verif_format_comment(char *str)
 	i = -1;
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
-	if (strncmp(str + i, COMMENT_CMD_STRING, \
-ft_strlen(COMMENT_CMD_STRING)) != 0)
+	if (strncmp(str + i, COMMENT_CMD_STRING,
+				ft_strlen(COMMENT_CMD_STRING)) != 0)
 		return (ERROR);
 	i += ft_strlen(COMMENT_CMD_STRING);
 	while (str[++i] && str[i] != '"')
@@ -105,10 +105,10 @@ int		ft_verif_register(t_champ *champ)
 				{
 					if (!ft_strisdigit(cur->params[i] + 1))
 						return (ft_error(champ, "error: wrong reg number"));
-					else if (ft_atoi(cur->params[i] + 1) <= 0 ||
-									ft_atoi(cur->params[i] + 1) > REG_NUMBER)
+					else if (ft_atoi(cur->params[i] + 1) <= 0
+							|| ft_atoi(cur->params[i] + 1) > REG_NUMBER)
 						return (ft_error(champ,
-								"error: reg number is too low or too high"));
+									"error: reg num is too low or too high"));
 				}
 		}
 		tmp = tmp->next;

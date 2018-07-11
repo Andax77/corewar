@@ -6,11 +6,20 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/09 19:34:23 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:51:19 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+static void		ft_print_usage(void)
+{
+	ft_printf("************************************************************\n");
+	ft_printf("*	normal mode (compiles a .s in .cor)		   *\n");
+	ft_printf("*  -r : reverse mode (compiles a .cor in .s)		   *\n");
+	ft_printf("*  -m : manual mode (opens a manual mode to create a .cor) *\n");
+	ft_printf("************************************************************\n");
+}
 
 static int		main_reverse(t_champ *champ)
 {
@@ -73,11 +82,9 @@ int				main(int argc, char **argv)
 	}
 	main_loop(champ, argc_c, argv);
 	if (argc == 1)
-		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n\
-*****************************************************************\n\
-*	normal mode (compiles a .s in .cor)			*\n\
-*  -r : reverse mode (compiles a .cor in .s)			*\n\
-*  -m : manual mode (opens a manual mode to create a .cor)	*\n\
-*****************************************************************\n", argv[0]);
+	{
+		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n\n", argv[0]);
+		ft_print_usage();
+	}
 	exit(EXIT_SUCCESS);
 }
