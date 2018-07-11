@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 16:12:57 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:30:40 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		print_usage(void)
 
 	line = NULL;
 	if (!(fd = open("usage.txt", O_RDONLY)))
-		return (0);
+		return ;
 	while (fd && get_next_line(fd, &line) == GNL_SUCCESS)
 	{
 		ft_printf("%s\n", line);
@@ -94,5 +94,4 @@ void		print_usage(void)
 	}
 	if (fd)
 		close(fd);
-	return (1);
 }

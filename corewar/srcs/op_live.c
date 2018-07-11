@@ -6,13 +6,20 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/11 15:16:46 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:31:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void	ft_live(t_cor *cor, t_champ *champ)
+static void	ft_live_bis(t_cor *cor, t_champ *champ)
+{
+	champ->last_live = cor->cycle;
+	champ->lives++;
+	cor->winner = champ->id;
+}
+
+void		ft_live(t_cor *cor, t_champ *champ)
 {
 	int		p;
 	t_list	*tmp;
@@ -24,12 +31,7 @@ void	ft_live(t_cor *cor, t_champ *champ)
 		+ cor->map[++champ->pc % MEM_SIZE];
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 	champ->v_lives++;
-	if (p == champ->v_id)
-	{
-		champ->last_live = cor->cycle;
-		champ->lives++;
-		cor->winner = champ->id;
-	}
+	(p == champ->v_id) ? ft_live_bis(cor, champ) : 0;
 	while (tmp)
 	{
 		if (((t_champ*)tmp->content)->v_id == p
