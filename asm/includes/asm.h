@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/09 15:13:16 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 19:32:27 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <libft.h>
 
 # define BASE_HEXA "0123456789ABCDEF"
-# define ERROR -1
-# define SUCCESS 0
+# define ERROR (-1)
+# define SUCCESS (0)
 
 enum			e_list
 {
