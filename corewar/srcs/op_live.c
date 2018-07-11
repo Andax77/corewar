@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/13 15:05:56 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/11 17:31:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 21:03:54 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,8 @@ static void	ft_live_bis(t_cor *cor, t_champ *champ)
 	cor->winner = champ->id;
 }
 
-void		ft_live(t_cor *cor, t_champ *champ)
+static void	ft_live_for_other(t_cor *cor, t_list *tmp, int p, t_champ *champ)
 {
-	int		p;
-	t_list	*tmp;
-
-	tmp = cor->champs;
-	p = (cor->map[++champ->pc % MEM_SIZE] << 24)
-		+ (cor->map[++champ->pc % MEM_SIZE] << 16)
-		+ (cor->map[++champ->pc % MEM_SIZE] << 8)
-		+ cor->map[++champ->pc % MEM_SIZE];
-	champ->pc = (champ->pc + 1) % MEM_SIZE;
-	champ->v_lives++;
-	(p == champ->v_id) ? ft_live_bis(cor, champ) : 0;
 	while (tmp)
 	{
 		if (((t_champ*)tmp->content)->v_id == p
@@ -46,4 +35,21 @@ void		ft_live(t_cor *cor, t_champ *champ)
 		}
 		tmp = tmp->next;
 	}
+}
+
+void		ft_live(t_cor *cor, t_champ *champ)
+{
+	int		p;
+	t_list	*tmp;
+
+	tmp = cor->champs;
+	p = (cor->map[++champ->pc % MEM_SIZE] << 24)
+		+ (cor->map[++champ->pc % MEM_SIZE] << 16)
+		+ (cor->map[++champ->pc % MEM_SIZE] << 8)
+		+ cor->map[++champ->pc % MEM_SIZE];
+	champ->pc = (champ->pc + 1) % MEM_SIZE;
+	champ->v_lives++;
+	champ->x_lives++;
+	(p == champ->v_id) ? ft_live_bis(cor, champ) : 0;
+	ft_live_for_other(cor, tmp, p, champ);
 }
