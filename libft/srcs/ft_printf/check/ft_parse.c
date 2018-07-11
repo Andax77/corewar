@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 15:45:06 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/08 17:49:30 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:33:54 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	ft_checklimit(char const *format, int i, char **expression)
 
 	index = i;
 	nbchar = 1;
-	while (ft_strchr("+- 0#123456789.*lhzjtq", format[i]) != NULL && \
-format[i] != '\0')
+	while (ft_strchr("+- 0#123456789.*lhzjtq", format[i]) != NULL
+			&& format[i] != '\0')
 	{
 		++i;
 		++nbchar;
@@ -70,7 +70,7 @@ int			ft_parse(char **str, const char *format, va_list ap, t_arg *arg)
 		if (format[i] == '%' && ++i)
 		{
 			if ((nbchar = ft_checklimit(format, i, &expression)) == \
-(int)(ft_strlen(format) + 10))
+					(int)(ft_strlen(format) + 10))
 				return (ERROR);
 			if (nbchar <= 0 && ((i += -nbchar) ? 1 : 1))
 				continue;

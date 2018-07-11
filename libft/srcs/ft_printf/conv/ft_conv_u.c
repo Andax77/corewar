@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 11:22:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:37:07 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:44:11 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	ft_no_precision(char **new_ret, t_arg *arg, int len)
 	if (!((*new_ret) = (char *)malloc(sizeof(**new_ret) * (len + 1))))
 		return (ERROR);
 	(*new_ret)[len] = '\0';
-	*new_ret = (arg->flag.zero == 1) ? ft_memset(*new_ret, '0', len) : \
-ft_memset(*new_ret, ' ', len);
+	*new_ret = (arg->flag.zero == 1) ? ft_memset(*new_ret, '0', len)
+		: ft_memset(*new_ret, ' ', len);
 	nb_len = (arg->flag.minus == 0) ? len : nb_len;
 	ft_fill_str_ud(new_ret, arg->arg.u, &nb_len, arg);
 	if (arg->arg.u == 0)
@@ -54,8 +54,8 @@ static int	ft_width(char **new_ret, char **new_nb, t_arg *arg)
 	{
 		nb_len = ft_strlen(*new_nb);
 		len = (nb_len > len) ? nb_len : len;
-		if (!(*new_ret = (char *)malloc(sizeof(**new_ret) * (len + 1))) && \
-ft_fruit(1, new_nb))
+		if (!(*new_ret = (char *)malloc(sizeof(**new_ret) * (len + 1)))
+				&& ft_fruit(1, new_nb))
 			return (ERROR);
 		if (*new_ret)
 			(*new_ret)[len] = '\0';
@@ -64,8 +64,8 @@ ft_fruit(1, new_nb))
 				ft_strncpy((*new_ret) + len - nb_len, *new_nb, nb_len);
 			else
 				ft_strncpy(*new_ret, *new_nb, nb_len);
-		else if (ft_fruit(1, new_ret) && \
-!(*new_ret = ft_strdup(*new_nb)) && ft_fruit(1, new_nb))
+		else if (ft_fruit(1, new_ret)
+				&& !(*new_ret = ft_strdup(*new_nb)) && ft_fruit(1, new_nb))
 			return (ERROR);
 	}
 	return (SUCCESS);

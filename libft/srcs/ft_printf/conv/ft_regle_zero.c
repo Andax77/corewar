@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 20:29:14 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:38:44 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:48:50 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	ft_check_sz_n(t_arg *arg)
 	else if (arg->conv == 'p')
 		return (arg->wi + (arg->wi == 0 ? 2 : 0));
 	else if (ft_strchr("Ddi", arg->conv))
-		return (arg->wi + (arg->wi == 0 && \
-(arg->flag.plus || arg->flag.space) ? 1 : 0));
+		return (arg->wi + (arg->wi == 0
+					&& (arg->flag.plus || arg->flag.space) ? 1 : 0));
 	else
 		return (arg->wi);
 }
@@ -40,8 +40,8 @@ int			ft_regle_zero(char **ret, t_arg *arg)
 		new[0] = '+';
 	else if (ft_strchr("Ddi", arg->conv) && arg->flag.plus)
 		new[sz_n - 1] = '+';
-	else if (arg->flag.hashtag == 1 &&
-			(arg->conv == 'o' || arg->conv == 'O') && arg->flag.minus)
+	else if (arg->flag.hashtag == 1
+			&& (arg->conv == 'o' || arg->conv == 'O') && arg->flag.minus)
 		new[0] = '0';
 	else if (arg->flag.hashtag == 1 && (arg->conv == 'o' || arg->conv == 'O'))
 		new[sz_n - 1] = '0';

@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 18:43:42 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/16 17:49:57 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 15:45:10 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ unsigned int	ft_atoi_base(const char *str, int base)
 	static char		eq_base[17] = "0123456789ABCDEF";
 
 	nb = 0;
-	while (*str == ' ' || *str == '\t' || *str == '\n' || \
-*str == '\v' || *str == '\f' || *str == '\r')
+	while (*str == ' ' || *str == '\t' || *str == '\n'
+			|| *str == '\v' || *str == '\f' || *str == '\r')
 		++str;
 	ft_skip(&str, base);
 	ft_str_toupper((char *)str);
