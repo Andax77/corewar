@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/11 18:03:10 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 18:15:00 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 19:19:35 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int					check_live_value(t_cor *cor, int pc);
 void				dump(t_cor *cor);
 void				jump(t_cor *cor);
 void				game_over(t_cor *cor);
+int					ft_print_error(char *msg, char *path);
 
 void				del_champ(void *content, size_t content_size);
 void				del(void *content, size_t content_size);
