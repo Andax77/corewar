@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 14:57:33 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 15:08:38 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			check_opt(char **argv)
 	return (SUCCESS);
 }
 
-int		check_doubles(t_opt *opt, int index)
+int			check_doubles(t_opt *opt, int index)
 {
 	int		i;
 
