@@ -147,6 +147,8 @@ void				get_color_heart(int live, char *line, int id);
 void				init_op(void (**f)(t_cor*, t_champ*));
 int					recup_content(t_cor *cor, t_champ *champ, int ocp,
 		long long dec_op);
+int					ft_change_sh_p1_p2(t_champ *champ, int ocp, int *p1,
+		int *p2);
 void				ft_move(t_cor *cor, t_champ *champ);
 void				ft_live(t_cor *cor, t_champ *champ);
 void				ft_ld(t_cor *cor, t_champ *champ);
