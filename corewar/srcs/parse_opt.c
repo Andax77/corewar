@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 14:57:58 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 15:11:44 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int		get_values(char **argv, int j, int i, t_opt *opt)
 			return (ERROR);
 		return (SUCCESS);
 	}
+	return (SUCCESS);
 }
 
 int				parse_opt(char **argv, t_opt *opt, t_cor *cor)

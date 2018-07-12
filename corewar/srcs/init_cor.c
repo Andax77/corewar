@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 15:06:40 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 16:17:01 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static void		init_memory(t_cor *cor)
 	}
 }
 
-static void		populate_instru(t_champ **champ, int64_t c)
+static void		populate_instru(t_champ **champ, int64_t ch)
 {
 	t_list		**instru;
 	char		*tmp;
 	t_list		*new;
 
 	instru = &(*champ)->instru;
-	if (!(tmp = ft_itoa(swap_int(c))))
+	if (!(tmp = ft_itoa(swap_int(ch))))
 		exit(EXIT_FAILURE);
 	if (!*instru)
 	{
@@ -66,31 +66,31 @@ static void		populate_instru(t_champ **champ, int64_t c)
 
 static int		get_champ(t_champ **champ, char *path, int nb)
 {
-	int64_t		c;
+	int64_t		ch;
 	int			fd;
 	int			ret;
+	int			cond;
 
-	if (path)
+	cond = 0;
+	fd = open(path, O_RDONLY);
+	if (fd != -1)
 	{
-		fd = open(path, O_RDONLY);
-		if (fd != -1)
+		while ((ret = read(fd, &ch, 4)))
 		{
-			while ((ret = read(fd, &c, 4)))
-				populate_instru(champ, c);
-			close(fd);
-			if (ret == -1)
-				return (ERROR);
-			if (check_champ(champ, path, nb) == ERROR)
-				return (ERROR);
+			++cond;
+			if (cond == 1 && ret < 4)
+				return (ft_print_error("not enough data", path));
+			populate_instru(champ, ch);
 		}
-		else
-		{
-			ft_printf("{red}error : file '%s' does not exists{eoc}\n", path);
+		close(fd);
+		if (ret == -1)
 			return (ERROR);
-		}
-		return (SUCCESS);
+		if (check_champ(champ, path, nb) == ERROR)
+			return (ERROR);
 	}
-	return (ERROR);
+	else
+		return (ft_print_error("file does not exist", path));
+	return (SUCCESS);
 }
 
 int				populate_champs(t_list **champs, char *path, int nb)
