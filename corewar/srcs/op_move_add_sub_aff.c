@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 22:02:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 16:07:50 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 17:06:15 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void		ft_move(t_cor *cor, t_champ *champ)
 
 void		ft_add(t_cor *cor, t_champ *champ)
 {
-	int p1;
-	int p2;
-	int p3;
-	int	ocp;
+	int		p1;
+	int		p2;
+	int		p3;
+	int		ocp;
 
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 4));
@@ -42,10 +42,10 @@ void		ft_add(t_cor *cor, t_champ *champ)
 
 void		ft_sub(t_cor *cor, t_champ *champ)
 {
-	int p1;
-	int p2;
-	int p3;
-	int	ocp;
+	int		p1;
+	int		p2;
+	int		p3;
+	int		ocp;
 
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 4));
