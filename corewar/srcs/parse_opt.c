@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 14:57:58 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 16:29:48 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static int		get_values(char **argv, int j, int i, t_opt *opt)
 	{
 		opt->n[i] = ft_atoi(argv[++j]);
 		opt->n_ed = 1;
-		if (check_doubles(opt, ++i) == ERROR)
-			return (ERROR);
+		check_doubles(opt, ++i);
 		return (SUCCESS);
 	}
+	return (SUCCESS);
 }
 
 int				parse_opt(char **argv, t_opt *opt, t_cor *cor)
@@ -62,8 +62,7 @@ int				parse_opt(char **argv, t_opt *opt, t_cor *cor)
 					opt->n[i] = ++id;
 				else
 					opt->n_ed = 0;
-				if (check_doubles(opt, ++i - 1) == ERROR)
-					return (ERROR);
+				check_doubles(opt, ++i - 1);
 			}
 		return (SUCCESS);
 	}
