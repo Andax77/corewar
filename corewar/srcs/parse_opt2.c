@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 15:16:24 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/12 16:26:04 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			check_opt(char **argv)
 	return (SUCCESS);
 }
 
-int			check_doubles(t_opt *opt, int index)
+void		check_doubles(t_opt *opt, int index)
 {
 	int		i;
 
@@ -59,12 +59,11 @@ int			check_doubles(t_opt *opt, int index)
 	{
 		if (opt->n[i] == opt->n[index])
 		{
-			ft_printf("{red}n value used twice...\n{eoc}");
-			free(opt->n);
-			return (ERROR);
+			opt->n[index] += 1;
+			check_doubles(opt, index);
+			break ;
 		}
 	}
-	return (SUCCESS);
 }
 
 int			is_opt(char *str)

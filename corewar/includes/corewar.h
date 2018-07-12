@@ -81,7 +81,7 @@ int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 void				init_opt(t_opt *opt, t_cor *cor);
 int					check_opt(char **argv);
-int					check_doubles(t_opt *opt, int index);
+void				check_doubles(t_opt *opt, int index);
 int					init(char **argv, t_cor *cor);
 int					read_args(t_cor *cor, char **argv);
 int					populate_champs(t_list **champs, char *path, int nb);
