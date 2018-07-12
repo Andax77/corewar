@@ -6,13 +6,13 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 20:29:56 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/12 19:47:27 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 21:16:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-static int	ft_change_sh_p1_p2(t_champ *champ, int ocp, int *p1, int *p2)
+int			ft_change_sh_p1_p2(t_champ *champ, int ocp, int *p1, int *p2)
 {
 	if (((ocp >> 6) & 3) == REG_CODE)
 	{
