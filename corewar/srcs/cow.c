@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:43 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/11 17:52:53 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/12 17:07:57 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,21 @@ void		print_cow(void)
 	if (color == 0 && ++color)
 		heart_color();
 	attron(COLOR_PAIR(17));
-	if (x == 0 && ++x)
+	if (x == 0)
+	{
+		x++;
 		draw_cow1(4);
-	else if (x == 1 && ++x)
+	}
+	else if (x == 1)
+	{
+		x++;
 		draw_cow2(4);
-	else if (x == 2 && !(x = 0))
+	}
+	else if (x == 2)
+	{
+		x = 0;
 		draw_cow3(4);
+	}
 }
 
 void		draw_cow1(int nb)
