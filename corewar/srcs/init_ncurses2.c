@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 16:22:41 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 18:31:19 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		draw_names(t_list *champs)
 {
 	t_champ	*champ;
 	int		id;
+	char	*name;
 
 	while (champs)
 	{
@@ -67,9 +68,11 @@ void		draw_names(t_list *champs)
 		if (!champ->father)
 		{
 			id = champ->id;
+			name = ft_strndup(((t_champ*)champs->content)->name, 42);
 			attron(COLOR_PAIR(id + 2));
 			draw_line(11 + (4 * (id - 1)), 10 + ft_countdigits(champ->v_id),
-					((t_champ*)champs->content)->name);
+					name);
+			ft_fruit(1, &name);
 		}
 		champs = champs->next;
 	}

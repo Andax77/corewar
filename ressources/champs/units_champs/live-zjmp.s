@@ -3,5 +3,5 @@
 
 live:		live %42
 			sti  r1, %:live, %1
-			add   r2, r2, r2
+			ld   %0, r0
 			zjmp %:live
