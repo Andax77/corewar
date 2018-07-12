@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 17:09:40 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/12 17:15:36 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ void				draw_heart(int line_idx, int y, char *line, int i);
 void				stat1(int player);
 void				stat2(int player);
 void				stat3(int player);
-void				stat4(int player);
 void				draw_player(int line_idx, int y, char *line);
 void				draw_player_id(int line_idx, int y, char *line);
 void				player(int player);
