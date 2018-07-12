@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 17:30:40 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 15:08:38 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,21 @@ int			check_opt(char **argv)
 	return (SUCCESS);
 }
 
-void		verif_doublons(t_opt *opt, int index)
+int			check_doubles(t_opt *opt, int index)
 {
 	int		i;
 
 	i = -1;
-	while (++i < index)
+	while (++i < index && index < MAX_PLAYERS)
 	{
 		if (opt->n[i] == opt->n[index])
 		{
-			opt->n[index] += 1;
-			verif_doublons(opt, index);
-			break ;
+			ft_printf("{red}n value used twice...\n{eoc}");
+			free(opt->n);
+			return (ERROR);
 		}
 	}
+	return (SUCCESS);
 }
 
 int			is_opt(char *str)
@@ -85,7 +86,7 @@ void		print_usage(void)
 	int		fd;
 
 	line = NULL;
-	if (!(fd = open("usage.txt", O_RDONLY)))
+	if ((fd = open("usage.txt", O_RDONLY)) == -1)
 		return ;
 	while (fd && get_next_line(fd, &line) == GNL_SUCCESS)
 	{

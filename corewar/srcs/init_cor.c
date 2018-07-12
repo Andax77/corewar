@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 15:09:07 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 15:06:40 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,12 @@ int				init_cor(t_cor *cor, char **argv)
 		cor->aff = NULL;
 		cor->winner = 0;
 		cor->cycle_to_die = CYCLE_TO_DIE;
-		cor->map = ft_malloc((MEM_SIZE + 1) * \
-				sizeof(unsigned char), EXIT_FAILURE);
+		cor->map = ft_malloc((MEM_SIZE + 1)
+				* sizeof(unsigned char), EXIT_FAILURE);
 		init_memory(cor);
 		init_cmap(cor);
-		if (MAX_PLAYERS > 4 || \
-				(!cor->opt->d && cor->opt->v && !init_ncurses(cor)))
+		if (MAX_PLAYERS > 4
+				|| (!cor->opt->d && cor->opt->v && !init_ncurses(cor)))
 			return (ERROR);
 		print_intro(cor);
 		(ft_lstcount(cor->champs) > 1) ? order_to_start(&cor->champs) : 0;
