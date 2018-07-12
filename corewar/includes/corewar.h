@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 17:15:36 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 19:37:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int					init(char **argv, t_cor *cor);
 int					read_args(t_cor *cor, char **argv);
 int					populate_champs(t_list **champs, char *path, int nb);
 int					count_champs(t_list *champs);
+void				check_prog_len_else(t_list *instru, char *add, char **text);
 void				draw_uchar(int pos, unsigned char val);
 void				draw_line(int line_idx, int col_idx, char *line);
 void				draw_names(t_list *champs);
