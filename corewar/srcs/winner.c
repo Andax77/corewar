@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 16:13:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 18:28:07 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void		print_intro(t_cor *cor)
 	{
 		if (((t_champ*)champ->content)->father == 0)
 			ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\
-				\n{eoc}", color_player(((t_champ*)champ->content)->id),\
-		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,\
+				\n{eoc}", color_player(((t_champ*)champ->content)->id),
+		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,
 		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
 		champ = champ->next;
 	}
@@ -51,8 +51,8 @@ char		*get_name_champ(t_cor *cor)
 	champ = cor->champs;
 	while (champ)
 	{
-		if (((t_champ*)champ->content)->id == cor->winner && \
-((t_champ*)champ->content)->father == 0)
+		if (((t_champ*)champ->content)->id == cor->winner
+				&& ((t_champ*)champ->content)->father == 0)
 			return (((t_champ*)champ->content)->name);
 		champ = champ->next;
 	}
@@ -67,7 +67,7 @@ void		game_over(t_cor *cor)
 
 	nb = 56;
 	id = cor->winner;
-	winner = get_name_champ(cor);
+	winner = ft_strndup(get_name_champ(cor), 42);
 	if (!winner)
 		winner = "No One..";
 	draw_line(36, 0, "WINNER IS : ");
@@ -82,4 +82,5 @@ void		game_over(t_cor *cor)
 	draw_line(nb++, 0, " ***** ** ** ** ** *****   *****  ***  ***** ** **  ");
 	draw_line(nb++, 0, "  ***  ** ** ** ** *****    ***    *   ***** **  *  ");
 	draw_line(nb++, 0, "                                                    ");
+	ft_fruit(1, &winner);
 }
