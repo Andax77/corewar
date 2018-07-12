@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 20:45:56 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 14:57:18 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int					is_opt(char *str);
 int					parse_opt(char **argv, t_opt *opt, t_cor *cor);
 void				init_opt(t_opt *opt, t_cor *cor);
 int					check_opt(char **argv);
-void				verif_doublons(t_opt *opt, int index);
+int					check_doubles(t_opt *opt, int index);
 int					init(char **argv, t_cor *cor);
 int					read_args(t_cor *cor, char **argv);
 int					populate_champs(t_list **champs, char *path, int nb);
