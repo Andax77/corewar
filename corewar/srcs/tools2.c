@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/19 15:12:06 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 16:13:06 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 14:10:10 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,13 @@ int		read_args(t_cor *cor, char **argv)
 	i = 0;
 	n = 0;
 	while (++argv && *argv)
-		if (ft_strstr(*argv, ".cor") && ++i && i <= MAX_PLAYERS)
+		if (ft_strstr(*argv, ".cor"))
 		{
+			if (++i > MAX_PLAYERS)
+			{
+				ft_printf("{red}Too many Champions\n{eoc}");
+				return (ERROR);
+			}
 			if (populate_champs(&cor->champs, *argv, cor->opt->n[n++]) == ERROR)
 				return (ERROR);
 		}
