@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 18:44:20 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/12 14:57:33 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,21 @@ int			check_opt(char **argv)
 	return (SUCCESS);
 }
 
-void		verif_doublons(t_opt *opt, int index)
+int		check_doubles(t_opt *opt, int index)
 {
 	int		i;
 
 	i = -1;
-	while (++i < index)
+	while (++i < index && index < MAX_PLAYERS)
 	{
 		if (opt->n[i] == opt->n[index])
 		{
-			opt->n[index] += 1;
-			verif_doublons(opt, index);
-			break ;
+			ft_printf("{red}n value used twice...\n{eoc}");
+			free(opt->n);
+			return (ERROR);
 		}
 	}
+	return (SUCCESS);
 }
 
 int			is_opt(char *str)
