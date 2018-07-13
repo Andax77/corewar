@@ -133,5 +133,7 @@ int				ft_get_instru(t_champ *champ)
 		free(inst);
 		cur = cur->next;
 	}
+	if (!champ->instru)
+		return (ERROR);
 	return (SUCCESS);
 }
