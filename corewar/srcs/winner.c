@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 18:28:07 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/13 15:48:13 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char		*get_name_champ(t_cor *cor)
 			return (((t_champ*)champ->content)->name);
 		champ = champ->next;
 	}
-	return (NULL);
+	return ("No One...");
 }
 
 void		game_over(t_cor *cor)
@@ -67,9 +67,7 @@ void		game_over(t_cor *cor)
 
 	nb = 56;
 	id = cor->winner;
-	winner = ft_strndup(get_name_champ(cor), 42);
-	if (!winner)
-		winner = "No One..";
+	winner = strndup((get_name_champ(cor)), 42);
 	draw_line(36, 0, "WINNER IS : ");
 	attron(COLOR_PAIR(id + 2));
 	draw_line(36, 12, winner);
