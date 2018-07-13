@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 22:02:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/13 14:49:31 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/13 19:11:03 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ void		ft_add(t_cor *cor, t_champ *champ)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] + champ->reg[p2 - 1];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
-	//	champ->carry = 1;
 	}
-	//else
-	//	champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -60,10 +57,7 @@ void		ft_sub(t_cor *cor, t_champ *champ)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] - champ->reg[p2 - 1];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
-	//	champ->carry = 1;
 	}
-	//else
-	//	champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 

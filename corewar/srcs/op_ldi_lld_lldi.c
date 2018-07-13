@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 20:29:56 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/13 14:50:02 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/13 19:10:41 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ void		ft_lldi(t_cor *cor, t_champ *champ)
 			+ (cor->map[(ori + p2 + 2) % MEM_SIZE] << 8)
 			+ cor->map[(ori + p2 + 3) % MEM_SIZE];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
-	//	champ->carry = 1;
 	}
-	//else
-	//	champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -127,9 +124,6 @@ void		ft_lld(t_cor *cor, t_champ *champ)
 			+ p1 + 2) % MEM_SIZE] << 8) + cor->map[(ori + p1 + 3) % MEM_SIZE];
 		}
 		champ->carry = (champ->reg[p2 - 1] == 0) ? 1 : 0;
-	//	champ->carry = 1;
 	}
-	//else
-	//	champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }

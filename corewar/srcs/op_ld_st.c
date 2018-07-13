@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 19:54:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/13 14:49:04 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/13 19:11:16 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void		ft_ld(t_cor *cor, t_champ *champ)
 		else if (((ocp >> 6) & 3) == IND_CODE)
 			ft_ld_elseif(cor, champ, p1, ft_2arg(p2, ori));
 		champ->carry = (champ->reg[p2 - 1] == 0) ? 1 : 0;
-	//	champ->carry = 1;
 	}
-	//else
-	//	champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
