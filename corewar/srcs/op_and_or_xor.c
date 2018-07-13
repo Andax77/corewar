@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 20:22:19 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/12 21:18:05 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/13 13:23:54 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ void		ft_and(t_cor *cor, t_champ *champ)
 	if (((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = p1 & p2;
-		champ->carry = ((p1 & p2) == 0) ? 1 : 0;
+		//champ->carry = ((p1 & p2) == 0) ? 1 : 0;
+		champ->carry = 1;
 	}
+	else
+		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -49,8 +52,11 @@ void		ft_or(t_cor *cor, t_champ *champ)
 	if (((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = p1 | p2;
-		champ->carry = ((p1 | p2) == 0) ? 1 : 0;
+		//champ->carry = ((p1 | p2) == 0) ? 1 : 0;
+		champ->carry = 1;
 	}
+	else
+		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -70,7 +76,10 @@ void		ft_xor(t_cor *cor, t_champ *champ)
 	if (((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = p1 ^ p2;
-		champ->carry = ((p1 ^ p2) == 0) ? 1 : 0;
+		//champ->carry = ((p1 ^ p2) == 0) ? 1 : 0;
+		champ->carry = 1;
 	}
+	else
+		champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
