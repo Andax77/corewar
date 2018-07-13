@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 22:02:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/13 13:25:30 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/13 14:49:31 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void		ft_add(t_cor *cor, t_champ *champ)
 			&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] + champ->reg[p2 - 1];
-		//champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
-		champ->carry = 1;
+		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
+	//	champ->carry = 1;
 	}
-	else
-		champ->carry = 0;
+	//else
+	//	champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -59,10 +59,11 @@ void		ft_sub(t_cor *cor, t_champ *champ)
 			&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] - champ->reg[p2 - 1];
-		//champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
-		champ->carry = 1;
+		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
+	//	champ->carry = 1;
 	}
-	champ->carry = 0;
+	//else
+	//	champ->carry = 0;
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
