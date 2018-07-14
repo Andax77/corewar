@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 20:22:19 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/13 19:11:33 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/14 11:36:59 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void		ft_and(t_cor *cor, t_champ *champ)
 	p3 = recup_content(cor, champ, ocp, ft_2arg(2, 6));
 	if (ft_change_sh_p1_p2(champ, ocp, &p1, &p2) == ERROR)
 		return ;
-	if (((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
+	if ((ocp == 0x54 || ocp == 0xD4 || ocp == 0x74 || ocp == 0xF4
+	|| ocp == 0x94 || ocp == 0x64 || ocp == 0xB4 || ocp == 0xE4 || ocp == 0xA4)
+	&& ((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = p1 & p2;
 		champ->carry = ((p1 & p2) == 0) ? 1 : 0;
@@ -44,7 +46,9 @@ void		ft_or(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 7));
 	p2 = recup_content(cor, champ, ocp, ft_2arg(4, 7));
 	p3 = recup_content(cor, champ, ocp, ft_2arg(2, 7));
-	if (ft_change_sh_p1_p2(champ, ocp, &p1, &p2) == ERROR)
+	if ((ocp == 0x54 || ocp == 0xD4 || ocp == 0x74 || ocp == 0xF4
+	|| ocp == 0x94 || ocp == 0x64 || ocp == 0xB4 || ocp == 0xE4 || ocp == 0xA4)
+	&& ft_change_sh_p1_p2(champ, ocp, &p1, &p2) == ERROR)
 		return ;
 	if (((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
 	{
@@ -65,7 +69,9 @@ void		ft_xor(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 8));
 	p2 = recup_content(cor, champ, ocp, ft_2arg(4, 8));
 	p3 = recup_content(cor, champ, ocp, ft_2arg(2, 8));
-	if (ft_change_sh_p1_p2(champ, ocp, &p1, &p2) == ERROR)
+	if ((ocp == 0x54 || ocp == 0xD4 || ocp == 0x74 || ocp == 0xF4
+	|| ocp == 0x94 || ocp == 0x64 || ocp == 0xB4 || ocp == 0xE4 || ocp == 0xA4)
+	&& ft_change_sh_p1_p2(champ, ocp, &p1, &p2) == ERROR)
 		return ;
 	if (((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
 	{

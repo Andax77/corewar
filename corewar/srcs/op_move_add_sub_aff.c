@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 22:02:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/13 19:11:03 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/14 12:46:51 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void		ft_add(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 4));
 	p2 = recup_content(cor, champ, ocp, ft_2arg(4, 4));
 	p3 = recup_content(cor, champ, ocp, ft_2arg(2, 4));
-	if (((ocp >> 6) & 3) == REG_CODE && ((ocp >> 4) & 3) == REG_CODE
-			&& ((ocp >> 2) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER
-			&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
+	if (ocp == 0x54
+	&& ((ocp >> 6) & 3) == REG_CODE && ((ocp >> 4) & 3) == REG_CODE
+	&& ((ocp >> 2) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER
+	&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] + champ->reg[p2 - 1];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
@@ -51,9 +52,10 @@ void		ft_sub(t_cor *cor, t_champ *champ)
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 4));
 	p2 = recup_content(cor, champ, ocp, ft_2arg(4, 4));
 	p3 = recup_content(cor, champ, ocp, ft_2arg(2, 4));
-	if (((ocp >> 6) & 3) == REG_CODE && ((ocp >> 4) & 3) == REG_CODE
-			&& ((ocp >> 2) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER
-			&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
+	if (ocp == 0x54
+	&& ((ocp >> 6) & 3) == REG_CODE && ((ocp >> 4) & 3) == REG_CODE
+	&& ((ocp >> 2) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER
+	&& p2 > 0 && p2 <= REG_NUMBER && p3 > 0 && p3 <= REG_NUMBER)
 	{
 		champ->reg[p3 - 1] = champ->reg[p1 - 1] - champ->reg[p2 - 1];
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
