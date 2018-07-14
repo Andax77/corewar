@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/07/14 10:26:41 by eparisot         ###   ########.fr        #
+#    Updated: 2018/07/12 19:37:05 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ FILES = main.c \
 		init_ncurses2.c \
 		init_cor.c \
 		parse_champ.c \
+		parse_champ2.c \
 		tools.c \
 		tools2.c \
 		legacy.c \
