@@ -6,7 +6,7 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:59 by anhuang           #+#    #+#             */
-/*   Updated: 2018/07/12 17:42:25 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/14 20:50:20 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		get_color_heart(int draw_live, char *line, int id)
 			attron(COLOR_PAIR(17));
 		else
 			attron(COLOR_PAIR(30));
-		live[id]--;
+		live[id - 1]--;
 	}
 	else
 	{
@@ -72,7 +72,7 @@ void		get_color_heart(int draw_live, char *line, int id)
 			attron(COLOR_PAIR(id + 25));
 	}
 	if (draw_live == 1)
-		live[id] = 16;
+		live[id - 1] = 16;
 }
 
 void		draw_player(int line_idx, int y, char *line)
