@@ -85,9 +85,7 @@ static int		check_prog_len(t_list *instru, int size, char **text)
 			check_prog_len_else(instru, add, text);
 		instru = instru->next;
 	}
-	if ((i != ((size % 4 == 0) ? size : size + 4 - size % 4))
-			|| (ft_strlen(*text) >= 2 && (*text)[ft_strlen(*text) - 2] == \
-				'0' && (*text)[ft_strlen(*text) - 1] == 'a'))
+	if (i != ((size % 4 == 0) ? size : size + 4 - size % 4))
 		return (ERROR);
 	return (SUCCESS);
 }
