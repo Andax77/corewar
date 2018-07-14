@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 19:54:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/13 19:11:16 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/14 11:39:20 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ void		ft_ld(t_cor *cor, t_champ *champ)
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 2));
 	p2 = recup_content(cor, champ, ocp, ft_2arg(4, 2));
-	if (((ocp >> 4) & 3) == REG_CODE && (((ocp >> 6) & 3) == DIR_CODE || \
-((ocp >> 6) & 3) == IND_CODE) && p2 > 0 && p2 <= REG_NUMBER)
+	if ((ocp == 0xD0 || ocp == 0x90)
+	&& ((ocp >> 4) & 3) == REG_CODE && (((ocp >> 6) & 3) == DIR_CODE
+	|| ((ocp >> 6) & 3) == IND_CODE) && p2 > 0 && p2 <= REG_NUMBER)
 	{
 		if (((ocp >> 6) & 3) == DIR_CODE)
 			champ->reg[p2 - 1] = p1;
@@ -108,7 +109,8 @@ void		ft_st(t_cor *cor, t_champ *champ)
 	ocp = cor->map[++champ->pc % MEM_SIZE];
 	p1 = recup_content(cor, champ, ocp, ft_2arg(6, 3));
 	p2 = recup_content(cor, champ, ocp, ft_2arg(4, 3));
-	if (((ocp >> 6) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER)
+	if ((ocp == 0x50 || ocp == 0x70)
+	&& ((ocp >> 6) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER)
 	{
 		if (((ocp >> 4) & 3) == REG_CODE && p2 > 0 && p2 <= REG_NUMBER)
 			champ->reg[p2 - 1] = champ->reg[p1 - 1];

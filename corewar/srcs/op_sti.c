@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 21:22:18 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 16:17:44 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/14 11:48:14 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,10 @@ void		ft_sti(t_cor *cor, t_champ *champ)
 	p3 = ((p2 + p3) % IDX_MOD) % MEM_SIZE;
 	if ((p3 + ori) < 0)
 		p3 += MEM_SIZE;
-	if ((((ocp >> 2) & 3) == DIR_CODE || ((ocp >> 2) & 3) == REG_CODE)
-			&& ((ocp >> 6) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER)
+	if ((ocp == 0x54 || ocp == 0x74 || ocp == 0x64 || ocp == 0x58
+	|| ocp == 0x78 || ocp == 0x68 )
+	&& (((ocp >> 2) & 3) == DIR_CODE || ((ocp >> 2) & 3) == REG_CODE)
+	&& ((ocp >> 6) & 3) == REG_CODE && p1 > 0 && p1 <= REG_NUMBER)
 		ft_sti_if(cor, champ, p3, ft_2arg(p1, ori));
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
