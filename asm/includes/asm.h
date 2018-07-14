@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:01:48 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/11 18:14:57 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 19:32:27 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <libft.h>
 
 # define BASE_HEXA "0123456789ABCDEF"
-# define ERROR -1
-# define SUCCESS 0
+# define ERROR (-1)
+# define SUCCESS (0)
 
 enum			e_list
 {
@@ -57,6 +57,12 @@ t_instru		*ft_init_instru(void);
 int				ft_fill_file_name(t_champ *champ);
 int				ft_fill_binary_name(t_champ *champ);
 
+int				ft_verif_format_name(char *str);
+int				ft_verif_format_comment(char *str);
+int				ft_verif_register(t_champ *champ);
+int				ft_name_comment_other_lines_next(char **member, char *tmp);
+
+int				ft_parse_status(t_champ *champ, int status);
 int				read_file(t_champ *champ);
 int				read_binary(t_champ *champ);
 int				ft_manual(t_champ *champ);

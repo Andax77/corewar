@@ -6,11 +6,20 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/12 17:24:22 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:51:19 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
+
+static void		ft_print_usage(void)
+{
+	ft_printf("************************************************************\n");
+	ft_printf("*	normal mode (compiles a .s in .cor)		   *\n");
+	ft_printf("*  -r : reverse mode (compiles a .cor in .s)		   *\n");
+	ft_printf("*  -m : manual mode (opens a manual mode to create a .cor) *\n");
+	ft_printf("************************************************************\n");
+}
 
 static int		main_reverse(t_champ *champ)
 {
@@ -32,7 +41,7 @@ static int		main_normal(t_champ *champ)
 	return (SUCCESS);
 }
 
-static void		main_boucle(t_champ *champ, int argc_c, char **argv)
+static void		main_loop(t_champ *champ, int argc_c, char **argv)
 {
 	while (--argc_c)
 	{
@@ -66,8 +75,16 @@ int				main(int argc, char **argv)
 
 	argc_c = argc;
 	champ = NULL;
-	main_boucle(champ, argc_c, argv);
+	if (MAX_ARGS_NUMBER != 4)
+	{
+		ft_printf("{red}stop touching op.h !\n{eoc}");
+		exit(EXIT_FAILURE);
+	}
+	main_loop(champ, argc_c, argv);
 	if (argc == 1)
-		ft_printf("{yellow}Usage: %s [-r] <sourcefile> ...{eoc}\n", argv[0]);
+	{
+		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n\n", argv[0]);
+		ft_print_usage();
+	}
 	exit(EXIT_SUCCESS);
 }

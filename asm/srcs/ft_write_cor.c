@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 00:43:44 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/22 17:35:09 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:39:38 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_get_instructions_length(t_champ *champ)
 }
 
 static void	ft_fill_output_instructions(t_champ *champ, char *output,
-																	int cursor)
+		int cursor)
 {
 	t_list		*tmp;
 	t_instru	*cur;
@@ -83,23 +83,23 @@ static void	ft_fill_output(t_champ *champ, char *output, int instructions_len)
 int			ft_write_cor(t_champ *champ)
 {
 	char	*output;
-	int		length_output;
-	int		instructions_length;
+	int		len_output;
+	int		instructions_len;
 	int		fd;
 
-	instructions_length = ft_get_instructions_length(champ);
-	if (instructions_length > CHAMP_MAX_SIZE)
+	instructions_len = ft_get_instructions_length(champ);
+	if (instructions_len > CHAMP_MAX_SIZE)
 		return (ft_error(champ, "error: too many instructions"));
 	if (sizeof(COREWAR_EXEC_MAGIC) > 4)
 		return (ft_error(champ, "error: magic number is not an integer"));
-	length_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4 +
-		sizeof(instructions_length) + COMMENT_LENGTH + 4 + instructions_length;
-	output = ft_malloc(sizeof(char) * (length_output + 1), EXIT_FAILURE);
-	ft_bzero(output, length_output + 1);
-	ft_fill_output(champ, output, instructions_length);
+	len_output = sizeof(COREWAR_EXEC_MAGIC) + PROG_NAME_LENGTH + 4
+		+ sizeof(instructions_len) + COMMENT_LENGTH + 4 + instructions_len;
+	output = ft_malloc(sizeof(char) * (len_output + 1), EXIT_FAILURE);
+	ft_bzero(output, len_output + 1);
+	ft_fill_output(champ, output, instructions_len);
 	if ((fd = open(champ->file_name, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) <= 0)
 		exit(EXIT_FAILURE);
-	write(fd, output, length_output);
+	write(fd, output, len_output);
 	ft_printf("{yellow}Writing output program to %s{eoc}\n", champ->file_name);
 	free(output);
 	return (SUCCESS);
