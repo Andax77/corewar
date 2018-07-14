@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 16:20:55 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/22 17:29:55 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:28:16 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void		ft_clean_spaces_comments(t_instru *inst)
 {
+	char	*clean;
 	int		i;
 	int		j;
 	int		k;
-	char	*clean;
 
 	i = -1;
 	while (inst->params[++i])
@@ -26,25 +26,47 @@ static void		ft_clean_spaces_comments(t_instru *inst)
 		while (inst->params[i][++j] == ' ' || inst->params[i][j] == '\t')
 			;
 		k = ft_strlen(inst->params[i]) - 1;
-		if (ft_strchr(inst->params[i], COMMENT_CHAR))
-		{
-			while (inst->params[i][k] != COMMENT_CHAR)
-				--k;
-			while (inst->params[i][k] == COMMENT_CHAR)
-				--k;
-		}
 		while (inst->params[i][k] == ' ' || inst->params[i][k] == '\t')
 			--k;
-		clean = ft_strndup(inst->params[i] + j, k - j + 1);
+		if (!(clean = ft_strndup(inst->params[i] + j, k - j + 1)))
+			exit(EXIT_FAILURE);
 		free(inst->params[i]);
 		inst->params[i] = clean;
 	}
 }
 
+static int		ft_verif_params(char **params)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (params[++i])
+		if (params[i][0] == DIRECT_CHAR)
+		{
+			if (params[i][1] == LABEL_CHAR)
+			{
+				j = 1;
+				while (params[i][++j])
+					if (!ft_strchr(LABEL_CHARS, params[i][j]))
+						return (ERROR);
+			}
+			else if (!ft_strisdigit(params[i] + 1))
+				return (ERROR);
+		}
+		else if (params[i][0] == LABEL_CHAR)
+		{
+			j = 0;
+			while (params[i][++j])
+				if (!ft_strchr(LABEL_CHARS, params[i][j]))
+					return (ERROR);
+		}
+	return (SUCCESS);
+}
+
 int				ft_get_params(t_instru *inst, char *str)
 {
 	int		i;
-	char	*sub;
 
 	if (ft_check_params_format(inst, str) == ERROR)
 		return (ERROR);
@@ -52,21 +74,21 @@ int				ft_get_params(t_instru *inst, char *str)
 	i = -1;
 	while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 		str++;
-	if (*str == LABEL_CHAR)
+	if (inst->label_name
+			&& ft_strstr(inst->label_name, g_op_tab[inst->op_code - 1].name))
 	{
+		while (*str != LABEL_CHAR)
+			str++;
 		str = ft_strstr(str, g_op_tab[inst->op_code - 1].name);
 		i = -1;
 		while (++i < (int)ft_strlen(g_op_tab[inst->op_code - 1].name))
 			str++;
 	}
-	i = -1;
-	while (str[++i] && str[i] != COMMENT_CHAR)
-		;
-	if (!(sub = ft_strsub(str, 0, i)))
+	if (!(inst->params = ft_strsplit(str, SEPARATOR_CHAR)))
 		exit(EXIT_FAILURE);
-	inst->params = ft_strsplit(sub, SEPARATOR_CHAR);
 	ft_clean_spaces_comments(inst);
-	free(sub);
+	if (ft_verif_params(inst->params) == ERROR)
+		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -111,5 +133,7 @@ int				ft_get_instru(t_champ *champ)
 		free(inst);
 		cur = cur->next;
 	}
+	if (!champ->instru)
+		return (ERROR);
 	return (SUCCESS);
 }

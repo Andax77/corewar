@@ -6,13 +6,13 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/22 19:35:41 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/10 17:38:02 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 
-static void	get_champ_name_comment_other_lines(char **member, int fd)
+static int	get_champ_name_comment_other_lines(char **member, int fd)
 {
 	char	*tmp;
 
@@ -24,13 +24,10 @@ static void	get_champ_name_comment_other_lines(char **member, int fd)
 		if (!(*member = ft_str_and_free_join(*member, tmp)))
 			exit(EXIT_FAILURE);
 		if (strchr(tmp, '"'))
-		{
-			(*member)[ft_strlen(*member) - 1] = '\0';
-			free(tmp);
-			break ;
-		}
+			return (ft_name_comment_other_lines_next(member, tmp));
 		free(tmp);
 	}
+	return (ERROR);
 }
 
 static int	get_champ_name_comment(char *line, char **member, int fd)
@@ -38,8 +35,10 @@ static int	get_champ_name_comment(char *line, char **member, int fd)
 	int		i;
 
 	i = 0;
-	while (*line && *line != '"')
+	while (*line && *line != COMMENT_CHAR && *line != '"')
 		line++;
+	if (*line == COMMENT_CHAR)
+		return (ERROR);
 	if (*line == '\0')
 		return (ERROR);
 	line++;
@@ -48,30 +47,44 @@ static int	get_champ_name_comment(char *line, char **member, int fd)
 	if (!(*member = ft_strndup(line, i)))
 		exit(EXIT_FAILURE);
 	if (line[i] == '\0')
-		get_champ_name_comment_other_lines(member, fd);
+		if (get_champ_name_comment_other_lines(member, fd) == ERROR)
+			return (ERROR);
+	if (line[i] != '\0' && line[i + 1])
+	{
+		while (line[++i])
+			if (line[i] != ' ' && line[i] != '\t')
+				return (ERROR);
+	}
 	return (SUCCESS);
 }
 
 static int	parse_line(char *line, t_champ *champ)
 {
 	int		status;
+	int		i;
 
 	status = SUCCESS;
-	if (line[0] == COMMENT_CHAR)
-		return (UNFINISHED);
-	if (ft_strstr(line, ".name"))
-		status = get_champ_name_comment(line, &champ->name, champ->fd);
-	else if (ft_strstr(line, ".comment"))
-		status = get_champ_name_comment(line, &champ->comment, champ->fd);
-	if (status == ERROR)
-		return (ft_error(champ, "error: name or comment is badly formatted"));
-	if (champ->name && ft_strlen(champ->name) > PROG_NAME_LENGTH)
-		return (ft_error(champ, "error: program name is too long"));
-	if (champ->comment && ft_strlen(champ->comment) > COMMENT_LENGTH)
-		return (ft_error(champ, "error: program comment is too long"));
-	if (champ->name != NULL && champ->comment != NULL)
-		return (FINISHED);
-	return (UNFINISHED);
+	i = -1;
+	while (line[++i])
+		if (line[i] == COMMENT_CHAR || line[i + 1] == '\0')
+			return (UNFINISHED);
+		else if (line[i] != ' ' && line[i] != '\t')
+			break ;
+	if (ft_strstr(line, NAME_CMD_STRING) && !champ->name)
+	{
+		if (ft_verif_format_name(line) == SUCCESS)
+			status = get_champ_name_comment(line, &champ->name, champ->fd);
+		else
+			return (ft_error(champ, "error: .name is badly spelled"));
+	}
+	else if (ft_strstr(line, COMMENT_CMD_STRING) && !champ->comment)
+		if (ft_verif_format_comment(line) == SUCCESS)
+			status = get_champ_name_comment(line, &champ->comment, champ->fd);
+		else
+			return (ft_error(champ, "error: .comment is badly spelled"));
+	else if (line[i])
+		return (ft_error(champ, "error: wrong command"));
+	return (ft_parse_status(champ, status));
 }
 
 static void	store_lines(t_champ *champ)
@@ -105,9 +118,8 @@ int			read_file(t_champ *champ)
 	int		result_gnl;
 
 	if ((champ->fd = open(champ->argv, O_RDONLY)) <= 0)
-		return (ERROR);
+		return (ft_error(champ, "error: bad file descriptor"));
 	line = NULL;
-	stock = UNFINISHED;
 	while ((result_gnl = get_next_line(champ->fd, &line)) == GNL_SUCCESS)
 	{
 		if ((stock = parse_line(line, champ)) == ERROR && ft_fruit(1, &line))

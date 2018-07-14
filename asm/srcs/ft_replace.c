@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 12:18:34 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/22 20:10:28 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:33:10 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ static int		ft_replace_direct(t_champ *champ)
 		if ((i = -1) && cur->params)
 		{
 			while (cur->params[++i])
-				if (ft_get_t_param(cur->params[i]) == T_DIR &&
-											!ft_strisdigit(cur->params[i] + 2))
+				if (ft_get_t_param(cur->params[i]) == T_DIR
+						&& ft_strchr(cur->params[i], LABEL_CHAR))
 				{
 					if (ft_replace_direct_param(champ, cur, i) == ERROR)
 						return (ERROR);
 				}
-				else if (ft_get_t_param(cur->params[i]) == T_IND &&
-											!ft_strisdigit(cur->params[i] + 1))
+				else if (ft_get_t_param(cur->params[i]) == T_IND
+						&& ft_strchr(cur->params[i], LABEL_CHAR))
 					if (ft_replace_indirect_param(champ, cur, i) == ERROR)
 						return (ERROR);
 		}
@@ -105,5 +105,7 @@ int				ft_fill_inst_addr_and_replace_direct(t_champ *champ)
 		total_size += cur->size;
 		tmp = tmp->next;
 	}
+	if (ft_verif_register(champ) == ERROR)
+		return (ERROR);
 	return (ft_replace_direct(champ));
 }
