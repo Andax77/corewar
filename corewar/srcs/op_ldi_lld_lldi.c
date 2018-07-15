@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/05 20:29:56 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/14 11:48:57 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/15 10:53:45 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ int			ft_change_sh_p1_p2(t_champ *champ, int ocp, int *p1, int *p2)
 	return (SUCCESS);
 }
 
+int			calc(t_cor *cor, int param1, int param2)
+{
+	return ((cor->map[(param1 + param2) % MEM_SIZE] << 24)
+			+ (cor->map[(param1 + param2 + 1) % MEM_SIZE] << 16)
+			+ (cor->map[(param1 + param2 + 2) % MEM_SIZE] << 8)
+			+ cor->map[(param1 + param2 + 3) % MEM_SIZE]);
+}
+
 void		ft_ldi(t_cor *cor, t_champ *champ)
 {
 	int		p1;
@@ -63,12 +71,7 @@ void		ft_ldi(t_cor *cor, t_champ *champ)
 	|| ocp == 0xE4 || ocp == 0xA4)
 	&& (((ocp >> 4) & 3) == REG_CODE || ((ocp >> 4) & 3) == DIR_CODE)
 	&& ((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
-	{
-		champ->reg[p3 - 1] = (cor->map[(ori + p2) % MEM_SIZE] << 24)
-			+ (cor->map[(ori + p2 + 1) % MEM_SIZE] << 16)
-			+ (cor->map[(ori + p2 + 2) % MEM_SIZE] << 8)
-			+ cor->map[(ori + p2 + 3) % MEM_SIZE];
-	}
+		champ->reg[p3 - 1] = calc(cor, ori, p2);
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
 }
 
@@ -94,10 +97,7 @@ void		ft_lldi(t_cor *cor, t_champ *champ)
 	&& (((ocp >> 4) & 3) == REG_CODE || ((ocp >> 4) & 3) == DIR_CODE)
 	&& ((ocp >> 2) & 3) == REG_CODE && p3 > 0 && p3 <= REG_NUMBER)
 	{
-		champ->reg[p3 - 1] = (cor->map[(ori + p2) % MEM_SIZE] << 24)
-			+ (cor->map[(ori + p2 + 1) % MEM_SIZE] << 16)
-			+ (cor->map[(ori + p2 + 2) % MEM_SIZE] << 8)
-			+ cor->map[(ori + p2 + 3) % MEM_SIZE];
+		champ->reg[p3 - 1] = calc(cor, ori, p2);
 		champ->carry = (champ->reg[p3 - 1] == 0) ? 1 : 0;
 	}
 	champ->pc = (champ->pc + 1) % MEM_SIZE;
@@ -124,9 +124,7 @@ void		ft_lld(t_cor *cor, t_champ *champ)
 		{
 			p1 = (short)p1 % MEM_SIZE;
 			p1 += ((ori + p1) < 0) ? MEM_SIZE : 0;
-			champ->reg[p2 - 1] = (cor->map[(ori + p1) % MEM_SIZE] << 24)
-			+ (cor->map[(ori + p1 + 1) % MEM_SIZE] << 16) + (cor->map[(ori
-			+ p1 + 2) % MEM_SIZE] << 8) + cor->map[(ori + p1 + 3) % MEM_SIZE];
+			champ->reg[p2 - 1] = calc(cor, ori, p1);
 		}
 		champ->carry = (champ->reg[p2 - 1] == 0) ? 1 : 0;
 	}
