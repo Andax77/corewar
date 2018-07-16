@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/13 15:48:13 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:18:18 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void		game_over(t_cor *cor)
 
 	nb = 56;
 	id = cor->winner;
-	winner = strndup((get_name_champ(cor)), 42);
+	if (!(winner = ft_strndup((get_name_champ(cor)), 42)))
+		exit(EXIT_FAILURE);
 	draw_line(36, 0, "WINNER IS : ");
 	attron(COLOR_PAIR(id + 2));
 	draw_line(36, 12, winner);

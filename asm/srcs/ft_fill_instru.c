@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 15:08:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 18:27:04 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 16:14:27 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int		ft_get_op_code(t_instru *inst, char *str)
 	ptr = ft_get_name_op_code(inst, str);
 	while (g_op_tab[++i].name)
 	{
-		if (strcmp(ptr, g_op_tab[i].name) == 0)
+		if (ft_strcmp(ptr, g_op_tab[i].name) == 0)
 		{
 			inst->op_code = g_op_tab[i].op_code;
 			break ;

@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/07/12 19:37:05 by pmilan           ###   ########.fr        #
+#    Updated: 2018/07/16 16:16:09 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ HFILES = includes/corewar.h \
 		 $(LIBFT_DIR)includes/libft.h
 
 CC = gcc
-CFLAGS = -Wall -Wextra -g#-Werror -O3
+CFLAGS = -Wall -Wextra -Werror
 
 INC_DIR = includes/ \
 		  ../commun/includes/ \

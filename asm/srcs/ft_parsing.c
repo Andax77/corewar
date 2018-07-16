@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 19:37:12 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/10 17:38:02 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 16:13:18 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	get_champ_name_comment_other_lines(char **member, int fd)
 			exit(EXIT_FAILURE);
 		if (!(*member = ft_str_and_free_join(*member, tmp)))
 			exit(EXIT_FAILURE);
-		if (strchr(tmp, '"'))
+		if (ft_strchr(tmp, '"'))
 			return (ft_name_comment_other_lines_next(member, tmp));
 		free(tmp);
 	}

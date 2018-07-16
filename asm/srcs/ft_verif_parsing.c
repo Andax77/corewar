@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 17:29:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 18:35:11 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 16:15:04 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_verif_format_name(char *str)
 	i = -1;
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
-	if (strncmp(str + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) != 0)
+	if (ft_strncmp(str + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) != 0)
 		return (ERROR);
 	i += ft_strlen(NAME_CMD_STRING);
 	while (str[++i] && str[i] != '"')
@@ -77,7 +77,7 @@ int		ft_verif_format_comment(char *str)
 	i = -1;
 	while (str[++i] == ' ' || str[i] == '\t')
 		;
-	if (strncmp(str + i, COMMENT_CMD_STRING,
+	if (ft_strncmp(str + i, COMMENT_CMD_STRING,
 				ft_strlen(COMMENT_CMD_STRING)) != 0)
 		return (ERROR);
 	i += ft_strlen(COMMENT_CMD_STRING);
