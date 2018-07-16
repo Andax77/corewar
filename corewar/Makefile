@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/19 15:13:01 by eparisot         ###   ########.fr        #
+#    Updated: 2018/07/16 16:16:09 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,30 +14,44 @@ NAME = corewar
 
 FILES = main.c \
 		parse_opt.c \
+		parse_opt2.c \
 		init.c \
+		init_ncurses.c \
+		init_ncurses2.c \
 		init_cor.c \
 		parse_champ.c \
+		parse_champ2.c \
 		tools.c \
 		tools2.c \
+		legacy.c \
 		parse_op.c \
 		../../commun/srcs/op.c \
+		key_handling.c \
+		key_handling2.c \
 		cycle.c \
+		cycle2.c \
+		cycle3.c \
 		exec_op.c \
-		op1.c \
-		op2.c \
-		op3.c \
-		player.c\
-		cow2.c\
-		cow.c\
-		heart.c\
-		heart2.c
+		op_move_add_sub_aff.c \
+		op_ld_st.c \
+		op_and_or_xor.c \
+		op_sti.c \
+		op_ldi_lld_lldi.c \
+		op_zjmp_fork_lfork.c \
+		op_live.c \
+		player.c \
+		cow.c \
+		heart.c \
+		heart2.c \
+		print.c \
+		winner.c
 
 HFILES = includes/corewar.h \
 		 ../commun/includes/op.h \
 		 $(LIBFT_DIR)includes/libft.h
 
 CC = gcc
-CFLAGS = -Wall -Wextra -g#-Werror -O3
+CFLAGS = -Wall -Wextra -Werror
 
 INC_DIR = includes/ \
 		  ../commun/includes/ \
@@ -91,6 +105,7 @@ clean:
 	$(START)
 	@printf $(RED)"-x remove .o files\n"$(NORMAL)
 	@rm -rf $(OBJ_DIR)
+	@rm -rf ../commun/srcs/op.o
 	$(END)
 
 fclean: clean

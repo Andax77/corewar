@@ -32,9 +32,7 @@ int64_t		swap_int64(int64_t val)
 char		*translate(int64_t val)
 {
 	char	*text;
-	int		i;
 
-	i = 0;
 	if (!(text = ft_strnew(5)))
 		exit(EXIT_FAILURE);
 	text[0] = val >> 24;
@@ -47,19 +45,18 @@ char		*translate(int64_t val)
 
 int			pad(char **str, int n)
 {
+	char	*zeros;
 	char	*tmp;
-	char	zeros[n + 1];
 	int		i;
 	int		len;
 
 	i = 0;
 	len = n - ft_strlen(*str);
-	tmp = *str;
+	zeros = ft_malloc(sizeof(char) * (n + 1), EXIT_FAILURE);
 	while (len--)
 		zeros[i++] = '0';
-	while (i <= n)
-		zeros[i++] = '\0';
-	if (!(*str = ft_strjoin(zeros, *str)))
+	tmp = *str;
+	if (!(*str = ft_str_and_free_join(zeros, tmp)))
 		exit(EXIT_FAILURE);
 	free(tmp);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 15:45:06 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/08 17:49:30 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:33:54 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_norminette(char **ret, t_arg *arg, int x)
 
 static int	ft_fill_l(int *i, const char *format, char **ret, t_arg *arg)
 {
-	char *tmp;
+	char	*tmp;
 
 	if ((tmp = ft_strsub(format, *i, 1)) == NULL)
 		return (ERROR);
@@ -57,19 +57,20 @@ static int	ft_fill_l(int *i, const char *format, char **ret, t_arg *arg)
 
 int			ft_parse(char **str, const char *format, va_list ap, t_arg *arg)
 {
-	static int	i = 0;
-	int			nbchar;
-	char		*expression;
-	static int	x = 0;
+	int		nbchar;
+	int		i;
+	int		x;
+	char	*expression;
 
-	nbchar = ((i *= 0) && (x *= 0)) ? 1 : 1;
+	i = 0;
+	x = 0;
 	if ((*str = ft_strnew(0)) == NULL)
 		return (ERROR);
 	while (format[i] && i < (int)ft_strlen(format))
 		if (format[i] == '%' && ++i)
 		{
-			if ((nbchar = ft_checklimit(format, i, &expression))
-					== (int)(ft_strlen(format) + 10))
+			if ((nbchar = ft_checklimit(format, i, &expression)) == \
+					(int)(ft_strlen(format) + 10))
 				return (ERROR);
 			if (nbchar <= 0 && ((i += -nbchar) ? 1 : 1))
 				continue;

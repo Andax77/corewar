@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 18:45:17 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:32:30 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:31:20 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static int	ft_replace_stars_2(long nb_len, int *j, int *i, char *new)
 	int		n;
 	int		marqueur;
 
-	n = ((ft_get2arg(nb_len, 0) < 0) ? -(unsigned int)ft_get2arg(nb_len, 0) :
-			(unsigned int)ft_get2arg(nb_len, 0)) * 10;
+	n = ((ft_get2arg(nb_len, 0) < 0) ? -(unsigned int)ft_get2arg(nb_len, 0)
+			: (unsigned int)ft_get2arg(nb_len, 0)) * 10;
 	marqueur = *i + ft_get2arg(nb_len, 1);
 	while ((n /= 10) > 0)
 		new[--(*j)] = n % 10 + '0';
-	*j += (ft_get2arg(nb_len, 0) <= 0) ? ft_get2arg(nb_len, 1) - 2 :
-		ft_get2arg(nb_len, 1) - 1;
+	*j += (ft_get2arg(nb_len, 0) <= 0) ? ft_get2arg(nb_len, 1) - 2
+		: ft_get2arg(nb_len, 1) - 1;
 	return (marqueur);
 }
 

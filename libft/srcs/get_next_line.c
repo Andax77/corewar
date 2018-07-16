@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 13:11:44 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/07 19:09:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:24:39 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,20 @@ static int		ft_fruit_gnl(t_file **f, size_t n)
 	to_del = ((t_file*)ft_lstget((t_list*)*f, n));
 	if (n > 0)
 	{
-		((t_file*)ft_lstget((t_list*)*f, n - 1))->next =
+		((t_file*)ft_lstget((t_list*)*f, n - 1))->next = \
 			((t_file*)ft_lstget((t_list*)*f, n + 1));
 	}
 	else
 	{
 		to_del = *f;
-		*f = (*f)->next;
+		if (*f)
+			*f = (*f)->next;
 	}
-	free(to_del->s);
-	free(to_del);
+	if (to_del)
+	{
+		free(to_del->s);
+		free(to_del);
+	}
 	return (GNL_SUCCESS);
 }
 
@@ -69,8 +73,8 @@ static int		ft_get_line(t_file *tmp, char **line)
 
 	tmp->size = ft_strlen(tmp->s);
 	size_line = 0;
-	while (tmp->s[size_line] != '\n' && tmp->s[size_line] != '\r' &&
-			tmp->s[size_line] != '\0')
+	while (tmp->s[size_line] != '\n' && tmp->s[size_line] != '\r'
+			&& tmp->s[size_line] != '\0')
 		size_line++;
 	if (!(*line = malloc(sizeof(**line) * (size_line + 1))))
 		return (GNL_ERROR);
@@ -78,7 +82,7 @@ static int		ft_get_line(t_file *tmp, char **line)
 	(*line)[size_line] = '\0';
 	ft_memmove(tmp->s, tmp->s + size_line + 1, tmp->size - size_line);
 	if (!(tmp->s = ft_realloc(tmp->s, tmp->size + 1,
-													tmp->size - size_line + 1)))
+					tmp->size - size_line + 1)))
 		return (GNL_ERROR);
 	tmp->s[tmp->size - size_line] = '\0';
 	tmp->size = ft_strlen(tmp->s) + 1;
@@ -123,7 +127,6 @@ int				get_next_line(const int fd, char **line)
 	if (fd < 0 || line == NULL || BUFF_SIZE <= 0)
 		return (GNL_ERROR);
 	*line = NULL;
-	ret = 0;
 	if (ft_create_struct(&f, fd, &n) == GNL_ERROR)
 		return (GNL_ERROR);
 	ret = ft_read(f, line, n);

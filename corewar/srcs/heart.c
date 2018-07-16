@@ -6,98 +6,88 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:57:09 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/15 16:57:11 by anhuang          ###   ########.fr       */
+/*   Updated: 2018/07/12 17:38:46 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_heart2(int nb, int player, int stat, int live)
+void		print_heart2(int player, int stat)
 {
 	if (stat == 1)
-		stat1(nb, player, live);
+		stat1(player);
 	if (stat == 2)
-		stat2(nb, player, live);
+		stat2(player);
 	if (stat == 3)
-		stat3(nb, player, live);
-	if (stat == 4)
-		stat4(nb, player, live);
+		stat3(player);
 }
 
-void		stat1(int nb, int player, int live)
+void		stat1(int player)
 {
-	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb, player, "   ", 0 + live);
-	draw_heart(nb, player, "**", 3 + live);
-	draw_heart(nb, player, " ", 5 + live);
-	draw_heart(nb, player, "**", 6 + live);
-	draw_heart(nb++, player, "   ", 8 + live);
-	draw_heart(nb, player, "  ", 0 + live);
-	draw_heart(nb, player, "*******", 2 + live);
-	draw_heart(nb++, player, "  ", 9 + live);
-	draw_heart(nb, player, "   ", 0 + live);
-	draw_heart(nb, player, "*****", 3 + live);
-	draw_heart(nb++, player, "   ", 8 + live);
-	draw_heart(nb, player, "    ", 0 + live);
-	draw_heart(nb, player, "***", 4 + live);
-	draw_heart(nb++, player, "    ", 7 + live);
-	draw_heart(nb, player, "     ", 0 + live);
-	draw_heart(nb, player, "*", 5 + live);
-	draw_heart(nb++, player, "     ", 6 + live);
+	int		nb;
+
+	nb = 41;
+	draw_heart(nb, player, "   ", 0);
+	draw_heart(nb, player, "**", 3);
+	draw_heart(nb, player, " ", 5);
+	draw_heart(nb, player, "**", 6);
+	draw_heart(nb++, player, "   ", 8);
+	draw_heart(nb, player, "  ", 0);
+	draw_heart(nb, player, "*******", 2);
+	draw_heart(nb++, player, "  ", 9);
+	draw_heart(nb, player, "   ", 0);
+	draw_heart(nb, player, "*****", 3);
+	draw_heart(nb++, player, "   ", 8);
+	draw_heart(nb, player, "    ", 0);
+	draw_heart(nb, player, "***", 4);
+	draw_heart(nb++, player, "    ", 7);
+	draw_heart(nb, player, "     ", 0);
+	draw_heart(nb, player, "*", 5);
+	draw_heart(nb++, player, "     ", 6);
 }
 
-void		stat2(int nb, int player, int live)
+void		stat2(int player)
 {
-	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb, player, "   ", 0 + live);
-	draw_heart(nb, player, "**", 3 + live);
-	draw_heart(nb, player, " ", 5 + live);
-	draw_heart(nb, player, "*", 6 + live);
-	draw_heart(nb++, player, "    ", 7 + live);
-	draw_heart(nb, player, "  ", 0 + live);
-	draw_heart(nb, player, "*****", 2 + live);
-	draw_heart(nb++, player, "    ", 7 + live);
-	draw_heart(nb, player, "    ", 0 + live);
-	draw_heart(nb, player, "**", 3 + live);
-	draw_heart(nb, player, "  ", 5 + live);
-	draw_heart(nb, player, "*", 7 + live);
-	draw_heart(nb++, player, "   ", 8 + live);
-	draw_heart(nb, player, "    ", 0 + live);
-	draw_heart(nb, player, "**", 4 + live);
-	draw_heart(nb++, player, "     ", 6 + live);
-	draw_heart(nb, player, "     ", 0 + live);
-	draw_heart(nb, player, "*", 5 + live);
-	draw_heart(nb++, player, "     ", 6 + live);
+	int		nb;
+
+	nb = 41;
+	draw_heart(nb, player, "   ", 0);
+	draw_heart(nb, player, "**", 3);
+	draw_heart(nb, player, " ", 5);
+	draw_heart(nb, player, "*", 6);
+	draw_heart(nb++, player, "    ", 7);
+	draw_heart(nb, player, "  ", 0);
+	draw_heart(nb, player, "*****", 2);
+	draw_heart(nb++, player, "    ", 7);
+	draw_heart(nb, player, "    ", 0);
+	draw_heart(nb, player, "**", 3);
+	draw_heart(nb, player, "  ", 5);
+	draw_heart(nb, player, "*", 7);
+	draw_heart(nb++, player, "   ", 8);
+	draw_heart(nb, player, "    ", 0);
+	draw_heart(nb, player, "**", 4);
+	draw_heart(nb++, player, "     ", 6);
+	draw_heart(nb, player, "     ", 0);
+	draw_heart(nb, player, "*", 5);
+	draw_heart(nb++, player, "     ", 6);
 }
 
-void		stat3(int nb, int player, int live)
+void		stat3(int player)
 {
-	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb, player, "   ", 0 + live);
-	draw_heart(nb, player, "**", 3 + live);
-	draw_heart(nb++, player, "      ", 5 + live);
-	draw_heart(nb, player, "    ", 0 + live);
-	draw_heart(nb, player, "***", 4 + live);
-	draw_heart(nb++, player, "    ", 7 + live);
-	draw_heart(nb, player, "     ", 0 + live);
-	draw_heart(nb, player, "**", 5 + live);
-	draw_heart(nb++, player, "    ", 7 + live);
-	draw_heart(nb, player, "     ", 0 + live);
-	draw_heart(nb, player, "*", 5 + live);
-	draw_heart(nb++, player, "    ", 7 + live);
-	draw_heart(nb++, player, "           ", 0 + live);
-}
+	int		nb;
 
-void		stat4(int nb, int player, int live)
-{
-	nb = 29 + (4 * (nb - 1));
-	draw_heart(nb++, player, "           ", 0 + live);
-	draw_heart(nb, player, "    ", 0 + live);
-	draw_heart(nb, player, "IS", 4 + live);
-	draw_heart(nb++, player, "     ", 6 + live);
-	draw_heart(nb++, player, "           ", 0 + live);
-	draw_heart(nb, player, "   ", 0 + live);
-	draw_heart(nb, player, "DEAD", 3 + live);
-	draw_heart(nb++, player, "    ", 7 + live);
-	draw_heart(nb++, player, "           ", 0 + live);
+	nb = 41;
+	draw_heart(nb, player, "   ", 0);
+	draw_heart(nb, player, "**", 3);
+	draw_heart(nb++, player, "      ", 5);
+	draw_heart(nb, player, "    ", 0);
+	draw_heart(nb, player, "***", 4);
+	draw_heart(nb++, player, "    ", 7);
+	draw_heart(nb, player, "     ", 0);
+	draw_heart(nb, player, "**", 5);
+	draw_heart(nb++, player, "    ", 7);
+	draw_heart(nb, player, "     ", 0);
+	draw_heart(nb, player, "*", 5);
+	draw_heart(nb++, player, "    ", 7);
+	draw_heart(nb++, player, "           ", 0);
 }

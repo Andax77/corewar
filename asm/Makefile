@@ -6,7 +6,7 @@
 #    By: pmilan <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/11 18:16:13 by pmilan            #+#    #+#              #
-#    Updated: 2018/06/11 20:24:13 by pmilan           ###   ########.fr        #
+#    Updated: 2018/07/16 16:10:43 by pmilan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = asm
 
 FILES = main.c \
 		ft_init.c \
+		ft_verif_parsing.c \
 		ft_parsing.c \
 		ft_parsing_binary.c \
 		ft_manual.c \
@@ -42,7 +43,7 @@ LIBFT = $(LIBFT_DIR)libft.a
 LIBFT_LIB = -L $(LIBFT_DIR) -lft
 
 CC = gcc
-CFLAGS = -Wall -Wextra -g#-Werror -O3
+CFLAGS = -Wall -Wextra -Werror
 
 OBJ_DIR = objs/
 SRCS_DIR = srcs/

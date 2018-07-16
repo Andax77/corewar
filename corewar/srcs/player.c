@@ -6,21 +6,20 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:59 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/19 15:53:53 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/14 20:50:20 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_player(int nb, int player)
+void		print_player(int player)
 {
-	int		x;
+	int		nb;
 
 	attron(COLOR_PAIR(17));
-	x = nb;
 	while (player)
 	{
-		nb = 26 + (4 * (x - 1));
+		nb = 38;
 		draw_line2(nb++, "---------------------------------------------------");
 		draw_player(nb++, player, " ___________ ");
 		draw_player(nb++, player, "|           |");
@@ -38,11 +37,7 @@ void		draw_heart(int line_idx, int y, char *line, int i)
 {
 	int		x;
 	int		id;
-	int		live;
 
-	live = 0;
-	if (i >= 10 && (live = 1))
-		i -= 10;
 	id = y;
 	x = 201 + y * 14 - 14 - y + i;
 	y = 30;
@@ -50,33 +45,34 @@ void		draw_heart(int line_idx, int y, char *line, int i)
 	{
 		if (line_idx == y)
 		{
-			get_color_heart(live, line, id);
+			get_color_heart(0, line, id);
 			mvprintw(y, x, line);
 		}
 		y++;
 	}
 }
 
-void		get_color_heart(int live, char *line, int id)
+void		get_color_heart(int draw_live, char *line, int id)
 {
-	if (live == 1)
+	static int live[4];
+
+	if (live[id - 1] >= 1)
 	{
 		if (ft_strchr(line, ' '))
-			attron(COLOR_PAIR(17) | A_BOLD);
-		else if (ft_strstr(line, "IS") || ft_strstr(line, "DEAD"))
-			attron(COLOR_PAIR(2 + id) | A_BOLD);
+			attron(COLOR_PAIR(17));
 		else
-			attron(COLOR_PAIR(id + 25) | A_BOLD);
+			attron(COLOR_PAIR(30));
+		live[id - 1]--;
 	}
 	else
 	{
 		if (ft_strchr(line, ' '))
 			attron(COLOR_PAIR(17));
-		else if (ft_strstr(line, "IS") || ft_strstr(line, "DEAD"))
-			attron(COLOR_PAIR(2 + id));
 		else
 			attron(COLOR_PAIR(id + 25));
 	}
+	if (draw_live == 1)
+		live[id - 1] = 16;
 }
 
 void		draw_player(int line_idx, int y, char *line)

@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 11:23:46 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:36:37 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:42:55 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ static int	ft_conv_o_type(char **nbx, int *size_nb, t_arg *arg)
 	int			left;
 	int			nbbit;
 	int			i;
-	int			sz;
 
-	sz = ft_get_size_o(arg, size_nb);
-	if (!(*nbx = malloc(sizeof(char) * (*size_nb + 1))))
+	ft_get_size_o(arg, size_nb);
+	if (!(*nbx = (char *)malloc(sizeof(char) * (*size_nb + 1))))
 		return (ERROR);
 	(*nbx)[*size_nb] = '\0';
 	nbbit = sizeof(long long) * 8;
@@ -123,9 +122,10 @@ int			ft_conv_o(char **ret, t_arg *arg)
 	ft_get_size_new(arg, size_nb, &size_new);
 	if (!(new = ft_strnew(sizeof(char) * size_new)) && ft_fruit(1, &nbx))
 		return (ERROR);
-	ft_place_nb_o(arg, new, nbx, size_new);
-	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg)) &&
-			ft_fruit(2, &nbx, &new))
+	if (new)
+		ft_place_nb_o(arg, new, nbx, size_new);
+	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg))
+			&& ft_fruit(2, &nbx, &new))
 		return (ERROR);
 	arg->cmpt += size_new;
 	free(nbx);

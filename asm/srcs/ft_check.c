@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 16:22:52 by pmilan            #+#    #+#             */
-/*   Updated: 2018/05/29 16:23:03 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:20:22 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ int				ft_check_params_type(t_instru *inst)
 	i = -1;
 	while (inst->params[++i])
 	{
-		if (ft_get_t_param(inst->params[i]) == ERROR ||
-			ft_check_ocp_addition(g_op_tab[inst->op_code - 1].params_type[i],
-			ft_get_t_param(inst->params[i])) == ERROR)
+		if (ft_get_t_param(inst->params[i]) == ERROR
+				|| ft_check_ocp_addition(g_op_tab[inst->op_code
+					- 1].params_type[i],
+					ft_get_t_param(inst->params[i])) == ERROR)
 			return (ERROR);
 	}
 	return (SUCCESS);
@@ -84,9 +85,9 @@ int				ft_check_input_format(t_champ *champ)
 			;
 		if (str[i] && str[i] == '.')
 		{
-			if (ft_strncmp(str + i, ".name", 5) == 0)
+			if (ft_strcmp(str + i, NAME_CMD_STRING) == 0)
 				return (ft_error(champ, "error: several names of file found"));
-			else if (ft_strncmp(str + i, ".comment", 8) == 0)
+			else if (ft_strcmp(str + i, COMMENT_CMD_STRING) == 0)
 				return (ft_error(champ, "error: several comments found"));
 			return (ft_error(champ, "error: unknown command found"));
 		}
@@ -104,8 +105,8 @@ int				ft_empty_or_comment_line(char *str)
 	{
 		if (str[i] == COMMENT_CHAR)
 			return (EMPTY);
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r' && str[i] != '\v'
-											&& str[i] != '\n' && str[i] != '\f')
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\r'
+				&& str[i] != '\v' && str[i] != '\n' && str[i] != '\f')
 			return (CHARACTER);
 	}
 	return (EMPTY);

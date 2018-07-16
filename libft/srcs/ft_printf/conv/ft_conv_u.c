@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 11:22:31 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:37:07 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:44:11 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static int	ft_no_precision(char **new_ret, t_arg *arg, int len)
 
 	nb_len = ft_nb_len_u(arg);
 	len = (nb_len > len) ? nb_len : len;
-	if (!((*new_ret) = malloc(sizeof(**new_ret) * (len + 1))))
+	if (!((*new_ret) = (char *)malloc(sizeof(**new_ret) * (len + 1))))
 		return (ERROR);
 	(*new_ret)[len] = '\0';
-	*new_ret = (arg->flag.zero == 1) ? ft_memset(*new_ret, '0', len) :
-		ft_memset(*new_ret, ' ', len);
+	*new_ret = (arg->flag.zero == 1) ? ft_memset(*new_ret, '0', len)
+		: ft_memset(*new_ret, ' ', len);
 	nb_len = (arg->flag.minus == 0) ? len : nb_len;
 	ft_fill_str_ud(new_ret, arg->arg.u, &nb_len, arg);
 	if (arg->arg.u == 0)
@@ -54,10 +54,11 @@ static int	ft_width(char **new_ret, char **new_nb, t_arg *arg)
 	{
 		nb_len = ft_strlen(*new_nb);
 		len = (nb_len > len) ? nb_len : len;
-		if (!(*new_ret = malloc(sizeof(**new_ret) * (len + 1))) &&
-				ft_fruit(1, new_nb))
+		if (!(*new_ret = (char *)malloc(sizeof(**new_ret) * (len + 1)))
+				&& ft_fruit(1, new_nb))
 			return (ERROR);
-		(*new_ret)[len] = '\0';
+		if (*new_ret)
+			(*new_ret)[len] = '\0';
 		if (arg->preci < arg->wi && ft_memset(*new_ret, ' ', len))
 			if (arg->flag.minus == 0)
 				ft_strncpy((*new_ret) + len - nb_len, *new_nb, nb_len);
@@ -78,7 +79,7 @@ static int	ft_precision(char **new_nb, t_arg *arg)
 	nb_len = ft_nb_len_u(arg);
 	len = arg->preci;
 	len = (nb_len > len) ? nb_len : len;
-	if (!((*new_nb) = malloc(sizeof(**new_nb) * (len + 1))))
+	if (!((*new_nb) = (char *)malloc(sizeof(**new_nb) * (len + 1))))
 		return (ERROR);
 	ft_memset(*new_nb, '0', len);
 	(*new_nb)[len] = '\0';

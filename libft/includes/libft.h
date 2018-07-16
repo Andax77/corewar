@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 13:14:11 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/19 18:32:10 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 17:58:10 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <ft_printf.h>
 
-# define BUFF_SIZE 1024
+# define BUFF_SIZE 2048
 # define LINE_READ 1
 # define GNL_END 0
 # define GNL_SUCCESS 1
@@ -50,7 +50,7 @@ int					ft_strncmp(const char *str1, const char *str2, size_t n);
 char				*ft_strdup(const char *src);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
-int					ft_is_int(const char *str);
+int					ft_isint(const char *str);
 int					ft_isascii(int c);
 int					ft_isalnum(int c);
 int					ft_isprint(int c);
@@ -63,7 +63,7 @@ char				*ft_strncat(char *dest, const char *src, size_t nb);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 char				*ft_strstr(const char *str, const char *to_find);
 char				*ft_strnstr(const char *str, const char *to_find,
-					size_t size);
+		size_t size);
 char				*ft_strchr(const char *str, int c);
 char				*ft_strrchr(const char *str, int c);
 void				*ft_memset(void *b, int c, size_t n);
@@ -112,7 +112,7 @@ int					ft_odd(int nb);
 int					ft_even(int nb);
 int					ft_sqrt(int nb);
 void				*ft_realloc(void *ptr, size_t original_size,
-					size_t new_size);
+		size_t new_size);
 int					ft_read_fd(int fd, char **file_content);
 int					ft_read_file(char *filename, char **file_content);
 char				*ft_int_to_base(long long n, char *base);

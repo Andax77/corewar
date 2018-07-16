@@ -49,6 +49,7 @@ char			*ft_itoa(int n)
 		n2 /= 10;
 		nb_ch--;
 	}
-	ret[0] = (n == 0) ? '0' : ret[0];
+	if (n == 0)
+		ret[0] = '0';
 	return (ret);
 }

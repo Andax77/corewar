@@ -1,8 +1,8 @@
 Usage: ./corewar [-v] [-a] [-dump nbr_cycles] [[-n nbr] <champion1.cor> ... ]
-################################################################################
-#	-v                : Ncurses output mode                                #
-#	-a                : Prints output from "aff" (Default is to hide it)   #
-#	-dump nbr_cycles  : Dumps Memory after nbr_cycles and exits            #
-#	-n nbr            : Set the next champ at position nbr                 #
-################################################################################
+####################################################################################
+#	-v                    : Ncurses output mode                                #
+#	-a                    : Prints output from "aff" (Default is to hide it)   #
+#	-d(ump) nbr_cycles    : Dumps Memory after nbr_cycles and exits            #
+#	-n nbr                : Set the next champ at position nbr                 #
+####################################################################################
 

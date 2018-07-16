@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 17:57:56 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 16:32:02 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void		init_memory(t_cor *cor)
 	while (champs)
 	{
 		((t_champ*)champs->content)->pc = i;
-		((t_champ*)champs->content)->live = 0;
 		((t_champ*)champs->content)->father = 0;
+		((t_champ*)champs->content)->cur_op = 0;
 		tmp_prog = ((t_champ *)champs->content)->splited_prog;
 		while (j < ((t_champ *)champs->content)->op_nb)
 		{
@@ -41,14 +41,14 @@ static void		init_memory(t_cor *cor)
 	}
 }
 
-static void		populate_instru(t_champ **champ, int64_t c)
+static void		populate_instru(t_champ **champ, int64_t ch)
 {
 	t_list		**instru;
 	char		*tmp;
 	t_list		*new;
 
 	instru = &(*champ)->instru;
-	if (!(tmp = ft_itoa(swap_int(c))))
+	if (!(tmp = ft_itoa(swap_int(ch))))
 		exit(EXIT_FAILURE);
 	if (!*instru)
 	{
@@ -66,34 +66,34 @@ static void		populate_instru(t_champ **champ, int64_t c)
 
 static int		get_champ(t_champ **champ, char *path, int nb)
 {
-	int64_t		c;
+	int64_t		ch;
 	int			fd;
 	int			ret;
+	int			cond;
 
-	if (path)
+	cond = 0;
+	fd = open(path, O_RDONLY);
+	if (fd != -1)
 	{
-		fd = open(path, O_RDONLY);
-		if (fd != -1)
+		while ((ret = read(fd, &ch, 4)))
 		{
-			while ((ret = read(fd, &c, 4)))
-				populate_instru(champ, c);
-			close(fd);
-			if (ret == -1)
-				return (ERROR);
-			if (check_champ(champ, path, nb) == ERROR)
-				return (ERROR);
+			++cond;
+			if (cond == 1 && ret < 4)
+				return (ft_print_error("not enough data", path));
+			populate_instru(champ, ch);
 		}
-		else
-		{
-			ft_printf("{red}error : file '%s' does not exists{eoc}\n", path);
+		close(fd);
+		if (ret == -1)
 			return (ERROR);
-		}
-		return (SUCCESS);
+		if (check_champ(champ, path, nb) == ERROR)
+			return (ERROR);
 	}
-	return (ERROR);
+	else
+		return (ft_print_error("file does not exist", path));
+	return (SUCCESS);
 }
 
-static int		populate_champs(t_list **champs, char *path, int nb)
+int				populate_champs(t_list **champs, char *path, int nb)
 {
 	t_list		*new;
 	t_champ		*champ;
@@ -121,31 +121,26 @@ static int		populate_champs(t_list **champs, char *path, int nb)
 
 int				init_cor(t_cor *cor, char **argv)
 {
-	int			i;
-	int			n;
-
-	i = 0;
-	n = 0;
-	while (++argv && *argv)
-	{
-		if (ft_strstr(*argv, ".cor") && ++i && i <= MAX_PLAYERS)
-		{
-			if (populate_champs(&cor->champs, *argv, cor->opt->n[n++]) == ERROR)
-				return (ERROR);
-		}
-		else if (!is_opt(*argv))
-		{
-			print_usage();
-			return (ERROR);
-		}
-	}
-	if (!(cor->map = malloc((MEM_SIZE + 1) * sizeof(unsigned char))))
-		exit(EXIT_FAILURE);
-	init_memory(cor);
-	cor->cycle_to_die = CYCLE_TO_DIE;
-	if (cor->opt->v && !init_ncurses(cor))
+	if (read_args(cor, argv) == ERROR)
 		return (ERROR);
-	order_to_start(&cor->champs);
-	cycle(cor);
-	return (SUCCESS);
+	if (MEM_SIZE > 0 && CYCLE_TO_DIE > 0 && CYCLE_DELTA > 0 && NBR_LIVE > 0
+			&& MAX_CHECKS > 0 && REG_NUMBER > 0)
+	{
+		cor->aff = NULL;
+		cor->winner = 0;
+		cor->cycle_to_die = CYCLE_TO_DIE;
+		cor->map = ft_malloc((MEM_SIZE + 1)
+				* sizeof(unsigned char), EXIT_FAILURE);
+		init_memory(cor);
+		init_cmap(cor);
+		if (MAX_PLAYERS > 4
+				|| (!cor->opt->d && cor->opt->v && !init_ncurses(cor)))
+			return (ERROR);
+		print_intro(cor);
+		(ft_lstcount(cor->champs) > 1) ? order_to_start(&cor->champs) : 0;
+		cycle(cor, 1);
+		return (SUCCESS);
+	}
+	ft_printf("{red}Wrong value in op.h\n{eoc}");
+	return (ERROR);
 }

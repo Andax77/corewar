@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 23:28:10 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/07 19:54:38 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:20:31 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ int64_t					swap_int(int64_t c)
 char					*translate(int64_t val)
 {
 	char	*text;
-	int		i;
 
-	i = 0;
 	if (!(text = ft_strnew(5)))
 		exit(EXIT_FAILURE);
 	text[0] = val >> 24;
@@ -36,19 +34,18 @@ char					*translate(int64_t val)
 
 int						pad(char **str, int n)
 {
+	char	*zeros;
 	char	*tmp;
-	char	zeros[n + 1];
 	int		i;
 	int		len;
 
 	i = 0;
 	len = n - ft_strlen(*str);
-	tmp = *str;
+	zeros = ft_malloc(sizeof(char) * (n + 1), EXIT_FAILURE);
 	while (len--)
 		zeros[i++] = '0';
-	while (i <= n)
-		zeros[i++] = '\0';
-	if (!(*str = ft_strjoin(zeros, *str)))
+	tmp = *str;
+	if (!(*str = ft_str_and_free_join(zeros, tmp)))
 		exit(EXIT_FAILURE);
 	free(tmp);
 	return (SUCCESS);
@@ -87,8 +84,8 @@ void					split_bits(char **prog, unsigned char **splited_prog)
 
 	i = 0;
 	j = 0;
-	if (!(splited = (unsigned char *)malloc((ft_strlen(*prog) / 2) + 1 * \
-					sizeof(unsigned char))))
+	if (!(splited = (unsigned char *)malloc((ft_strlen(*prog) / 2)
+					+ 1 * sizeof(unsigned char))))
 		exit(EXIT_FAILURE);
 	while ((*prog)[i] && j < (int)ft_strlen(*prog))
 	{

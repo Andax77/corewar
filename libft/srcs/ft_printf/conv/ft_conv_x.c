@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 14:05:58 by pmilan            #+#    #+#             */
-/*   Updated: 2018/02/22 14:37:48 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:46:41 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@ static int	ft_conv_x_type(char **nbx, int *size_nb, t_arg *arg)
 	int			left;
 	int			nb_bit;
 	int			i;
-	int			sz;
 
-	sz = ft_get_size_x(arg, size_nb);
-	if (!(*nbx = malloc(sizeof(char) * (*size_nb + 1))))
+	ft_get_size_x(arg, size_nb);
+	if (!(*nbx = (char *)malloc(sizeof(char) * (*size_nb + 1))))
 		return (ERROR);
 	(*nbx)[*size_nb] = '\0';
 	nb_bit = sizeof(long long) * 8;
@@ -95,11 +94,11 @@ static void	ft_place_nb_x(t_arg *arg, char *new, char *nbx, int size_new)
 	if (arg->flag.hashtag == 1 && arg->flag.minus == 1)
 		new[1] = ((new[0] -= new[0] - '0') && arg->conv == 'X') ? 'X' : 'x';
 	else if (arg->flag.hashtag == 1 && arg->preci > size_nb)
-		new[size_new - arg->preci - 1] = ((new[size_new - arg->preci - 2] -=
+		new[size_new - arg->preci - 1] = ((new[size_new - arg->preci - 2] -= \
 					new[0] - '0') && arg->conv == 'X') ? 'X' : 'x';
 	else if (arg->flag.hashtag == 1)
-		new[start_nbx - 1] = ((new[start_nbx - 2] -= new[0] - '0') &&
-				arg->conv == 'X') ? 'X' : 'x';
+		new[start_nbx - 1] = ((new[start_nbx - 2] -= new[0] - '0')
+				&& arg->conv == 'X') ? 'X' : 'x';
 	ft_memcpy((new + start_nbx), nbx, size_nb);
 }
 
@@ -121,9 +120,10 @@ int			ft_conv_x(char **ret, t_arg *arg)
 		return (ERROR);
 	if (!(new = ft_strnew(sizeof(char) * size_new)) && ft_fruit(1, &nbx))
 		return (ERROR);
-	ft_place_nb_x(arg, new, nbx, size_new);
-	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg)) &&
-			ft_fruit(2, &nbx, &new))
+	if (new)
+		ft_place_nb_x(arg, new, nbx, size_new);
+	if (!(*ret = ft_strfreejoin(*ret, new, size_new, arg))
+			&& ft_fruit(2, &nbx, &new))
 		return (ERROR);
 	arg->cmpt += size_new;
 	free(nbx);

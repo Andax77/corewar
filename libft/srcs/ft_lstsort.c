@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 11:59:28 by eparisot          #+#    #+#             */
-/*   Updated: 2018/05/17 15:07:52 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:04:49 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static size_t	bigger(t_list *lst, t_list *next)
 	return (bigger_size);
 }
 
-static void		ft_lstswap(void *mem, unsigned int mem_size, t_list *lst, \
-							t_list *next)
+static void		ft_lstswap(void *mem, unsigned int mem_size, t_list *lst,
+		t_list *next)
 {
 	mem = lst->content;
 	mem_size = lst->content_size;
@@ -65,9 +65,7 @@ void			ft_lstsort(t_list *lst)
 		while (lst->next)
 		{
 			if (ft_memcmp(lst->content, next->content, bigger(lst, next)) > 0)
-			{
 				ft_lstswap(mem, mem_size, lst, next);
-			}
 			lst = lst->next;
 			next = next->next;
 		}

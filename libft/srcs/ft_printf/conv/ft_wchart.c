@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 13:23:56 by pmilan            #+#    #+#             */
-/*   Updated: 2018/01/11 11:01:07 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 16:49:46 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int			ft_add_conv_bigc(char **ret, t_arg *arg)
 	nb = ft_strlenw(wch);
 	if (nb == ERROR)
 		return (ERROR);
-	else if ((wch <= 56319 && wch >= 55296) ||
-			(wch >= 0xDB80 && wch <= 0xDBFF) ||
-			(wch >= 0xDC00 && wch <= 0xDFFF))
+	else if ((wch <= 56319 && wch >= 55296)
+			|| (wch >= 0xDB80 && wch <= 0xDBFF)
+			|| (wch >= 0xDC00 && wch <= 0xDFFF))
 		return (ERROR);
 	else if ((MB_CUR_MAX == 1 && wch >= 128 && wch <= 255) || nb == 1)
 		return (ft_print_oneb(ret, wch, arg));

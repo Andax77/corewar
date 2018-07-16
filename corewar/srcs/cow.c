@@ -6,13 +6,13 @@
 /*   By: anhuang <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 16:56:43 by anhuang           #+#    #+#             */
-/*   Updated: 2018/06/18 20:13:08 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/12 17:07:57 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar.h>
 
-void		print_cow(t_cor *cor)
+void		print_cow(void)
 {
 	static int x;
 	static int color;
@@ -20,23 +20,20 @@ void		print_cow(t_cor *cor)
 	if (color == 0 && ++color)
 		heart_color();
 	attron(COLOR_PAIR(17));
-	if (cor->cycle_to_die < 750)
+	if (x == 0)
 	{
-		if (x == 0 && ++x)
-			angry_cow1(4);
-		else if (x == 1 && ++x)
-			angry_cow2(4);
-		else if (x == 2 && !(x = 0))
-			angry_cow3(4);
+		x++;
+		draw_cow1(4);
 	}
-	else
+	else if (x == 1)
 	{
-		if (x == 0 && ++x)
-			draw_cow1(4);
-		else if (x == 1 && ++x)
-			draw_cow2(4);
-		else if (x == 2 && !(x = 0))
-			draw_cow3(4);
+		x++;
+		draw_cow2(4);
+	}
+	else if (x == 2)
+	{
+		x = 0;
+		draw_cow3(4);
 	}
 }
 
@@ -82,7 +79,7 @@ void		draw_cow2(int nb)
 	draw_line2(nb++, "		 |   ###              //  //nnnnnnn/--//");
 	draw_line2(nb++, "		 |    ###      ______//  //nnnnnnn/  //");
 	draw_line2(nb++, "		 |#    ##       |       //nnnnnnn/  //");
-	draw_line2(nb++, "		 |##            |      //nnnnnnnn/  //");
+	draw_line2(nb++, "		 |##            |      //nnnnnnn/  //");
 	draw_line2(nb++, "		 |###       ####|     //nnnnnnn/  //");
 	draw_line2(nb++, "                              ------------");
 	draw_line2(nb++, "			 C.O.W -- W.A.R");
@@ -106,7 +103,7 @@ void		draw_cow3(int nb)
 	draw_line2(nb++, "		 |   ###     ###|\\_________|_ |nnnn/--//");
 	draw_line2(nb++, "		 |    ###               |  |nnnnnn/  //");
 	draw_line2(nb++, "		 |#    ##       \\_______|__|nnnnn/  //");
-	draw_line2(nb++, "		 |##                   //nnnnnnnn/  //");
+	draw_line2(nb++, "		 |##                   //nnnnnnn/  //");
 	draw_line2(nb++, "		 |###       ####|     //nnnnnnn/  //");
 	draw_line2(nb++, "                              ------------");
 	draw_line2(nb++, "			 C.O.W -- W.A.R");

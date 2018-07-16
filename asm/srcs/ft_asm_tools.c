@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/10 15:11:05 by pmilan            #+#    #+#             */
-/*   Updated: 2018/06/12 14:58:57 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/11 18:18:32 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ unsigned char			*split_bits(char *prog)
 
 	i = 0;
 	j = 0;
-	if (!(splitted_prog = (unsigned char *)malloc((ft_strlen(prog) / 2) + 1 * \
-					sizeof(unsigned char))))
+	if (!(splitted_prog = (unsigned char *)malloc((ft_strlen(prog) / 2)
+					+ 1 * sizeof(unsigned char))))
 		exit(EXIT_FAILURE);
 	while (prog[i] && j < (int)ft_strlen(prog))
 	{

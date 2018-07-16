@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/06/19 16:05:10 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/11 15:15:40 by eparisot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,29 @@ void		del_champ(void *content, size_t content_size)
 
 static void	free_cor(t_cor *cor)
 {
-	free(cor->opt->n);
-	free(cor->opt);
-	ft_lstdel(&(cor->champs), del_champ);
-	free(cor->map);
+	if (cor)
+	{
+		if (cor->aff)
+			free(cor->aff);
+		if (cor->opt && cor->opt->n)
+			free(cor->opt->n);
+		if (cor->opt)
+			free(cor->opt);
+		if (cor->champs)
+			ft_lstdel(&(cor->champs), del_champ);
+		if (cor->map)
+			free(cor->map);
+		if (cor->c_map)
+			free(cor->c_map);
+		free(cor);
+	}
+}
+
+static void	deal_w_error(t_opt *opt, t_cor *cor)
+{
+	print_usage();
 	free(cor);
+	free(opt);
 }
 
 int			main(int argc, char **argv)
@@ -48,13 +66,12 @@ int			main(int argc, char **argv)
 	cor = ft_malloc(sizeof(t_cor), EXIT_FAILURE);
 	if (argc == 1)
 	{
-		print_usage();
+		deal_w_error(opt, cor);
 		exit(EXIT_FAILURE);
 	}
 	else if (parse_opt(argv, opt, cor) == ERROR)
 	{
-		print_usage();
-		free_cor(cor);
+		deal_w_error(opt, cor);
 		exit(EXIT_FAILURE);
 	}
 	else if (init(argv, cor) == ERROR)
@@ -63,7 +80,5 @@ int			main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	free_cor(cor);
-	//DEBUG LEAKS
-	while (1);
 	exit(EXIT_SUCCESS);
 }
