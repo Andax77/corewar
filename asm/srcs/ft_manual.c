@@ -6,7 +6,7 @@
 /*   By: pierremilan <marvin@42.fr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/16 20:20:15 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 18:31:44 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 17:02:17 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int	ft_fill_instructions_next_m(t_champ *champ, char *instructions,
 			free(instructions);
 			return (ft_error_m(champ, "error: instruction larger than 0xF"));
 		}
-	*f_instructions = ft_strnew(*instructions_length + 1);
+	if (!(*f_instructions = ft_strnew(*instructions_length + 1)))
+		exit(EXIT_FAILURE);
 	i = 0;
 	while (instructions[i])
 	{

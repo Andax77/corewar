@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 20:07:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 18:51:19 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 17:08:07 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int				main(int argc, char **argv)
 	{
 		ft_printf("{yellow}Usage: %s [-rm] <sourcefile> ...{eoc}\n\n", argv[0]);
 		ft_print_usage();
+		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_SUCCESS);
 }

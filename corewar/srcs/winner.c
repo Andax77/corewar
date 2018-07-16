@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/16 16:18:18 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 16:45:35 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void		print_intro(t_cor *cor)
 	{
 		if (((t_champ*)champ->content)->father == 0)
 			ft_printf("{%s}* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\
-				\n{eoc}", color_player(((t_champ*)champ->content)->id),
-		((t_champ*)champ->content)->v_id, ((t_champ*)champ->content)->op_nb,
-		((t_champ*)champ->content)->name, ((t_champ*)champ->content)->comment);
+					\n{eoc}",
+					color_player(((t_champ*)champ->content)->id),
+					((t_champ*)champ->content)->v_id,
+					((t_champ*)champ->content)->op_nb,
+					((t_champ*)champ->content)->name,
+					((t_champ*)champ->content)->comment);
 		champ = champ->next;
 	}
 }

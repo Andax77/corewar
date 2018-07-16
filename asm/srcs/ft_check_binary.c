@@ -6,7 +6,7 @@
 /*   By: pmilan <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 14:47:51 by pmilan            #+#    #+#             */
-/*   Updated: 2018/07/11 18:21:33 by pmilan           ###   ########.fr       */
+/*   Updated: 2018/07/16 16:57:34 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ static int		ft_check_champ_binary_bis(t_list *input, t_champ **champ)
 		free(prog);
 		return (ft_error(*champ, "instructions length is incorrect"));
 	}
-	splitted_prog = split_bits(prog);
+	if (!(splitted_prog = split_bits(prog)))
+		exit(EXIT_FAILURE);
 	free(prog);
 	if (ft_decrypt_prog(*champ, splitted_prog, inst_length) == ERROR)
 	{

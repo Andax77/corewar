@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:06:55 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 16:29:48 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:37:43 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void			init_opt(t_opt *opt, t_cor *cor)
 	opt->v = 0;
 	opt->d = 0;
 	opt->n = (int*)ft_malloc((max_players + 1) * sizeof(int), EXIT_FAILURE);
-	ft_bzero(opt->n, (max_players + 1) * sizeof(int));
 	cor->opt = opt;
 }
 

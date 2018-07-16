@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/14 20:42:04 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:32:02 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int				populate_champs(t_list **champs, char *path, int nb)
 	t_champ		*champ;
 
 	champ = ft_malloc(sizeof(t_champ), EXIT_FAILURE);
-	ft_bzero(champ, sizeof(t_champ));
 	if (get_champ(&champ, path, nb) == ERROR)
 	{
 		del_champ(champ, 0);

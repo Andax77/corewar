@@ -6,7 +6,7 @@
 /*   By: eparisot <eparisot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:11:42 by eparisot          #+#    #+#             */
-/*   Updated: 2018/07/12 18:31:19 by eparisot         ###   ########.fr       */
+/*   Updated: 2018/07/16 16:34:12 by pmilan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void		draw_names(t_list *champs)
 		if (!champ->father)
 		{
 			id = champ->id;
-			name = ft_strndup(((t_champ*)champs->content)->name, 42);
+			if (!(name = ft_strndup(((t_champ*)champs->content)->name, 42)))
+				exit(EXIT_FAILURE);
 			attron(COLOR_PAIR(id + 2));
 			draw_line(11 + (4 * (id - 1)), 10 + ft_countdigits(champ->v_id),
 					name);
