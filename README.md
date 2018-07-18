@@ -2,7 +2,7 @@
 
 42 Algorithmic Project
 
-![](Corewar_edit_0.gif)
+![](Corewar.gif)
 
 ## Build champs:
 ```
