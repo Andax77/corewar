@@ -1,4 +1,4 @@
-# corewar
+# Corewar
 
 42 Algorithmic Project
 
